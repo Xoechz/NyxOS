@@ -10,6 +10,8 @@
         xz
         unzip
 
+        vscode.fhs
+
         ripgrep
         fzf
 
