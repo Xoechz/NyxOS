@@ -11,16 +11,17 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.NyxOS = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.demo = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./configuration.nix
-
+        ./hosts/demo
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.elias = import ./home.nix;
+
+          home-manager.extraSpecialArgs = inputs;
+          home-manager.users.elias = import ./home;
         }
       ];
     };
