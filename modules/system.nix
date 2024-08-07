@@ -11,8 +11,9 @@
   };
 
   nix.settings = {
-
-  }
+    experimental-features = ["nix-command" "flakes"];
+    trusted-users = ["elias"];
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
@@ -39,19 +40,20 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
+  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+  services = {
+    dbus.packages = [pkgs.gcr];
+
+    geoclue2.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
   };
 
   networking.firewall.enable = false;
@@ -62,11 +64,33 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-      vscode.fhs
       git
       wget
       curl
+      
+      neofetch
+      zip
+      xz
+      unzip
+
+      lm_sensors
+      sysstat
   ];
 
-}
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
+    openFirewall = true;
+  };
+
 }

@@ -5,11 +5,6 @@
     home.homeDirectory = "/home/elias";
 
     home.packages = with pkgs; [
-        neofetch
-        zip
-        xz
-        unzip
-
         vscode.fhs
 
         ripgrep
@@ -31,9 +26,6 @@
         strace
         ltrace
         lsof
-
-        sysstat
-        lm_sensors
 
         ethtool
         pciutils
