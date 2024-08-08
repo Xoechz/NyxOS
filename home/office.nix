@@ -7,5 +7,7 @@
     hunspellDicts.de_AT
 
     thunderbird
+
+    pdfarranger
   ];
 }
