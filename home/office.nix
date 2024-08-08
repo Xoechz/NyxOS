@@ -1,3 +1,4 @@
+# Office work oriented apps and packages
 { pkgs, ... }:
 {
   home.packages = with pkgs; [

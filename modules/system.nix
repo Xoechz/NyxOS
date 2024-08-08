@@ -1,12 +1,14 @@
+# The base system config
 { pkgs, ... }:
-
 {
+  # user setup
   users.users.elias = {
     isNormalUser = true;
     description = "Elias";
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
+  # enable flakes and new nix commands
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "elias" ];
@@ -41,6 +43,7 @@
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
+  #configure pipewire
   services = {
     dbus.packages = [ pkgs.gcr ];
 
@@ -53,13 +56,12 @@
     };
   };
 
+  # disable the firewall
   networking.firewall.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     git
     wget
@@ -78,12 +80,14 @@
     nixpkgs-fmt
   ];
 
+  # garbage collection to save diskspace
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
 
+  # enable ssh, so in the case of display failure, i can still access the machine
   services.openssh = {
     enable = true;
     settings = {

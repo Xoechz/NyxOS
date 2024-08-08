@@ -1,5 +1,5 @@
+# default home-manager config, could be split up in the future
 { pkgs, ... }:
-
 {
   imports =
     [
@@ -37,12 +37,14 @@
     usbutils
   ];
 
+  #setup git to use the correct email for commits
   programs.git = {
     enable = true;
     userName = "Elias Leonhardsberger";
     userEmail = "elias.leonhardsberger@gmail.com";
   };
 
+  #enable bash completion, maybe in the future ill use another shell
   programs.bash = {
     enable = true;
     enableCompletion = true;

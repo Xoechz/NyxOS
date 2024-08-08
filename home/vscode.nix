@@ -1,3 +1,4 @@
+# vscode with all extensions for nix development. New extensions need be be installed via this config
 { pkgs, ... }:
 
 {

@@ -1,3 +1,4 @@
+# The config for steam
 { ... }:
 {
   programs.steam = {
