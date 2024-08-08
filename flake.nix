@@ -11,19 +11,49 @@
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.demo = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hosts/demo
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+    nixosConfigurations = {
+      demo = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/demo
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-          home-manager.extraSpecialArgs = inputs;
-          home-manager.users.elias = import ./home;
-        }
-      ];
+            home-manager.extraSpecialArgs = inputs;
+            home-manager.users.elias = import ./home;
+          }
+        ];
+      };
+      EliasLaptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/EliasLaptop
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.extraSpecialArgs = inputs;
+            home-manager.users.elias = import ./home;
+          }
+        ];
+      };
+      EliasPC = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/EliasPC
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.extraSpecialArgs = inputs;
+            home-manager.users.elias = import ./home;
+          }
+        ];
+      };
     };
   };
 }
