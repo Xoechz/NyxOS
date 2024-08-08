@@ -11,6 +11,7 @@
       ./hardware-configuration.nix
       ../../modules/system.nix
       ../../modules/kde.nix
+      ../../modules/steam.nix
     ];
 
   # Bootloader.
