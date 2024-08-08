@@ -5,6 +5,7 @@
     [
       ./vscode.nix
       ./office.nix
+      ./gaming.nix
     ];
 
   home.username = "elias";
