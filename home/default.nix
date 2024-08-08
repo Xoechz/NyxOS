@@ -4,7 +4,7 @@
   imports =
     [
       ./vscode.nix
-      ./libreoffice.nix
+      ./office.nix
     ];
 
   home.username = "elias";
@@ -34,8 +34,6 @@
     ethtool
     pciutils
     usbutils
-
-    thunderbird
   ];
 
   programs.git = {
