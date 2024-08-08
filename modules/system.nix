@@ -1,13 +1,10 @@
-{ pkgs, lib, ...}:
+{ pkgs, inputs, ...}:
 
 { 
   users.users.elias = {
     isNormalUser = true;
     description = "Elias";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      thunderbird
-    ];
   };
 
   nix.settings = {
@@ -75,6 +72,8 @@
 
       lm_sensors
       sysstat
+
+      nixd
   ];
 
   nix.gc = {
@@ -82,6 +81,8 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   services.openssh = {
     enable = true;

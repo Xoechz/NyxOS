@@ -1,12 +1,15 @@
 { config, pkgs, ... }:
 
 {
+imports =
+    [ 
+      ./vscode.nix
+    ];
+    
     home.username = "elias";
     home.homeDirectory = "/home/elias";
 
     home.packages = with pkgs; [
-        vscode.fhs
-
         ripgrep
         fzf
 
