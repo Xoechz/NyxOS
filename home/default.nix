@@ -1,52 +1,55 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-imports =
-    [ 
+  imports =
+    [
       ./vscode.nix
-    ];
-    
-    home.username = "elias";
-    home.homeDirectory = "/home/elias";
-
-    home.packages = with pkgs; [
-        ripgrep
-        fzf
-
-        mtr
-        iperf3
-        dnsutils
-
-        which
-        tree
-
-        nix-output-monitor
-
-        btop
-        iotop
-        iftop
-
-        strace
-        ltrace
-        lsof
-
-        ethtool
-        pciutils
-        usbutils
+      ./libreoffice.nix
     ];
 
-    programs.git = {
-        enable = true;
-        userName = "Elias Leonhardsberger";
-        userEmail = "elias.leonhardsberger@gmail.com";
-    };
+  home.username = "elias";
+  home.homeDirectory = "/home/elias";
 
-    programs.bash = {
-        enable = true;
-        enableCompletion = true;
-    };
+  home.packages = with pkgs; [
+    ripgrep
+    fzf
 
-    home.stateVersion = "24.05";
+    mtr
+    iperf3
+    dnsutils
 
-    programs.home-manager.enable = true;
+    which
+    tree
+
+    nix-output-monitor
+
+    btop
+    iotop
+    iftop
+
+    strace
+    ltrace
+    lsof
+
+    ethtool
+    pciutils
+    usbutils
+
+    thunderbird
+  ];
+
+  programs.git = {
+    enable = true;
+    userName = "Elias Leonhardsberger";
+    userEmail = "elias.leonhardsberger@gmail.com";
+  };
+
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+  };
+
+  home.stateVersion = "24.05";
+
+  programs.home-manager.enable = true;
 }

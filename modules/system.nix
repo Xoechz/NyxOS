@@ -1,6 +1,6 @@
-{ pkgs, inputs, ...}:
+{ pkgs, ... }:
 
-{ 
+{
   users.users.elias = {
     isNormalUser = true;
     description = "Elias";
@@ -8,8 +8,8 @@
   };
 
   nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
-    trusted-users = ["elias"];
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "elias" ];
   };
 
   # Set your time zone.
@@ -42,7 +42,7 @@
   security.rtkit.enable = true;
 
   services = {
-    dbus.packages = [pkgs.gcr];
+    dbus.packages = [ pkgs.gcr ];
 
     geoclue2.enable = true;
     pipewire = {
@@ -61,19 +61,21 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-      git
-      wget
-      curl
-      
-      neofetch
-      zip
-      xz
-      unzip
+    git
+    wget
+    curl
 
-      lm_sensors
-      sysstat
+    neofetch
+    zip
+    xz
+    unzip
 
-      nixd
+    lm_sensors
+    sysstat
+
+    nixd
+    direnv
+    nixpkgs-fmt
   ];
 
   nix.gc = {
@@ -81,8 +83,6 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
-
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   services.openssh = {
     enable = true;
