@@ -78,6 +78,9 @@
     nixd
     direnv
     nixpkgs-fmt
+
+    clinfo
+    glxinfo
   ];
 
   # garbage collection to save diskspace

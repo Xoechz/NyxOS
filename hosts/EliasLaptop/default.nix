@@ -9,6 +9,7 @@
       ../../modules/system.nix
       ../../modules/kde.nix
       ../../modules/steam.nix
+      ../../modules/nvidia.nix
     ];
 
   # Bootloader.
