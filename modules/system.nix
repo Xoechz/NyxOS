@@ -81,6 +81,8 @@
 
     clinfo
     glxinfo
+
+    wayland-utils
   ];
 
   # garbage collection to save diskspace
