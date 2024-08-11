@@ -6,6 +6,7 @@
       ./vscode.nix
       ./office.nix
       ./media.nix
+      ./plasma.nix
     ];
 
   home.username = "elias";

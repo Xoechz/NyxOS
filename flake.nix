@@ -10,9 +10,16 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Plasma manager is used to port the plasma desktop via nixos
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, plasma-manager, ... }@inputs: {
     nixosConfigurations = {
       # demo is a vm that I used for testing, may be deleted in the future
       demo = nixpkgs.lib.nixosSystem {
@@ -40,6 +47,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
+            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
             home-manager.extraSpecialArgs = inputs;
             home-manager.users.elias = import ./home;
           }
@@ -55,6 +63,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
+            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
             home-manager.extraSpecialArgs = inputs;
             home-manager.users.elias = import ./home;
           }
