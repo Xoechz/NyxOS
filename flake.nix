@@ -3,11 +3,12 @@
 
   inputs = {
     # The main channel is nixos stable, that may change in the future
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     # The same goes for the home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -24,6 +25,7 @@
       # demo is a vm that I used for testing, may be deleted in the future
       demo = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+
         modules = [
           ./hosts/demo
           home-manager.nixosModules.home-manager

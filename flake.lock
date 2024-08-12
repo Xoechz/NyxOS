@@ -7,27 +7,42 @@
         ]
       },
       "locked": {
-        "lastModified": 1720042825,
-        "narHash": "sha256-A0vrUB6x82/jvf17qPCpxaM+ulJnD8YZwH9Ci0BsAzE=",
+        "lastModified": 1723399884,
+        "narHash": "sha256-97wn0ihhGqfMb8WcUgzzkM/TuAxce2Gd20A8oiruju4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e1391fb22e18a36f57e6999c7a9f966dc80ac073",
+        "rev": "086f619dd991a4d355c07837448244029fc2d9ab",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-24.05",
         "repo": "home-manager",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1722869614,
-        "narHash": "sha256-7ojM1KSk3mzutD7SkrdSflHXEujPvW1u7QuqWoTLXQU=",
+        "lastModified": 1723175592,
+        "narHash": "sha256-M0xJ3FbDUc4fRZ84dPGx5VvgFsOzds77KiBMW/mMTnI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "883180e6550c1723395a3a342f830bfc5c371f6b",
+        "rev": "5e0ca22929f3342b19569b21b2f3462f053e497b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1723282977,
+        "narHash": "sha256-oTK91aOlA/4IsjNAZGMEBz7Sq1zBS0Ltu4/nIQdYDOg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a781ff33ae258bbcfd4ed6e673860c3e923bf2cc",
         "type": "github"
       },
       "original": {
@@ -47,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1723391864,
-        "narHash": "sha256-nX/aloqD8ZHcuPS7sk7fx1txTaXCi+o6iYm0mIX4uIE=",
+        "lastModified": 1723483411,
+        "narHash": "sha256-h6F9JK9PrrTmt5WgsZChLCn7ECk+G/cYJL2CuQVY/Cc=",
         "owner": "nix-community",
         "repo": "plasma-manager",
-        "rev": "f843f4258eea57c5ba60f6ce1d96d12d6494b56e",
+        "rev": "b3b9d4ce20d75319c20a7faada08ad9135a1f008",
         "type": "github"
       },
       "original": {
@@ -64,6 +79,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-stable": "nixpkgs-stable",
         "plasma-manager": "plasma-manager"
       }
     }
