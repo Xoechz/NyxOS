@@ -6,6 +6,7 @@
       ./vscode.nix
       ./office.nix
       ./media.nix
+      # uncomment to apply the plasma desktop configuration
       ./plasma.nix
     ];
 

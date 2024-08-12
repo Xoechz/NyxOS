@@ -1,5 +1,5 @@
 # configs regarding window management and kde, it is possible to swap this out if i want to change desktop environment
-{ ... }:
+{ pkgs, ... }:
 {
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -18,4 +18,10 @@
   # set KDE to wayland
   services.displayManager.defaultSession = "plasma";
   services.displayManager.sddm.wayland.enable = true;
+
+  # exclude some packages
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    kate
+    khelpcenter
+  ];
 }
