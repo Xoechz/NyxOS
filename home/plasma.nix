@@ -112,14 +112,10 @@
             name = "org.kde.plasma.lock_logout";
             config.General =
               {
-                showLock = false;
-                showShutdown = true;
-                showSwitchUser = false;
-                showLogout = false;
-                showSleep = false;
-                showRestart = false;
-                showSuspend = false;
-                showHibernate = false;
+                show_lockScreen = true;
+                show_requestShutDown = true;
+                show_requestLogout = true;
+                show_requestReboot = true;
               };
           }
           {
