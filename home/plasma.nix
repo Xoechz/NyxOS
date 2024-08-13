@@ -4,27 +4,50 @@
   programs.plasma = {
     enable = true;
     overrideConfig = false;
-    workspace = {
-      wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
-      iconTheme = "Papirus";
-      theme = "breeze-dark";
-      colorScheme = "BreezeDark";
-      soundTheme = "ocean";
-      splashScreen = {
-        theme = "None";
+    input = {
+      keyboard = {
+        model = "pc105";
+        switchingPolicy = "global";
+        layouts = [
+          {
+            layout = "at";
+          }
+        ];
+        numlockOnStartup = "unchanged";
+        repeatDelay = 600;
+        repeatRate = 25;
       };
     };
-    spectacle.shortcuts = {
-      captureActiveWindow = "Meta+Print";
-      captureCurrentMonitor = "Print";
-      captureEntireDesktop = "Shift+Print";
-      captureRectangularRegion = "Meta+Shift+S";
-      captureWindowUnderCursor = "Meta+Ctrl+Print";
-      launch = "Meta+S";
-      launchWithoutCapturing = "Meta+Alt+S";
-      recordRegion = "Meta+Shift+R";
-      recordScreen = "Meta+Alt+R";
-      recordWindow = "Meta+Ctrl+R";
+    kscreenlocker = {
+      autoLock = true;
+      lockOnResume = true;
+      timeout = 30;
+      passwordRequired = true;
+      passwordRequiredDelay = 5;
+      lockOnStartup = false;
+      appearance = {
+        alwaysShowClock = true;
+        showMediaControls = true;
+        wallpaper = "/home/elias/NyxOS/nix-wallpaper-binary-black_8k.png";
+      };
+    };
+    kwin = {
+      # Disables the edge-barriers introduced in plasma 6.1
+      edgeBarrier = 0;
+      cornerBarrier = false;
+      nightLight = {
+        enable = true;
+        mode = "times";
+        time = {
+          morning = "06:00";
+          evening = "18:00";
+        };
+        temperature = {
+          day = 6500;
+          night = 4000;
+        };
+        transitionTime = 30;
+      };
     };
     panels = [
       {
@@ -163,17 +186,29 @@
         ];
       }
     ];
-    kscreenlocker = {
-      autoLock = true;
-      lockOnResume = true;
-      timeout = 30;
-      passwordRequired = true;
-      passwordRequiredDelay = 5;
-      lockOnStartup = false;
-      appearance = {
-        alwaysShowClock = true;
-        showMediaControls = true;
-        wallpaper = "/home/elias/NyxOS/nix-wallpaper-binary-black_8k.png";
+    spectacle.shortcuts = {
+      captureActiveWindow = "Meta+Print";
+      captureCurrentMonitor = "Print";
+      captureEntireDesktop = "Shift+Print";
+      captureRectangularRegion = "Meta+Shift+S";
+      captureWindowUnderCursor = "Meta+Ctrl+Print";
+      launch = "Meta+S";
+      launchWithoutCapturing = "Meta+Alt+S";
+      recordRegion = "Meta+Shift+R";
+      recordScreen = "Meta+Alt+R";
+      recordWindow = "Meta+Ctrl+R";
+    };
+    windows = {
+      allowWindowsToRememberPositions = true;
+    };
+    workspace = {
+      wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
+      iconTheme = "Papirus";
+      theme = "breeze-dark";
+      colorScheme = "BreezeDark";
+      soundTheme = "ocean";
+      splashScreen = {
+        theme = "None";
       };
     };
   };
