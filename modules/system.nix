@@ -83,6 +83,7 @@
     glxinfo
 
     wayland-utils
+    gparted
   ];
 
   # garbage collection to save diskspace
