@@ -8,6 +8,8 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  programs.steam.gamescopeSession.enable = true;
+
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1w"
   ];
@@ -16,6 +18,16 @@
     steam = pkgs.steam.override {
       extraPkgs = pkgs: with pkgs; [
         openssl_1_1
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
       ];
     };
   };
