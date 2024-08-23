@@ -6,7 +6,6 @@
       ./vscode.nix
       ./office.nix
       ./media.nix
-      # uncomment to apply the plasma desktop configuration
       ./plasma.nix
     ];
 
@@ -38,6 +37,13 @@
     pciutils
     usbutils
   ];
+
+  #enable direnv
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
 
   #setup git to use the correct email for commits
   programs.git = {

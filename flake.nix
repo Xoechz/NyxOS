@@ -19,7 +19,7 @@
       inputs.home-manager.follows = "home-manager";
     };
   };
-
+  
   outputs = { nixpkgs, home-manager, plasma-manager, ... }@inputs: {
     nixosConfigurations = {
       # demo is a vm that I used for testing, may be deleted in the future

@@ -78,10 +78,6 @@
     lm_sensors
     sysstat
 
-    nixd
-    direnv
-    nixpkgs-fmt
-
     clinfo
     glxinfo
 

@@ -5,9 +5,11 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
-      ms-dotnettools.csdevkit
-      ms-dotnettools.csharp
-      ms-dotnettools.vscodeintellicode-csharp
+      # ms-dotnettools.csdevkit
+      # ms-dotnettools.csharp
+      # ms-dotnettools.vscodeintellicode-csharp
+      # VisualStudioExptTeam.vscodeintellicode
+      ms-vscode.cpptools
       mhutchie.git-graph
       github.copilot
       github.copilot-chat
