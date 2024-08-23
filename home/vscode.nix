@@ -10,6 +10,7 @@
       # ms-dotnettools.vscodeintellicode-csharp
       # VisualStudioExptTeam.vscodeintellicode
       ms-vscode.cpptools
+      ms-vscode.cmake-tools
       mhutchie.git-graph
       github.copilot
       github.copilot-chat

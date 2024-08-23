@@ -1,8 +1,9 @@
 # configures dev packages
 { pkgs, ... }:
 {
-    environment.systemPackages = with pkgs; [
-        # c and c++
+  environment.systemPackages = with pkgs; [
+    # c and c++
+    clang
     clang-tools
     cmake
     codespell
