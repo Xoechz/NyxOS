@@ -3,8 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     # c and c++
-    clang
-    clang-tools
+    gcc
     cmake
     codespell
     conan

@@ -8,7 +8,7 @@
       # ms-dotnettools.csdevkit
       # ms-dotnettools.csharp
       # ms-dotnettools.vscodeintellicode-csharp
-      # VisualStudioExptTeam.vscodeintellicode
+      VisualStudioExptTeam.vscodeintellicode
       ms-vscode.cpptools
       ms-vscode.cmake-tools
       mhutchie.git-graph
