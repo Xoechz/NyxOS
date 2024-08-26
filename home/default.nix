@@ -3,7 +3,7 @@
 {
   imports =
     [
-      ./vscode.nix
+      ./editors.nix
       ./office.nix
       ./media.nix
       ./plasma.nix

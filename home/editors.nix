@@ -1,4 +1,4 @@
-# vscode with all extensions for nix development. New extensions need be be installed via this config
+# vscode with all extensions for nix development and jetbrains programs. New extensions need be be installed via this config
 { pkgs, ... }:
 
 {
@@ -8,7 +8,7 @@
       # ms-dotnettools.csdevkit
       # ms-dotnettools.csharp
       # ms-dotnettools.vscodeintellicode-csharp
-      VisualStudioExptTeam.vscodeintellicode
+      visualstudioexptteam.vscodeintellicode
       ms-vscode.cpptools
       ms-vscode.cmake-tools
       mhutchie.git-graph
@@ -23,4 +23,9 @@
       mkhl.direnv
     ];
   };
+
+  # jetbrains programs
+  home.packages = with pkgs; [
+    jetbrains.clion
+  ];
 }
