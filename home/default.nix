@@ -7,6 +7,8 @@
       ./office.nix
       ./media.nix
       ./plasma.nix
+      ./games.nix
+      ./defaultApplications.nix
     ];
 
   home.username = "elias";

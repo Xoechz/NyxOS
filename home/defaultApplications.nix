@@ -14,6 +14,16 @@
       "text/plain" = "code.desktop";
       "application/pdf" = "okular.desktop";
       "default-web-browser " = "firefox.desktop";
+      "text/calendar" = "thunderbird.desktop";
+      "message/rfc822" = "thunderbird.desktop";
+      "application/x-extension-ics" = "thunderbird.desktop";
+    };
+    associations.added = {
+      "inode/directory" = "code.desktop";
+      "x-scheme-handler/mailto" = "thunderbird.desktop";
+      "x-scheme-handler/mid" = "thunderbird.desktop";
+      "x-scheme-handler/webcal" = "thunderbird.desktop";
+      "x-scheme-handler/webcals" = "thunderbird.desktop";
     };
   };
 }
