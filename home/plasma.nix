@@ -28,7 +28,6 @@
       appearance = {
         alwaysShowClock = true;
         showMediaControls = true;
-        wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
       };
     };
     kwin = {
@@ -202,10 +201,7 @@
       allowWindowsToRememberPositions = true;
     };
     workspace = {
-      wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
       iconTheme = "Papirus";
-      theme = "breeze-dark";
-      colorScheme = "CatppuccinMochaFlamingo";
       soundTheme = "ocean";
       splashScreen = {
         theme = "None";

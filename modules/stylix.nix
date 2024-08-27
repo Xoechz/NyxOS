@@ -3,5 +3,5 @@
 {
   stylix.enable = true;
   stylix.image = ../nixos-wallpaper-catppuccin-mocha.png;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 }

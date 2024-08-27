@@ -10,7 +10,29 @@
 			"path": "../Repos/SEbaBB3"
 		}
 	],
-	"settings": {},
+	"settings": {
+		"nix.serverPath": "nixd",
+		"nix.enableLanguageServer": true,
+		"nix.serverSettings": {
+			"nixd": {
+				"formatting": {
+					"command": [
+						"nixpkgs-fmt"
+					]
+				},
+			}
+		},
+		"editor.formatOnSave": true,
+		"git.confirmSync": false,
+		"git.autofetch": true,
+		"git.enableSmartCommit": true,
+		"workbench.sideBar.location": "right",
+		"explorer.confirmDelete": false,
+		"debug.onTaskErrors": "showErrors",
+		"editor.renderWhitespace": "trailing",
+		"debug.internalConsoleOptions": "openOnSessionStart",
+		"debug.openDebug": "openOnSessionStart"
+	},
 	"extensions": {
 		"recommendations": [
 			"arrterian.nix-env-selector",

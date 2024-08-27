@@ -10,6 +10,7 @@
       ../../modules/kde.nix
       ../../modules/steam.nix
       ../../modules/dev.nix
+      ../../modules/stylix.nix
     ];
 
   # Bootloader.
