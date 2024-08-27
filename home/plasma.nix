@@ -28,7 +28,7 @@
       appearance = {
         alwaysShowClock = true;
         showMediaControls = true;
-        wallpaper = "/home/elias/NyxOS/nix-wallpaper-binary-black_8k.png";
+        wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
       };
     };
     kwin = {
@@ -205,7 +205,7 @@
       wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
       iconTheme = "Papirus";
       theme = "breeze-dark";
-      colorScheme = "BreezeDark";
+      colorScheme = "CatppuccinMochaFlamingo";
       soundTheme = "ocean";
       splashScreen = {
         theme = "None";

@@ -30,7 +30,8 @@
 			"tomoki1207.pdf",
 			"twxs.cmake",
 			"visualstudioexptteam.intellicode-api-usage-examples",
-			"visualstudioexptteam.vscodeintellicode"
+			"visualstudioexptteam.vscodeintellicode",
+			"catppuccin.catppuccin-vsc"
 		]
 	}
 }

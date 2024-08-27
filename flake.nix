@@ -18,32 +18,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    # Auto styling and theming through the stylix package
+    stylix.url = "github:danth/stylix";
   };
-  
-  outputs = { nixpkgs, home-manager, plasma-manager, ... }@inputs: {
+
+  outputs = { nixpkgs, home-manager, plasma-manager, stylix, ... }@inputs: {
     nixosConfigurations = {
-      # demo is a vm that I used for testing, may be deleted in the future
-      demo = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./hosts/demo
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.extraSpecialArgs = inputs;
-            home-manager.users.elias = import ./home;
-          }
-        ];
-      };
       EliasLaptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           # right now there arent many differences between hosts, only hardware settings, 
           # but for gaming i probably have to change graphics settings for AMD and NVIDIA
           ./hosts/EliasLaptop
+          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -60,6 +48,7 @@
         modules = [
           # Not yet in use
           ./hosts/EliasPC
+          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
