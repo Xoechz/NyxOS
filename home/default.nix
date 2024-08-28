@@ -39,6 +39,10 @@
     ethtool
     pciutils
     usbutils
+
+    tor-browser
+    transmission_4-qt
+    wireguard-tools
   ];
 
   #enable direnv
