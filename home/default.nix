@@ -9,6 +9,7 @@
       ./plasma.nix
       ./games.nix
       ./defaultApplications.nix
+      ./styling.nix
     ];
 
   home.username = "elias";

@@ -19,11 +19,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    # Auto styling and theming through the stylix package
-    stylix.url = "github:danth/stylix";
+    # Auto styling and theming through the catppuccin package
+    catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { nixpkgs, home-manager, plasma-manager, stylix, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, plasma-manager, catppuccin, ... }@inputs: {
     nixosConfigurations = {
       EliasLaptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -31,7 +31,7 @@
           # right now there arent many differences between hosts, only hardware settings, 
           # but for gaming i probably have to change graphics settings for AMD and NVIDIA
           ./hosts/EliasLaptop
-          stylix.nixosModules.stylix
+          catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -48,7 +48,7 @@
         modules = [
           # Not yet in use
           ./hosts/EliasPC
-          stylix.nixosModules.stylix
+          catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
