@@ -11,7 +11,7 @@
       ../../modules/steam.nix
       ../../modules/nvidia.nix
       ../../modules/dev.nix
-      ../../modules/stylix.nix
+      ../../modules/styling.nix
     ];
 
   # Bootloader.
