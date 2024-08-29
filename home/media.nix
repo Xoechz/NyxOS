@@ -1,11 +1,14 @@
 # Media and communication oriented apps and packages
-{ pkgs, ... }:
+{ pkgs, spicetify-nix, ... }:
 {
+  imports = [
+    spicetify-nix.homeManagerModules.default
+  ];
+
   home.packages = with pkgs; [
     (discord.override {
       withVencord = true;
     })
-    spotify
     vlc
   ];
 
@@ -22,4 +25,28 @@
 
     @import url("https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css");
   '';
+
+  # spicetify spices up spotify
+  programs.spicetify =
+    let
+      spicePkgs = spicetify-nix.legacyPackages.${pkgs.system};
+    in
+    {
+      enable = true;
+
+      enabledExtensions = with spicePkgs.extensions; [
+        adblock
+        shuffle # shuffle+ (special characters are sanitized out of extension names)
+      ];
+      enabledCustomApps = with spicePkgs.apps; [
+        newReleases
+        ncsVisualizer
+      ];
+      enabledSnippets = with spicePkgs.snippets; [
+        pointer
+      ];
+
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "mocha";
+    };
 }

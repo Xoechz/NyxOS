@@ -21,6 +21,9 @@
 
     # Auto styling and theming through the catppuccin package
     catppuccin.url = "github:catppuccin/nix";
+
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { nixpkgs, home-manager, plasma-manager, catppuccin, ... }@inputs: {
