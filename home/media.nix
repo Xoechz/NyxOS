@@ -37,13 +37,17 @@
       enabledExtensions = with spicePkgs.extensions; [
         adblock
         shuffle # shuffle+ (special characters are sanitized out of extension names)
+        fullAppDisplay
+        playlistIcons
+        fullAlbumDate
+        wikify
+        songStats
+        betterGenres
+        playNext
+        volumePercentage
       ];
       enabledCustomApps = with spicePkgs.apps; [
-        newReleases
         ncsVisualizer
-      ];
-      enabledSnippets = with spicePkgs.snippets; [
-        pointer
       ];
 
       theme = spicePkgs.themes.catppuccin;

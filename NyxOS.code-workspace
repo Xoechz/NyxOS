@@ -35,7 +35,6 @@
 	},
 	"extensions": {
 		"recommendations": [
-			"arrterian.nix-env-selector",
 			"bierner.markdown-mermaid",
 			"christian-kohler.path-intellisense",
 			"davidanson.vscode-markdownlint",
@@ -45,10 +44,8 @@
 			"github.copilot-chat",
 			"jnoortheen.nix-ide",
 			"mhutchie.git-graph",
-			"mkhl.direnv",
 			"ms-vscode.cmake-tools",
 			"ms-vscode.cpptools",
-			"pinage404.nix-extension-pack",
 			"tomoki1207.pdf",
 			"twxs.cmake",
 			"visualstudioexptteam.intellicode-api-usage-examples",

@@ -10,6 +10,7 @@
       ./games.nix
       ./defaultApplications.nix
       ./styling.nix
+      ./terminal.nix
     ];
 
   home.username = "elias";
@@ -45,24 +46,11 @@
     wireguard-tools
   ];
 
-  #enable direnv
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = true;
-    nix-direnv.enable = true;
-  };
-
   #setup git to use the correct email for commits
   programs.git = {
     enable = true;
     userName = "Elias Leonhardsberger";
     userEmail = "elias.leonhardsberger@gmail.com";
-  };
-
-  #enable bash completion, maybe in the future ill use another shell
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
   };
 
   home.stateVersion = "24.05";

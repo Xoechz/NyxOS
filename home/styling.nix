@@ -10,11 +10,5 @@
     enable = true;
     flavor = "mocha";
     accent = "pink";
-
-    pointerCursor = {
-      enable = true;
-      flavor = "mocha";
-      accent = "dark";
-    };
   };
 }

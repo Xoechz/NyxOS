@@ -26,6 +26,7 @@
       passwordRequiredDelay = 5;
       lockOnStartup = false;
       appearance = {
+        wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
         alwaysShowClock = true;
         showMediaControls = true;
       };
@@ -63,7 +64,7 @@
           {
             iconTasks = {
               launchers = [
-                "applications:org.kde.konsole.desktop"
+                "applications:kitty.desktop"
                 "applications:org.kde.dolphin.desktop"
                 "applications:thunderbird.desktop"
                 "applications:firefox.desktop"
@@ -116,6 +117,15 @@
               showActionButtonCaptions = true;
               pin = false;
               sidebarPosition = "right";
+            };
+          }
+          {
+            plasmaPanelColorizer = {
+              general = {
+                enable = true;
+                hideWidget = true;
+              };
+              panelBackground.originalBackground.hide = true;
             };
           }
         ];
@@ -202,6 +212,8 @@
     };
     workspace = {
       iconTheme = "Papirus";
+      wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
+      colorScheme = "CatppuccinMochaFlamingo";
       soundTheme = "ocean";
       splashScreen = {
         theme = "None";

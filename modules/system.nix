@@ -105,4 +105,6 @@
     openFirewall = true;
   };
 
+  users.users.elias.shell = pkgs.zsh;
+  programs.zsh.enable = true;
 }
