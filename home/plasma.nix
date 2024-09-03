@@ -93,7 +93,7 @@
                 rows = {
                   multirowView = "never";
                 };
-                iconSpacing = "small";
+                iconSpacing = "medium";
               };
               behavior = {
                 grouping = {
