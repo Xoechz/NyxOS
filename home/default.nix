@@ -44,6 +44,7 @@
     tor-browser
     transmission_4-qt
     wireguard-tools
+    kdePackages.kdeconnect-kde
   ];
 
   #setup git to use the correct email for commits

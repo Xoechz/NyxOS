@@ -53,12 +53,12 @@
         fish_indicator = "";
         bash_indicator = "[\\[BASH\\]]($style) ";
         zsh_indicator = "[\\[ZSH\\]]($style) ";
-        style = "lavender bold";
+        style = "peach bold";
       };
       username = {
         show_always = true;
         format = "[$user]($style)";
-        style_user = "peach bold";
+        style_user = "lavender bold";
         style_root = "red bold";
       };
       hostname = {

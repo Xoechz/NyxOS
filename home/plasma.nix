@@ -51,16 +51,29 @@
     };
     panels = [
       {
-        # "Taskbar"
-        location = "left";
-        height = 44;
-        lengthMode = "fit";
-        alignment = "left";
+        # Taskbar
+        location = "top";
+        height = 32;
+        lengthMode = "fill";
+        alignment = "center";
         hiding = "none";
         floating = false;
         screen = "all";
         widgets = [
-          "org.kde.plasma.showdesktop"
+          {
+            kickoff = {
+              icon = "nix-snowflake-white";
+              sortAlphabetically = false;
+              compactDisplayStyle = false;
+              favoritesDisplayMode = "grid";
+              applicationsDisplayMode = "list";
+              showButtonsFor = "power";
+              showActionButtonCaptions = true;
+              pin = false;
+              sidebarPosition = "right";
+            };
+          }
+          "org.kde.plasma.pager"
           {
             iconTasks = {
               launchers = [
@@ -80,7 +93,7 @@
                 rows = {
                   multirowView = "never";
                 };
-                iconSpacing = "medium";
+                iconSpacing = "small";
               };
               behavior = {
                 grouping = {
@@ -105,56 +118,30 @@
               };
             };
           }
-          "org.kde.plasma.pager"
+          "org.kde.plasma.marginsseparator" # Spacer to Right
           {
-            kickoff = {
-              icon = "nix-snowflake-white";
-              sortAlphabetically = false;
-              compactDisplayStyle = false;
-              favoritesDisplayMode = "grid";
-              applicationsDisplayMode = "list";
-              showButtonsFor = "power";
-              showActionButtonCaptions = true;
-              pin = false;
-              sidebarPosition = "right";
-            };
-          }
-          {
-            plasmaPanelColorizer = {
-              general = {
+            digitalClock = {
+              date = {
                 enable = true;
-                hideWidget = true;
+                format.custom = "dd.MM.yyyy";
+                position = "belowTime";
               };
-              panelBackground.originalBackground.hide = true;
+              time = {
+                showSeconds = "always";
+                format = "24h";
+              };
+              timeZone = {
+                selected = [ "Local" ];
+                format = "code";
+                alwaysShow = false;
+              };
             };
-          }
-        ];
-      }
-      {
-        # "System Tray"
-        location = "right";
-        height = 36;
-        lengthMode = "fit";
-        alignment = "left";
-        hiding = "none";
-        floating = false;
-        screen = "all";
-        widgets = [
-          {
-            name = "org.kde.plasma.lock_logout";
-            config.General =
-              {
-                show_lockScreen = true;
-                show_requestShutDown = true;
-                show_requestLogout = true;
-                show_requestReboot = true;
-              };
           }
           {
             systemTray = {
               pin = false;
               icons = {
-                spacing = "medium";
+                spacing = "small";
                 scaleToFit = false;
               };
               items = {
@@ -170,26 +157,92 @@
                   "org.kde.plasma.mediacontroller"
                   "org.kde.plasma.notifications"
                   "org.kde.plasma.removabledevices"
+                  "org.kde.kdeconnect"
                 ];
               };
             };
           }
           {
-            digitalClock = {
-              date = {
+            # lock
+            name = "org.kde.plasma.lock_logout";
+            config.General =
+              {
+                show_lockScreen = true;
+                show_requestShutDown = false;
+                show_requestLogout = false;
+                show_requestReboot = false;
+              };
+          }
+          {
+            # logout
+            name = "org.kde.plasma.lock_logout";
+            config.General =
+              {
+                show_lockScreen = false;
+                show_requestShutDown = false;
+                show_requestLogout = true;
+                show_requestReboot = false;
+              };
+          }
+          {
+            # reboot
+            name = "org.kde.plasma.lock_logout";
+            config.General =
+              {
+                show_lockScreen = false;
+                show_requestShutDown = false;
+                show_requestLogout = false;
+                show_requestReboot = true;
+              };
+          }
+          {
+            # shutdown
+            name = "org.kde.plasma.lock_logout";
+            config.General =
+              {
+                show_lockScreen = false;
+                show_requestShutDown = true;
+                show_requestLogout = false;
+                show_requestReboot = false;
+              };
+          }
+          {
+            plasmaPanelColorizer = {
+              general = {
                 enable = true;
-                format.custom = "dd.MM";
-                position = "belowTime";
+                hideWidget = true;
               };
-              time = {
-                showSeconds = "onlyInTooltip";
-                format = "24h";
-              };
-              timeZone = {
-                selected = [ "Local" ];
-                format = "code";
-                alwaysShow = false;
-              };
+              panelBackground.originalBackground.hide = true;
+              layout.widgetMarginRules = [
+                {
+                  widgetId = "org.kde.plasma.kickoff";
+                  margin = {
+                    vertical = -9;
+                    horizontal = 0;
+                  };
+                }
+                {
+                  widgetId = "org.kde.plasma.icontasks";
+                  margin = {
+                    vertical = -8;
+                    horizontal = -5;
+                  };
+                }
+                {
+                  widgetId = "org.kde.plasma.systemtray";
+                  margin = {
+                    vertical = 0;
+                    horizontal = -5;
+                  };
+                }
+                {
+                  widgetId = "org.kde.plasma.lock_logout";
+                  margin = {
+                    vertical = 1;
+                    horizontal = 1;
+                  };
+                }
+              ];
             };
           }
         ];

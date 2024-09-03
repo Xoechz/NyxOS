@@ -1,5 +1,5 @@
 # The config for steam
-{ ... }:
+{ pkgs, ... }:
 {
   programs.steam = {
     enable = true;
@@ -31,4 +31,8 @@
       ];
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    mangohud
+  ];
 }
