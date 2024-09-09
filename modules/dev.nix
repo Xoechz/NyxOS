@@ -18,5 +18,9 @@
     # nix
     nixd
     nixpkgs-fmt
+
+    # latex
+    texlive.combined.scheme-full
+    (python3.withPackages (ps: [ ps.pygments ]))
   ];
 }
