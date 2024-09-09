@@ -85,6 +85,7 @@
     gparted
 
     openssl
+    baobab
   ];
 
   # garbage collection to save diskspace
