@@ -17,6 +17,7 @@
       ll = "ls -l";
       rebuild = "sudo nixos-rebuild switch";
       update = "sudo nixos-rebuild switch --recreate-lock-file";
+      cleanup = "nix store optimise && nix-collect-garbage -d";
     };
     history = {
       size = 10000;
