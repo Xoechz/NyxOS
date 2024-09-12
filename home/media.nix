@@ -10,6 +10,7 @@
       withVencord = true;
     })
     vlc
+    teams-for-linux
   ];
 
   xdg.configFile."Vencord/themes/custom.css".text = '' 
