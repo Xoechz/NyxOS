@@ -1,6 +1,6 @@
 # NyxOS
 
-My NixOS config(still testing)
+My NixOS config
 
 The name is inspired by the Dota hero Nyx
 
