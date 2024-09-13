@@ -75,7 +75,7 @@
     wget
     curl
 
-    neofetch
+    fastfetch
     zip
     xz
     unzip

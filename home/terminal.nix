@@ -47,13 +47,12 @@
 
     settings = {
       add_newline = false;
-      format = "$shell$username❄️$hostname$nix_shell$git_branch$git_commit$git_state$git_status$directory$cmd_duration$character";
+      format = "$shell$username$os$hostname$nix_shell$git_branch$git_commit$directory$cmd_duration$character";
       shell = {
         disabled = false;
-        format = "$indicator";
-        fish_indicator = "";
-        bash_indicator = "[\\[BASH\\]]($style) ";
-        zsh_indicator = "[\\[ZSH\\]]($style) ";
+        format = "$indicator ";
+        bash_indicator = "[\\[BASH\\]]($style)";
+        zsh_indicator = "[\\[ZSH\\]]($style)";
         style = "peach bold";
       };
       username = {
@@ -61,6 +60,14 @@
         format = "[$user]($style)";
         style_user = "lavender bold";
         style_root = "red bold";
+      };
+      os = {
+        format = "[$symbol]($style)";
+        style = "sapphire bold";
+        disabled = false;
+        symbols = {
+          NixOS = " ";
+        };
       };
       hostname = {
         format = "[$hostname]($style) ";
@@ -74,7 +81,7 @@
       };
       git_branch = {
         only_attached = true;
-        format = "[$branch]($style) ";
+        format = "[ $branch]($style) ";
         style = "yellow bold";
       };
       git_commit = {
@@ -82,21 +89,15 @@
         format = "[$hash]($style)";
         style = "flamingo bold";
       };
-      git_state = {
-        style = "sapphire bold";
-      };
-      git_status = {
-        style = "blue bold";
-      };
       directory = {
-        format = "[$path]($style) ";
+        format = "[ $path]($style) ";
         style = "mauve bold";
         read_only = "🔒";
         truncation_length = 10;
         truncate_to_repo = false;
       };
       cmd_duration = {
-        format = "[$duration]($style) ";
+        format = "[ $duration]($style) ";
         style = "text";
       };
       character = {
@@ -123,8 +124,6 @@
       enable_audio_bell = false;
       mouse_hide_wait = " 10.0 ";
       window_padding_width = 10;
-      background_opacity = " 0.4 ";
-      background_blur = 5;
     };
   };
 }

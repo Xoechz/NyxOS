@@ -163,7 +163,8 @@
 				],
 				"env": {}
 			}
-		]
+		],
+		"editor.fontFamily": "Hack Nerd Font"
 	},
 	"extensions": {
 		"recommendations": [
