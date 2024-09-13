@@ -59,8 +59,13 @@
     };
   };
 
-  # disable the firewall
-  networking.firewall.enable = false;
+  # Enable firewall settings
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 22 80 443 57621 ];
+    allowedUDPPorts = [ 5353 ];
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -86,6 +91,8 @@
 
     openssl
     baobab
+
+    iptables
   ];
 
   # garbage collection to save diskspace

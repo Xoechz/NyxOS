@@ -36,6 +36,7 @@
     strace
     ltrace
     lsof
+    traceroute
 
     ethtool
     pciutils
