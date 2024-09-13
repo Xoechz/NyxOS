@@ -23,4 +23,12 @@
     texlive.combined.scheme-full
     (python3.withPackages (ps: [ ps.pygments ]))
   ];
+
+  # enable virtualbox to run windows stuff🤮
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
+
+  users.extraGroups.vboxusers.members = [ "elias" ];
 }
