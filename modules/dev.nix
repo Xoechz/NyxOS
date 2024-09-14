@@ -1,5 +1,5 @@
 # configures dev packages
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, ... }:
 {
   environment.systemPackages = with pkgs; [
     # c and c++
@@ -27,6 +27,7 @@
   # enable virtualbox to run windows stuff🤮
   virtualisation.virtualbox.host = {
     enable = true;
+    package = pkgs-stable.virtualbox;
     enableExtensionPack = true;
   };
 

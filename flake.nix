@@ -26,10 +26,16 @@
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, home-manager, plasma-manager, catppuccin, ... }@inputs: {
+  outputs = { nixpkgs, nixpkgs-stable, home-manager, plasma-manager, catppuccin, ... }@inputs: {
     nixosConfigurations = {
       EliasLaptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {
+          pkgs-stable = import nixpkgs-stable {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+        };
         modules = [
           # right now there arent many differences between hosts, only hardware settings, 
           # but for gaming i probably have to change graphics settings for AMD and NVIDIA
@@ -48,6 +54,12 @@
       };
       EliasPC = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {
+          pkgs-stable = import nixpkgs-stable {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+        };
         modules = [
           # Not yet in use
           ./hosts/EliasPC
