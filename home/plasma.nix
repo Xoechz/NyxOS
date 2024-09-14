@@ -26,7 +26,7 @@
       passwordRequiredDelay = 5;
       lockOnStartup = false;
       appearance = {
-        wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
+        wallpaper = "/home/elias/NyxOS/images/nixos-wallpaper-catppuccin-mocha.png";
         alwaysShowClock = true;
         showMediaControls = true;
       };
@@ -265,7 +265,7 @@
     };
     workspace = {
       iconTheme = "Papirus";
-      wallpaper = "/home/elias/NyxOS/nixos-wallpaper-catppuccin-mocha.png";
+      wallpaper = "/home/elias/NyxOS/images/nixos-wallpaper-catppuccin-mocha.png";
       colorScheme = "CatppuccinMochaFlamingo";
       soundTheme = "ocean";
       splashScreen = {
