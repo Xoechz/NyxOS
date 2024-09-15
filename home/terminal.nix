@@ -14,7 +14,7 @@
       };
     };
     shellAliases = {
-      ll = "ls -l";
+      ll = "ls -htla";
       rebuild = "sudo nixos-rebuild switch";
       update = "sudo nixos-rebuild switch --recreate-lock-file";
       cleanup = "sudo nix store optimise && sudo nix-collect-garbage -d";

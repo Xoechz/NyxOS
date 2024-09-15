@@ -53,6 +53,10 @@
     enable = true;
     userName = "Elias Leonhardsberger";
     userEmail = "elias.leonhardsberger@gmail.com";
+    lfs.enable = true;
+    aliases = {
+      graph = "log --decorate --oneline --graph --max-count=20";
+    };
   };
 
   home.stateVersion = "24.05";
