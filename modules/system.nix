@@ -64,7 +64,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 80 443 57621 ];
-    allowedUDPPorts = [ 5353 ];
+    allowedUDPPorts = [ 5353 24642 ];
   };
 
   # Allow unfree packages

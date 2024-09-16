@@ -7,8 +7,11 @@
     package = pkgs.vscode.fhs;
   };
 
-  # jetbrains programs
   home.packages = with pkgs; [
+    # jetbrains programs
     jetbrains.clion
+    jetbrains.datagrip
+
+    qgis
   ];
 }
