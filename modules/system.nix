@@ -100,6 +100,8 @@
     baobab
 
     iptables
+
+    gnome-multi-writer
   ];
 
   # garbage collection to save diskspace
