@@ -70,8 +70,9 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 80 443 57621 ];
-    allowedUDPPorts = [ 5353 24642 ];
+    # Ports for HTTP, HTTPS, SSH, Stardew Valley and Steam Local Network Game Transfer
+    allowedTCPPorts = [ 22 80 443 57621 27040 ];
+    allowedUDPPorts = [ 5353 24642 27031 27032 27033 27034 27035 27036 ];
   };
 
   # Allow unfree packages
