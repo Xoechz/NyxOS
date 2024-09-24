@@ -46,6 +46,8 @@
     transmission_4-qt
     wireguard-tools
     kdePackages.kdeconnect-kde
+
+    hdparm
   ];
 
   #setup git to use the correct email for commits
