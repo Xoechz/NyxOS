@@ -61,7 +61,6 @@
           };
         };
         modules = [
-          # Not yet in use
           ./hosts/EliasPC
           catppuccin.nixosModules.catppuccin
           home-manager.nixosModules.home-manager
