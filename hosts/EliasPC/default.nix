@@ -9,14 +9,21 @@
       ../../modules/system.nix
       ../../modules/kde.nix
       ../../modules/steam.nix
+      ../../modules/amd.nix
       ../../modules/dev.nix
       ../../modules/styling.nix
     ];
 
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  # Bootloader
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.loader.grub =
+    {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+      useOSProber = true;
+    };
 
   networking.hostName = "EliasPC";
 
