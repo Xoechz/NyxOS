@@ -129,4 +129,7 @@
 
   users.users.elias.shell = pkgs.zsh;
   programs.zsh.enable = true;
+
+  # Firmware updates
+  services.fwupd.enable = true;
 }
