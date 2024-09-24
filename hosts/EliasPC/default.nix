@@ -25,6 +25,18 @@
       useOSProber = true;
     };
 
+  fileSystems."/run/media/elias/4TB-HDD" =
+    {
+      device = "/dev/disk/by-uuid/5939832d-c16a-4b0d-bf9c-fa07d41fd538";
+      fsType = "ext4";
+    };
+
+  fileSystems."/run/media/elias/100GB-SSD" =
+    {
+      device = "/dev/disk/by-uuid/2b788cd1-fa01-45ee-bf76-6c396e06015f";
+      fsType = "ext4";
+    };
+
   networking.hostName = "EliasPC";
 
   # Enable networking
