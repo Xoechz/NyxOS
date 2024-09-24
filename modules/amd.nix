@@ -1,7 +1,6 @@
-# settings for AMD gpus
-{ pkgs, ... }: {
-  hardware.graphics.enable = true;
-
+# settings for AMD GPUs
+{ pkgs, ... }:
+{
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -9,22 +8,18 @@
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 
-  hardware.opengl.extraPackages = with pkgs; [
-    amdvlk
-    rocmPackages.clr.icd
-  ];
-
-  hardware.opengl = {
-    # Mesa
+  hardware.graphics = {
     enable = true;
 
-    # Vulkan
-    driSupport = true;
-  };
+    extraPackages = with pkgs; [
+      amdvlk
+      rocmPackages.clr.icd
+    ];
 
-  # For 32 bit applications 
-  hardware.opengl.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
-  ];
-  hardware.opengl.driSupport32Bit = true;
+    # For 32 bit applications 
+    enable32Bit = true;
+    extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+    ];
+  };
 }
