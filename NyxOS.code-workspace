@@ -176,14 +176,14 @@
 			"github.copilot",
 			"github.copilot-chat",
 			"jnoortheen.nix-ide",
-			"mhutchie.git-graph",
 			"ms-vscode.cmake-tools",
 			"ms-vscode.cpptools",
 			"twxs.cmake",
 			"visualstudioexptteam.intellicode-api-usage-examples",
 			"visualstudioexptteam.vscodeintellicode",
 			"catppuccin.catppuccin-vsc",
-			"james-yu.latex-workshop"
+			"james-yu.latex-workshop",
+			"bpruitt-goddard.mermaid-markdown-syntax-highlighting"
 		]
 	}
 }
