@@ -32,4 +32,15 @@
   };
 
   users.extraGroups.vboxusers.members = [ "elias" ];
+
+  # enable docker
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
+  users.users.elias.extraGroups = [ "docker" ];
 }
