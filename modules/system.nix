@@ -70,9 +70,34 @@
 
   networking.firewall = {
     enable = true;
-    # Ports for HTTP, HTTPS, SSH, Stardew Valley and Steam Local Network Game Transfer
-    allowedTCPPorts = [ 22 80 443 57621 27040 ];
-    allowedUDPPorts = [ 5353 24642 27031 27032 27033 27034 27035 27036 ];
+    allowedTCPPorts = [
+      # SSH
+      22
+      # HTTP
+      80
+      # HTTPS
+      443
+      # Spotify
+      57621
+      # Steam Local Network Game Transfer
+      27040
+    ];
+    allowedUDPPorts = [
+      # Spotify
+      5353
+      # Stardew Valley LAN Multiplayer
+      24642
+    ];
+    allowedTCPPortRanges = [
+      # KDE Connect
+      { from = 1714; to = 1764; }
+    ];
+    allowedUDPPortRanges = [
+      # KDE Connect
+      { from = 1714; to = 1764; }
+      # Steam Local Network Game Transfer
+      { from = 27031; to = 27036; }
+    ];
   };
 
   # Allow unfree packages
