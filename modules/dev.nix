@@ -42,5 +42,5 @@
     };
   };
 
-  users.users.elias.extraGroups = [ "docker" ];
+  users.extraGroups.docker.members = [ "elias" ];
 }

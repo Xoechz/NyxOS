@@ -183,7 +183,8 @@
 			"visualstudioexptteam.vscodeintellicode",
 			"catppuccin.catppuccin-vsc",
 			"james-yu.latex-workshop",
-			"bpruitt-goddard.mermaid-markdown-syntax-highlighting"
+			"bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+			"ms-azuretools.vscode-docker"
 		]
 	}
 }
