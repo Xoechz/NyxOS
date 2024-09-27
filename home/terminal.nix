@@ -47,7 +47,7 @@
 
     settings = {
       add_newline = false;
-      format = "$shell$username$os$hostname$nix_shell$git_branch$git_commit$git_status$git_state $directory$cmd_duration$character";
+      format = "$shell$username$os$hostname$nix_shell$git_branch$git_commit$git_status$git_state$directory$cmd_duration$character";
       shell = {
         disabled = false;
         format = "$indicator ";
@@ -90,11 +90,11 @@
         style = "yellow bold";
       };
       git_status = {
-        format = "[\\[$all_status$ahead_behind\\]]($style)";
+        format = "[\\[$all_status$ahead_behind\\]]($style) ";
         style = "flamingo bold";
       };
       git_state = {
-        format = "\\([$state( $progress_current/$progress_total)]($style)\\)";
+        format = "\\([$state( $progress_current/$progress_total)]($style)\\) ";
         style = "flamingo bold";
       };
       directory = {
