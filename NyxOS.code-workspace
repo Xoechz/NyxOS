@@ -11,6 +11,10 @@
 		{
 			"name": "SEbaBB3",
 			"path": "../Repos/SEbaBB3"
+		},
+		{
+			"name": "UE1",
+			"path": "../Repos/ue01-Xoechz"
 		}
 	],
 	"settings": {
@@ -164,7 +168,15 @@
 				"env": {}
 			}
 		],
-		"editor.fontFamily": "Hack Nerd Font"
+		"editor.fontFamily": "Hack Nerd Font",
+		"cmake.options.statusBarVisibility": "icon",
+		"C_Cpp.formatting": "vcFormat",
+		"C_Cpp.vcFormat.indent.accessSpecifiers": false,
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "newLine",
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "newLine",
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "newLine",
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "newLine",
+		"C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "newLine",
 	},
 	"extensions": {
 		"recommendations": [
