@@ -265,7 +265,7 @@
     };
     workspace = {
       iconTheme = "Papirus";
-      wallpaper = "/home/elias/NyxOS/images/nixos-wallpaper-catppuccin-mocha.png";
+      wallpaper = "/home/elias/NyxOS/images/HeightLinesMocha.png";
       colorScheme = "CatppuccinMochaFlamingo";
       soundTheme = "ocean";
       splashScreen = {
