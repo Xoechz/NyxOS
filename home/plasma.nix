@@ -79,6 +79,7 @@
               launchers = [
                 "applications:kitty.desktop"
                 "applications:org.kde.dolphin.desktop"
+                "applications:super-productivity.desktop"
                 "applications:thunderbird.desktop"
                 "applications:firefox.desktop"
                 "applications:code.desktop"
@@ -212,7 +213,15 @@
                 enable = true;
                 hideWidget = true;
               };
-              panelBackground.originalBackground.hide = true;
+              panelBackground = {
+                originalBackground.hide = true;
+                customBackground = {
+                  enable = true;
+                  colorSource = "system";
+                  system.color = "background";
+                  opacity = 0.9;
+                };
+              };
               layout.widgetMarginRules = [
                 {
                   widgetId = "org.kde.plasma.kickoff";

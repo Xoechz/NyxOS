@@ -10,5 +10,7 @@
     thunderbird
 
     pdfarranger
+
+    super-productivity
   ];
 }
