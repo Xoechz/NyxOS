@@ -17,10 +17,14 @@ The name is inspired by the Dota hero Nyx
 - [images](images) => Background image and readme images
 - [workspace](NyxOS.code-workspace) => Vscode settings in a base workspace
 
-### Fastfetch
+### Fastfetch(Laptop)
 
 ![fastfetch](images/fastfetch.png)
 
 ### Background Image
 
-![background image](images/nixos-wallpaper-catppuccin-mocha.png)
+![Background image](images/HeightLinesMocha.png)
+
+### Lockscreen Image
+
+![Lockscreen image](images/nixos-wallpaper-catppuccin-mocha.png)
