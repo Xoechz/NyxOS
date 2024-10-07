@@ -182,6 +182,9 @@
 		"latex-workshop.formatting.latex": "latexindent",
 		"poor-mans-t-sql-formatter.std.breakJoinOnSections": true,
 		"poor-mans-t-sql-formatter.std.trailingCommas": false,
+		"markdownlint.config": {
+			"MD024": false,
+		},
 	},
 	"extensions": {
 		"recommendations": [
