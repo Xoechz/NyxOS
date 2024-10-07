@@ -177,6 +177,11 @@
 		"C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "newLine",
 		"C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "newLine",
 		"C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "newLine",
+		"plantuml.server": "",
+		"plantuml.render": "Local",
+		"latex-workshop.formatting.latex": "latexindent",
+		"poor-mans-t-sql-formatter.std.breakJoinOnSections": true,
+		"poor-mans-t-sql-formatter.std.trailingCommas": false,
 	},
 	"extensions": {
 		"recommendations": [
@@ -198,7 +203,9 @@
 			"bpruitt-goddard.mermaid-markdown-syntax-highlighting",
 			"ms-azuretools.vscode-docker",
 			"ms-vscode.makefile-tools",
-			"pkief.material-icon-theme"
+			"pkief.material-icon-theme",
+			"jebbs.plantuml",
+			"taoklerks.poor-mans-t-sql-formatter-vscode"
 		]
 	}
 }
