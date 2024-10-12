@@ -157,4 +157,9 @@
 
   # Firmware updates
   services.fwupd.enable = true;
+
+  # Filesystems
+  boot.supportedFilesystems = [
+    "ntfs"
+  ];
 }
