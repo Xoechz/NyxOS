@@ -184,6 +184,11 @@
 		"poor-mans-t-sql-formatter.std.trailingCommas": false,
 		"markdownlint.config": {
 			"MD024": false,
+			"MD041": false,
+			"MD001": false,
+		},
+		"files.associations": {
+			"string_view": "c"
 		},
 	},
 	"extensions": {
