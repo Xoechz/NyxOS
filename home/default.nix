@@ -48,6 +48,9 @@
     kdePackages.kdeconnect-kde
 
     hdparm
+
+    ntfs3g
+    exfat
   ];
 
   #setup git to use the correct email for commits
