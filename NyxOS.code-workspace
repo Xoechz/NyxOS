@@ -190,6 +190,7 @@
 		"files.associations": {
 			"string_view": "c"
 		},
+		"markdown.preview.scrollEditorWithPreview": false,
 	},
 	"extensions": {
 		"recommendations": [
