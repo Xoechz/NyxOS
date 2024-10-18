@@ -169,6 +169,7 @@
             config.General =
               {
                 show_lockScreen = true;
+                show_requestLogoutScreen = false;
                 show_requestShutDown = false;
                 show_requestLogout = false;
                 show_requestReboot = false;
@@ -180,6 +181,7 @@
             config.General =
               {
                 show_lockScreen = false;
+                show_requestLogoutScreen = false;
                 show_requestShutDown = false;
                 show_requestLogout = true;
                 show_requestReboot = false;
@@ -191,6 +193,7 @@
             config.General =
               {
                 show_lockScreen = false;
+                show_requestLogoutScreen = false;
                 show_requestShutDown = false;
                 show_requestLogout = false;
                 show_requestReboot = true;
@@ -202,6 +205,7 @@
             config.General =
               {
                 show_lockScreen = false;
+                show_requestLogoutScreen = false;
                 show_requestShutDown = true;
                 show_requestLogout = false;
                 show_requestReboot = false;

@@ -51,6 +51,8 @@
 
     ntfs3g
     exfat
+
+    dmidecode
   ];
 
   #setup git to use the correct email for commits
