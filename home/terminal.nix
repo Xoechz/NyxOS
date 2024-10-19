@@ -1,4 +1,4 @@
-# kitty and direnv setup
+# kitty, zsh, starship and direnv setup
 { lib, ... }:
 {
   # zsh
@@ -18,6 +18,7 @@
       rebuild = "sudo nixos-rebuild switch";
       update = "sudo nixos-rebuild switch --recreate-lock-file";
       cleanup = "sudo nix store optimise && sudo nix-collect-garbage -d";
+      pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
     };
     history = {
       size = 10000;
