@@ -136,6 +136,7 @@
                 format = "code";
                 alwaysShow = false;
               };
+              calendar.showWeekNumbers = true;
             };
           }
           {
