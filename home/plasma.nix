@@ -146,8 +146,8 @@
                 scaleToFit = false;
               };
               items = {
-                showAll = true;
-                extra = [
+                showAll = false;
+                shown = [
                   "org.kde.plasma.volume"
                   "org.kde.plasma.networkmanagement"
                   "org.kde.plasma.bluetooth"
@@ -245,7 +245,7 @@
                   widgetId = "org.kde.plasma.systemtray";
                   margin = {
                     vertical = 0;
-                    horizontal = -5;
+                    horizontal = 0;
                   };
                 }
                 {

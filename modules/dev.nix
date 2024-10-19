@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     # c and c++
     gcc
+    gnumake
     cmake
     codespell
     conan
