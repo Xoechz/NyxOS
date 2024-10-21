@@ -53,6 +53,9 @@
     exfat
 
     dmidecode
+
+    parallel
+    libwebp
   ];
 
   #setup git to use the correct email for commits
