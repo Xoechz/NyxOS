@@ -16,7 +16,7 @@
     shellAliases = {
       ll = "ls -htla";
       rebuild = "sudo nixos-rebuild switch";
-      update = "sudo nixos-rebuild switch --recreate-lock-file";
+      update = "nix flake update && sudo nixos-rebuild switch";
       cleanup = "sudo nix store optimise && sudo nix-collect-garbage -d";
       pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
       pm-rebuild = "rebuild && pm-reset";
