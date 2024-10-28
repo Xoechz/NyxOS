@@ -203,7 +203,8 @@
 			"markdown",
 			"!json"
 		],
-		"cSpell.checkOnlyEnabledFileTypes": true
+		"cSpell.checkOnlyEnabledFileTypes": true,
+		"cSpell.diagnosticLevel": "Hint"
 	},
 	"extensions": {
 		"recommendations": [
