@@ -194,19 +194,7 @@
 		"files.associations": {
 			"string_view": "c"
 		},
-		"markdown.preview.scrollEditorWithPreview": false,
-		"cSpell.words": [
-			"Leonhardsberger",
-			"sudoku"
-		],
-		"cSpell.language": "en,de-AT",
-		"cSpell.enableFiletypes": [
-			"!json",
-			"markdown",
-			"!code-workspace"
-		],
-		"cSpell.checkOnlyEnabledFileTypes": true,
-		"cSpell.diagnosticLevel": "Hint"
+		"markdown.preview.scrollEditorWithPreview": false
 	},
 	"extensions": {
 		"recommendations": [
@@ -226,9 +214,6 @@
 			"ms-vscode.cpptools",
 			"pkief.material-icon-theme",
 			"ryu1kn.partial-diff",
-			"streetsidesoftware.code-spell-checker-austrian-german",
-			"streetsidesoftware.code-spell-checker-german",
-			"streetsidesoftware.code-spell-checker",
 			"taoklerks.poor-mans-t-sql-formatter-vscode",
 			"twxs.cmake",
 			"visualstudioexptteam.vscodeintellicode"
