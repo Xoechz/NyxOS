@@ -196,12 +196,14 @@
 		},
 		"markdown.preview.scrollEditorWithPreview": false,
 		"cSpell.words": [
-			"Leonhardsberger"
+			"Leonhardsberger",
+			"sudoku"
 		],
 		"cSpell.language": "en,de-AT",
 		"cSpell.enableFiletypes": [
+			"!json",
 			"markdown",
-			"!json"
+			"!code-workspace"
 		],
 		"cSpell.checkOnlyEnabledFileTypes": true,
 		"cSpell.diagnosticLevel": "Hint"
