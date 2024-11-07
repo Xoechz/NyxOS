@@ -15,6 +15,10 @@
 		{
 			"name": "UE1",
 			"path": "../Repos/ue01-Xoechz"
+		},
+		{
+			"name": "UE2",
+			"path": "../Repos/ue02-Xoechz"
 		}
 	],
 	"settings": {
@@ -190,7 +194,7 @@
 		"files.associations": {
 			"string_view": "c"
 		},
-		"markdown.preview.scrollEditorWithPreview": false,
+		"markdown.preview.scrollEditorWithPreview": false
 	},
 	"extensions": {
 		"recommendations": [
@@ -210,9 +214,6 @@
 			"ms-vscode.cpptools",
 			"pkief.material-icon-theme",
 			"ryu1kn.partial-diff",
-			"streetsidesoftware.code-spell-checker-austrian-german",
-			"streetsidesoftware.code-spell-checker-german",
-			"streetsidesoftware.code-spell-checker",
 			"taoklerks.poor-mans-t-sql-formatter-vscode",
 			"twxs.cmake",
 			"visualstudioexptteam.vscodeintellicode"
