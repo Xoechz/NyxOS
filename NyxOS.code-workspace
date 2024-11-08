@@ -216,7 +216,8 @@
 			"ryu1kn.partial-diff",
 			"taoklerks.poor-mans-t-sql-formatter-vscode",
 			"twxs.cmake",
-			"visualstudioexptteam.vscodeintellicode"
+			"visualstudioexptteam.vscodeintellicode",
+			"mhutchie.git-graph"
 		]
 	}
 }
