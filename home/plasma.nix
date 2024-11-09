@@ -278,7 +278,7 @@
       allowWindowsToRememberPositions = true;
     };
     workspace = {
-      iconTheme = "Papirus";
+      iconTheme = "Papirus-Dark";
       wallpaper = "/home/elias/NyxOS/images/HeightLinesMocha.png";
       colorScheme = "CatppuccinMochaFlamingo";
       soundTheme = "ocean";
