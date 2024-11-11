@@ -162,4 +162,7 @@
   boot.supportedFilesystems = [
     "ntfs"
   ];
+
+  # resolved for wireguard
+  services.resolved.enable = true;
 }
