@@ -12,7 +12,7 @@
       "x-scheme-handler/mailto" = "thunderbird.desktop";
       "x-scheme-handler/file" = "org.kde.dolphin.desktop";
       "text/plain" = "code.desktop";
-      "application/pdf" = "okular.desktop";
+      "application/pdf" = "firefox.desktop";
       "default-web-browser " = "firefox.desktop";
       "text/calendar" = "thunderbird.desktop";
       "message/rfc822" = "thunderbird.desktop";

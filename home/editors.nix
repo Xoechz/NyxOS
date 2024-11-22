@@ -9,9 +9,9 @@
 
   home.packages = with pkgs; [
     # jetbrains programs
-    jetbrains.clion
-    jetbrains.datagrip
+    (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.datagrip [ "github-copilot" ])
 
     qgis
   ];
+
 }
