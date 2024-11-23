@@ -1,5 +1,5 @@
 # configures dev packages
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     # c and c++
@@ -27,14 +27,14 @@
     graphviz
   ];
 
-  # enable virtualbox to run windows stuff🤮
-  virtualisation.virtualbox.host = {
-    enable = true;
-    package = pkgs-stable.virtualbox;
-    enableExtensionPack = true;
-  };
+  # enable virtualbox to run windows stuff🤮 - currently not needed, but the code is kept for future use
+  # virtualisation.virtualbox.host = {
+  #   enable = true;
+  #   package = pkgs-stable.virtualbox;
+  #   enableExtensionPack = true;
+  # };
 
-  users.extraGroups.vboxusers.members = [ "elias" ];
+  # users.extraGroups.vboxusers.members = [ "elias" ];
 
   # enable docker
   virtualisation.docker = {
