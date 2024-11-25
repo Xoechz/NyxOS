@@ -15,6 +15,7 @@
     vcpkg
     vcpkg-tool
     gdb
+    pkg-config
 
     # nix
     nixd
