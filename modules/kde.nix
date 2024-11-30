@@ -25,4 +25,10 @@
     khelpcenter
     konsole
   ];
+
+  # enable some packages
+  environment.systemPackages = with pkgs.kdePackages; [
+    korganizer
+    kdepim-addons
+  ];
 }

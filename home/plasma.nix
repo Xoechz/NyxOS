@@ -218,45 +218,9 @@
                 enable = true;
                 hideWidget = true;
               };
-              panelBackground = {
-                originalBackground.hide = true;
-                customBackground = {
-                  enable = true;
-                  colorSource = "system";
-                  system.color = "background";
-                  opacity = 0.9;
-                };
+              presetAutoLoading = {
+                normal = "Default Nixos";
               };
-              layout.widgetMarginRules = [
-                {
-                  widgetId = "org.kde.plasma.kickoff";
-                  margin = {
-                    vertical = -9;
-                    horizontal = 0;
-                  };
-                }
-                {
-                  widgetId = "org.kde.plasma.icontasks";
-                  margin = {
-                    vertical = -8;
-                    horizontal = -5;
-                  };
-                }
-                {
-                  widgetId = "org.kde.plasma.systemtray";
-                  margin = {
-                    vertical = 0;
-                    horizontal = 0;
-                  };
-                }
-                {
-                  widgetId = "org.kde.plasma.lock_logout";
-                  margin = {
-                    vertical = 1;
-                    horizontal = 1;
-                  };
-                }
-              ];
             };
           }
         ];
