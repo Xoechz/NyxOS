@@ -28,6 +28,7 @@
     tree
 
     nix-output-monitor
+    nvd
 
     btop
     iotop

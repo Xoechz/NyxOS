@@ -7,5 +7,5 @@
     accent = "pink";
   };
 
-  fonts.packages = with pkgs;[ nerdfonts ];
+  fonts.packages = builtins.filter pkgs.lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 }

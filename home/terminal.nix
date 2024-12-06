@@ -15,11 +15,12 @@
     };
     shellAliases = {
       ll = "ls -htla";
-      rebuild = "sudo nixos-rebuild switch";
-      update = "nix flake update --flake ~/NyxOS --impure && sudo nixos-rebuild switch";
+      rebuild = "sudo nixos-rebuild switch && show-changes";
+      update = "nix flake update --flake ~/NyxOS --impure && rebuild";
       cleanup = "sudo nix store optimise && sudo nix-collect-garbage -d";
       pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
       pm-rebuild = "rebuild && pm-reset";
+      show-changes = "nvd diff $(ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)";
     };
     history = {
       size = 10000;
