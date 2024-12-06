@@ -226,6 +226,8 @@
         ];
       }
     ];
+    powerdevil.AC.dimDisplay.enable = false;
+    session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
     spectacle.shortcuts = {
       captureActiveWindow = "Meta+Print";
       captureCurrentMonitor = "Print";
