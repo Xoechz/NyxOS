@@ -16,6 +16,7 @@
     vcpkg-tool
     gdb
     pkg-config
+    valgrind
 
     # nix
     nixd
