@@ -123,7 +123,6 @@
     gparted
 
     openssl
-    baobab
 
     iptables
 

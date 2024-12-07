@@ -34,6 +34,8 @@
     iotop
     iftop
 
+    baobab
+
     strace
     ltrace
     lsof
