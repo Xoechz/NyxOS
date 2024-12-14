@@ -11,7 +11,7 @@
     # jetbrains programs
     (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.datagrip [ "github-copilot" ])
 
-    qgis
+    # qgis
   ];
 
 }
