@@ -22,7 +22,7 @@
       enable = true;
       efiSupport = true;
       device = "nodev";
-      useOSProber = true;
+      useOSProber = false; # enable if dual booting
     };
 
   networking.hostName = "EliasLaptop";
