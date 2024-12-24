@@ -1,5 +1,5 @@
 # The base system config
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, ... }:
 {
   # user setup
   users.users.elias = {
@@ -43,7 +43,10 @@
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    package = pkgs-stable.firefox;
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
