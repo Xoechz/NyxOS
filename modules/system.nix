@@ -5,7 +5,8 @@
   users.users.elias = {
     isNormalUser = true;
     description = "Elias";
-    extraGroups = [ "networkmanager" "wheel" ];
+    # lpadmin is needed for printer setup
+    extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
   };
 
   # enable flakes and new nix commands
@@ -49,7 +50,11 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing =
+    {
+      enable = true;
+      drivers = with pkgs; [ hplip ];
+    };
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -130,6 +135,9 @@
     iptables
 
     gnome-multi-writer
+
+    # to add a hp printer via hplip
+    hplip
   ];
 
   # garbage collection to save diskspace
