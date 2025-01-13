@@ -56,7 +56,16 @@
 			"stdexcept": "cpp",
 			"streambuf": "cpp",
 			"typeinfo": "cpp",
-			"list": "cpp"
+			"list": "cpp",
+			"iomanip": "cpp",
+			"charconv": "cpp",
+			"ctime": "cpp",
+			"format": "cpp",
+			"span": "cpp",
+			"sstream": "cpp",
+			"text_encoding": "cpp",
+			"variant": "cpp",
+			"cstring": "cpp"
 		}
 	}
 }
