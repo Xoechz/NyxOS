@@ -55,15 +55,15 @@
       drivers = with pkgs; [ hplip ];
     };
 
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-  #configure pipewire
+  # Enable sound with pipewire.
   services = {
     dbus.packages = [ pkgs.gcr ];
 
     geoclue2.enable = true;
+
+    pulseaudio.enable = false;
     pipewire = {
       enable = true;
       alsa.enable = true;
