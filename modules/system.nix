@@ -132,6 +132,7 @@
     openssl
 
     iptables
+    inetutils
 
     gnome-multi-writer
 
