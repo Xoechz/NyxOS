@@ -14,7 +14,7 @@
 
     # Plasma manager is used to port the plasma desktop via nixos
     plasma-manager = {
-      url = "github:nix-community/plasma-manager";
+      url = "github:sidmoreoss/plasma-manager/krohnkite";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
