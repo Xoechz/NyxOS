@@ -1,0 +1,17 @@
+{
+    "folders": [
+        {
+            "path": "/home/elias/Repos/Liquoring"
+        },
+        {
+            "path": "/home/elias/NyxOS"
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "string_view": "c",
+            "type_traits": "cpp",
+            "stdexcept": "cpp"
+        }
+    }
+}
