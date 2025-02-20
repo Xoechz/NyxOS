@@ -90,6 +90,7 @@
             "org.kde.polkit-kde-authentication-agent-1"
             "org.kde.kruler"
             "kruler"
+            "factorio"
           ];
         };
       };
