@@ -10,6 +10,7 @@
   home.packages = with pkgs; [
     # jetbrains programs
     (jetbrains.plugins.addPlugins jetbrains.datagrip [ "github-copilot" ])
+    (jetbrains.plugins.addPlugins jetbrains.rider [ "github-copilot" ])
 
     # qgis
   ];
