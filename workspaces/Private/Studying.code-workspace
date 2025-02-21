@@ -1,7 +1,7 @@
 {
     "folders": [
         {
-            "path": "/home/elias/Repos/Liquoring"
+            "path": "/home/elias/Repos/SWO_studying"
         },
         {
             "path": "/home/elias/NyxOS"
@@ -12,7 +12,8 @@
             "string_view": "c",
             "type_traits": "cpp",
             "stdexcept": "cpp",
-            "ostream": "cpp"
+            "ostream": "cpp",
+            "*.tcc": "cpp"
         }
     }
 }
