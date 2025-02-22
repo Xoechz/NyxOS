@@ -4,7 +4,7 @@
   inputs = {
     # The main channel is nixos stable, that may change in the future
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     # The same goes for the home manager
     home-manager = {

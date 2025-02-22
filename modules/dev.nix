@@ -30,13 +30,21 @@
   ];
 
   # enable virtualbox to run windows stuff🤮 - currently not needed, but the code is kept for future use
-  # virtualisation.virtualbox.host = {
-  #   enable = true;
-  #   package = pkgs-stable.virtualbox;
-  #   enableExtensionPack = true;
-  # };
+  virtualisation.virtualbox = {
+    host = {
+      enable = true;
+      package = pkgs.virtualbox;
+      enableExtensionPack = true;
+    };
+    guest = {
+      enable = true;
+      dragAndDrop = true;
+    };
+  };
 
-  # users.extraGroups.vboxusers.members = [ "elias" ];
+  boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
+
+  users.extraGroups.vboxusers.members = [ "elias" ];
 
   # enable docker
   virtualisation.docker = {
