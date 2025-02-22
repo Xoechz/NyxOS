@@ -272,7 +272,13 @@
         ];
       }
     ];
-    powerdevil.AC.dimDisplay.enable = false;
+    powerdevil.AC = {
+      dimDisplay.enable = false;
+      autoSuspend = {
+        action = "sleep";
+        idleTimeout = 3600;
+      };
+    };
     session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
     shortcuts = {
       "KDE Keyboard Layout Switcher"."Switch keyboard layout to German (Austria)" = [ ];
