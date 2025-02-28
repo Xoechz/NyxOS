@@ -27,10 +27,9 @@
     (python3.withPackages (ps: [ ps.pygments ]))
 
     graphviz
-    dotnetCorePackages.sdk_9_0
   ];
 
-  # enable virtualbox to run windows stuff🤮 - currently not needed, but the code is kept for future use
+  # enable virtualbox to run windows stuff🤮 - currently not needed, but the codtte is kept for future use
   virtualisation.virtualbox = {
     host = {
       enable = true;
