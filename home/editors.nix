@@ -12,6 +12,8 @@
     (jetbrains.plugins.addPlugins jetbrains.datagrip [ "github-copilot" ])
 
     # qgis
+
+    inkscape
   ];
 
 }
