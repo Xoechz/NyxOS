@@ -10,10 +10,10 @@
   home.packages = with pkgs; [
     # jetbrains programs
     (jetbrains.plugins.addPlugins jetbrains.datagrip [ "github-copilot" ])
+    (jetbrains.plugins.addPlugins jetbrains.idea-ultimate [ "github-copilot" ])
 
     # qgis
 
     inkscape
   ];
-
 }

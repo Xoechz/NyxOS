@@ -22,9 +22,16 @@
     nixd
     nixpkgs-fmt
 
-    # latex
+    # latex & python(needed for latex and separatly)
     texlive.combined.scheme-full
-    (python3.withPackages (ps: [ ps.pygments ]))
+    (python3.withPackages (ps:
+      [
+        ps.pygments
+        ps.pip
+        ps.pylint
+        ps.autopep8
+        ps.graphviz
+      ]))
 
     graphviz
   ];
