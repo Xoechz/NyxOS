@@ -23,6 +23,12 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = false; # enable if dual booting
+      extraEntries = "
+        menuentry \"Windows\" --class windows --class os {\n
+          insmod ntfs\n
+          search --no-floppy --set=root --fs-uuid C236-4D6C\n
+          chainloader /efi/Microsoft/Boot/bootmgfw.efi\n
+        }";
     };
 
   networking.hostName = "EliasLaptop";
