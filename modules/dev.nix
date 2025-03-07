@@ -37,21 +37,21 @@
   ];
 
   # enable virtualbox to run windows stuff🤮 - currently not needed, but the codtte is kept for future use
-  virtualisation.virtualbox = {
-    host = {
-      enable = true;
-      package = pkgs.virtualbox;
-      enableExtensionPack = true;
-    };
-    guest = {
-      enable = true;
-      dragAndDrop = true;
-    };
-  };
+  # virtualisation.virtualbox = {
+  #   host = {
+  #     enable = true;
+  #     package = pkgs.virtualbox;
+  #     enableExtensionPack = true;
+  #   };
+  #   guest = {
+  #     enable = true;
+  #     dragAndDrop = true;
+  #   };
+  # };
 
-  boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
+  # boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
 
-  users.extraGroups.vboxusers.members = [ "elias" ];
+  # users.extraGroups.vboxusers.members = [ "elias" ];
 
   # enable docker
   virtualisation.docker = {
