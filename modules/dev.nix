@@ -41,7 +41,8 @@
   # for dynamically linked executables
   programs.nix-ld.enable = true;
 
-  # enable virtualbox to run windows stuff🤮 - currently not needed, but the codtte is kept for future use
+  # enable virtualbox to run windows stuff🤮 - currently not needed, but the code is kept for future use
+  # windows is now dual booted, so no need for virtualbox
   # virtualisation.virtualbox = {
   #   host = {
   #     enable = true;
