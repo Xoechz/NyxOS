@@ -34,7 +34,12 @@
       ]))
 
     graphviz
+
+    dotnetCorePackages.sdk_9_0
   ];
+
+  # for dynamically linked executables
+  programs.nix-ld.enable = true;
 
   # enable virtualbox to run windows stuff🤮 - currently not needed, but the codtte is kept for future use
   # virtualisation.virtualbox = {
