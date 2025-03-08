@@ -90,12 +90,18 @@
       57621
       # Steam Local Network Game Transfer
       27040
+      # ddev
+      9003
+      # DNS
+      53
     ];
     allowedUDPPorts = [
       # Spotify
       5353
       # Stardew Valley LAN Multiplayer
       24642
+      # DNS
+      53
     ];
     allowedTCPPortRanges = [
       # KDE Connect
@@ -107,6 +113,7 @@
       # Steam Local Network Game Transfer
       { from = 27031; to = 27036; }
     ];
+    trustedInterfaces = [ "docker0" ];
   };
 
   # Allow unfree packages

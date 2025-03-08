@@ -36,6 +36,10 @@
     graphviz
 
     dotnetCorePackages.sdk_9_0
+
+    # php
+    ddev
+    mkcert
   ];
 
   # for dynamically linked executables
@@ -62,11 +66,15 @@
   # enable docker
   virtualisation.docker = {
     enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
+    daemon.settings = {
+      dns = [ "8.8.8.8" "8.8.4.4" ];
     };
   };
 
   users.extraGroups.docker.members = [ "elias" ];
+
+  # Make it possible for ddev to modify the /etc/hosts file.
+  # Otherwise you'll have to manually change the
+  # hosts configuration after creating a new ddev project.
+  environment.etc.hosts.mode = "0644";
 }
