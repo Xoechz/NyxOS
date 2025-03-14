@@ -125,7 +125,6 @@
               launchers = [
                 "applications:kitty.desktop"
                 "applications:org.kde.dolphin.desktop"
-                "applications:super-productivity.desktop"
                 "applications:thunderbird.desktop"
                 "applications:firefox.desktop"
                 "applications:code.desktop"
