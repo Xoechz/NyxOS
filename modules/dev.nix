@@ -39,7 +39,6 @@
 
     # php
     ddev
-    mkcert
   ];
 
   # for dynamically linked executables
