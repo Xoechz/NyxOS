@@ -15,5 +15,8 @@
     # qgis
 
     inkscape
+
+    xmlstarlet
+    xidel
   ];
 }
