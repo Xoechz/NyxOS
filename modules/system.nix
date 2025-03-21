@@ -189,4 +189,7 @@
     enable = true;
     package = pkgs.mullvad-vpn;
   };
+
+  # latest kernel release
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 }
