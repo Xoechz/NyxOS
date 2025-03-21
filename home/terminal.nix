@@ -74,7 +74,7 @@
         ssh_only = false;
       };
       nix_shell = {
-        symbol = "❄️";
+        symbol = "❄️ ";
         format = "[$symbol$name]($style) ";
         style = "sky bold";
       };
