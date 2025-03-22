@@ -12,7 +12,7 @@
     (jetbrains.plugins.addPlugins jetbrains.datagrip [ "github-copilot" ])
     (jetbrains.plugins.addPlugins jetbrains.idea-ultimate [ "github-copilot" ])
 
-    # qgis
+    qgis
 
     inkscape
 
