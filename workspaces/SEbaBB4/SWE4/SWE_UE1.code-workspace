@@ -1,8 +1,8 @@
 {
 	"folders": [
 		{
-			"name": "UE5",
-			"path": "/home/elias/Repos/SWO3/ue05-Xoechz"
+			"name": "UE1",
+			"path": "/home/elias/Repos/SWE4/ue01-Xoechz"
 		},
 		{
 			"name": "NyxOS",
@@ -55,7 +55,17 @@
 			"numbers": "cpp",
 			"stdexcept": "cpp",
 			"streambuf": "cpp",
-			"typeinfo": "cpp"
+			"typeinfo": "cpp",
+			"list": "cpp",
+			"iomanip": "cpp",
+			"charconv": "cpp",
+			"ctime": "cpp",
+			"format": "cpp",
+			"span": "cpp",
+			"sstream": "cpp",
+			"text_encoding": "cpp",
+			"variant": "cpp",
+			"cstring": "cpp"
 		}
 	}
 }
