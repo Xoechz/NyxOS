@@ -10,7 +10,7 @@
       enable = true;
     };
     shellAliases = {
-      ll = "ls -htla";
+      ll = "ls -htlA";
       rebuild = "sudo nixos-rebuild switch && show-changes";
       update = "nix flake update --flake ~/NyxOS --impure && rebuild";
       cleanup = "sudo nix store optimise && sudo nix-collect-garbage -d";
