@@ -39,6 +39,10 @@
 
     # php
     ddev
+
+    # java
+    jdk17
+    ant
   ];
 
   # for dynamically linked executables
