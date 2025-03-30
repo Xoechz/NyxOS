@@ -1,5 +1,27 @@
 # configures dev packages
 { pkgs, ... }:
+let
+  pythonWithPackages = pkgs.python3.withPackages (ps:
+    [
+      ps.pygments
+      ps.pip
+      ps.pylint
+      ps.autopep8
+      ps.graphviz
+      ps.numpy
+      ps.matplotlib
+      ps.networkx
+      ps.pydot
+      pkgs.glib
+      pkgs.zlib
+      pkgs.libGL
+      pkgs.fontconfig
+      pkgs.xorg.libX11
+      pkgs.libxkbcommon
+      pkgs.freetype
+      pkgs.dbus
+    ]);
+in
 {
   environment.systemPackages = with pkgs; [
     # c and c++
@@ -24,14 +46,7 @@
 
     # latex & python(needed for latex and separatly)
     texlive.combined.scheme-full
-    (python3.withPackages (ps:
-      [
-        ps.pygments
-        ps.pip
-        ps.pylint
-        ps.autopep8
-        ps.graphviz
-      ]))
+    pythonWithPackages
 
     graphviz
 
