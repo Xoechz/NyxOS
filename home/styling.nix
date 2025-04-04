@@ -3,12 +3,13 @@
 {
   imports =
     [
-      catppuccin.homeManagerModules.catppuccin
+      catppuccin.homeModules.catppuccin
     ];
 
   catppuccin = {
     enable = true;
     flavor = "mocha";
     accent = "pink";
+    vscode.enable = false; # vscode setup is done non declaratively. Sorry!
   };
 }
