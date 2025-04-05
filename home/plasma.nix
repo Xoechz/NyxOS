@@ -212,9 +212,6 @@
                 enable = true;
                 hideWidget = true;
               };
-              presetAutoLoading = {
-                normal = "Default Nixos";
-              };
             };
           }
         ];
