@@ -1,6 +1,7 @@
 # my prefered plasma config
 { ... }:
 {
+  # for this to work the plasma drawer widget, the papirus icon theme and the catppuccin mocha flamingo color scheme have to be downloaded manually
   programs.plasma = {
     enable = true;
     overrideConfig = false;
@@ -55,7 +56,7 @@
           gaps = {
             top = 2;
             right = 2;
-            bottom = 0;
+            bottom = 2;
             left = 2;
             tiles = 5;
           };
@@ -107,16 +108,10 @@
         screen = "all";
         widgets = [
           {
-            kickoff = {
+            name = "p-connor.plasma-drawer";
+            config.General = {
               icon = "nix-snowflake-white";
-              sortAlphabetically = false;
-              compactDisplayStyle = false;
-              favoritesDisplayMode = "grid";
-              applicationsDisplayMode = "list";
-              showButtonsFor = "power";
-              showActionButtonCaptions = true;
-              pin = false;
-              sidebarPosition = "right";
+              searchRunners = "krunner_services,krunner_systemsettings,krunner_recentdocuments,baloosearch,krunner_placesrunner,locations,krunner_bookmarksrunner,krunner_appstream,krunner_calculator";
             };
           }
           "org.kde.plasma.pager"
@@ -520,7 +515,7 @@
       "org_kde_powerdevil"."Toggle Keyboard Backlight" = "Keyboard Light On/Off";
       "org_kde_powerdevil"."Turn Off Screen" = [ ];
       "org_kde_powerdevil"."powerProfile" = "Meta+B";
-      "plasmashell"."activate application launcher" = "Meta";
+      "plasmashell"."activate plasma drawer widget" = "Meta";
       "plasmashell"."activate task manager entry 1" = "Meta+1";
       "plasmashell"."activate task manager entry 10" = "Meta+0";
       "plasmashell"."activate task manager entry 2" = "Meta+2";
@@ -572,7 +567,14 @@
     };
     workspace = {
       iconTheme = "Papirus-Dark";
-      wallpaper = "/home/elias/NyxOS/images/HeightLinesMocha.png";
+      # single wallpaper
+      # wallpaper = "/home/elias/NyxOS/images/HeightLinesMocha.png";
+      # slideshow wallpaper
+      wallpaperSlideShow =
+        {
+          path = "/home/elias/NyxOS/images/slideshow";
+          interval = 10;
+        };
       colorScheme = "CatppuccinMochaFlamingo";
       soundTheme = "ocean";
       splashScreen = {
