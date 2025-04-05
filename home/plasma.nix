@@ -49,52 +49,6 @@
         };
         transitionTime = 30;
       };
-      # Krohnkite is a tiling window manager for plasma
-      scripts.krohnkite = {
-        enable = true;
-        settings = {
-          gaps = {
-            top = 2;
-            right = 2;
-            bottom = 2;
-            left = 2;
-            tiles = 5;
-          };
-          layouts.enabled = [
-            "tile"
-            {
-              name = "monocle";
-              options = { maximize = false; minimizeRest = false; };
-
-            }
-            "spiral"
-          ];
-          maximizeSoleTile = false;
-          keepFloatAbove = true;
-          keepTilingOnDrag = true;
-          preventMinimize = false;
-          preventProtrusion = true;
-          noTileBorders = false;
-          floatUtility = true;
-          ignoreRoles = [
-            "quake"
-          ];
-          ignoreClasses = [
-            "krunner"
-            "yakuake"
-            "spectacle"
-            "kded5"
-            "xwaylandvideobridge"
-            "plasmashell"
-            "ksplashqml"
-            "org.kde.plasmashell"
-            "org.kde.polkit-kde-authentication-agent-1"
-            "org.kde.kruler"
-            "kruler"
-            "factorio"
-          ];
-        };
-      };
     };
     panels = [
       {
@@ -111,7 +65,7 @@
             name = "p-connor.plasma-drawer";
             config.General = {
               icon = "nix-snowflake-white";
-              searchRunners = "krunner_services,krunner_systemsettings,krunner_recentdocuments,baloosearch,krunner_placesrunner,locations,krunner_bookmarksrunner,krunner_appstream,krunner_calculator";
+              searchRunners = "krunner_services,krunner_systemsettings,krunner_recentdocuments,baloosearch,krunner_placesrunner,locations,krunner_bookmarksrunner,krunner_appstream,calculator";
             };
           }
           "org.kde.plasma.pager"
@@ -301,7 +255,7 @@
       "kwin"."Cycle Overview Opposite" = [ ];
       "kwin"."Cycle Overview" = [ ];
       "kwin"."Decrease Opacity" = [ ];
-      "kwin"."Edit Tiles" = "none,Meta+T,Toggle Tiles Editor";
+      "kwin"."Edit Tiles" = "Meta+T";
       "kwin"."Expose" = "Ctrl+F9";
       "kwin"."ExposeAll" = "Ctrl+F10";
       "kwin"."ExposeClass" = "Ctrl+F7";
@@ -311,38 +265,38 @@
       "kwin"."Kill Window" = "Meta+Ctrl+Esc";
       "kwin"."KrohnkiteBTreeLayout" = [ ];
       "kwin"."KrohnkiteColumnsLayout" = [ ];
-      "kwin"."KrohnkiteDecrease" = "Meta+U";
-      "kwin"."KrohnkiteFloatAll" = "Meta+Shift+F";
+      "kwin"."KrohnkiteDecrease" = [ ];
+      "kwin"."KrohnkiteFloatAll" = [ ];
       "kwin"."KrohnkiteFloatingLayout" = [ ];
       "kwin"."KrohnkiteFocusDown" = [ ];
       "kwin"."KrohnkiteFocusLeft" = [ ];
-      "kwin"."KrohnkiteFocusNext" = "Meta+.";
-      "kwin"."KrohnkiteFocusPrev" = "Meta+\\,";
+      "kwin"."KrohnkiteFocusNext" = [ ];
+      "kwin"."KrohnkiteFocusPrev" = [ ];
       "kwin"."KrohnkiteFocusRight" = [ ];
       "kwin"."KrohnkiteFocusUp" = [ ];
-      "kwin"."KrohnkiteGrowHeight" = "Meta+Shift+I";
-      "kwin"."KrohnkiteIncrease" = "Meta+I";
-      "kwin"."KrohnkiteMonocleLayout" = "Meta+M";
-      "kwin"."KrohnkiteNextLayout" = "Meta+T";
+      "kwin"."KrohnkiteGrowHeight" = [ ];
+      "kwin"."KrohnkiteIncrease" = [ ];
+      "kwin"."KrohnkiteMonocleLayout" = [ ];
+      "kwin"."KrohnkiteNextLayout" = [ ];
       "kwin"."KrohnkitePreviousLayout" = [ ];
       "kwin"."KrohnkiteQuarterLayout" = [ ];
-      "kwin"."KrohnkiteRotate" = "Meta+R";
+      "kwin"."KrohnkiteRotate" = [ ];
       "kwin"."KrohnkiteRotatePart" = [ ];
-      "kwin"."KrohnkiteSetMaster" = "Meta+Return";
-      "kwin"."KrohnkiteShiftDown" = "Meta+Down";
-      "kwin"."KrohnkiteShiftLeft" = "Meta+Left";
-      "kwin"."KrohnkiteShiftRight" = "Meta+Right";
-      "kwin"."KrohnkiteShiftUp" = "Meta+Up";
-      "kwin"."KrohnkiteShrinkHeight" = "Meta+Shift+U";
-      "kwin"."KrohnkiteShrinkWidth" = "Meta+Ctrl+U";
+      "kwin"."KrohnkiteSetMaster" = [ ];
+      "kwin"."KrohnkiteShiftDown" = [ ];
+      "kwin"."KrohnkiteShiftLeft" = [ ];
+      "kwin"."KrohnkiteShiftRight" = [ ];
+      "kwin"."KrohnkiteShiftUp" = [ ];
+      "kwin"."KrohnkiteShrinkHeight" = [ ];
+      "kwin"."KrohnkiteShrinkWidth" = [ ];
       "kwin"."KrohnkiteSpiralLayout" = [ ];
       "kwin"."KrohnkiteSpreadLayout" = [ ];
       "kwin"."KrohnkiteStackedLayout" = [ ];
       "kwin"."KrohnkiteStairLayout" = [ ];
       "kwin"."KrohnkiteTileLayout" = [ ];
-      "kwin"."KrohnkiteToggleFloat" = "Meta+F";
+      "kwin"."KrohnkiteToggleFloat" = [ ];
       "kwin"."KrohnkiteTreeColumnLayout" = [ ];
-      "kwin"."KrohnkitegrowWidth" = "Meta+Ctrl+I";
+      "kwin"."KrohnkitegrowWidth" = [ ];
       "kwin"."Move Tablet to Next Output" = [ ];
       "kwin"."MoveMouseToCenter" = "Meta+F6";
       "kwin"."MoveMouseToFocus" = "Meta+F5";
@@ -411,13 +365,13 @@
       "kwin"."Window Below Other Windows" = [ ];
       "kwin"."Window Close" = "Alt+F4";
       "kwin"."Window Fullscreen" = [ ];
-      "kwin"."Window Grow Horizontal" = [ ];
-      "kwin"."Window Grow Vertical" = [ ];
+      "kwin"."Window Grow Horizontal" = "Meta+Shift+I";
+      "kwin"."Window Grow Vertical" = "Meta+Ctrl+I";
       "kwin"."Window Lower" = [ ];
       "kwin"."Window Maximize Horizontal" = [ ];
       "kwin"."Window Maximize Vertical" = [ ];
       "kwin"."Window Maximize" = "Meta+PgUp";
-      "kwin"."Window Minimize" = "Meta+PgDown";
+      "kwin"."Window Minimize" = "Meta+Esc";
       "kwin"."Window Move Center" = [ ];
       "kwin"."Window Move" = [ ];
       "kwin"."Window No Border" = [ ];
@@ -426,10 +380,10 @@
       "kwin"."Window One Desktop Up" = "Meta+Ctrl+Shift+Up";
       "kwin"."Window One Desktop to the Left" = "Meta+Ctrl+Shift+Left";
       "kwin"."Window One Desktop to the Right" = "Meta+Ctrl+Shift+Right";
-      "kwin"."Window One Screen Down" = [ ];
-      "kwin"."Window One Screen Up" = [ ];
-      "kwin"."Window One Screen to the Left" = [ ];
-      "kwin"."Window One Screen to the Right" = [ ];
+      "kwin"."Window One Screen Down" = "Meta+Shift+Down";
+      "kwin"."Window One Screen Up" = "Meta+Shift+Up";
+      "kwin"."Window One Screen to the Left" = "Meta+Shift+Left";
+      "kwin"."Window One Screen to the Right" = "Meta+Shift+Right";
       "kwin"."Window Operations Menu" = "Alt+F3";
       "kwin"."Window Pack Down" = [ ];
       "kwin"."Window Pack Left" = [ ];
@@ -437,17 +391,17 @@
       "kwin"."Window Pack Up" = [ ];
       "kwin"."Window Quick Tile Bottom Left" = [ ];
       "kwin"."Window Quick Tile Bottom Right" = [ ];
-      "kwin"."Window Quick Tile Bottom" = [ ];
-      "kwin"."Window Quick Tile Left" = [ ];
-      "kwin"."Window Quick Tile Right" = [ ];
+      "kwin"."Window Quick Tile Bottom" = "Meta+Down";
+      "kwin"."Window Quick Tile Left" = "Meta+Left";
+      "kwin"."Window Quick Tile Right" = "Meta+Right";
       "kwin"."Window Quick Tile Top Left" = [ ];
       "kwin"."Window Quick Tile Top Right" = [ ];
-      "kwin"."Window Quick Tile Top" = [ ];
+      "kwin"."Window Quick Tile Top" = "Meta+Up";
       "kwin"."Window Raise" = [ ];
       "kwin"."Window Resize" = [ ];
       "kwin"."Window Shade" = [ ];
-      "kwin"."Window Shrink Horizontal" = [ ];
-      "kwin"."Window Shrink Vertical" = [ ];
+      "kwin"."Window Shrink Horizontal" = "Meta+Shift+U";
+      "kwin"."Window Shrink Vertical" = "Meta+Ctrl+U";
       "kwin"."Window to Desktop 1" = [ ];
       "kwin"."Window to Desktop 10" = [ ];
       "kwin"."Window to Desktop 11" = [ ];
@@ -469,9 +423,9 @@
       "kwin"."Window to Desktop 8" = [ ];
       "kwin"."Window to Desktop 9" = [ ];
       "kwin"."Window to Next Desktop" = [ ];
-      "kwin"."Window to Next Screen" = "Meta+Shift+Right";
+      "kwin"."Window to Next Screen" = [ ];
       "kwin"."Window to Previous Desktop" = [ ];
-      "kwin"."Window to Previous Screen" = "Meta+Shift+Left";
+      "kwin"."Window to Previous Screen" = [ ];
       "kwin"."Window to Screen 0" = [ ];
       "kwin"."Window to Screen 1" = [ ];
       "kwin"."Window to Screen 2" = [ ];
