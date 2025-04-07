@@ -22,6 +22,7 @@
             mesa
             freeglut
             glfw
+            glew
           ];
         };
       };
