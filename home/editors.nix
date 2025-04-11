@@ -16,7 +16,6 @@
 
     inkscape
 
-    xmlstarlet
     xidel
   ];
 }
