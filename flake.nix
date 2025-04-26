@@ -47,33 +47,44 @@
             home-manager.useUserPackages = true;
 
             home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
-            home-manager.extraSpecialArgs = inputs;
+            home-manager.extraSpecialArgs = inputs // {
+              pkgs-stable = import nixpkgs-stable {
+                system = "x86_64-linux";
+                config.allowUnfree = true;
+              };
+            };
             home-manager.users.elias = import ./home;
           }
         ];
       };
-      EliasPC = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          pkgs-stable = import nixpkgs-stable {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
+      EliasPC = nixpkgs.lib.nixosSystem
+        {
+          system = "x86_64-linux";
+          specialArgs = {
+            pkgs-stable = import nixpkgs-stable {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
           };
-        };
-        modules = [
-          ./hosts/EliasPC
-          catppuccin.nixosModules.catppuccin
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+          modules = [
+            ./hosts/EliasPC
+            catppuccin.nixosModules.catppuccin
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
 
-            home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
-            home-manager.extraSpecialArgs = inputs;
-            home-manager.users.elias = import ./home;
-          }
-        ];
-      };
+              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+              home-manager.extraSpecialArgs = inputs // {
+                pkgs-stable = import nixpkgs-stable {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                };
+              };
+              home-manager.users.elias = import ./home;
+            }
+          ];
+        };
     };
   };
 }
