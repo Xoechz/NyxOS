@@ -22,12 +22,10 @@
       size = 10000;
       path = "/home/elias/zsh/history";
     };
-    initExtraFirst = ''
+    initContent = ''
       DISABLE_AUTO_UPDATE=true
       DISABLE_MAGIC_FUNCTIONS=true
       export "MICRO_TRUECOLOR=1"
-    '';
-    initExtra = ''
       setopt share_history 
       setopt hist_expire_dups_first
       setopt hist_ignore_dups

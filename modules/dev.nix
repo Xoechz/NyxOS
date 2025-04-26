@@ -9,6 +9,7 @@ let
       ps.autopep8
       ps.graphviz
       ps.numpy
+      ps.scikit-learn
       ps.matplotlib
       ps.networkx
       ps.pydot
