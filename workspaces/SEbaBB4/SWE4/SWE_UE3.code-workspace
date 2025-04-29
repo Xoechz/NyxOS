@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "UE3",
+			"path": "/home/elias/Repos/SWE4/ue03-Xoechz"
+		},
+		{
+			"name": "NyxOS",
+			"path": "/home/elias/NyxOS"
+		}
+	],
+	"settings": {
+		"java.project.referencedLibraries": [
+			"**/lib/*"
+		]
+	}
+}

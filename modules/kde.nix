@@ -24,8 +24,6 @@
     kate
     khelpcenter
     konsole
-    korganizer
-    kontact
-    oxygen
+    elisa
   ];
 }
