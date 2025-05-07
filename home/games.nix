@@ -4,5 +4,7 @@
   home.packages = with pkgs; [
     atlauncher
     jdk8
+
+    gamemode
   ];
 }
