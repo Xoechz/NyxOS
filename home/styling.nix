@@ -11,5 +11,6 @@
     flavor = "mocha";
     accent = "pink";
     vscode.enable = false; # vscode setup is done non declaratively. Sorry!
+    mako.enable = false; # fixes a new build error
   };
 }
