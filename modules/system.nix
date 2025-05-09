@@ -27,7 +27,7 @@
   time.timeZone = "Europe/Vienna";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "de_AT.UTF-8";
@@ -39,9 +39,9 @@
     LC_PAPER = "de_AT.UTF-8";
     LC_TELEPHONE = "de_AT.UTF-8";
     LC_TIME = "de_AT.UTF-8";
-    LANGUAGE = "en_US.UTF-8";
-    LANG = "en_US.UTF-8";
-    LC_ALL = "en_US.UTF-8";
+    LANGUAGE = "en_GB.UTF-8";
+    LANG = "en_GB.UTF-8";
+    LC_ALL = "en_GB.UTF-8";
   };
 
   # Install firefox.
