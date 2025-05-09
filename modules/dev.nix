@@ -13,6 +13,7 @@ let
       ps.matplotlib
       ps.networkx
       ps.pydot
+      ps.dbus-python
       pkgs.glib
       pkgs.zlib
       pkgs.libGL
