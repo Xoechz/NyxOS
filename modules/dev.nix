@@ -14,6 +14,7 @@ let
       ps.networkx
       ps.pydot
       ps.dbus-python
+      ps.pandas
       pkgs.glib
       pkgs.zlib
       pkgs.libGL
@@ -60,7 +61,14 @@ in
     # java
     jdk17
     ant
+    temurin-bin
   ];
+
+  programs.java =
+    {
+      enable = true;
+      package = pkgs.temurin-bin;
+    };
 
   # for dynamically linked executables
   programs.nix-ld.enable = true;
