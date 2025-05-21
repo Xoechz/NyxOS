@@ -88,7 +88,9 @@
       443
       # Spotify
       57621
-      # Steam Local Network Game Transfer
+      # Steam Local Network Game Transfer and Remote Play
+      27015
+      27036
       27040
       # ddev
       9003
@@ -102,6 +104,8 @@
       24642
       # DNS
       53
+      #Steam
+      27015
     ];
     allowedTCPPortRanges = [
       # KDE Connect
@@ -110,7 +114,7 @@
     allowedUDPPortRanges = [
       # KDE Connect
       { from = 1714; to = 1764; }
-      # Steam Local Network Game Transfer
+      # Steam Local Network Game Transfer and Remote Play
       { from = 27031; to = 27036; }
     ];
     trustedInterfaces = [ "docker0" ];
