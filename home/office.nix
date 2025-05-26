@@ -10,5 +10,6 @@
     thunderbird
 
     pdfarranger
+    teams-for-linux
   ];
 }

@@ -59,15 +59,13 @@ in
     ddev
 
     # java
-    jdk17
     ant
-    temurin-bin
   ];
 
   programs.java =
     {
       enable = true;
-      package = pkgs.temurin-bin;
+      package = (pkgs.jdk21.override { enableJavaFX = true; });
     };
 
   # for dynamically linked executables
