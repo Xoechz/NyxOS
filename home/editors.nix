@@ -15,6 +15,7 @@
     pkgs.qgis
 
     pkgs.inkscape
+    pkgs.gimp
 
     pkgs.xidel
   ];

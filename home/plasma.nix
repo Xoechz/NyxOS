@@ -229,7 +229,7 @@
       "KDE Keyboard Layout Switcher"."Switch keyboard layout to German (Austria)" = [ ];
       "KDE Keyboard Layout Switcher"."Switch to Last-Used Keyboard Layout" = [ ];
       "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" = [ ];
-      "kaccess"."Toggle Screen Reader On and Off" = "Meta+Alt+S";
+      "kaccess"."Toggle Screen Reader On and Off" = [ ];
       "kcm_touchpad"."Disable Touchpad" = "Touchpad Off";
       "kcm_touchpad"."Enable Touchpad" = "Touchpad On";
       "kcm_touchpad"."Toggle Touchpad" = "Touchpad Toggle";
