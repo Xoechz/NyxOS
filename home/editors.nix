@@ -1,5 +1,5 @@
 # vscode and jetbrains programs.
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, ... }:
 
 {
   programs.vscode = {
@@ -9,10 +9,10 @@
 
   home.packages = [
     # jetbrains programs
-    (pkgs-stable.jetbrains.plugins.addPlugins pkgs-stable.jetbrains.datagrip [ "github-copilot" ])
-    (pkgs-stable.jetbrains.plugins.addPlugins pkgs-stable.jetbrains.idea-ultimate [ "github-copilot" ])
+    # (pkgs-stable.jetbrains.plugins.addPlugins pkgs-stable.jetbrains.datagrip [ "github-copilot" ])
+    # (pkgs-stable.jetbrains.plugins.addPlugins pkgs-stable.jetbrains.idea-ultimate [ "github-copilot" ])
 
-    pkgs.qgis
+    # pkgs.qgis
 
     pkgs.inkscape
     pkgs.gimp

@@ -201,7 +201,4 @@
     size = 32 * 1024; # 32GB
     randomEncryption.enable = true;
   }];
-
-  # latest kernel release
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 }

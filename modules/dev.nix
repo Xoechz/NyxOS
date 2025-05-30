@@ -60,6 +60,8 @@ in
 
     # java
     ant
+    maven
+    gradle
   ];
 
   programs.java =
