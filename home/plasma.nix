@@ -501,18 +501,6 @@
       "services/org.kde.spectacle.desktop"."RectangularRegionScreenShot" = "Meta+Shift+S";
       "services/org.kde.spectacle.desktop"."_launch" = [ ];
     };
-    spectacle.shortcuts = {
-      captureActiveWindow = "Meta+Print";
-      captureCurrentMonitor = "Print";
-      captureEntireDesktop = "Shift+Print";
-      captureRectangularRegion = "Meta+Shift+S";
-      captureWindowUnderCursor = "Meta+Ctrl+Print";
-      launch = "Meta+S";
-      launchWithoutCapturing = "Meta+Alt+S";
-      recordRegion = "Meta+Shift+R";
-      recordScreen = "Meta+Alt+R";
-      recordWindow = "Meta+Ctrl+R";
-    };
     windows = {
       allowWindowsToRememberPositions = true;
     };
