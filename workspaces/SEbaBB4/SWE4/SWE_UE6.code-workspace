@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "UE6",
+			"path": "/home/elias/Repos/SWE4/ue06-Xoechz"
+		},
+		{
+			"name": "UE5",
+			"path": "/home/elias/Repos/SWE4/ue05-Xoechz"
+		},
+		{
+			"name": "NyxOS",
+			"path": "/home/elias/NyxOS"
+		}
+	],
+	"settings": {
+		"java.project.referencedLibraries": [
+			"**/lib/*"
+		]
+	}
+}

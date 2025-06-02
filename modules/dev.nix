@@ -59,6 +59,7 @@ in
     ddev
 
     # java
+    jdk8
     ant
     maven
     gradle
@@ -67,6 +68,7 @@ in
   programs.java =
     {
       enable = true;
+      #package = pkgs.jdk8;
       package = (pkgs.jdk21.override { enableJavaFX = true; });
     };
 

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "UE5",
+			"path": "/home/elias/Repos/SWE4/Feedback/ue05-GadringaStyle"
+		},
+		{
+			"name": "NyxOS",
+			"path": "/home/elias/NyxOS"
+		}
+	],
+	"settings": {
+		"java.project.referencedLibraries": [
+			"**/lib/*"
+		]
+	}
+}
