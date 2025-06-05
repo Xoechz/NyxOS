@@ -57,6 +57,7 @@ in
 
     # php
     ddev
+    mkcert
 
     # java
     jdk8
