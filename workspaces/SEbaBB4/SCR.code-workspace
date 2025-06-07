@@ -12,5 +12,23 @@
             "name": "NyxOS",
             "path": "/home/elias/NyxOS"
         }
-    ]
+    ],
+    "settings": {
+        "sqltools.connections": [
+            {
+                "mysqlOptions": {
+                    "authProtocol": "default",
+                    "enableSsl": "Disabled"
+                },
+                "previewLimit": 50,
+                "server": "localhost",
+                "port": 32787,
+                "driver": "MySQL",
+                "name": "SRC-Project",
+                "database": "db",
+                "username": "db",
+                "password": "db"
+            }
+        ]
+    }
 }
