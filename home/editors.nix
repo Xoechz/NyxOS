@@ -17,6 +17,6 @@
     pkgs.inkscape
     pkgs.gimp
 
-    pkgs.xidel
+    pkgs.zed-editor-fhs
   ];
 }
