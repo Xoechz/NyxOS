@@ -22,7 +22,7 @@
                 },
                 "previewLimit": 50,
                 "server": "localhost",
-                "port": 32787,
+                "port": 32772,
                 "driver": "MySQL",
                 "name": "SRC-Project",
                 "database": "db",

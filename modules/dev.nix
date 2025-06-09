@@ -56,6 +56,7 @@ in
     dotnetCorePackages.sdk_9_0
 
     # php
+    php
     ddev
     mkcert
 
@@ -64,6 +65,8 @@ in
     ant
     maven
     gradle
+
+    nodejs
   ];
 
   programs.java =
