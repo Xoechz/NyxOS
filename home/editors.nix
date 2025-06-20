@@ -16,7 +16,5 @@
 
     pkgs.inkscape
     pkgs.gimp
-
-    pkgs.zed-editor-fhs
   ];
 }
