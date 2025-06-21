@@ -64,7 +64,7 @@
           {
             name = "p-connor.plasma-drawer";
             config.General = {
-              icon = "nix-snowflake-white";
+              icon = "/home/elias/NyxOS/images/nix-snowflake-rainbow.svg";
               searchRunners = "krunner_services,krunner_systemsettings,krunner_recentdocuments,baloosearch,krunner_placesrunner,locations,krunner_bookmarksrunner,krunner_appstream,calculator";
             };
           }
