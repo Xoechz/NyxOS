@@ -42,5 +42,13 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # swap
+  zramSwap.enable = true;
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 32 * 1024; # 32GB
+    randomEncryption.enable = true;
+  }];
+
   system.stateVersion = "24.05";
 }

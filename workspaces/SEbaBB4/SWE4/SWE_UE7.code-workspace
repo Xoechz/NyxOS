@@ -12,6 +12,22 @@
 	"settings": {
 		"java.project.referencedLibraries": [
 			"**/lib/*"
+		],
+		"sqltools.connections": [
+			{
+				"mysqlOptions": {
+					"authProtocol": "default",
+					"enableSsl": "Disabled"
+				},
+				"previewLimit": 50,
+				"server": "localhost",
+				"port": 3306,
+				"driver": "MariaDB",
+				"name": "Java",
+				"database": "sos-db",
+				"username": "user",
+				"password": "user"
+			}
 		]
 	}
 }

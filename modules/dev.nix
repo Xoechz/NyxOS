@@ -69,12 +69,16 @@ in
     nodejs
   ];
 
-  programs.java =
-    {
-      enable = true;
-      #package = pkgs.jdk8;
-      package = (pkgs.jdk21.override { enableJavaFX = true; });
-    };
+  programs.java = {
+    enable = true;
+    package = (pkgs.jdk21.override { enableJavaFX = true; });
+  };
+
+  environment.variables = {
+    # set the default java version to 21
+    JAVA_HOME = "${(pkgs.jdk21.override { enableJavaFX = true; })}/lib/openjdk";
+    JAVA_8_HOME = "${pkgs.jdk8.home}";
+  };
 
   # for dynamically linked executables
   programs.nix-ld.enable = true;

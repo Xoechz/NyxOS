@@ -72,6 +72,14 @@
     };
   };
 
+  services.home-manager = {
+    autoExpire = {
+      enable = true;
+      frequency = "monthly";
+      timestamp = "-30 days";
+    };
+  };
+
   home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;

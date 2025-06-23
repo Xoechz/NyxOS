@@ -47,5 +47,13 @@
     };
   };
 
+  # swap
+  zramSwap.enable = true;
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 18 * 1024; # 18GB
+    randomEncryption.enable = true;
+  }];
+
   system.stateVersion = "24.05";
 }
