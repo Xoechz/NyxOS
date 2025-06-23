@@ -55,11 +55,6 @@ in
 
     dotnetCorePackages.sdk_9_0
 
-    # php
-    php
-    ddev
-    mkcert
-
     # java
     jdk8
     ant
