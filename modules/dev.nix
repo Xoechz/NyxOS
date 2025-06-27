@@ -56,6 +56,7 @@ in
     dotnetCorePackages.sdk_9_0
 
     # java
+    (jdk21.override { enableJavaFX = true; })
     jdk8
     ant
     maven

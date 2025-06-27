@@ -10,9 +10,6 @@
 		}
 	],
 	"settings": {
-		"java.project.referencedLibraries": [
-			"**/lib/*"
-		],
 		"sqltools.connections": [
 			{
 				"mysqlOptions": {
@@ -28,6 +25,7 @@
 				"username": "user",
 				"password": "user"
 			}
-		]
+		],
+		"java.configuration.updateBuildConfiguration": "automatic"
 	}
 }
