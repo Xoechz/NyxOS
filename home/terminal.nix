@@ -18,6 +18,7 @@
       pm-rebuild = "rebuild && pm-reset";
       show-changes = "nvd diff $(ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)";
       show-leftovers = "nix-store --gc --print-roots | egrep -v '^(/nix/var|/run/\\w+-system|\\{memory|/proc)'";
+      full-update = "cd ~/NyxOS && git pull && update";
     };
     history = {
       size = 10000;
