@@ -1,5 +1,5 @@
 # The system config base for EliasLaptop
-{ ... }:
+{ config, ... }:
 
 {
   imports =
@@ -54,6 +54,33 @@
     size = 18 * 1024; # 18GB
     randomEncryption.enable = true;
   }];
+
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/keys/cache-private.pem";
+  };
+
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    virtualHosts = {
+      "cache.eliasLaptop.lan" = {
+        locations."/".proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
+      };
+    };
+  };
+
+  nix.settings = {
+    substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.nixos.org/"
+      "http://cache.eliasPC.lan"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.eliasPC.lan:tlg80Kl0He8uCZhANAp1gHA3W9YOFYNkO02jjHGT04Q="
+    ];
+  };
 
   system.stateVersion = "24.05";
 }
