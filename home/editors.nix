@@ -7,14 +7,15 @@
     package = pkgs.vscode.fhs;
   };
 
-  home.packages = [
+  home.packages = with pkgs; [
     # jetbrains programs
     # (pkgs-stable.jetbrains.plugins.addPlugins pkgs-stable.jetbrains.datagrip [ "github-copilot" ])
     (pkgs-stable.jetbrains.plugins.addPlugins pkgs-stable.jetbrains.idea-ultimate [ "github-copilot" ])
 
     # pkgs.qgis
 
-    pkgs.inkscape
-    pkgs.gimp
+    inkscape
+    gimp
+    kdePackages.kdenlive
   ];
 }

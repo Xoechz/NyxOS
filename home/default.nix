@@ -30,7 +30,7 @@
     nix-output-monitor
     nvd
 
-    btop
+    btop-rocm
     iotop
     iftop
 
