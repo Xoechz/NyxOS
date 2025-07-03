@@ -77,5 +77,10 @@
     ];
   };
 
+  nix.extraOptions = ''
+    # Ensure we can still build when missing-server is not accessible
+    fallback = true
+  '';
+
   system.stateVersion = "24.05";
 }
