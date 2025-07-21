@@ -63,6 +63,12 @@ in
     gradle
 
     nodejs
+
+    # go
+    go
+    gopls
+    delve
+    golangci-lint
   ];
 
   programs.java = {
