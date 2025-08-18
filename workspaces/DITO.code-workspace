@@ -6,5 +6,8 @@
         {
             "path": "/home/elias/NyxOS"
         }
-    ]
+    ],
+    "settings": {
+        "dotnet.defaultSolution": "/home/elias/Repos/DITO/src/demo/Demo.slnx"
+    }
 }
