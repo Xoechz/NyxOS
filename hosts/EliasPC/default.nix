@@ -50,37 +50,5 @@
     randomEncryption.enable = true;
   }];
 
-  services.nix-serve = {
-    enable = true;
-    secretKeyFile = "/var/keys/cache-private.pem";
-  };
-
-  services.nginx = {
-    enable = true;
-    recommendedProxySettings = true;
-    virtualHosts = {
-      "cache.eliasPC.lan" = {
-        locations."/".proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
-      };
-    };
-  };
-
-  nix.settings = {
-    substituters = [
-      "https://nix-community.cachix.org"
-      "https://cache.nixos.org/"
-      "http://cache.eliasLaptop.lan"
-    ];
-    trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "cache.eliasLaptop.lan:L7ITJY4cscUAYF9OF/12W1R44shr1eETY4yq0bOGxOg="
-    ];
-  };
-
-  nix.extraOptions = ''
-    # Ensure we can still build when missing-server is not accessible
-    fallback = true
-  '';
-
   system.stateVersion = "24.05";
 }
