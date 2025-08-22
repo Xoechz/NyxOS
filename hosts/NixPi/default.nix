@@ -121,6 +121,7 @@
     fastfetch
     wget
     curl
+    openssl
   ];
 
   system.stateVersion = "25.11";

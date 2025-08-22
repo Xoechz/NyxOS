@@ -20,6 +20,7 @@
       show-leftovers = "nix-store --gc --print-roots | egrep -v '^(/nix/var|/run/\\w+-system|\\{memory|/proc)'";
       full-update = "cd ~/NyxOS && git pull && update";
       ssh = "kitten ssh";
+      deploy-to-pi = "sudo nixos-rebuild switch --target-host root@192.168.0.10 --build-host localhost";
     };
     history = {
       size = 10000;
