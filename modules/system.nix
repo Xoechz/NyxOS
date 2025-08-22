@@ -13,7 +13,7 @@
   # enable flakes and new nix commands
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "elias" ];
+    trusted-users = [ "elias" "nixremote" ];
   };
 
   nix.settings = {
@@ -196,4 +196,7 @@
     enable = true;
     package = pkgs.mullvad-vpn;
   };
+
+  # enable remote building to raspi
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

@@ -1,5 +1,5 @@
 # The system config base for EliasLaptop
-{ config, ... }:
+{ ... }:
 
 {
   imports =

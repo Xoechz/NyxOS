@@ -24,10 +24,9 @@
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
-    nix-serve-ng.url = "github:aristanetworks/nix-serve-ng";
   };
 
-  outputs = { nixpkgs, nixpkgs-stable, home-manager, plasma-manager, catppuccin, nix-serve-ng, ... }@inputs: {
+  outputs = { nixpkgs, nixpkgs-stable, home-manager, plasma-manager, catppuccin, ... }@inputs: {
     nixosConfigurations = {
       EliasLaptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -56,7 +55,6 @@
             };
             home-manager.users.elias = import ./home;
           }
-          nix-serve-ng.nixosModules.default
         ];
       };
       EliasPC = nixpkgs.lib.nixosSystem
@@ -85,9 +83,20 @@
               };
               home-manager.users.elias = import ./home;
             }
-            nix-serve-ng.nixosModules.default
           ];
         };
+      NixPi = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = {
+          pkgs-stable = import nixpkgs-stable {
+            system = "aarch64-linux";
+            config.allowUnfree = true;
+          };
+        };
+        modules = [
+          ./hosts/NixPi
+        ];
+      };
     };
   };
 }
