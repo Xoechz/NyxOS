@@ -172,11 +172,13 @@
     enable = true;
     settings = {
       X11Forwarding = true;
-      PermitRootLogin = "no";
+      PermitRootLogin = "yes";
       PasswordAuthentication = true;
     };
     openFirewall = true;
   };
+
+  programs.ssh.startAgent = true;
 
   users.users.elias.shell = pkgs.zsh;
   programs.zsh.enable = true;
