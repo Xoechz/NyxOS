@@ -36,6 +36,10 @@
       setopt hist_ignore_dups
       setopt hist_verify
     '';
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ ];
+    };
   };
 
   #fancy shell with starship
