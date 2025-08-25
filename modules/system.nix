@@ -178,8 +178,6 @@
     openFirewall = true;
   };
 
-  programs.ssh.startAgent = true;
-
   users.users.elias.shell = pkgs.zsh;
   programs.zsh.enable = true;
 
