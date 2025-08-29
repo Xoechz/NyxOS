@@ -1,0 +1,13 @@
+{
+    "folders": [
+        {
+            "path": "/home/elias/Repos/DITO/OtelDemo"
+        },
+        {
+            "path": "/home/elias/NyxOS"
+        }
+    ],
+    "settings": {
+        "dotnet.defaultSolution": "/home/elias/Repos/DITO/src/demo/Demo.slnx"
+    }
+}
