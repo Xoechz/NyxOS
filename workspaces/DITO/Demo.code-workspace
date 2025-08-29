@@ -8,6 +8,6 @@
         }
     ],
     "settings": {
-        "dotnet.defaultSolution": "/home/elias/Repos/DITO/src/demo/Demo.slnx"
+        "dotnet.defaultSolution": "/home/elias/Repos/DITO/OtelDemo/src/Demo.slnx"
     }
 }
