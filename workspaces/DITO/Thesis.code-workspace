@@ -6,5 +6,11 @@
         {
             "path": "/home/elias/NyxOS"
         }
-    ]
+    ],
+    "settings": {
+        "ltex.enabled": [
+            "latex",
+            "bibtex"
+        ]
+    }
 }
