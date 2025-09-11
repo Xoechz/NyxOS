@@ -54,6 +54,7 @@ in
     graphviz
 
     dotnetCorePackages.sdk_9_0
+    dotnetCorePackages.sdk_10_0
 
     # java
     (jdk21.override { enableJavaFX = true; })
@@ -80,7 +81,10 @@ in
     # set the default java version to 21
     JAVA_HOME = "${(pkgs.jdk21.override { enableJavaFX = true; })}/lib/openjdk";
     JAVA_8_HOME = "${pkgs.jdk8.home}";
+    DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_9_0}/bin/dotnet";
+    DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_9_0}/share/dotnet";
   };
+
 
   # for dynamically linked executables
   programs.nix-ld.enable = true;
