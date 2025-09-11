@@ -70,6 +70,9 @@ in
     gopls
     delve
     golangci-lint
+
+    # http testing
+    bruno
   ];
 
   programs.java = {

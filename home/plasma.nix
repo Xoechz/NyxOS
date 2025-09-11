@@ -486,7 +486,7 @@
       "plasmashell"."next activity" = "Meta+A";
       "plasmashell"."previous activity" = "Meta+Shift+A";
       "plasmashell"."repeat_action" = "noned";
-      "plasmashell"."show dashboard" = "Ctrl+F12";
+      "plasmashell"."show dashboard" = [ ];
       "plasmashell"."show-barcode" = [ ];
       "plasmashell"."show-on-mouse-pos" = "Meta+V";
       "plasmashell"."stop current activity" = "Meta+S";
