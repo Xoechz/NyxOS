@@ -54,7 +54,6 @@ in
     graphviz
 
     dotnetCorePackages.sdk_9_0
-    dotnetCorePackages.sdk_10_0
 
     # java
     (jdk21.override { enableJavaFX = true; })
