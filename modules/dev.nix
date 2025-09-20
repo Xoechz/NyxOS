@@ -54,6 +54,7 @@ in
     graphviz
 
     dotnetCorePackages.sdk_9_0
+    ilspycmd
 
     # java
     (jdk21.override { enableJavaFX = true; })
