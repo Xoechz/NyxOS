@@ -1,5 +1,5 @@
 # configures dev packages
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 let
   pythonWithPackages = pkgs.python3.withPackages (ps:
     [
@@ -53,8 +53,10 @@ in
 
     graphviz
 
+    # dotnet
     dotnetCorePackages.sdk_9_0
     ilspycmd
+    libmsquic
 
     # java
     (jdk21.override { enableJavaFX = true; })
@@ -73,6 +75,9 @@ in
 
     # http testing
     bruno
+
+    # android
+    android-studio
   ];
 
   programs.java = {
@@ -86,6 +91,11 @@ in
     JAVA_8_HOME = "${pkgs.jdk8.home}";
     DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_9_0}/bin/dotnet";
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_9_0}/share/dotnet";
+    # Combine required library search paths; force to avoid conflicts with other modules
+    LD_LIBRARY_PATH = lib.mkForce (builtins.concatStringsSep ":" [
+      "/run/current-system/sw/lib"                   # base system libs
+      "${config.services.pipewire.package.jack}/lib" # pipewire jack (was defined elsewhere causing conflict) 
+    ]);
   };
 
 
