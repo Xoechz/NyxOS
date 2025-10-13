@@ -129,7 +129,7 @@
   environment.systemPackages = with pkgs; [
     git
     wget
-    curlHTTP3
+    curl
 
     fastfetch
     zip
