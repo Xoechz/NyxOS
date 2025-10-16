@@ -10,16 +10,5 @@
 
   hardware.graphics = {
     enable = true;
-
-    extraPackages = with pkgs; [
-      amdvlk
-      rocmPackages.clr.icd
-    ];
-
-    # For 32 bit applications 
-    enable32Bit = true;
-    extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
-    ];
   };
 }
