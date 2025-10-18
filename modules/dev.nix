@@ -78,6 +78,7 @@ in
 
     # android
     android-studio
+    androidenv.androidPkgs.platform-tools
   ];
 
   programs.java = {
@@ -134,4 +135,11 @@ in
   # Otherwise you'll have to manually change the
   # hosts configuration after creating a new ddev project.
   environment.etc.hosts.mode = "0644";
+
+  # android usb debugging
+  programs.adb.enable = true;
+  users.extraGroups.adbusers.members = [ "elias" ];
+  services.udev.packages = [
+    pkgs.android-udev-rules
+  ];
 }
