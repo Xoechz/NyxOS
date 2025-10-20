@@ -59,6 +59,8 @@
 
     parallel
     libwebp
+
+    jq
   ];
 
   #setup git to use the correct email for commits
