@@ -64,12 +64,16 @@
   #setup git to use the correct email for commits
   programs.git = {
     enable = true;
-    userName = "Elias Leonhardsberger";
-    userEmail = "elias.leonhardsberger@gmail.com";
-    lfs.enable = true;
-    aliases = {
-      graph = "log --decorate --oneline --graph --max-count=20";
+    settings = {
+      user = {
+        name = "Elias Leonhardsberger";
+        email = "elias.leonhardsberger@gmail.com";
+      };
+      alias = {
+        graph = "log --decorate --oneline --graph --max-count=20";
+      };
     };
+    lfs.enable = true;
   };
 
   services.home-manager = {
