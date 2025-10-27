@@ -139,7 +139,4 @@ in
   # android usb debugging
   programs.adb.enable = true;
   users.extraGroups.adbusers.members = [ "elias" ];
-  services.udev.packages = [
-    pkgs.android-udev-rules
-  ];
 }

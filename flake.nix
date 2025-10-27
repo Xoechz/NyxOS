@@ -97,6 +97,9 @@
           ./hosts/NixPi
         ];
       };
+      # TODO: Überlegung, Papas Pc hier verwalten und ihn packete über flatpack installieren lassen, 
+      # dabei gleichzeitig modulatisierung überdenken. Dann kann ich aus meinem Repo updates pullen oder remote deployen
+      # Bei ihm ist stable ok
     };
   };
 }

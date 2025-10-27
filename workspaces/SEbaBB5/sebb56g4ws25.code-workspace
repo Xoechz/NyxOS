@@ -1,0 +1,15 @@
+{
+    "folders": [
+        {
+            "name": "sebb56g4ws25",
+            "path": "/home/elias/Repos/sebb56g4ws25"
+        },
+        {
+            "name": "NyxOS",
+            "path": "/home/elias/NyxOS"
+        }
+    ],
+    "settings": {
+        "dotnet.defaultSolution": "/home/elias/Repos/sebb56g4ws25/backend/Backend.slnx"
+    }
+}
