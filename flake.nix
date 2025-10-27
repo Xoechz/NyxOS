@@ -53,7 +53,7 @@
                 config.allowUnfree = true;
               };
             };
-            home-manager.users.elias = import ./home;
+            home-manager.users.elias = import ./home/elias.nix;
           }
         ];
       };
@@ -81,7 +81,7 @@
                   config.allowUnfree = true;
                 };
               };
-              home-manager.users.elias = import ./home;
+              home-manager.users.elias = import ./home/elias.nix;
             }
           ];
         };
@@ -97,9 +97,33 @@
           ./hosts/NixPi
         ];
       };
-      # TODO: Überlegung, Papas Pc hier verwalten und ihn packete über flatpack installieren lassen, 
-      # dabei gleichzeitig modulatisierung überdenken. Dann kann ich aus meinem Repo updates pullen oder remote deployen
-      # Bei ihm ist stable ok
+      OfficePC = nixpkgs-stable.lib.nixosSystem
+        {
+          system = "x86_64-linux";
+          specialArgs = {
+            pkgs-stable = import nixpkgs-stable {
+              system = "x86_64-linux";
+              config.allowUnfree = true;
+            };
+          };
+          modules = [
+            ./hosts/OfficePC
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = inputs // {
+                pkgs-stable = import nixpkgs-stable {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                };
+              };
+              home-manager.users.fred = import ./home/fred.nix;
+              home-manager.users.gerhard = import ./home/gerhard.nix;
+            }
+          ];
+        };
     };
   };
 }

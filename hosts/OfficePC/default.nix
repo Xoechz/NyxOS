@@ -1,5 +1,5 @@
-# The system config base for EliasLaptop
-{ pkgs, ... }:
+# The system config base for OfficePC
+{ ... }:
 
 {
   imports =
@@ -10,8 +10,6 @@
       ../../modules/kde.nix
       ../../modules/steam.nix
       ../../modules/nvidia.nix
-      ../../modules/dev.nix
-      ../../modules/styling.nix
     ];
 
   # Bootloader
@@ -31,55 +29,54 @@
         }";
     };
 
-  networking.hostName = "EliasLaptop";
+  fileSystems."/run/media/fred/4TB-HDD" =
+    {
+      device = "/dev/disk/by-uuid/5939832d-c16a-4b0d-bf9c-fa07d41fd538";
+      fsType = "ext4";
+    };
+
+  fileSystems."/run/media/fred/100GB-SSD" =
+    {
+      device = "/dev/disk/by-uuid/2b788cd1-fa01-45ee-bf76-6c396e06015f";
+      fsType = "ext4";
+    };
+
+  networking.hostName = "OfficePC";
 
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # enables support for Bluetooth
-  hardware.bluetooth.enable = true;
-  # powers up the default Bluetooth controller on boot
-  hardware.bluetooth.powerOnBoot = true;
-  # allow reading device charge
-  hardware.bluetooth.settings = {
-    General = {
-      Experimental = true;
-    };
-  };
-
   # user setup
-  users.users.elias = {
-    isNormalUser = true;
-    description = "Elias";
-    # lpadmin is needed for printer setup
-    extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+  users.users = {
+    fred = {
+      isNormalUser = true;
+      description = "Fred";
+      # lpadmin is needed for printer setup
+      extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+    };
+    gerhard = {
+      isNormalUser = true;
+      description = "Gerhard";
+      # lpadmin is needed for printer setup
+      extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+    };
   };
 
   # enable flakes and new nix commands
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "elias" "nixremote" ];
+    trusted-users = [ "fred" "gerhard" "nixremote" ];
   };
 
   # swap
   zramSwap.enable = true;
   swapDevices = [{
     device = "/var/lib/swapfile";
-    size = 18 * 1024; # 18GB
+    size = 32 * 1024; # 32GB
     randomEncryption.enable = true;
   }];
 
-  hardware.nvidia.prime = {
-    reverseSync.enable = true;
-    # Enable if using an external GPU
-    allowExternalGpu = false;
-
-    # Make sure to use the correct Bus ID values for your system!
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:2:0:0";
-  };
-
-  users.users.elias.shell = pkgs.zsh;
+  programs.chromium.enable = true;
 
   system.stateVersion = "24.05";
 }

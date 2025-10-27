@@ -2,20 +2,6 @@
 #{ pkgs, pkgs-stable, ... }:
 { pkgs, ... }:
 {
-  # user setup
-  users.users.elias = {
-    isNormalUser = true;
-    description = "Elias";
-    # lpadmin is needed for printer setup
-    extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
-  };
-
-  # enable flakes and new nix commands
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "elias" "nixremote" ];
-  };
-
   nix.settings = {
     substituters = [
       "https://nix-community.cachix.org"
@@ -154,6 +140,10 @@
 
     # to add a hp printer via hplip
     hplip
+
+    # nix
+    nixd
+    nixpkgs-fmt
   ];
 
   # garbage collection to save diskspace
@@ -178,7 +168,6 @@
     openFirewall = true;
   };
 
-  users.users.elias.shell = pkgs.zsh;
   programs.zsh.enable = true;
 
   # Firmware updates
@@ -191,11 +180,6 @@
 
   # resolved for wireguard
   services.resolved.enable = true;
-
-  services.mullvad-vpn = {
-    enable = true;
-    package = pkgs.mullvad-vpn;
-  };
 
   # enable remote building to raspi
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

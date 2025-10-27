@@ -1,5 +1,5 @@
 # configures dev packages
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, pkgs-stable, ... }:
 let
   pythonWithPackages = pkgs.python3.withPackages (ps:
     [
@@ -43,10 +43,6 @@ in
     pkg-config
     valgrind
 
-    # nix
-    nixd
-    nixpkgs-fmt
-
     # latex & python(needed for latex and separatly)
     texlive.combined.scheme-full
     pythonWithPackages
@@ -59,6 +55,7 @@ in
     libmsquic
 
     # java
+    (pkgs-stable.jetbrains.plugins.addPlugins pkgs-stable.jetbrains.idea-ultimate [ "github-copilot" ])
     (jdk21.override { enableJavaFX = true; })
     jdk8
     ant
@@ -139,4 +136,9 @@ in
   # android usb debugging
   programs.adb.enable = true;
   users.extraGroups.adbusers.members = [ "elias" ];
+
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 }

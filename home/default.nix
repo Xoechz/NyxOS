@@ -1,21 +1,6 @@
 # default home-manager config, could be split up in the future
 { pkgs, ... }:
 {
-  imports =
-    [
-      ./editors.nix
-      ./office.nix
-      ./media.nix
-      ./plasma.nix
-      ./games.nix
-      ./defaultApplications.nix
-      ./styling.nix
-      ./terminal.nix
-    ];
-
-  home.username = "elias";
-  home.homeDirectory = "/home/elias";
-
   home.packages = with pkgs; [
     ripgrep
     fzf
@@ -45,11 +30,6 @@
     pciutils
     usbutils
 
-    tor-browser
-    transmission_4-qt
-    wireguard-tools
-    kdePackages.kdeconnect-kde
-
     hdparm
 
     ntfs3g
@@ -61,6 +41,8 @@
     libwebp
 
     jq
+
+    vlc
   ];
 
   #setup git to use the correct email for commits

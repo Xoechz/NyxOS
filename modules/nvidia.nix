@@ -1,4 +1,4 @@
-# the necasary config vor nvidia for EliasLaptop
+# the necasary config vor nvidia for EliasLaptop and OfficePC
 { config, ... }:
 {
   # Enable OpenGL
@@ -37,15 +37,5 @@
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    prime = {
-      reverseSync.enable = true;
-      # Enable if using an external GPU
-      allowExternalGpu = false;
-
-      # Make sure to use the correct Bus ID values for your system!
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:2:0:0";
-    };
   };
 }

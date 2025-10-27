@@ -1,5 +1,5 @@
 # The system config base for EliasPC
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -42,6 +42,20 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # user setup
+  users.users.elias = {
+    isNormalUser = true;
+    description = "Elias";
+    # lpadmin is needed for printer setup
+    extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+  };
+
+  # enable flakes and new nix commands
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "elias" "nixremote" ];
+  };
+
   # swap
   zramSwap.enable = true;
   swapDevices = [{
@@ -49,6 +63,8 @@
     size = 32 * 1024; # 32GB
     randomEncryption.enable = true;
   }];
+
+  users.users.elias.shell = pkgs.zsh;
 
   system.stateVersion = "24.05";
 }

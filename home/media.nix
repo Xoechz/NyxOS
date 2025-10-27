@@ -9,7 +9,12 @@
     (discord.override {
       withVencord = true;
     })
-    vlc
+
+    # "multi-media" apps
+    tor-browser
+    transmission_4-qt
+    wireguard-tools
+    kdePackages.kdeconnect-kde
   ];
 
   xdg.configFile."Vencord/themes/custom.css".text = '' 

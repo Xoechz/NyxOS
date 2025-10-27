@@ -1,5 +1,5 @@
 # kitty, zsh, starship and direnv setup
-{ lib, ... }:
+{ lib, config, ... }:
 {
   # zsh
   programs.zsh = {
@@ -25,7 +25,7 @@
     };
     history = {
       size = 10000;
-      path = "/home/elias/zsh/history";
+      path = config.home.homeDirectory + "/zsh/history";
     };
     initContent = ''
       DISABLE_AUTO_UPDATE=true
