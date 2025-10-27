@@ -29,7 +29,7 @@
         }";
     };
 
-  fileSystems."/run/media/fred/4TB-HDD" =
+  fileSystems."/" =
     {
       device = "/dev/disk/by-uuid/5939832d-c16a-4b0d-bf9c-fa07d41fd538";
       fsType = "ext4";
