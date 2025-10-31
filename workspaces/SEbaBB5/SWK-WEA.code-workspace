@@ -16,5 +16,8 @@
             "name": "NyxOS",
             "path": "/home/elias/NyxOS"
         }
-    ]
+    ],
+    "settings": {
+        "dotnet.defaultSolution": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger/backend/Delifhery.Backend.slnx"
+    }
 }
