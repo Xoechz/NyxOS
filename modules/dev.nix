@@ -56,7 +56,7 @@ in
 
     # java
     (pkgs-stable.jetbrains.plugins.addPlugins pkgs-stable.jetbrains.idea-ultimate [ "github-copilot" ])
-    (jdk21.override { enableJavaFX = true; })
+    jdk21
     jdk8
     ant
     maven
@@ -80,12 +80,12 @@ in
 
   programs.java = {
     enable = true;
-    package = (pkgs.jdk21.override { enableJavaFX = true; });
+    package = pkgs.jdk21;
   };
 
   environment.variables = {
     # set the default java version to 21
-    JAVA_HOME = "${(pkgs.jdk21.override { enableJavaFX = true; })}/lib/openjdk";
+    JAVA_21_HOME = "${pkgs.jdk21.home}";
     JAVA_8_HOME = "${pkgs.jdk8.home}";
     DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_9_0}/bin/dotnet";
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_9_0}/share/dotnet";

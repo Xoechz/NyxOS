@@ -126,7 +126,6 @@
     sysstat
 
     clinfo
-    glxinfo
 
     wayland-utils
     gparted
@@ -144,6 +143,7 @@
     # nix
     nixd
     nixpkgs-fmt
+    nix-tree
   ];
 
   # garbage collection to save diskspace
