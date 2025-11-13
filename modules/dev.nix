@@ -51,6 +51,7 @@ in
 
     # dotnet
     dotnetCorePackages.sdk_9_0
+    dotnetCorePackages.sdk_10_0
     ilspycmd
     libmsquic
 
@@ -87,8 +88,8 @@ in
     # set the default java version to 21
     JAVA_21_HOME = "${pkgs.jdk21.home}";
     JAVA_8_HOME = "${pkgs.jdk8.home}";
-    DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_9_0}/bin/dotnet";
-    DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_9_0}/share/dotnet";
+    DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_10_0}/bin/dotnet";
+    DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
     # Combine required library search paths; force to avoid conflicts with other modules
     LD_LIBRARY_PATH = lib.mkForce (builtins.concatStringsSep ":" [
       "/run/current-system/sw/lib" # base system libs
