@@ -1,4 +1,4 @@
-# vscode and jetbrains programs.
+# varios editors
 { pkgs, ... }:
 
 {

@@ -1,5 +1,5 @@
 # Office work oriented apps and packages
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     libreoffice-qt
@@ -10,7 +10,6 @@
     thunderbird
 
     teams-for-linux
-  ] ++ [
-    pkgs-stable.pdfarranger
+    pdfarranger
   ];
 }

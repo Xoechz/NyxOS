@@ -4,7 +4,8 @@
   inputs = {
     # The main channel is nixos stable, that may change in the future
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-very-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # The same goes for the home manager
     home-manager = {
@@ -26,12 +27,16 @@
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, nixpkgs-stable, home-manager, plasma-manager, catppuccin, ... }@inputs: {
+  outputs = { nixpkgs, nixpkgs-stable, nixpkgs-very-unstable, home-manager, plasma-manager, catppuccin, ... }@inputs: {
     nixosConfigurations = {
       EliasLaptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           pkgs-stable = import nixpkgs-stable {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          pkgs-very-unstable = import nixpkgs-very-unstable {
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
