@@ -1,4 +1,4 @@
-# the necasary config vor nvidia for EliasLaptop and OfficePC
+# the necasary config vor nvidia for EliasLaptop and FredPC
 { config, ... }:
 {
   # Enable OpenGL

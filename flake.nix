@@ -106,7 +106,7 @@
           ./hosts/NixPi
         ];
       };
-      OfficePC = nixpkgs.lib.nixosSystem
+      FredPC = nixpkgs.lib.nixosSystem
         {
           system = "x86_64-linux";
           specialArgs = {
@@ -116,7 +116,7 @@
             };
           };
           modules = [
-            ./hosts/OfficePC
+            ./hosts/FredPC
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
