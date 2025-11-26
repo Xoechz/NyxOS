@@ -1,5 +1,5 @@
 # The system config base for EliasLaptop
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports =
@@ -48,20 +48,6 @@
     };
   };
 
-  # user setup
-  users.users.elias = {
-    isNormalUser = true;
-    description = "Elias";
-    # lpadmin is needed for printer setup
-    extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
-  };
-
-  # enable flakes and new nix commands
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "elias" "nixremote" ];
-  };
-
   # swap
   zramSwap.enable = true;
   swapDevices = [{
@@ -79,8 +65,6 @@
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:2:0:0";
   };
-
-  users.users.elias.shell = pkgs.zsh;
 
   system.stateVersion = "24.05";
 }

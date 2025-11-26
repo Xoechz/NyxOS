@@ -10,6 +10,22 @@
     ];
   };
 
+  # user setup
+  users.users.elias = {
+    isNormalUser = true;
+    description = "Elias";
+    # lpadmin is needed for printer setup
+    extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+  };
+
+  # enable flakes and new nix commands
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [ "elias" "nixremote" ];
+  };
+
+  users.users.elias.shell = pkgs.zsh;
+
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
 
@@ -162,4 +178,12 @@
 
   # enable remote building to raspi
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # cron job for automatic repo updates
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "* * * * *      root    cd /home/elias/NyxOS && ./update.sh >> /var/log/nixos-update.log 2>&1"
+    ];
+  };
 }

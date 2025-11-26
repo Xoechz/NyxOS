@@ -47,12 +47,6 @@
     };
   };
 
-  # enable flakes and new nix commands
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "fred" "gerhard" "nixremote" ];
-  };
-
   # swap
   zramSwap.enable = true;
   swapDevices = [{

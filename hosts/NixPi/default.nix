@@ -4,6 +4,7 @@
 {
   imports =
     [
+      ../../modules/language_en_at.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -51,23 +52,6 @@
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
-  };
-
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_AT.UTF-8";
-    LC_IDENTIFICATION = "de_AT.UTF-8";
-    LC_MEASUREMENT = "de_AT.UTF-8";
-    LC_MONETARY = "de_AT.UTF-8";
-    LC_NAME = "de_AT.UTF-8";
-    LC_NUMERIC = "de_AT.UTF-8";
-    LC_PAPER = "de_AT.UTF-8";
-    LC_TELEPHONE = "de_AT.UTF-8";
-    LC_TIME = "de_AT.UTF-8";
-    LANGUAGE = "en_GB.UTF-8";
-    LANG = "en_GB.UTF-8";
-    LC_ALL = "en_GB.UTF-8";
   };
 
   networking.firewall = {
