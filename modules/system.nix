@@ -183,7 +183,7 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "* * * * *      root    cd /home/elias/NyxOS && ./update.sh >> /var/log/nixos-update.log 2>&1"
+      "0 */2 * * *      root    cd /home/elias/NyxOS && ./update.sh >> /var/log/nixos-update.log 2>&1"
     ];
   };
 }
