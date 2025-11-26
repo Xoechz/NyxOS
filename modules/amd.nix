@@ -8,7 +8,11 @@
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 
-  hardware.graphics = {
-    enable = true;
+  hardware = {
+    amdgpu = {
+      initrd.enable = true;
+      opencl.enable = true;
+    };
+    graphics.enable = true;
   };
 }

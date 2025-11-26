@@ -15,6 +15,7 @@ let
       ps.pydot
       ps.dbus-python
       ps.pandas
+      ps.pygobject3
       pkgs.glib
       pkgs.zlib
       pkgs.libGL
