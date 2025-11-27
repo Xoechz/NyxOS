@@ -9,22 +9,34 @@
       ../../modules/system.nix
       ../../modules/kde.nix
       ../../modules/steam.nix
-      ../../modules/nvidia.nix
-      ../../modules/language_de_at.nix
+      ../../modules/styling.nix
+      ../../modules/language_en_at.nix
     ];
 
   # Bootloader
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.loader.grub =
-    {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      useOSProber = true;
-    };
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    useOSProber = true;
+    extraEntries = ''
+      menuentry "UEFI Firmware Settings" --class efi {
+        fwsetup
+      }
+    '';
+  };
 
-  # put file systems here if needed
+  fileSystems."/run/media/OldWindows" = {
+    device = "/dev/disk/by-uuid/A60E66E70E66B04B";
+    fsType = "ntfs";
+  };
+
+  fileSystems."/run/media/Windows" = {
+    device = "/dev/disk/by-uuid/A48C4D438C4D10EA";
+    fsType = "ntfs";
+  };
 
   networking.hostName = "FredPC";
 
@@ -70,5 +82,5 @@
     gnome-software
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }

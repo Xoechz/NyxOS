@@ -24,6 +24,11 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = true;
+      extraEntries = ''
+        menuentry "UEFI Firmware Settings" --class efi {
+          fwsetup
+        }
+      '';
     };
 
   fileSystems."/run/media/elias/4TB-HDD" =

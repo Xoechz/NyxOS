@@ -60,7 +60,6 @@
   };
 
   # Enable firewall settings
-
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
@@ -139,6 +138,8 @@
     nixd
     nixpkgs-fmt
     nix-tree
+
+    efibootmgr
   ];
 
   # garbage collection to save diskspace

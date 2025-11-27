@@ -1,4 +1,4 @@
-# the necasary config vor nvidia for EliasLaptop and FredPC
+# the necasary config vor nvidia for EliasLaptop
 { config, ... }:
 {
   # Enable OpenGL
@@ -8,7 +8,6 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-
     # Modesetting is required.
     modesetting.enable = true;
 

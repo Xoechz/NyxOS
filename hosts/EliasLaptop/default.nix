@@ -24,12 +24,16 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = false;
-      extraEntries = "
-        menuentry \"Windows\" --class windows --class os {\n
-          insmod ntfs\n
-          search --no-floppy --set=root --fs-uuid C236-4D6C\n
-          chainloader /efi/Microsoft/Boot/bootmgfw.efi\n
-        }";
+      extraEntries = ''
+        menuentry "Windows" --class windows --class os {
+          insmod ntfs
+          search --no-floppy --set=root --fs-uuid C236-4D6C
+          chainloader /efi/Microsoft/Boot/bootmgfw.efi
+        };
+        menuentry "UEFI Firmware Settings" --class efi {
+          fwsetup
+        }
+      '';
     };
 
   networking.hostName = "EliasLaptop";

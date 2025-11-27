@@ -117,11 +117,13 @@
           };
           modules = [
             ./hosts/FredPC
+            catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
+              home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
               home-manager.extraSpecialArgs = inputs // {
                 pkgs-stable = import nixpkgs-stable {
                   system = "x86_64-linux";
@@ -129,6 +131,7 @@
                 };
               };
               home-manager.users.fred = import ./home/fred.nix;
+              home-manager.users.elias = import ./home/elias.nix;
               home-manager.users.gerhard = import ./home/gerhard.nix;
             }
           ];
