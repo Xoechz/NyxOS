@@ -10,7 +10,7 @@
       ../../modules/kde.nix
       ../../modules/steam.nix
       ../../modules/styling.nix
-      ../../modules/language_en_at.nix
+      ../../modules/language_de_at.nix
     ];
 
   # Bootloader
@@ -77,10 +77,6 @@
       flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     '';
   };
-
-  environment.systemPackages = with pkgs; [
-    gnome-software
-  ];
 
   system.stateVersion = "25.05";
 }
