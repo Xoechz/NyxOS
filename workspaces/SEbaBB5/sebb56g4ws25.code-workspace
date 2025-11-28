@@ -10,6 +10,6 @@
         }
     ],
     "settings": {
-        "dotnet.defaultSolution": "/home/elias/Repos/sebb56g4ws25/backend/Backend.slnx"
+        "dotnet.defaultSolution": "/home/elias/Repos/sebb56g4ws25/backend/Backend.sln"
     }
 }
