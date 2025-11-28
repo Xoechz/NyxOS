@@ -67,6 +67,13 @@
     randomEncryption.enable = true;
   }];
 
+  environment.systemPackages = with pkgs; [
+    kdePackages.discover
+    (chromium.override {
+      commandLineArgs = [ "--disable-gpu" ];
+    })
+  ];
+
   programs.chromium.enable = true;
 
   services.flatpak.enable = true;
