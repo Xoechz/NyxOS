@@ -49,13 +49,13 @@
       isNormalUser = true;
       description = "Fred";
       # lpadmin is needed for printer setup
-      extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+      extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
     };
     gerhard = {
       isNormalUser = true;
       description = "Gerhard";
       # lpadmin is needed for printer setup
-      extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+      extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
     };
   };
 
@@ -73,8 +73,6 @@
       commandLineArgs = [ "--disable-gpu" ];
     })
   ];
-
-  programs.chromium.enable = true;
 
   services.flatpak.enable = true;
   systemd.services.flatpak-repo = {

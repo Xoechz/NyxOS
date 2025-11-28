@@ -15,7 +15,8 @@
     isNormalUser = true;
     description = "Elias";
     # lpadmin is needed for printer setup
-    extraGroups = [ "networkmanager" "wheel" "lpadmin" ];
+    # video is needed for dvb-s access
+    extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
   };
 
   # enable flakes and new nix commands
