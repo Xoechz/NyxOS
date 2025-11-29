@@ -1,13 +1,34 @@
 { pkgs, ... }:
 {
-  nix.settings = {
-    substituters = [
-      "https://nix-community.cachix.org"
-      "https://cache.nixos.org/"
-    ];
-    trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
+  nix = {
+    settings = {
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+      # enable flakes and new nix commands
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "elias" "nixremote" ];
+    };
+
+    # Optimise nix store usage
+    optimise = {
+      automatic = true;
+      dates = "weekly";
+    };
+  };
+
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 7d --keep 3";
+      dates = "weekly";
+    };
+    flake = "/home/elias/NyxOS";
   };
 
   # user setup
@@ -17,15 +38,8 @@
     # lpadmin is needed for printer setup
     # video is needed for dvb-s access
     extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
+    shell = pkgs.zsh;
   };
-
-  # enable flakes and new nix commands
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "elias" "nixremote" ];
-  };
-
-  users.users.elias.shell = pkgs.zsh;
 
   # Set your time zone.
   time.timeZone = "Europe/Vienna";
@@ -142,18 +156,6 @@
 
     efibootmgr
   ];
-
-  # garbage collection to save diskspace
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
-
-  nix.optimise = {
-    automatic = true;
-    dates = "weekly";
-  };
 
   # enable ssh, so in the case of display failure, i can still access the machine
   services.openssh = {

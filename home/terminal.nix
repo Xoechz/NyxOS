@@ -10,18 +10,19 @@
       enable = true;
     };
     shellAliases = {
-      ll = "ls -htlA";
-      rebuild = "sudo nixos-rebuild switch && show-changes";
-      update = "nix flake update --flake ~/NyxOS --impure && rebuild";
-      cleanup = "df / -HT && sudo nix store optimise && sudo nix-collect-garbage -d --quiet && show-leftovers && df / -HT";
+      ll = "eza -la --git";
+      etree = "eza -T --git -a -I '.git|node_modules|bin|obj'";
+      rebuild = "sudo echo Rebuilding... && nh os switch";
+      update = "sudo echo Updating... && nix flake update --flake ~/NyxOS --impure && rebuild";
+      cleanup = "sudo nix store optimise && nh clean all";
       pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
       pm-rebuild = "rebuild && pm-reset";
-      show-changes = "nvd diff $(ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)";
       show-leftovers = "nix-store --gc --print-roots | egrep -v '^(/nix/var|/run/\\w+-system|\\{memory|/proc)'";
       full-update = "cd ~/NyxOS && git pull && update";
       ssh = "kitten ssh";
       deploy-to-pi-from-laptop = "sudo nixos-rebuild switch --target-host nixpi --build-host eliaslaptop";
       deploy-to-pi-from-pc = "sudo nixos-rebuild switch --target-host nixpi --build-host eliaspc";
+      cat = "bat";
     };
     history = {
       size = 10000;
@@ -142,7 +143,13 @@
     enableZshIntegration = true;
   };
 
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+    git = true;
+    icons = "auto";
+  };
+
   programs.ripgrep.enable = true;
+  programs.bat.enable = true;
 }
-
-
