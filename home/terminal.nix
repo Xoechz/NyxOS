@@ -136,6 +136,13 @@
       window_padding_width = 10;
     };
   };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.ripgrep.enable = true;
 }
 
 

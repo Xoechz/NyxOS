@@ -152,6 +152,7 @@
 
   nix.optimise = {
     automatic = true;
+    dates = "weekly";
   };
 
   # enable ssh, so in the case of display failure, i can still access the machine
@@ -166,6 +167,8 @@
   };
 
   programs.zsh.enable = true;
+  programs.command-not-found.enable = false;
+  programs.nix-index-database.comma.enable = true;
 
   # Firmware updates
   services.fwupd.enable = true;
