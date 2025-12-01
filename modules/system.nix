@@ -182,6 +182,7 @@
 
   # resolved for wireguard
   services.resolved.enable = true;
+  services.fstrim.enable = true;
 
   # enable remote building to raspi
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -193,4 +194,15 @@
       "0 */2 * * *      root    cd /home/elias/NyxOS && ./update.sh >> /var/log/nixos-update.log 2>&1"
     ];
   };
+
+  # different kernels
+  # fast
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # leaning fast
+  # boot.kernelPackages = pkgs.linuxPackages_lqx;
+  # leaning stable
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod;
+  # stable
+  # boot.kernelPackages = pkgs.linuxPackages;
+
 }
