@@ -1,8 +1,14 @@
 # configs regarding window management and kde, it is possible to swap this out if i want to change desktop environment
 { pkgs, ... }:
 {
-  # I am only using wayland, so no need for xserver
-  services.xserver.enable = false;
+  # Enable the X11 windowing system. Disabling it seems to break a lot of stuff.
+  services.xserver.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "at";
+    variant = "";
+  };
 
   # Enable the KDE Plasma Desktop Environment.
   services.desktopManager.plasma6.enable = true;
