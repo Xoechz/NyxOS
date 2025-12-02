@@ -56,6 +56,33 @@
     randomEncryption.enable = true;
   }];
 
+  # Power management (Intel desktop-friendly defaults)
+  services.thermald.enable = true;
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+      # Responsive CPU scaling
+      CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      CPU_BOOST_ON_AC = "1";
+
+      # Device runtime power management (avoid GPUs)
+      RUNTIME_PM_ON_AC = "on";
+      RUNTIME_PM_DRIVER_BLACKLIST = "nouveau amdgpu nvidia";
+
+      # Safe disk & USB savings
+      SATA_LINKPWR_ON_AC = "med_power_with_dipm";
+      USB_AUTOSUSPEND = 1;
+
+      # Audio powersave when idle
+      SOUND_POWER_SAVE_ON_AC = 1;
+
+      # Keep PCIe ASPM default for desktop stability
+      PCIE_ASPM_ON_AC = "default";
+    };
+  };
+
 
   system.stateVersion = "24.05";
 }

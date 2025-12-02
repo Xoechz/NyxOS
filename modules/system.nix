@@ -155,6 +155,7 @@
     nix-tree
 
     efibootmgr
+    powertop
   ];
 
   # enable ssh, so in the case of display failure, i can still access the machine
@@ -205,4 +206,10 @@
   # stable
   # boot.kernelPackages = pkgs.linuxPackages;
 
+  services.system76-scheduler = {
+    enable = true;
+    settings.cfsProfiles.enable = true;
+  };
+
+  powerManagement.powertop.enable = true;
 }
