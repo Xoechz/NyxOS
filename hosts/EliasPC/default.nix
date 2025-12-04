@@ -56,33 +56,43 @@
     randomEncryption.enable = true;
   }];
 
-  # Power management (Intel desktop-friendly defaults)
+  # Power management optimized for high performance
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = false;
   services.tlp = {
     enable = true;
     settings = {
-      # Responsive CPU scaling
-      CPU_SCALING_GOVERNOR_ON_AC = "schedutil";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+      # Aggressive CPU scaling for maximum performance
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
       CPU_BOOST_ON_AC = "1";
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
 
-      # Device runtime power management (avoid GPUs)
-      RUNTIME_PM_ON_AC = "on";
-      RUNTIME_PM_DRIVER_BLACKLIST = "nouveau amdgpu nvidia";
+      # Disable runtime PM on AC to prevent USB devices from suspending
+      RUNTIME_PM_ON_AC = "off";
 
-      # Safe disk & USB savings
+      # Disable USB autosuspend to prevent input devices from suspending
+      USB_AUTOSUSPEND = 0;
+      USB_AUTOSUSPEND_ON_AC = 0;
+
+      # Optimize disk performance (use noop for SSDs)
       SATA_LINKPWR_ON_AC = "med_power_with_dipm";
-      USB_AUTOSUSPEND = 1;
+      DISK_IDLE_SECS_ON_AC = 0;
 
-      # Audio powersave when idle
-      SOUND_POWER_SAVE_ON_AC = 1;
+      # Disable audio powersave for better responsiveness
+      SOUND_POWER_SAVE_ON_AC = 0;
 
-      # Keep PCIe ASPM default for desktop stability
-      PCIE_ASPM_ON_AC = "default";
+      # Optimize PCIe for performance
+      PCIE_ASPM_ON_AC = "off";
     };
   };
 
+  # Kernel parameters for high performance
+  boot.kernelParams = [
+    # Disable CPU power states for consistent performance
+    "intel_pstate=disable"
+  ];
 
   system.stateVersion = "24.05";
 }
