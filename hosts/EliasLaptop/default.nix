@@ -105,9 +105,7 @@
         RUNTIME_PM_DEVICE_BLACKLIST = "";
 
         # USB autosuspend
-        USB_AUTOSUSPEND = 1;
-        USB_BLACKLIST = "";
-        USB_ALLOWLIST = "";
+        USB_AUTOSUSPEND = 0;
 
         # SATA link power management
         SATA_LINKPWR_ON_AC = "med_power_with_dipm";
