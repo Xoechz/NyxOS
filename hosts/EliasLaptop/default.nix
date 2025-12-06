@@ -8,6 +8,7 @@
       ./hardware-configuration.nix
       ../../modules/system.nix
       ../../modules/kde.nix
+      ../../modules/plasmaFix.nix
       ../../modules/steam.nix
       ../../modules/nvidia.nix
       ../../modules/dev.nix
@@ -132,11 +133,11 @@
       };
     };
 
-  services.github-runners.default = {
-    enable = true;
-    tokenFile = "/run/secrets/github-runner/default.token";
-    url = "https://github.com/swk5-2025ws/delifhery-bb-g1-leonhardsberger";
-  };
+  # services.github-runners.default = {
+  #   enable = true;
+  #   tokenFile = "/run/secrets/github-runner/default.token";
+  #   url = "https://github.com/swk5-2025ws/delifhery-bb-g1-leonhardsberger";
+  # };
 
   system.stateVersion = "24.05";
 }

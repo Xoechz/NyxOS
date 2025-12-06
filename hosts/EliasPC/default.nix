@@ -8,6 +8,7 @@
       ./hardware-configuration.nix
       ../../modules/system.nix
       ../../modules/kde.nix
+      ../../modules/plasmaFix.nix
       ../../modules/steam.nix
       ../../modules/amd.nix
       ../../modules/dev.nix
