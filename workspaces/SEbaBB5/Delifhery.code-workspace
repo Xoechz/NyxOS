@@ -14,6 +14,7 @@
         }
     ],
     "settings": {
-        "dotnet.defaultSolution": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger/backend/Delifhery.Backend.slnx"
+        "dotnet.defaultSolution": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger/backend/Delifhery.Backend.slnx",
+        "dotnet.solution.autoOpen": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger/backend/Delifhery.Backend.slnx"
     }
 }

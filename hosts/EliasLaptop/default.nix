@@ -132,5 +132,11 @@
       };
     };
 
+  services.github-runners.default = {
+    enable = true;
+    tokenFile = "/run/secrets/github-runner/default.token";
+    url = "https://github.com/swk5-2025ws/delifhery-bb-g1-leonhardsberger";
+  };
+
   system.stateVersion = "24.05";
 }
