@@ -27,7 +27,11 @@
       passwordRequiredDelay = 5;
       lockOnStartup = false;
       appearance = {
-        wallpaper = "/home/elias/NyxOS/images/nixos-wallpaper-catppuccin-mocha.png";
+        wallpaperSlideShow =
+          {
+            path = "/home/elias/NyxOS/images/heightlines_v1";
+            interval = 60;
+          };
         alwaysShowClock = true;
         showMediaControls = true;
       };
