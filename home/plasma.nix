@@ -511,7 +511,7 @@
       # slideshow wallpaper
       wallpaperSlideShow =
         {
-          path = "/home/elias/NyxOS/images/slideshow";
+          path = "/home/elias/NyxOS/images/heightlines_v3";
           interval = 10;
         };
       colorScheme = "CatppuccinMochaFlamingo";

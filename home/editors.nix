@@ -8,7 +8,7 @@
   };
 
   home.packages = with pkgs; [
-    # pkgs.qgis
+    pkgs.qgis
 
     inkscape
     gimp
