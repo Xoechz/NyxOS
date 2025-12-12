@@ -1,6 +1,11 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, system, inputs, ... }:
 {
   nixpkgs.overlays = lib.singleton (final: prev: {
+    # Override nh to use the latest nix-output-monitor
+    nh = prev.nh.override {
+      nix-output-monitor = inputs.nix-output-monitor.packages.${system}.default;
+    };
+
     kdePackages = prev.kdePackages // {
       plasma-workspace =
         let

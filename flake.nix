@@ -35,6 +35,14 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # to overlay the newest nom version
+    nix-output-monitor = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:maralorn/nix-output-monitor";
+    };
   };
 
   outputs = { nixpkgs, nixpkgs-stable, nixpkgs-very-unstable, home-manager, plasma-manager, catppuccin, nix-index-database, ... }@inputs:
@@ -47,6 +55,7 @@
 
       # Helper function to create specialArgs with stable and very-unstable pkgs
       mkSpecialArgs = system: withVeryUnstable: {
+        inherit inputs system;
         pkgs-stable = mkPkgs system nixpkgs-stable;
       } // (if withVeryUnstable then {
         pkgs-very-unstable = mkPkgs system nixpkgs-very-unstable;
