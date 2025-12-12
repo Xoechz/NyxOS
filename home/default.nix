@@ -12,9 +12,6 @@
     which
     tree
 
-    nix-output-monitor
-    nvd
-
     btop-rocm
     iotop
     iftop

@@ -153,6 +153,8 @@
     nixd
     nixpkgs-fmt
     nix-tree
+    nix-output-monitor
+    nvd
 
     efibootmgr
     powertop
