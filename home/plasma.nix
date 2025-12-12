@@ -210,14 +210,6 @@
                 show_requestReboot = false;
               };
           }
-          {
-            plasmaPanelColorizer = {
-              general = {
-                enable = true;
-                hideWidget = true;
-              };
-            };
-          }
         ];
       }
     ];
