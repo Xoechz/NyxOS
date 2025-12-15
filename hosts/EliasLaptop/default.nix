@@ -139,5 +139,35 @@
   #   url = "https://github.com/swk5-2025ws/delifhery-bb-g1-leonhardsberger";
   # };
 
+  # devcert for local https development
+  # create it with dotnet dev-certs https --format PEM -ep devcert.crt
+  security.pki.certificates = [
+    ''
+      DevCert
+      =========
+      -----BEGIN CERTIFICATE-----
+      MIIDXzCCAkegAwIBAgIIUHjB2p5JLhowDQYJKoZIhvcNAQELBQAwFDESMBAGA1UE
+      AxMJbG9jYWxob3N0MB4XDTI1MTExMzE2NTUwMFoXDTI2MTExMzE2NTUwMFowFDES
+      MBAGA1UEAxMJbG9jYWxob3N0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+      AQEAuLfoxBS3wuJQlnHgVwhPl6A2Lx4ZrLO3QvMKDB2ll0zDEFrIU9mQdZsEOBa6
+      G5usqKRiPSaXT0tDM1CFt0ReaNLFZVzHyn38TqtUdG61uH+rqOEjlp6IDVrQ55Zm
+      LlylX/PS40BmejiTw1TlAKuQ9C8OOkWGfYIoh5sot4aypcjrAbKYUhJGj2qflfcm
+      DPBOAKN7AoBDReguWavoSku9EiwPDzZpAMxZFM6sO/4RrcaOadtf1onsrwGc+dJv
+      P2zm95Vzv21WXbtSR6N+eRx5bqArEejeQcJ6cRKvJEml3xPVewrgRh/+/ehBxsI/
+      c8ICkt3XX0ewxqZMXF4AnId1aQIDAQABo4G0MIGxMAwGA1UdEwEB/wQCMAAwDgYD
+      VR0PAQH/BAQDAgWgMBYGA1UdJQEB/wQMMAoGCCsGAQUFBwMBMGgGA1UdEQEB/wRe
+      MFyCCWxvY2FsaG9zdIIPKi5kZXYubG9jYWxob3N0gg4qLmRldi5pbnRlcm5hbIIU
+      aG9zdC5kb2NrZXIuaW50ZXJuYWyCGGhvc3QuY29udGFpbmVycy5pbnRlcm5hbDAP
+      BgorBgEEAYI3VAEBBAEEMA0GCSqGSIb3DQEBCwUAA4IBAQCmpCO6nyGkN6Q1JixF
+      rw3tstUJcnuaHJYFV2stNnzhqd0o4kiaFolUx8x8hU5e8Jjbfv/v63inepQYLKj9
+      dEY6948K2SLnB+X5+zczxHOBJCA5VBtpFIUKpu+nSPLZLwn/Do++OQmkPb72ktwD
+      LCuLYncvJbAhEdr/+yoLuBqTQlv8VlEwpX/m+/3+kOjN/vQfvUSpE7yuA2BY7jce
+      z7AR6zUBA/4perHTPj25t5gB0fAtmSnoH9hi23ffEdJK0Z1Vs4hj/wresnxk269k
+      bRWwGL41pkOa9/gBffLHAN0Qj4HIAK7iHyTdAxR7UyZILGYBQ9zoByXUx8GCorkw
+      QZzT
+      -----END CERTIFICATE-----
+    ''
+  ];
+
   system.stateVersion = "24.05";
 }
