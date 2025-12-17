@@ -25,6 +25,7 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = false;
+      memtest86.enable = true;
       extraEntries = ''
         menuentry "Windows" --class windows --class os {
           insmod ntfs

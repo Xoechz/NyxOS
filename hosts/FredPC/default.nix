@@ -21,6 +21,7 @@
     efiSupport = true;
     device = "nodev";
     useOSProber = true;
+    memtest86.enable = true;
     extraEntries = ''
       menuentry "UEFI Firmware Settings" --class efi {
         fwsetup
