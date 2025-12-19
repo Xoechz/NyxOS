@@ -1,5 +1,5 @@
 # The system config base for EliasLaptop
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -43,6 +43,11 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  environment.systemPackages = with pkgs; [
+    btop-cuda
+    nvtopPackages.nvidia
+  ];
+
   # enables support for Bluetooth
   hardware.bluetooth.enable = true;
   # powers up the default Bluetooth controller on boot
@@ -61,16 +66,6 @@
     size = 18 * 1024; # 18GB
     randomEncryption.enable = true;
   }];
-
-  hardware.nvidia.prime = {
-    reverseSync.enable = true;
-    # Enable if using an external GPU
-    allowExternalGpu = false;
-
-    # Make sure to use the correct Bus ID values for your system!
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:2:0:0";
-  };
 
   # power management
   services.auto-cpufreq.enable = false;

@@ -9,6 +9,7 @@
       ../../modules/system.nix
       ../../modules/kde.nix
       ../../modules/steam.nix
+      ../../modules/nvidia.nix
       ../../modules/styling.nix
       ../../modules/language_de_at.nix
     ];
@@ -69,6 +70,8 @@
   }];
 
   environment.systemPackages = with pkgs; [
+    btop
+    nvtopPackages.nvidia
     kdePackages.discover
     (chromium.override {
       commandLineArgs = [ "--disable-gpu" ];

@@ -63,6 +63,7 @@
         alignment = "center";
         hiding = "none";
         floating = false;
+        opacity = "translucent";
         screen = "all";
         widgets = [
           {

@@ -11,8 +11,6 @@
 
     which
     tree
-
-    btop-rocm
     iotop
     iftop
 

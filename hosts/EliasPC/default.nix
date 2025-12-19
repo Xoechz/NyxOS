@@ -1,5 +1,5 @@
 # The system config base for EliasPC
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports =
@@ -49,6 +49,10 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    btop-rocm
+  ];
 
   # swap
   zramSwap.enable = true;
