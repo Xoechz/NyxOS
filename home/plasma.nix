@@ -19,6 +19,12 @@
         repeatRate = 25;
       };
     };
+    krunner = {
+      position = "center";
+      activateWhenTypingOnDesktop = true;
+      historyBehavior = "enableSuggestions";
+      shortcuts.launch = "Meta";
+    };
     kscreenlocker = {
       autoLock = true;
       lockOnResume = true;
@@ -450,6 +456,7 @@
       "org.kde.spectacle.desktop"."RectangularRegionScreenShot" = "Meta+Shift+S";
       "org.kde.spectacle.desktop"."WindowUnderCursorScreenShot" = "Meta+Ctrl+Print";
       "org.kde.spectacle.desktop"."_launch" = "Meta+S";
+      "org.kde.krunner.desktop"."_launch" = "Meta";
       "org_kde_powerdevil"."Decrease Keyboard Brightness" = "Keyboard Brightness Down";
       "org_kde_powerdevil"."Decrease Screen Brightness Small" = "Shift+Monitor Brightness Down";
       "org_kde_powerdevil"."Decrease Screen Brightness" = "Monitor Brightness Down";
@@ -463,7 +470,6 @@
       "org_kde_powerdevil"."Toggle Keyboard Backlight" = "Keyboard Light On/Off";
       "org_kde_powerdevil"."Turn Off Screen" = [ ];
       "org_kde_powerdevil"."powerProfile" = "Meta+B";
-      "plasmashell"."activate plasma drawer widget" = "Meta";
       "plasmashell"."activate task manager entry 1" = "Meta+1";
       "plasmashell"."activate task manager entry 10" = "Meta+0";
       "plasmashell"."activate task manager entry 2" = "Meta+2";
@@ -490,7 +496,7 @@
       "plasmashell"."switch to next activity" = [ ];
       "plasmashell"."switch to previous activity" = [ ];
       "plasmashell"."toggle do not disturb" = [ ];
-      "services/kitty.desktop"."_launch" = "Meta+X";
+      "services/kitty.desktop"."_launch" = "Meta+Space";
       "services/org.kde.plasma.emojier.desktop"."_launch" = "Meta+Ctrl+Alt+Shift+Space";
       "services/org.kde.spectacle.desktop"."CurrentMonitorScreenShot" = "Print";
       "services/org.kde.spectacle.desktop"."OpenWithoutScreenshot" = [ ];
