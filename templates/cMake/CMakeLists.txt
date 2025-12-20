@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(Hashtable VERSION 1.0.0 LANGUAGES C CXX)
 
 # enable virtual folders for projects if supported by the build system/IDE
-set_property(GLOBAL PROPERTY USE_FOLDERS ON) 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # set output directories
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/static)
@@ -48,7 +48,7 @@ function(target name)
          -fsanitize=address,undefined,leak   # enable address, undefined behavior and memory leak sanitizers
       )
       # openGl
-      #target_link_libraries(${name} PRIVATE ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU)   
+      #target_link_libraries(${name} PRIVATE ${OPENGL_LIBRARIES} ${GLUT_LIBRARIES} GLU)
       #target_include_directories(${project} PUBLIC "inc" ${wxWidgets_INCLUDE_DIRS})
       #target_link_libraries(${project} PUBLIC compile_flags glfw OpenGL::GL OpenGL::GLU ${wxWidgets_LIBRARIES})
    elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")

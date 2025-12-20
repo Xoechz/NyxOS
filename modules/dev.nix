@@ -93,7 +93,7 @@ in
     # Combine required library search paths; force to avoid conflicts with other modules
     LD_LIBRARY_PATH = lib.mkForce (builtins.concatStringsSep ":" [
       "/run/current-system/sw/lib" # base system libs
-      "${config.services.pipewire.package.jack}/lib" # pipewire jack (was defined elsewhere causing conflict) 
+      "${config.services.pipewire.package.jack}/lib" # pipewire jack (was defined elsewhere causing conflict)
     ]);
   };
 
