@@ -48,6 +48,16 @@
     nvtopPackages.nvidia
   ];
 
+  hardware.nvidia.prime = {
+    reverseSync.enable = true;
+    # Enable if using an external GPU
+    allowExternalGpu = false;
+
+    # Make sure to use the correct Bus ID values for your system!
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:2:0:0";
+  };
+
   # enables support for Bluetooth
   hardware.bluetooth.enable = true;
   # powers up the default Bluetooth controller on boot
