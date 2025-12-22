@@ -52,6 +52,7 @@
         graph = "log --decorate --oneline --graph --max-count=20";
       };
       pull.rebase = true;
+      core.autocrlf = "input";
     };
     lfs.enable = true;
   };
