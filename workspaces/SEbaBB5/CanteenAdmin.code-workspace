@@ -1,0 +1,15 @@
+{
+    "folders": [
+        {
+            "name": "CanteenAdmin",
+            "path": "/home/elias/Repos/CanteenAdmin"
+        },
+        {
+            "name": "NyxOS",
+            "path": "/home/elias/NyxOS"
+        }
+    ],
+    "settings": {
+        "editor.wordWrap": "on"
+    }
+}
