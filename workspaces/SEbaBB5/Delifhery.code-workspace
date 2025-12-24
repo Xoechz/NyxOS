@@ -2,7 +2,7 @@
     "folders": [
         {
             "name": "delifhery",
-            "path": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger"
+            "path": "/home/elias/Repos/delifhery-web-bb-Xoechz"
         },
         // {
         //     "name": "WEA5",
@@ -14,7 +14,7 @@
         }
     ],
     "settings": {
-        "dotnet.defaultSolution": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger/backend/Delifhery.Backend.slnx",
-        "dotnet.solution.autoOpen": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger/backend/Delifhery.Backend.slnx"
+        "dotnet.defaultSolution": "/home/elias/Repos/delifhery-web-bb-Xoechz/backend/Delifhery.Backend.slnx",
+        "dotnet.solution.autoOpen": "/home/elias/Repos/delifhery-web-bb-Xoechz/backend/Delifhery.Backend.slnx"
     }
 }
