@@ -38,10 +38,14 @@
 
     # to overlay the newest nom version
     nix-output-monitor = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
       url = "github:maralorn/nix-output-monitor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # betterfox
+    betterfox-nix = {
+      url = "github:HeitorAugustoLN/betterfox-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

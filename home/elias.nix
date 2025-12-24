@@ -12,6 +12,7 @@
       ./defaultApplications.nix
       ./styling.nix
       ./terminal.nix
+      ./betterfox.nix
     ];
 
   home.username = "elias";
