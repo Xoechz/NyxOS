@@ -142,4 +142,7 @@ in
     enable = true;
     package = pkgs.mullvad-vpn;
   };
+
+  # certificates for https development
+  security.pki.certificateFiles = [ "/home/elias/certs/devcert.pem" ];
 }
