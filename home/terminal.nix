@@ -23,7 +23,7 @@
       deploy-to-pi-from-laptop = "sudo nixos-rebuild switch --target-host nixpi --build-host eliaslaptop";
       deploy-to-pi-from-pc = "sudo nixos-rebuild switch --target-host nixpi --build-host eliaspc";
       cat = "bat";
-      dev-certs-reload = "dotnet dev-certs https --format PEM -ep /home/elias/certs/devcert.pem && rebuild";
+      dev-certs-reload = "mkdir -p ~/NyxOS/certs && dotnet dev-certs https --format PEM -ep ~/NyxOS/certs/$(hostname)-dev-cert.pem && rebuild";
     };
     history = {
       size = 10000;

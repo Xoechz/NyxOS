@@ -144,5 +144,11 @@ in
   };
 
   # certificates for https development
-  security.pki.certificateFiles = [ "/home/elias/certs/devcert.pem" ];
+  security.pki.certificates =
+    let
+      certsDir = ../certs;
+      certFiles = builtins.readDir certsDir;
+      pemFiles = lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".pem" name) certFiles;
+    in
+    map (name: builtins.readFile (certsDir + "/${name}")) (builtins.attrNames pemFiles);
 }
