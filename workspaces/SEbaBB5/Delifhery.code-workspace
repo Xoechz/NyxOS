@@ -14,6 +14,7 @@
         }
     ],
     "settings": {
+        // "editor.wordWrap": "on", // Use for latex
         "dotnet.defaultSolution": "/home/elias/Repos/delifhery-web-bb-Xoechz/backend/Delifhery.Backend.slnx",
         "dotnet.solution.autoOpen": "/home/elias/Repos/delifhery-web-bb-Xoechz/backend/Delifhery.Backend.slnx"
     }
