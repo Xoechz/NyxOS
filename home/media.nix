@@ -15,6 +15,8 @@
     transmission_4-qt
     wireguard-tools
     kdePackages.kdeconnect-kde
+
+    cava
   ];
 
   xdg.configFile."Vencord/themes/custom.css".text = ''
