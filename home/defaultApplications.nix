@@ -18,6 +18,7 @@
       "message/rfc822" = "thunderbird.desktop";
       "application/x-extension-ics" = "thunderbird.desktop";
       "terminal" = "kitty.desktop";
+      "image/svg" = "inkscape.desktop";
     };
     associations.added = {
       "inode/directory" = "code.desktop";
