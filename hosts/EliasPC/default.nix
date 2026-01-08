@@ -54,6 +54,8 @@
     btop-rocm
   ];
 
+  hardware.cpu.intel.updateMicrocode = true;
+
   # swap
   zramSwap.enable = true;
   swapDevices = [{

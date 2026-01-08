@@ -58,6 +58,8 @@
     nvidiaBusId = "PCI:2:0:0";
   };
 
+  hardware.cpu.intel.updateMicrocode = true;
+
   # enables support for Bluetooth
   hardware.bluetooth.enable = true;
   # powers up the default Bluetooth controller on boot
