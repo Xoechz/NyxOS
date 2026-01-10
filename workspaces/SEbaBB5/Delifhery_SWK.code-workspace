@@ -1,0 +1,17 @@
+{
+    "folders": [
+        {
+            "name": "delifhery",
+            "path": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger"
+        },
+        {
+            "name": "NyxOS",
+            "path": "/home/elias/NyxOS"
+        }
+    ],
+    "settings": {
+        // "editor.wordWrap": "on", // Use for latex
+        "dotnet.defaultSolution": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger/backend/Delifhery.Backend.slnx",
+        "dotnet.solution.autoOpen": "/home/elias/Repos/delifhery-bb-g1-leonhardsberger/backend/Delifhery.Backend.slnx"
+    }
+}

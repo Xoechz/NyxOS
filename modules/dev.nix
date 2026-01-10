@@ -74,6 +74,7 @@ in
     # android
     android-studio
     androidenv.androidPkgs.platform-tools
+    android-tools
 
     # docker
     dive
@@ -135,7 +136,6 @@ in
   environment.etc.hosts.mode = "0644";
 
   # android usb debugging
-  programs.adb.enable = true;
   users.extraGroups.adbusers.members = [ "elias" ];
 
   services.mullvad-vpn = {
