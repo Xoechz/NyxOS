@@ -1,13 +1,5 @@
 { pkgs, ... }:
 {
-  nix = {
-    # Optimise nix store usage
-    optimise = {
-      automatic = true;
-      dates = "weekly";
-    };
-  };
-
   programs.nh = {
     enable = true;
     clean = {
@@ -26,6 +18,79 @@
     # video is needed for dvb-s access
     extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
     shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # EliasLaptop nixremote
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # OfficePC nixremote // TODO
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # NixPi nixremote
+    ];
+  };
+
+  # Root SSH authorized keys for remote builds (add all machines' nixremote public keys)
+  users.users = {
+    root.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # EliasLaptop nixremote
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # OfficePC nixremote // TODO
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # NixPi nixremote
+    ];
+  };
+
+  # Create nixremote user for remote builds
+  users.users.nixremote = {
+    isSystemUser = true;
+    group = "nixremote";
+    home = "/var/lib/nixremote";
+    createHome = true;
+    shell = "${pkgs.nix}/bin/nix-shell";
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # EliasLaptop nixremote
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # OfficePC nixremote // TODO
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # NixPi nixremote
+    ];
+  };
+
+  users.groups.nixremote = { };
+
+  # Allow nixremote to run nix commands without password
+  security.sudo.extraRules = [
+    {
+      users = [ "nixremote" ];
+      commands = [
+        {
+          command = "${pkgs.nix}/bin/nix-store";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.nix}/bin/nix-daemon";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
+  # SSH known hosts for distributed builds
+  programs.ssh.knownHosts = {
+    EliasPC = {
+      hostNames = [ "EliasPC" "EliasPC.local" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBHAqDy+XbGANEjlFRgFu/KhiA1Y08RSekbArf/o/9H";
+    };
+    EliasLaptop = {
+      hostNames = [ "EliasLaptop" "EliasLaptop.local" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx"; # Replace with actual key
+    };
+    OfficePC = {
+      hostNames = [ "OfficePC" "OfficePC.local" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx"; # Replace with actual key // TODO
+    };
+    NixPi = {
+      hostNames = [ "NixPi" "NixPi.local" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx"; # Replace with actual key
+    };
   };
 
   # Set your time zone.
@@ -154,6 +219,7 @@
       X11Forwarding = true;
       PermitRootLogin = "yes";
       PasswordAuthentication = false;
+      PubkeyAuthentication = true;
     };
     openFirewall = true;
   };

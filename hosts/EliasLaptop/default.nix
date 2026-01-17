@@ -7,6 +7,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/system.nix
+      ../../modules/build.nix
       ../../modules/kde.nix
       ../../modules/overlays.nix
       ../../modules/steam.nix
@@ -141,39 +142,8 @@
       };
     };
 
-  nix = {
-    buildMachines = [
-      {
-        hostName = "EliasPC";
-        system = "x86_64-linux";
-        protocol = "ssh-ng";
-        maxJobs = 8;
-        speedFactor = 2;
-        supportedFeatures = [ "kvm" "nixos-test" "benchmark" "big-parallel" ];
-      }
-    ];
-
-    distributedBuilds = true;
-
-    extraOptions = ''
-      builders-use-substitutes = true
-    '';
-
-    settings = {
-      substituters = [
-        "https://nix-community.cachix.org"
-        "https://cache.nixos.org/"
-        "ssh-ng://EliasPC"
-      ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "EliasPC:FeMYLAaSK5o419ftDiAxhHs6x3n+tIsEq+LlZif0pg4="
-      ];
-      # enable flakes and new nix commands
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "elias" "nixremote" ];
-    };
-  };
+  # Offload builds to EliasPC
+  nix.distributedBuilds = true;
 
   system.stateVersion = "24.05";
 }

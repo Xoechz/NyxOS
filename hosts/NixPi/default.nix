@@ -5,6 +5,7 @@
   imports =
     [
       ../../modules/language_en_at.nix
+      ../../modules/build.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -69,6 +70,9 @@
   nix.optimise = {
     automatic = true;
   };
+
+  # Offload builds to EliasPC
+  nix.distributedBuilds = true;
 
   # enable ssh, so in the case of display failure, i can still access the machine
   services.openssh = {
@@ -140,40 +144,6 @@
         maxTime = "30m";
         prefetching = true;
       };
-    };
-  };
-
-  nix = {
-    buildMachines = [
-      {
-        hostName = "EliasPC";
-        system = "x86_64-linux";
-        protocol = "ssh-ng";
-        maxJobs = 8;
-        speedFactor = 2;
-        supportedFeatures = [ "kvm" "nixos-test" "benchmark" "big-parallel" ];
-      }
-    ];
-
-    distributedBuilds = true;
-
-    extraOptions = ''
-      builders-use-substitutes = true
-    '';
-
-    settings = {
-      substituters = [
-        "https://nix-community.cachix.org"
-        "https://cache.nixos.org/"
-        "ssh-ng://EliasPC"
-      ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "EliasPC:FeMYLAaSK5o419ftDiAxhHs6x3n+tIsEq+LlZif0pg4="
-      ];
-      # enable flakes and new nix commands
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "elias" "nixremote" ];
     };
   };
 
