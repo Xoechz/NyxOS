@@ -4,12 +4,17 @@
             "name": "sebb56g4ws25",
             "path": "/home/elias/Repos/sebb56g4ws25"
         },
+        //{
+        //    "name": "delifhery",
+        //    "path": "/home/elias/Repos/delifhery-web-bb-Xoechz"
+        //},
         {
             "name": "NyxOS",
             "path": "/home/elias/NyxOS"
         }
     ],
     "settings": {
-        "dotnet.defaultSolution": "/home/elias/Repos/sebb56g4ws25/backend/Backend.sln"
+        "dotnet.defaultSolution": "/home/elias/Repos/sebb56g4ws25/backend/Backend.sln",
+        "dotnet.solution.autoOpen": "/home/elias/Repos/sebb56g4ws25/backend/Backend.sln"
     }
 }
