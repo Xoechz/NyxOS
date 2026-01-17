@@ -22,6 +22,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnMpBp5leDkEcY+FzM93cn0xjs1bUaFvMiuJthItVIQ nixremote@NixPi"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEkkeMQneWIvzI9mzolIl2nyzt7pnzHqlNfk4zDlPyw elias@NixPi"
       # OfficePC nixremote and elias // TODO
     ];
@@ -41,6 +42,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnMpBp5leDkEcY+FzM93cn0xjs1bUaFvMiuJthItVIQ nixremote@NixPi"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEkkeMQneWIvzI9mzolIl2nyzt7pnzHqlNfk4zDlPyw elias@NixPi"
       # OfficePC nixremote and elias // TODO
     ];
@@ -57,6 +59,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnMpBp5leDkEcY+FzM93cn0xjs1bUaFvMiuJthItVIQ nixremote@NixPi"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEkkeMQneWIvzI9mzolIl2nyzt7pnzHqlNfk4zDlPyw elias@NixPi"
       # OfficePC nixremote and elias // TODO
     ];
