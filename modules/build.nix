@@ -5,7 +5,7 @@ let
   buildMachines = [
     {
       hostName = "EliasPC";
-      system = [ "x86_64-linux" "aarch64-linux" ];
+      systems = [ "x86_64-linux" "aarch64-linux" ];
       maxJobs = 16;
       speedFactor = 2;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];

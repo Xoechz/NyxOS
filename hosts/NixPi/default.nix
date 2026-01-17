@@ -45,7 +45,7 @@
     group = "nixremote";
     home = "/var/lib/nixremote";
     createHome = true;
-    shell = "${pkgs.nix}/bin/nix-shell";
+    shell = pkgs.zsh;
   };
 
   users.groups.nixremote = { };
@@ -100,7 +100,7 @@
   };
 
   # Offload builds to EliasPC
-  nix.distributedBuilds = false;
+  nix.distributedBuilds = true;
 
   # enable ssh, so in the case of display failure, i can still access the machine
   services.openssh = {
