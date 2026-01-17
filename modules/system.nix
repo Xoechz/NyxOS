@@ -93,7 +93,6 @@
     EliasLaptop = {
       hostNames = [ "EliasLaptop" "EliasLaptop.local" ];
       publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
-      publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
     };
     OfficePC = {
       hostNames = [ "OfficePC" "OfficePC.local" ];
