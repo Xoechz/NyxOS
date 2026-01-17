@@ -39,6 +39,34 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
+  # Create nixremote user for remote builds
+  users.users.nixremote = {
+    isSystemUser = true;
+    group = "nixremote";
+    home = "/var/lib/nixremote";
+    createHome = true;
+    shell = "${pkgs.nix}/bin/nix-shell";
+  };
+
+  users.groups.nixremote = { };
+
+  # Allow nixremote to run nix commands without password
+  security.sudo.extraRules = [
+    {
+      users = [ "nixremote" ];
+      commands = [
+        {
+          command = "${pkgs.nix}/bin/nix-store";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "${pkgs.nix}/bin/nix-daemon";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
