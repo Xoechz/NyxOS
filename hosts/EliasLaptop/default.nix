@@ -143,7 +143,7 @@
     };
 
   # Offload builds to EliasPC
-  nix.distributedBuilds = true;
+  nix.distributedBuilds = false;
 
   system.stateVersion = "24.05";
 }

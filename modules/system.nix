@@ -21,9 +21,8 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # EliasLaptop nixremote
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # OfficePC nixremote // TODO
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # NixPi nixremote
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
+      # OfficePC nixremote and elias // TODO
     ];
   };
 
@@ -32,9 +31,8 @@
     root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # EliasLaptop nixremote
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # OfficePC nixremote // TODO
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # NixPi nixremote
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
+      # OfficePC nixremote and elias // TODO
     ];
   };
 
@@ -48,9 +46,8 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # EliasLaptop nixremote
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # OfficePC nixremote // TODO
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx" # NixPi nixremote
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
+      # OfficePC nixremote and elias // TODO
     ];
   };
 
@@ -81,7 +78,7 @@
     };
     EliasLaptop = {
       hostNames = [ "EliasLaptop" "EliasLaptop.local" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx"; # Replace with actual key
+      publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
     };
     OfficePC = {
       hostNames = [ "OfficePC" "OfficePC.local" ];
@@ -89,7 +86,7 @@
     };
     NixPi = {
       hostNames = [ "NixPi" "NixPi.local" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx"; # Replace with actual key
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIxxxx";
     };
   };
 
