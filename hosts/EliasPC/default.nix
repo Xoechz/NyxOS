@@ -102,5 +102,21 @@
     "intel_pstate=disable"
   ];
 
+  nix = {
+    settings = {
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+      # enable flakes and new nix commands
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "elias" "nixremote" ];
+      secret-key-files = "/etc/nix/cache-priv-key.pem";
+    };
+  };
+
   system.stateVersion = "24.05";
 }
