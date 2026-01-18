@@ -34,6 +34,8 @@ in
         "EliasPC:FeMYLAaSK5o419ftDiAxhHs6x3n+tIsEq+LlZif0pg4="
       ];
 
+      fallback = true;
+
       # Enable flakes and new nix commands
       experimental-features = [ "nix-command" "flakes" ];
 

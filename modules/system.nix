@@ -19,13 +19,13 @@
     extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRlE7jMZnrznBCJkd9LpMM84QATX1cfHw8fg16ndeap nixremote@EliasLaptop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL71xmI34J5TlOzo6z0M3kTpzUTB7jxqiEvkALg4bcC6 root@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnMpBp5leDkEcY+FzM93cn0xjs1bUaFvMiuJthItVIQ nixremote@NixPi"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKDhjGdO4LZSBd21DrYSt1iJAC5f1kP1Q9yleTf9qZ7o root@EliasLaptop"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEkkeMQneWIvzI9mzolIl2nyzt7pnzHqlNfk4zDlPyw elias@NixPi"
-      # OfficePC nixremote and elias // TODO
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKF/LtEbMhHudYUlzGlYi3gdO819/U5KC1aJ5XNSkRJi root@NixPi"
+      # OfficePC root and elias // TODO
     ];
   };
 
@@ -37,19 +37,6 @@
   # sudo -u nixremote ssh-keygen -t ed25519 -N ""
   # sudo cat /var/lib/nixremote/.ssh/id_ed25519.pub
 
-  # Root SSH authorized keys for remote builds (add all machines' nixremote public keys)
-  users.users = {
-    root.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRlE7jMZnrznBCJkd9LpMM84QATX1cfHw8fg16ndeap nixremote@EliasLaptop"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnMpBp5leDkEcY+FzM93cn0xjs1bUaFvMiuJthItVIQ nixremote@NixPi"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEkkeMQneWIvzI9mzolIl2nyzt7pnzHqlNfk4zDlPyw elias@NixPi"
-      # OfficePC nixremote and elias // TODO
-    ];
-  };
-
   # Create nixremote user for remote builds
   users.users.nixremote = {
     isSystemUser = true;
@@ -58,13 +45,13 @@
     createHome = true;
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMN0GLVcwzHE8WKcbYZFdfmGTqcBZxkM4j9Rj0fEytrR nixremote@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRlE7jMZnrznBCJkd9LpMM84QATX1cfHw8fg16ndeap nixremote@EliasLaptop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL71xmI34J5TlOzo6z0M3kTpzUTB7jxqiEvkALg4bcC6 root@EliasPC"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBnMpBp5leDkEcY+FzM93cn0xjs1bUaFvMiuJthItVIQ nixremote@NixPi"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKDhjGdO4LZSBd21DrYSt1iJAC5f1kP1Q9yleTf9qZ7o root@EliasLaptop"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEkkeMQneWIvzI9mzolIl2nyzt7pnzHqlNfk4zDlPyw elias@NixPi"
-      # OfficePC nixremote and elias // TODO
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKF/LtEbMhHudYUlzGlYi3gdO819/U5KC1aJ5XNSkRJi root@NixPi"
+      # OfficePC root and elias // TODO
     ];
   };
 
