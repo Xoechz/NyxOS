@@ -6,6 +6,7 @@ let
     {
       hostName = "EliasPC";
       systems = [ "x86_64-linux" "aarch64-linux" ];
+      sshUser = "nixremote";
       maxJobs = 16;
       speedFactor = 2;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
@@ -24,7 +25,7 @@ in
         "https://nix-community.cachix.org"
         "https://cache.nixos.org/"
       ] ++ lib.optionals config.nix.distributedBuilds [
-        "ssh-ng://EliasPC"
+        "ssh-ng://nixremote@EliasPC"
       ];
 
       trusted-public-keys = [
