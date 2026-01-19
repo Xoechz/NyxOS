@@ -13,16 +13,14 @@
       ll = "eza -la --git";
       etree = "eza -T --git -a -I '.git|node_modules|bin|obj'";
       rebuild = "sudo echo Rebuilding... && nh os switch";
-      rebuild-local = "sudo echo Rebuilding... && nh os switch --option builders ''";
-      update = "sudo echo Updating... && nix flake update --flake ~/NyxOS --impure && rebuild";
+      update = "sudo echo Updating... && nh os switch -u";
       cleanup = "sudo nix store optimise && nh clean all";
       pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
       pm-rebuild = "rebuild && pm-reset";
       show-leftovers = "nix-store --gc --print-roots | egrep -v '^(/nix/var|/run/\\w+-system|\\{memory|/proc)'";
       full-update = "cd ~/NyxOS && git pull && update";
       ssh = "kitten ssh";
-      deploy-to-pi-from-laptop = "sudo nixos-rebuild switch --target-host nixpi --build-host eliaslaptop";
-      deploy-to-pi-from-pc = "sudo nixos-rebuild switch --target-host nixpi --build-host eliaspc";
+      deploy-to-pi = "rebuild --target-host NixPi -H NixPi";
       cat = "bat";
       dev-certs-reload = "mkdir -p ~/NyxOS/certs && dotnet dev-certs https --format PEM -ep ~/NyxOS/certs/$(hostname)-dev-cert.pem && rebuild";
     };
