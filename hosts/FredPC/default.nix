@@ -8,9 +8,9 @@
       ./hardware-configuration.nix
       ../../modules/system.nix
       ../../modules/build.nix
+      ../../modules/docker.nix
       ../../modules/kde.nix
       ../../modules/steam.nix
-      ../../modules/nvidia.nix
       ../../modules/styling.nix
       ../../modules/additionalFonts.nix
       ../../modules/language_de_at.nix
@@ -78,6 +78,7 @@
     (chromium.override {
       commandLineArgs = [ "--disable-gpu" ];
     })
+    w_scan2
   ];
 
   services.flatpak.enable = true;

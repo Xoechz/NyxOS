@@ -265,6 +265,8 @@
     enable = true;
     settings.cfsProfiles.enable = true;
   };
+  
+  programs.nix-ld.enable = true;
 
   powerManagement.powertop.enable = false;
 }

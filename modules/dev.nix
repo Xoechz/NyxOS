@@ -75,9 +75,6 @@ in
     android-studio
     androidenv.androidPkgs.platform-tools
     android-tools
-
-    # docker
-    dive
   ];
 
   programs.java = {
@@ -119,16 +116,6 @@ in
   # boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
 
   # users.extraGroups.vboxusers.members = [ "elias" ];
-
-  # enable docker
-  virtualisation.docker = {
-    enable = true;
-    daemon.settings = {
-      dns = [ "8.8.8.8" "8.8.4.4" ];
-    };
-  };
-
-  users.extraGroups.docker.members = [ "elias" ];
 
   # Make it possible for ddev to modify the /etc/hosts file.
   # Otherwise you'll have to manually change the
