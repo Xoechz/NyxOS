@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.nh = {
     enable = true;
@@ -252,8 +252,8 @@
   };
 
   # different kernels
-  # fast
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # fast - default, overridden in FredPC
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
   # leaning fast
   # boot.kernelPackages = pkgs.linuxPackages_lqx;
   # leaning stable
@@ -265,7 +265,7 @@
     enable = true;
     settings.cfsProfiles.enable = true;
   };
-  
+
   programs.nix-ld.enable = true;
 
   powerManagement.powertop.enable = false;

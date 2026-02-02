@@ -93,5 +93,7 @@
   # Offload builds to EliasPC
   nix.distributedBuilds = true;
 
+  boot.kernelPackages = pkgs.linuxPackages;
+
   system.stateVersion = "25.05";
 }
