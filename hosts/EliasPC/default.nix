@@ -14,6 +14,7 @@
       ../../modules/amd.nix
       ../../modules/dev.nix
       ../../modules/styling.nix
+      ../../modules/additionalFonts.nix
       ../../modules/language_en_at.nix
     ];
 

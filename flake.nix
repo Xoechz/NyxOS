@@ -133,9 +133,7 @@
           homeManagerUsers = [
             { user = "elias"; fileName = "nixPi.nix"; }
           ];
-          extraModules = [
-            home-manager.nixosModules.home-manager
-          ];
+          extraModules = baseModules;
         };
 
         # Multi-user desktop

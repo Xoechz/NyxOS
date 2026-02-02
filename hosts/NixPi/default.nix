@@ -6,6 +6,7 @@
     [
       ../../modules/language_en_at.nix
       ../../modules/build.nix
+      ../../modules/styling.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
@@ -117,11 +118,14 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # garbage collection to save diskspace
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 7d --keep 3";
+      dates = "weekly";
+    };
+    flake = "/home/elias/NyxOS";
   };
 
   nix.optimise = {

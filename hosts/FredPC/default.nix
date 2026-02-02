@@ -12,6 +12,7 @@
       ../../modules/steam.nix
       ../../modules/nvidia.nix
       ../../modules/styling.nix
+      ../../modules/additionalFonts.nix
       ../../modules/language_de_at.nix
     ];
 

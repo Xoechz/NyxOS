@@ -4,6 +4,7 @@
   imports =
     [
       ./default.nix
+      ./styling.nix
       ./terminal.nix
     ];
 
