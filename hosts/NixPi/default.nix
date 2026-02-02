@@ -194,6 +194,7 @@
           "printer.lan" = "192.168.0.11";
           "eliasPc.lan" = "192.168.0.12";
           "eliasLaptop.lan" = "192.168.0.13";
+          "fredPc.lan" = "192.168.0.14";
         };
       };
       caching = {

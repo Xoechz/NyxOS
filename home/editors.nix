@@ -1,5 +1,5 @@
 # varios editors
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, ... }:
 
 {
   programs.vscode = {
@@ -15,6 +15,7 @@
     adwaita-icon-theme
 
     gimp
-    kdePackages.kdenlive
+  ] ++ [
+    pkgs-stable.kdePackages.kdenlive
   ];
 }
