@@ -18,6 +18,7 @@
       pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
       pm-rebuild = "rebuild && pm-reset";
       show-leftovers = "nix-store --gc --print-roots | egrep -v '^(/nix/var|/run/\\w+-system|\\{memory|/proc)'";
+      full-rebuild = "cd ~/NyxOS && git pull && rebuild";
       full-update = "cd ~/NyxOS && git pull && update";
       ssh = "kitten ssh";
       deploy-to-pi = "rebuild --target-host NixPi -H NixPi";
