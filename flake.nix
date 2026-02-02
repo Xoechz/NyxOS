@@ -76,8 +76,8 @@
           };
           users = builtins.listToAttrs (map
             (user: {
-              name = user;
-              value = import ./home/${user}.nix;
+              name = user.user;
+              value = import ./home/${user.fileName};
             })
             users);
         };
@@ -108,7 +108,9 @@
         EliasLaptop = mkSystem {
           system = "x86_64-linux";
           hostPath = ./hosts/EliasLaptop;
-          homeManagerUsers = [ "elias" ];
+          homeManagerUsers = [
+            { user = "elias"; fileName = "elias.nix"; }
+          ];
           withVeryUnstable = true;
           extraModules = baseModules;
         };
@@ -117,7 +119,9 @@
         EliasPC = mkSystem {
           system = "x86_64-linux";
           hostPath = ./hosts/EliasPC;
-          homeManagerUsers = [ "elias" ];
+          homeManagerUsers = [
+            { user = "elias"; fileName = "elias.nix"; }
+          ];
           withVeryUnstable = true;
           extraModules = baseModules;
         };
@@ -126,14 +130,23 @@
         NixPi = mkSystem {
           system = "aarch64-linux";
           hostPath = ./hosts/NixPi;
-          homeManagerUsers = [ ];
+          homeManagerUsers = [
+            { user = "elias"; fileName = "nixPi.nix"; }
+          ];
+          extraModules = [
+            home-manager.nixosModules.home-manager
+          ];
         };
 
         # Multi-user desktop
         FredPC = mkSystem {
           system = "x86_64-linux";
           hostPath = ./hosts/FredPC;
-          homeManagerUsers = [ "fred" "elias" "gerhard" ];
+          homeManagerUsers = [
+            { user = "elias"; fileName = "elias.nix"; }
+            { user = "fred"; fileName = "fred.nix"; }
+            { user = "gerhard"; fileName = "gerhard.nix"; }
+          ];
           extraModules = baseModules;
         };
       };
