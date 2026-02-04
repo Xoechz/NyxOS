@@ -3,6 +3,10 @@
 		{
 			"name": "NyxOS",
 			"path": "/home/elias/NyxOS"
+		},
+		{
+			"name": "Dendric",
+			"path": "/home/elias/Dendric"
 		}
 	]
 }

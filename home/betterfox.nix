@@ -11,23 +11,7 @@
       enable = true;
 
       profiles.elias = {
-        # Set this to enable all sections by default
         enableAllSections = true;
-
-        settings = {
-          # To enable/disable specific sections
-          fastfox.enable = true;
-
-          # To enable/disable specific subsections
-          peskyfox = {
-            enable = true;
-          };
-
-          # To enable/disable specific options
-          securefox = {
-            enable = true;
-          };
-        };
       };
     };
   };
