@@ -42,9 +42,7 @@
       enable = true;
 
       enabledExtensions = with spicePkgs.extensions; [
-        adblock
         shuffle # shuffle+ (special characters are sanitized out of extension names)
-        fullAppDisplay
         playlistIcons
         fullAlbumDate
         wikify
@@ -52,9 +50,6 @@
         betterGenres
         playNext
         volumePercentage
-      ];
-      enabledCustomApps = with spicePkgs.apps; [
-        ncsVisualizer
       ];
 
       theme = spicePkgs.themes.catppuccin;
