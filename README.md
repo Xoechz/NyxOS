@@ -25,12 +25,6 @@ The name is inspired by the DOTA hero Nyx
     - build
     - cache signing
     - nix-ld
-  - editors.nix
-    - vscode
-    - qgis
-    - inkscape
-    - gimp
-    - kdenlive
   - users.nix
     - elias
     - fred
@@ -39,18 +33,23 @@ The name is inspired by the DOTA hero Nyx
     - steam
     - proton
     - minecraft
-  - media.nix
+  - apps.nix
+    - libreoffice
+    - thunderbird
+    - teams
+    - pdfarranger
+    - flatpak
+    - discover
     - spotify
     - vlc
     - discord
     - obs
     - cava
-    - sailing ;)
-  - office.nix
-    - libreoffice
-    - thunderbird
-    - teams
-    - pdfarranger
+    - vscode
+    - qgis
+    - inkscape
+    - gimp
+    - kdenlive
   - desktop.nix
     - plasmaManager
     - kde
@@ -82,14 +81,12 @@ The name is inspired by the DOTA hero Nyx
     - pipewire
     - power management
     - optimizations
-  - flatpak.nix
-    - flatpak
-    - discover
   - network.nix
     - ssh
     - firwall
     - blocky
     - vpn
+    - sailing ;)
   - dev.nix
     - docker
     - python
