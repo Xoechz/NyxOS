@@ -1,7 +1,7 @@
-# The system config base for EliasLaptop
+# The system config base for EliasPC
 { inputs, ... }:
 let system = "x86_64-linux"; in {
-  flake.nixosConfigurations.EliasLaptop = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.EliasPC = inputs.nixpkgs.lib.nixosSystem {
     system = system;
     specialArgs = {
       system = system;
@@ -11,12 +11,12 @@ let system = "x86_64-linux"; in {
       };
     };
     modules = [
-      inputs.self.modules.nixos.eliasLaptop
+      inputs.self.modules.nixos.eliasPC
       inputs.home-manager.nixosModules.home-manager
     ];
   };
 
-  flake.modules.nixos.eliasLaptop = { lib, ... }: {
+  flake.modules.nixos.eliasPC = { lib, ... }: {
     imports = with inputs.self.modules.nixos; [
       languageEn
       fonts
@@ -33,18 +33,17 @@ let system = "x86_64-linux"; in {
       ssh
       firewallDesktop
       vpn
-      distributedBuild
+      distributedBuilder
       nh
       homeManager
       grub
       basicSystem
-      optimizationsLaptop
-      swap18
-      bluetooth
+      optimizationsPC
+      swap32
       printing
       sound
       cpuIntel
-      gpuNvidia
+      gpuAmd
       nixIndex
       terminal
       elias
@@ -76,50 +75,39 @@ let system = "x86_64-linux"; in {
       home.stateVersion = "24.05";
     };
 
-    boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+    boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     boot.initrd.kernelModules = [ ];
     boot.kernelModules = [ "kvm-intel" ];
     boot.extraModulePackages = [ ];
 
     fileSystems."/" = {
-      device = "/dev/disk/by-uuid/f75b7ec9-ae4e-414d-879e-afda5168c71e";
+      device = "/dev/disk/by-uuid/e49cb94a-4cdd-4627-adb7-e60dd5865762";
       fsType = "ext4";
     };
 
     fileSystems."/boot" = {
-      device = "/dev/disk/by-uuid/C08E-50B6";
+      device = "/dev/disk/by-uuid/43CA-60A3";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+    fileSystems."/run/media/elias/4TB-HDD" = {
+      device = "/dev/disk/by-uuid/5939832d-c16a-4b0d-bf9c-fa07d41fd538";
+      fsType = "ext4";
+    };
+
+    fileSystems."/run/media/elias/100GB-SSD" = {
+      device = "/dev/disk/by-uuid/2b788cd1-fa01-45ee-bf76-6c396e06015f";
+      fsType = "ext4";
     };
 
     networking = {
       useDHCP = lib.mkDefault true;
-      hostName = "EliasLaptop";
+      hostName = "EliasPC";
       networkmanager.enable = true;
     };
 
     nixpkgs.hostPlatform = system;
-
-    boot.loader.grub.extraEntries = ''
-      menuentry "Windows" --class windows --class os {
-        insmod ntfs
-        search --no-floppy --set=root --fs-uuid C236-4D6C
-        chainloader /efi/Microsoft/Boot/bootmgfw.efi
-      };
-      menuentry "UEFI Firmware Settings" --class efi {
-        fwsetup
-      }
-    '';
-
-    hardware.nvidia.prime = {
-      reverseSync.enable = true;
-      # Enable if using an external GPU
-      allowExternalGpu = false;
-
-      # Make sure to use the correct Bus ID values for your system!
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:2:0:0";
-    };
 
     system.stateVersion = "24.05";
   };
