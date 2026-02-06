@@ -14,7 +14,7 @@
     programs.nix-index-database.comma.enable = true;
   };
 
-  # System Module terminal: alacritty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+  # System Module terminal: kitty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
   flake.modules.nixos.terminal = { ... }: {
     programs.zsh.enable = true;
 
@@ -23,15 +23,23 @@
     ];
   };
 
-  # Home Module terminal: alacritty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+  # Home Module terminal: kitty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
   flake.modules.homeManager.terminal = { config, ... }: {
-    # alacritty terminal
-    programs.alacritty = {
+    # kitty terminal
+    programs.kitty = {
       enable = true;
+      shellIntegration.enableZshIntegration = true;
+      settings = {
+        confirm_os_window_close = 0;
+        dynamic_background_opacity = true;
+        enable_audio_bell = false;
+        mouse_hide_wait = " 10.0 ";
+        window_padding_width = 10;
+      };
     };
 
     xdg.mimeApps.defaultApplications = {
-      "terminal" = "alacritty.desktop";
+      "terminal" = "kitty.desktop";
     };
 
     # tmux
@@ -79,8 +87,17 @@
         setopt hist_expire_dups_first
         setopt hist_ignore_dups
         setopt hist_verify
+  
+        # Autostart tmux
+        if [ -z "$TMUX" ]; then
+          tmux attach-session -t default || tmux new-session -s default
+        fi
       '';
-      oh-my-zsh.enable = false;
+      # required for the history search to work properly
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ ];
+      };
     };
 
     #fancy shell with starship

@@ -40,12 +40,7 @@
 
       jq
       nodejs
-    ];
-  };
 
-  # System Module basics: basic packages needed for a functional system
-  flake.modules.nixos.basics = { pkgs, ... }: {
-    environment.systemPackages = with pkgs; [
       wget
       curl
 
@@ -61,8 +56,6 @@
 
       efibootmgr
     ];
-
-
   };
 
   # System Module autoUpdate: automatic system updates

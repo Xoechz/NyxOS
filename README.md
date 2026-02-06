@@ -148,7 +148,7 @@ The name is inspired by the DOTA hero Nyx
       - configure nix-index
     - terminal
       - [terminal.nix](/modules/terminal.nix)
-      - alacritty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+      - kitty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
     - tv
       - [tv.nix](/modules/tv.nix)
       - dvb-s setup for tv
@@ -218,7 +218,7 @@ The name is inspired by the DOTA hero Nyx
       - enable home-manager service with basic settings
     - terminal
       - [terminal.nix](/modules/terminal.nix)
-      - alacritty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+      - kitty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
     - elias
       - [users.nix](/modules/users.nix)
       - home manager configuration for elias
