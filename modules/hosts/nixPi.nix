@@ -33,6 +33,8 @@ let system = "aarch64-linux"; in {
       elias
       cliUtilities
       basics
+    ] ++ [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
     home-manager.users.elias = {

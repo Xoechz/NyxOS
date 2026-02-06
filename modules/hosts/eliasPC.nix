@@ -50,6 +50,8 @@ let system = "x86_64-linux"; in {
       cliUtilities
       basics
       autoUpdate
+    ] ++ [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
     home-manager.users.elias = {

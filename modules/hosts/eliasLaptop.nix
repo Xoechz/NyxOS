@@ -16,7 +16,7 @@ let system = "x86_64-linux"; in {
     ];
   };
 
-  flake.modules.nixos.eliasLaptop = { lib, ... }: {
+  flake.modules.nixos.eliasLaptop = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
       languageEn
       fonts
@@ -50,6 +50,8 @@ let system = "x86_64-linux"; in {
       elias
       cliUtilities
       autoUpdate
+    ] ++ [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
     home-manager.users.elias = {
