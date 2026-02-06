@@ -5,7 +5,7 @@
       enable = true;
       settings = {
         X11Forwarding = true;
-        PermitRootLogin = "yes";
+        PermitRootLogin = "no";
         PasswordAuthentication = false;
         PubkeyAuthentication = true;
       };
@@ -94,7 +94,7 @@
     };
   };
 
-  # System Module vpn: enable and configure mulvad and wireguard vpn
+  # System Module vpn: enable and configure mullvad and wireguard vpn
   flake.modules.nixos.vpn = { pkgs, ... }: {
     # needed for wireguard and mullvad to work properly
     services.resolved.enable = true;

@@ -7,7 +7,7 @@
     };
   };
 
-  # System Module flatpack: enable flatpak and add flathub repo
+  # System Module flatpak: enable flatpak and add flathub repo
   flake.modules.nixos.flatpak = { pkgs, ... }: {
     services.flatpak.enable = true;
     systemd.services.flatpak-repo = {

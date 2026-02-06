@@ -14,7 +14,7 @@ The name is inspired by the DOTA hero Nyx
 - [hosts](hosts) => Per-host setup, disks and hardware-configuration.nix
 - [modules](modules) => Flake Parts modules, the following modules are currently implemented:
   - System Modules:
-    - flatpack
+    - flatpak
       - [apps.nix](/modules/apps.nix)
       - enable flatpak and add flathub repo
     - firefox
@@ -85,7 +85,7 @@ The name is inspired by the DOTA hero Nyx
       - enable and configure firewall with server settings
     - vpn
       - [network.nix](/modules/network.nix)
-      - enable and configure mulvad and wireguard vpn
+      - enable and configure mullvad and wireguard vpn
     - blocky
       - [network.nix](/modules/network.nix)
       - enable and configure blocky adblocker

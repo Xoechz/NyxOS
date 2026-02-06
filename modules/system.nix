@@ -22,6 +22,8 @@
   flake.modules.nixos.basicSystem = { ... }: {
     time.timeZone = "Europe/Vienna";
 
+    hardware.enableRedistributableFirmware = true;
+
     services.fwupd.enable = true;
     services.fstrim.enable = true;
 

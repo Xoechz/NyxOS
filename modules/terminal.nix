@@ -64,7 +64,7 @@
         etree = "eza -T --git -a -I '.git|node_modules|bin|obj'";
         rebuild = "sudo echo Rebuilding... && nh os switch";
         update = "sudo echo Updating... && nh os switch -u";
-        regen = "sudo echo Regenerating... && nix run /home/elias/NyxOS/flake.nix#write-flake";
+        regen = "sudo echo Regenerating... && nix run ${config.home.homeDirectory}/NyxOS/flake.nix#write-flake";
         cleanup = "sudo nix store optimise && nh clean all";
         pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
         pm-rebuild = "rebuild && pm-reset";

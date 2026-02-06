@@ -92,7 +92,7 @@
   };
 
   # Home Module plasma-manager: configure plasma manager
-  flake.modules.homeManager.plasma-manager = { ... }: {
+  flake.modules.homeManager.plasma-manager = { config, ... }: {
     imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
     # for this to work the plasma drawer widget, the papirus icon theme and the catppuccin mocha flamingo color scheme have to be downloaded manually
@@ -129,7 +129,7 @@
         appearance = {
           wallpaperSlideShow =
             {
-              path = "/home/elias/NyxOS/images/heightlines_v1";
+              path = "${config.home.homeDirectory}/NyxOS/images/heightlines_v1";
               interval = 60;
             };
           alwaysShowClock = true;
@@ -169,7 +169,7 @@
             {
               name = "p-connor.plasma-drawer";
               config.General = {
-                icon = "/home/elias/NyxOS/images/nix-snowflake-rainbow.svg";
+                icon = "${config.home.homeDirectory}/NyxOS/images/nix-snowflake-rainbow.svg";
                 searchRunners = "krunner_services,krunner_systemsettings,krunner_recentdocuments,baloosearch,krunner_placesrunner,locations,krunner_bookmarksrunner,krunner_appstream,calculator";
               };
             }
@@ -604,11 +604,11 @@
       workspace = {
         iconTheme = "Papirus-Dark";
         # single wallpaper
-        # wallpaper = "/home/elias/NyxOS/images/HeightLinesMocha.png";
+        # wallpaper = "${config.home.homeDirectory}/NyxOS/images/HeightLinesMocha.png";
         # slideshow wallpaper
         wallpaperSlideShow =
           {
-            path = "/home/elias/NyxOS/images/heightlines_v3";
+            path = "${config.home.homeDirectory}/NyxOS/images/heightlines_v3";
             interval = 10;
           };
         colorScheme = "CatppuccinMochaFlamingo";
