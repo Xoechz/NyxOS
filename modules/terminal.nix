@@ -1,6 +1,9 @@
 { config, inputs, ... }: {
   flake-file.inputs = {
-    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Module nixIndex: configure nix-index

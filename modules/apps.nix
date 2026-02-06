@@ -1,6 +1,10 @@
 { pkgs, pkgs-stable, inputs, ... }: {
   flake-file.inputs = {
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
+    };
   };
 
   # Module flatpack: enable flatpak and add flathub repo

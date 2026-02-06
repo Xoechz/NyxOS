@@ -1,8 +1,31 @@
 { inputs, lib, system, pkgs, ... }:
 {
   flake-file.inputs = {
-    nix-output-monitor.url = "github:maralorn/nix-output-monitor";
-    home-manager.url = "github:nix-community/home-manager";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+    flake-compat.url = "github:nixos/flake-compat";
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.gitignore.follows = "gitignore";
+    };
+    nix-output-monitor = {
+      url = "github:maralorn/nix-output-monitor";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.git-hooks.follows = "git-hooks";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Module baseSettings: common nix and nixpkgs settings for all systems

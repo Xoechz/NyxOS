@@ -1,6 +1,12 @@
 { inputs, pkgs, ... }: {
   flake-file.inputs = {
-    betterfox-nix.url = "github:HeitorAugustoLN/betterfox-nix";
+    betterfox-nix = {
+      url = "github:HeitorAugustoLN/betterfox-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.import-tree.follows = "import-tree";
+      inputs.systems.follows = "systems";
+    };
   };
 
   # Module firefox: configure basic firefox
