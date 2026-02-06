@@ -1,4 +1,4 @@
-{ config, inputs, ... }: {
+{ inputs, ... }: {
   flake-file.inputs = {
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -6,25 +6,25 @@
     };
   };
 
-  # Module nixIndex: configure nix-index
-  flake.modules.nixos.nixIndex = {
-    imports = [ inputs.nix-index-database.modules.nixos.nix-index ];
+  # System Module nixIndex: configure nix-index
+  flake.modules.nixos.nixIndex = { ... }: {
+    imports = [ inputs.nix-index-database.nixosModules.nix-index ];
 
     programs.command-not-found.enable = false;
     programs.nix-index-database.comma.enable = true;
   };
 
-  # Module terminal: alacritty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
-  flake.modules.nixos.terminal = {
+  # System Module terminal: alacritty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+  flake.modules.nixos.terminal = { ... }: {
     programs.zsh.enable = true;
 
     home-manager.sharedModules = [
-      inputs.self.modules.homeManager.terminalHome
+      inputs.self.modules.homeManager.terminal
     ];
   };
 
-  # Module terminalHome: alacritty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
-  flake.modules.home-manager.terminalHome = {
+  # Home Module terminal: alacritty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+  flake.modules.homeManager.terminal = { config, ... }: {
     # alacritty terminal
     programs.alacritty = {
       enable = true;

@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
-  # Module ssh: enable and configure ssh server and client
-  flake.modules.nixos.ssh = {
+{ ... }: {
+  # System Module ssh: enable and configure ssh server and client
+  flake.modules.nixos.ssh = { ... }: {
     services.openssh = {
       enable = true;
       settings = {
@@ -33,8 +33,8 @@
     };
   };
 
-  # Module firewallDesktop: enable and configure firewall with basic settings
-  flake.modules.nixos.firewallDesktop = {
+  # System Module firewallDesktop: enable and configure firewall with basic settings
+  flake.modules.nixos.firewallDesktop = { ... }: {
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -73,8 +73,8 @@
     };
   };
 
-  # Module firewallServer: enable and configure firewall with server settings
-  flake.modules.nixos.firewallServer = {
+  # System Module firewallServer: enable and configure firewall with server settings
+  flake.modules.nixos.firewallServer = { ... }: {
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -94,8 +94,8 @@
     };
   };
 
-  # Module vpn: enable and configure mulvad and wireguard vpn
-  flake.modules.nixos.vpn = {
+  # System Module vpn: enable and configure mulvad and wireguard vpn
+  flake.modules.nixos.vpn = { pkgs, ... }: {
     # needed for wireguard and mullvad to work properly
     services.resolved.enable = true;
 
@@ -106,8 +106,8 @@
     ];
   };
 
-  # Module blocky: enable and configure blocky adblocker
-  flake.modules.nixos.blocky = {
+  # System Module blocky: enable and configure blocky adblocker
+  flake.modules.nixos.blocky = { ... }: {
     services.blocky = {
       enable = true;
       settings = {
@@ -162,8 +162,8 @@
     };
   };
 
-  # Module sailing: enable and configure sailing applications ;)
-  flake.modules.home-manager.sailing = {
+  # Home Module sailing: enable and configure sailing applications ;)
+  flake.modules.homeManager.sailing = { pkgs, ... }: {
     home.packages = with pkgs; [
       tor-browser
       transmission_4-qt

@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, ... }:
 {
   imports = [
     inputs.flake-file.flakeModules.dendritic
@@ -12,4 +12,10 @@
       nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
     };
   };
+
+  # set flake.systems
+  systems = [
+    "aarch64-linux"
+    "x86_64-linux"
+  ];
 }

@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }: {
-  # Module c: c and c++ development environment
-  flake.modules.nixos.c = {
+{ ... }: {
+  # System Module c: c and c++ development environment
+  flake.modules.nixos.c = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       gcc
       gnumake
@@ -17,11 +17,10 @@
     ];
   };
 
-  # Module python: python development environment
-  flake.modules.nixos.python = {
-    environment.systemPackages = [
-      pkgs.python3.withPackages
-      (ps:
+  # System Module python: python development environment
+  flake.modules.nixos.python = { pkgs, ... }:
+    let
+      pythonWithPackages = pkgs.python3.withPackages (ps:
         [
           ps.pygments
           ps.pip
@@ -44,21 +43,24 @@
           pkgs.libxkbcommon
           pkgs.freetype
           pkgs.dbus
-        ])
+        ]);
+    in
+    {
+      environment.systemPackages = [
+        pythonWithPackages
+        pkgs.graphviz
+      ];
+    };
 
-      pkgs.graphviz
-    ];
-  };
-
-  # Module latex: latex development environment(some features need python)
-  flake.modules.nixos.latex = {
+  # System Module latex: latex development environment(some features need python)
+  flake.modules.nixos.latex = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       texlive.combined.scheme-full
     ];
   };
 
-  # Module dotnet: dotnet development environment
-  flake.modules.nixos.dotnet = {
+  # System Module dotnet: dotnet development environment
+  flake.modules.nixos.dotnet = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       dotnetCorePackages.sdk_10_0
       ilspycmd
@@ -72,8 +74,8 @@
     # // TODO: merge the LD_LIBRARY_PATH with /run/current-system/sw/lib to fix libmsquic
   };
 
-  # Module java: java development environment
-  flake.modules.nixos.java = {
+  # System Module java: java development environment
+  flake.modules.nixos.java = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       jdk21
       jdk8
@@ -93,8 +95,8 @@
     };
   };
 
-  # Module android: android development environment(needs java)
-  flake.modules.nixos.android = {
+  # System Module android: android development environment(needs java)
+  flake.modules.nixos.android = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       android-studio
       androidenv.androidPkgs.platform-tools
@@ -104,8 +106,8 @@
     users.extraGroups.adbusers.members = [ "elias" ];
   };
 
-  # Module go: go development environment
-  flake.modules.nixos.go = {
+  # System Module go: go development environment
+  flake.modules.nixos.go = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       go
       gopls
@@ -114,8 +116,8 @@
     ];
   };
 
-  # Module docker: enable and configure docker for development
-  flake.modules.nixos.docker = {
+  # System Module docker: enable and configure docker for development
+  flake.modules.nixos.docker = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       # docker
       dive
@@ -132,8 +134,8 @@
     users.extraGroups.docker.members = [ "elias" ];
   };
 
-  # Module devCerts: add development certificates to the system
-  flake.modules.nixos.devCerts = {
+  # System Module devCerts: add development certificates to the system
+  flake.modules.nixos.devCerts = { lib, ... }: {
     security.pki.certificates =
       let
         certsDir = ../certs;
@@ -143,8 +145,8 @@
       map (name: builtins.readFile (certsDir + "/${name}")) (builtins.attrNames pemFiles);
   };
 
-  # Module vm: enable and configure virtual machine support for development
-  flake.modules.nixos.vm = {
+  # System Module vm: enable and configure virtual machine support for development
+  flake.modules.nixos.vm = { ... }: {
     virtualisation.virtualbox = {
       host = {
         enable = true;

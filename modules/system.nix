@@ -1,6 +1,6 @@
-{ lib, pkgs, config, ... }: {
-  # Module grub: configure grub bootloader
-  flake.modules.nixos.grub = {
+{ ... }: {
+  # System Module grub: configure grub bootloader
+  flake.modules.nixos.grub = { lib, ... }: {
     boot.loader.efi.canTouchEfiVariables = true;
 
     boot.loader.grub =
@@ -18,8 +18,8 @@
       };
   };
 
-  # Module basicSystem: configure firmware updates, file system tools, and other basic utilities
-  flake.modules.nixos.basicSystem = {
+  # System Module basicSystem: configure firmware updates, file system tools, and other basic utilities
+  flake.modules.nixos.basicSystem = { ... }: {
     time.timeZone = "Europe/Vienna";
 
     services.fwupd.enable = true;
@@ -30,8 +30,8 @@
     ];
   };
 
-  # Module optimizationsPC: configure optimizations for PC hardware
-  flake.modules.nixos.optimizationsPC = {
+  # System Module optimizationsPC: configure optimizations for PC hardware
+  flake.modules.nixos.optimizationsPC = { pkgs, lib, ... }: {
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
     services.system76-scheduler = {
@@ -73,8 +73,8 @@
     };
   };
 
-  # Module optimizationsLaptop: configure optimizations for laptop hardware
-  flake.modules.nixos.optimizationsLaptop = {
+  # System Module optimizationsLaptop: configure optimizations for laptop hardware
+  flake.modules.nixos.optimizationsLaptop = { pkgs, lib, ... }: {
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
     services.system76-scheduler = {
@@ -145,18 +145,38 @@
       };
   };
 
-  # Module swap: configure swap settings
-  flake.modules.nixos.swap = {
+  # System Module swap32: configure 32 GB swap
+  flake.modules.nixos.swap32 = { ... }: {
     zramSwap.enable = true;
     swapDevices = [{
       device = "/var/lib/swapfile";
-      size = lib.mkDefault (32 * 1024); # 32GB
+      size = 32 * 1024; # 32 GB
       randomEncryption.enable = true;
     }];
   };
 
-  # Module bluetooth: configure bluetooth settings
-  flake.modules.nixos.bluetooth = {
+  # System Module swap18: configure 18 GB swap
+  flake.modules.nixos.swap18 = { ... }: {
+    zramSwap.enable = true;
+    swapDevices = [{
+      device = "/var/lib/swapfile";
+      size = 18 * 1024; # 18 GB
+      randomEncryption.enable = true;
+    }];
+  };
+
+  # System Module swap8: configure 8 GB swap
+  flake.modules.nixos.swap8 = { ... }: {
+    zramSwap.enable = true;
+    swapDevices = [{
+      device = "/var/lib/swapfile";
+      size = 8 * 1024; # 8 GB
+      randomEncryption.enable = true;
+    }];
+  };
+
+  # System Module bluetooth: configure bluetooth settings
+  flake.modules.nixos.bluetooth = { ... }: {
     # enables support for Bluetooth
     hardware.bluetooth.enable = true;
     # powers up the default Bluetooth controller on boot
@@ -169,8 +189,8 @@
     };
   };
 
-  # Module printing: configure printing services for the HP printer at home
-  flake.modules.nixos.printing = {
+  # System Module printing: configure printing services for the HP printer at home
+  flake.modules.nixos.printing = { pkgs, ... }: {
     services.printing =
       {
         enable = true;
@@ -182,8 +202,8 @@
     ];
   };
 
-  # Module sound: configure sound settings
-  flake.modules.nixos.sound = {
+  # System Module sound: configure sound settings
+  flake.modules.nixos.sound = { pkgs, lib, config, ... }: {
     security.rtkit.enable = true;
 
     services = {
@@ -210,8 +230,8 @@
     };
   };
 
-  # Module cpuIntel: configure Intel CPU microcode updates
-  flake.modules.nixos.cpuIntel = {
+  # System Module cpuIntel: configure Intel CPU microcode updates
+  flake.modules.nixos.cpuIntel = { pkgs, ... }: {
     hardware.cpu.intel.updateMicrocode = true;
 
     environment.systemPackages = with pkgs; [
@@ -219,8 +239,8 @@
     ];
   };
 
-  # Module gpuNvidia: configure Nvidia GPU settings
-  flake.modules.nixos.gpuNvidia = {
+  # System Module gpuNvidia: configure Nvidia GPU settings
+  flake.modules.nixos.gpuNvidia = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       btop-cuda
       nvtopPackages.nvidia
@@ -242,8 +262,8 @@
     };
   };
 
-  # Module gpuAmd: configure AMD GPU settings
-  flake.modules.nixos.gpuAmd = {
+  # System Module gpuAmd: configure AMD GPU settings
+  flake.modules.nixos.gpuAmd = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       btop-rocm
     ];

@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, ... }: {
   flake-file.inputs = {
     betterfox-nix = {
       url = "github:HeitorAugustoLN/betterfox-nix";
@@ -9,24 +9,24 @@
     };
   };
 
-  # Module firefox: configure basic firefox
-  flake.modules.nixos.firefox = {
+  # System Module firefox: configure basic firefox
+  flake.modules.nixos.firefox = { ... }: {
     programs.firefox = {
       enable = true;
     };
   };
 
-  # Module chromium-no-gpu: chromium with disabled gpu acceleration
-  flake.modules.nixos.chromium-no-gpu = {
-    nvironment.systemPackages = with pkgs; [
+  # System Module chromium-no-gpu: chromium with disabled gpu acceleration
+  flake.modules.nixos.chromium-no-gpu = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
       (chromium.override {
         commandLineArgs = [ "--disable-gpu" ];
       })
     ];
   };
 
-  # Module betterfox: configure betterfox instead of firefox in home manager
-  flake.modules.home-manager.betterfox = {
+  # Home Module betterfox: configure betterfox instead of firefox in home manager
+  flake.modules.homeManager.betterfox = { ... }: {
     imports = [ inputs.betterfox-nix.modules.homeManager.betterfox ];
 
     # In firefox

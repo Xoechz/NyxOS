@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, ... }: {
+{ inputs, ... }: {
   flake-file.inputs = {
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
@@ -7,8 +7,8 @@
     };
   };
 
-  # Module kde
-  flake.modules.nixos.kde = {
+  # System Module kde
+  flake.modules.nixos.kde = { pkgs, lib, ... }: {
     # Enable the X11 windowing system. Disabling it seems to break a lot of stuff.
     services.xserver.enable = true;
 
@@ -91,8 +91,8 @@
     });
   };
 
-  # Module plasma-manager: configure plasma manager
-  flake.modules.home-manager.plasma-manager = {
+  # Home Module plasma-manager: configure plasma manager
+  flake.modules.homeManager.plasma-manager = { ... }: {
     imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
     # for this to work the plasma drawer widget, the papirus icon theme and the catppuccin mocha flamingo color scheme have to be downloaded manually

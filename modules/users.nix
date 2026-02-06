@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
-  # Module elias: user configuration for elias
-  flake.modules.nixos.elias = {
+{ ... }: {
+  # System Module elias: user configuration for elias
+  flake.modules.nixos.elias = { pkgs, ... }: {
     users.users.elias = {
       isNormalUser = true;
       description = "Elias";
@@ -27,8 +27,8 @@
     };
   };
 
-  # Module others: user configuration for fred and gerhard
-  flake.modules.nixos.others = {
+  # System Module others: user configuration for fred and gerhard
+  flake.modules.nixos.others = { pkgs, ... }: {
     users.users = {
       fred = {
         isNormalUser = true;
@@ -36,6 +36,7 @@
         # lpadmin is needed for printer setup
         # video is needed for dvb-s access
         extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
+        shell = pkgs.zsh;
       };
       gerhard = {
         isNormalUser = true;
@@ -43,24 +44,25 @@
         # lpadmin is needed for printer setup
         # video is needed for dvb-s access
         extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
+        shell = pkgs.zsh;
       };
     };
   };
 
-  # Module eliasHome: home manager configuration for elias
-  flake.modules.home-manager.eliasHome = {
+  # Home Module elias: home manager configuration for elias
+  flake.modules.homeManager.elias = { ... }: {
     home.username = "elias";
     home.homeDirectory = "/home/elias";
   };
 
-  # Module fredHome: home manager configuration for fred
-  flake.modules.home-manager.fredHome = {
+  # Home Module fred: home manager configuration for fred
+  flake.modules.homeManager.fred = { ... }: {
     home.username = "fred";
     home.homeDirectory = "/home/fred";
   };
 
-  # Module gerhardHome: home manager configuration for gerhard
-  flake.modules.home-manager.gerhardHome = {
+  # Home Module gerhard: home manager configuration for gerhard
+  flake.modules.homeManager.gerhard = { ... }: {
     home.username = "gerhard";
     home.homeDirectory = "/home/gerhard";
   };

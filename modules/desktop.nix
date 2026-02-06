@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, ... }: {
   flake-file.inputs = {
     catppuccin = {
       url = "github:catppuccin/nix";
@@ -6,8 +6,8 @@
     };
   };
 
-  # Module languageEn
-  flake.modules.nixos.languageEn = {
+  # System Module languageEn: configure english (uk) language settings mixed with austrian locale settings
+  flake.modules.nixos.languageEn = { ... }: {
     i18n.defaultLocale = "en_GB.UTF-8";
 
     i18n.extraLocaleSettings = {
@@ -26,8 +26,8 @@
     };
   };
 
-  # Module languageDe
-  flake.modules.nixos.languageDe = {
+  # System Module languageDe: configure german (austria) language settings
+  flake.modules.nixos.languageDe = { ... }: {
     i18n.defaultLocale = "de_AT.UTF-8";
 
     i18n.extraLocaleSettings = {
@@ -46,8 +46,8 @@
     };
   };
 
-  # Module basicFonts
-  flake.modules.nixos.basicFonts = {
+  # System Module basicFonts: configure basic fonts
+  flake.modules.nixos.basicFonts = { pkgs, ... }: {
     fonts = {
       packages = with pkgs;[
         # JetBrains officially created font for developers
@@ -66,8 +66,8 @@
     };
   };
 
-  # Module fonts
-  flake.modules.nixos.fonts = {
+  # System Module fonts: configure additional fonts
+  flake.modules.nixos.fonts = { pkgs, ... }: {
     fonts = {
       packages = with pkgs;[
         corefonts
@@ -212,9 +212,9 @@
     };
   };
 
-  # Module catppuccin: configure catppuccin theming
-  flake.modules.nixos.catppuccin = {
-    imports = [ inputs.catppuccin.modules.nixos.catppuccin ];
+  # System Module catppuccin: configure catppuccin theming
+  flake.modules.nixos.catppuccin = { ... }: {
+    imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
     catppuccin = {
       enable = true;
@@ -223,13 +223,13 @@
     };
 
     home-manager.sharedModules = [
-      inputs.self.modules.homeManager.cattpuccinHome
+      inputs.self.modules.homeManager.catppuccin
     ];
   };
 
-  # Module catppuccinHome: configure catppuccin theming in home manager
-  flake.modules.home-manager.catppuccinHome = {
-    imports = [ inputs.catppuccin.modules.homeManager.catppuccin ];
+  # Home Module catppuccin: configure catppuccin theming in home manager
+  flake.modules.homeManager.catppuccin = { ... }: {
+    imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
     catppuccin = {
       enable = true;

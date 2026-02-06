@@ -1,4 +1,4 @@
-{ inputs, lib, system, pkgs, ... }:
+{ inputs, ... }:
 {
   flake-file.inputs = {
     flake-utils = {
@@ -28,8 +28,8 @@
     };
   };
 
-  # Module baseSettings: common nix and nixpkgs settings for all systems
-  flake.modules.nixos.baseSettings = {
+  # System Module baseSettings: common nix and nixpkgs settings for all systems
+  flake.modules.nixos.baseSettings = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       nixd
       nixpkgs-fmt
@@ -104,8 +104,8 @@
     ];
   };
 
-  # Module distributedBuild: settings for building on remote machines
-  flake.modules.nixos.distributedBuild = {
+  # System Module distributedBuild: settings for building on remote machines
+  flake.modules.nixos.distributedBuild = { ... }: {
     imports = [ inputs.self.modules.nixos.baseSettings ];
     nix = {
       distributedBuilds = true;
@@ -137,8 +137,8 @@
     };
   };
 
-  # Module distributedBuilder: settings for providing building capabilities to other machines
-  flake.modules.nixos.distributedBuilder = {
+  # System Module distributedBuilder: settings for providing building capabilities to other machines
+  flake.modules.nixos.distributedBuilder = { ... }: {
     imports = [ inputs.self.modules.nixos.baseSettings ];
     nix = {
       distributedBuilds = false;
@@ -158,8 +158,8 @@
     };
   };
 
-  # Module nh: enable and configure nh
-  flake.modules.nixos.nh = {
+  # System Module nh: enable and configure nh
+  flake.modules.nixos.nh = { lib, system, ... }: {
     nixpkgs.overlays = lib.singleton
       (final: prev: {
         # Override nh to use the latest nix-output-monitor
@@ -179,8 +179,17 @@
     };
   };
 
-  # Module homeManager: enable home-manager service with basic settings
-  flake.modules.home-manager.homeManager = {
+  # System Module homeManager: enable home-manager service with basic settings
+  flake.modules.nixos.homeManager = { ... }: {
+    home-manager = {
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      sharedModules = [ inputs.self.modules.homeManager.homeManager ];
+    };
+  };
+
+  # Home Module homeManager: enable home-manager service with basic settings
+  flake.modules.homeManager.homeManager = { ... }: {
     services.home-manager = {
       autoExpire = {
         enable = true;

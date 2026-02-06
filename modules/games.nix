@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
-  # Module steam: configure steam and related tools
-  flake.modules.nixos.steam = {
+{ ... }: {
+  # System Module steam: configure steam and related tools
+  flake.modules.nixos.steam = { pkgs, ... }: {
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -18,8 +18,8 @@
     ];
   };
 
-  # Module minecraft: configure minecraft and related tools
-  flake.modules.home-manager.minecraft = {
+  # Home Module minecraft: configure minecraft and related tools
+  flake.modules.homeManager.minecraft = { pkgs, ... }: {
     home.packages = with pkgs; [
       atlauncher
     ];

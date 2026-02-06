@@ -1,0 +1,140 @@
+# The system config base for EliasLaptop
+{ inputs, ... }:
+let system = "x86_64-linux"; in {
+  flake.nixosConfigurations.EliasLaptop = inputs.nixpkgs.lib.nixosSystem {
+    system = system;
+    specialArgs = {
+      system = system;
+      pkgs-stable = import inputs.nixpkgs-stable {
+        system = system;
+        config.allowUnfree = true;
+      };
+    };
+    modules = [
+      inputs.self.modules.nixos.eliasLaptop
+      inputs.home-manager.nixosModules.home-manager
+    ];
+  };
+
+  flake.modules.nixos.eliasLaptop = { lib, ... }: {
+    imports = with inputs.self.modules.nixos; [
+      languageEn
+      fonts
+      catppuccin
+      python
+      latex
+      dotnet
+      java
+      go
+      docker
+      devCerts
+      steam
+      kde
+      ssh
+      firewallDesktop
+      vpn
+      distributedBuild
+      nh
+      homeManager
+      grub
+      basicSystem
+      optimizationsLaptop
+      swap18
+      bluetooth
+      printing
+      sound
+      cpuIntel
+      gpuNvidia
+      nixIndex
+      terminal
+      elias
+      cliUtilities
+      basics
+      autoUpdate
+    ];
+
+    home-manager.users.elias = {
+      imports = with inputs.self.modules.homeManager; [
+        defaultApplicationsKde
+        libreoffice
+        email
+        teams
+        pdf
+        media
+        discord
+        kdeConnect
+        vscode
+        betterfox
+        minecraft
+        plasma-manager
+        sailing
+        elias
+        git
+        guiUtilities
+      ];
+
+      home.stateVersion = "24.05";
+    };
+
+    boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+    boot.initrd.kernelModules = [ ];
+    boot.kernelModules = [ "kvm-intel" ];
+    boot.extraModulePackages = [ ];
+
+    fileSystems."/" = {
+      device = "/dev/disk/by-uuid/f75b7ec9-ae4e-414d-879e-afda5168c71e";
+      fsType = "ext4";
+    };
+
+    fileSystems."/boot" = {
+      device = "/dev/disk/by-uuid/C08E-50B6";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+    networking = {
+      useDHCP = lib.mkDefault true;
+      hostName = "EliasLaptop";
+      networkmanager.enable = true;
+    };
+
+    nixpkgs.hostPlatform = system;
+
+    # Bootloader
+    boot.loader.efi.canTouchEfiVariables = true;
+
+    boot.loader.grub.extraEntries = ''
+      menuentry "Windows" --class windows --class os {
+        insmod ntfs
+        search --no-floppy --set=root --fs-uuid C236-4D6C
+        chainloader /efi/Microsoft/Boot/bootmgfw.efi
+      };
+      menuentry "UEFI Firmware Settings" --class efi {
+        fwsetup
+      }
+    '';
+
+    hardware.nvidia.prime = {
+      reverseSync.enable = true;
+      # Enable if using an external GPU
+      allowExternalGpu = false;
+
+      # Make sure to use the correct Bus ID values for your system!
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:2:0:0";
+    };
+
+    # enables support for Bluetooth
+    hardware.bluetooth.enable = true;
+    # powers up the default Bluetooth controller on boot
+    hardware.bluetooth.powerOnBoot = true;
+    # allow reading device charge
+    hardware.bluetooth.settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+
+    system.stateVersion = "24.05";
+  };
+}

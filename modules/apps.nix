@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, inputs, ... }: {
+{ inputs, ... }: {
   flake-file.inputs = {
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
@@ -7,8 +7,8 @@
     };
   };
 
-  # Module flatpack: enable flatpak and add flathub repo
-  flake.modules.nixos.flatpak = {
+  # System Module flatpack: enable flatpak and add flathub repo
+  flake.modules.nixos.flatpak = { pkgs, ... }: {
     services.flatpak.enable = true;
     systemd.services.flatpak-repo = {
       wantedBy = [ "multi-user.target" ];
@@ -23,8 +23,8 @@
     ];
   };
 
-  # Module defaultApplicationsKde: set default applications for kde
-  flake.modules.home-manager.defaultApplicationsKde = {
+  # Home Module defaultApplicationsKde: set default applications for kde
+  flake.modules.homeManager.defaultApplicationsKde = { ... }: {
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
@@ -33,8 +33,8 @@
     };
   };
 
-  # Module libreoffice: configure libreoffice with basic settings
-  flake.modules.home-manager.libreoffice = {
+  # Home Module libreoffice: configure libreoffice with basic settings
+  flake.modules.homeManager.libreoffice = { pkgs, ... }: {
     home.packages = with pkgs; [
       libreoffice-qt
       hunspell
@@ -43,8 +43,8 @@
     ];
   };
 
-  # Module email: configure email clients
-  flake.modules.home-manager.email = {
+  # Home Module email: configure email clients
+  flake.modules.homeManager.email = { pkgs, ... }: {
     home.packages = with pkgs; [
       thunderbird
     ];
@@ -65,23 +65,25 @@
     };
   };
 
-  # Module teams: configure microsoft teams client
-  flake.modules.home-manager.teams = {
+  # Home Module teams: configure microsoft teams client
+  flake.modules.homeManager.teams = { pkgs, ... }: {
     home.packages = with pkgs; [
       teams-for-linux
     ];
   };
 
-  # Module pdf: configure pdf related tools
-  flake.modules.home-manager.pdf = {
+  # Home Module pdf: configure pdf related tools
+  flake.modules.homeManager.pdf = { pkgs, ... }: {
     home.packages = with pkgs; [
       pdfarranger
       kdePackages.okular
     ];
   };
 
-  # Module media: configure media players
-  flake.modules.home-manager.media = {
+  # Home Module media: configure media players
+  flake.modules.homeManager.media = { pkgs, ... }: {
+    imports = [ inputs.spicetify-nix.homeManagerModules.default ];
+
     home.packages = with pkgs; [
       cava
       vlc
@@ -110,8 +112,8 @@
       };
   };
 
-  # Module discord: configure discord with vencord
-  flake.modules.home-manager.discord = {
+  # Home Module discord: configure discord with vencord
+  flake.modules.homeManager.discord = { pkgs, ... }: {
     home.packages = with pkgs; [
       (discord.override {
         withVencord = true;
@@ -133,15 +135,15 @@
     '';
   };
 
-  # Module kdeConnect: configure kdeconnect for home manager
-  flake.modules.home-manager.kdeConnect = {
+  # Home Module kdeConnect: configure kdeconnect for home manager
+  flake.modules.homeManager.kdeConnect = { pkgs, ... }: {
     home.packages = with pkgs; [
       kdePackages.kdeconnect-kde
     ];
   };
 
-  # module obs: configure obs studio
-  flake.modules.home-manager.obs = {
+  # Home module obs: configure obs studio
+  flake.modules.homeManager.obs = { pkgs, ... }: {
     programs.obs-studio = {
       enable = true;
       plugins = with pkgs.obs-studio-plugins; [
@@ -152,8 +154,8 @@
     };
   };
 
-  # module vscode: configure vscode for home manager
-  flake.modules.home-manager.vscode = {
+  # Home Module vscode: configure vscode for home manager
+  flake.modules.homeManager.vscode = { pkgs, ... }: {
     programs.vscode = {
       enable = true;
       package = pkgs.vscode.fhs;
@@ -169,15 +171,15 @@
     };
   };
 
-  # module qgis: configure qgis for home manager
-  flake.modules.home-manager.qgis = {
+  # Home Module qgis: configure qgis for home manager
+  flake.modules.homeManager.qgis = { pkgs, ... }: {
     home.packages = with pkgs; [
       qgis
     ];
   };
 
-  # module mediaEditors: configure media editors
-  flake.modules.home-manager.mediaEditors = {
+  # Home module mediaEditors: configure media editors
+  flake.modules.homeManager.mediaEditors = { pkgs, pkgs-stable, ... }: {
     home.packages = with pkgs; [
       inkscape
       adwaita-icon-theme

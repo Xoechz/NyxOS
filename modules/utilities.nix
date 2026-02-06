@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
-  # Module cliUtilities: add useful  tools
-  flake.modules.nixos.cliUtilities = {
+{ ... }: {
+  # System Module cliUtilities: add useful  tools
+  flake.modules.nixos.cliUtilities = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       fastfetch
       mtr
@@ -43,8 +43,8 @@
     ];
   };
 
-  # Module basics: basic packages needed for a functional system
-  flake.modules.nixos.basics = {
+  # System Module basics: basic packages needed for a functional system
+  flake.modules.nixos.basics = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       wget
       curl
@@ -65,8 +65,8 @@
 
   };
 
-  # Module autoUpdate: automatic system updates
-  flake.modules.nixos.autoUpdate = {
+  # System Module autoUpdate: automatic system updates
+  flake.modules.nixos.autoUpdate = { ... }: {
     services.cron = {
       enable = true;
       systemCronJobs = [
@@ -75,8 +75,8 @@
     };
   };
 
-  # Module git: configure git for home manager
-  flake.modules.home-manager.git = {
+  # Home Module git: configure git for home manager
+  flake.modules.homeManager.git = { ... }: {
     programs.git = {
       enable = true;
       settings = {
@@ -94,8 +94,8 @@
     };
   };
 
-  # Module guiUtilities: Usefull gui utilities
-  flake.modules.home-manager.guiUtilities = {
+  # Home Module guiUtilities: Usefull gui utilities
+  flake.modules.homeManager.guiUtilities = { pkgs, ... }: {
     home.packages = with pkgs; [
       baobab
       bruno
