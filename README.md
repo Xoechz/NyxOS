@@ -11,7 +11,6 @@ The name is inspired by the DOTA hero Nyx
 ### Structure (Dendric Nix Pattern)
 
 - [flake.nix](flake.nix) => Base of the configuration
-- [hosts](hosts) => Per-host setup, disks and hardware-configuration.nix
 - [modules](modules) => Flake Parts modules, the following modules are currently implemented:
   - System Modules:
     - flatpak
@@ -234,6 +233,7 @@ The name is inspired by the DOTA hero Nyx
     - guiUtilities
       - [utilities.nix](/modules/utilities.nix)
       - Usefull gui utilities
+- [modules/hosts](modules/hosts) => Per-host setup. Uses the defined modules
 - [images](images) => Background and ReadMe images
 - [workspaces](workspaces) => Workspaces for different tasks
 

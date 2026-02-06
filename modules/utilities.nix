@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module cliUtilities: add useful  tools
+  # System Module cliUtilities: add useful tools
   flake.modules.nixos.cliUtilities = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       fastfetch
@@ -87,7 +87,7 @@
     };
   };
 
-  # Home Module guiUtilities: Usefull gui utilities
+  # Home Module guiUtilities: Useful gui utilities
   flake.modules.homeManager.guiUtilities = { pkgs, ... }: {
     home.packages = with pkgs; [
       baobab
