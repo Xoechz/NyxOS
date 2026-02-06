@@ -7,6 +7,7 @@
 
   inputs = {
     betterfox-nix.url = "github:HeitorAugustoLN/betterfox-nix";
+    catppuccin.url = "github:catppuccin/nix";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
       inputs.nixpkgs-lib.follows = "nixpkgs-lib";
@@ -18,9 +19,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:fzakaria/nix-auto-follow";
     };
+    nix-index-database.url = "github:nix-community/nix-index-database";
     nix-output-monitor.url = "github:maralorn/nix-output-monitor";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-lib.follows = "nixpkgs";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    plasma-manager.url = "github:nix-community/plasma-manager";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     systems.url = "github:nix-systems/default";
   };
 
