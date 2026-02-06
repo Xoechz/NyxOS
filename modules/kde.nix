@@ -253,7 +253,7 @@
                     "org.kde.plasma.bluetooth"
                     "org.kde.plasma.clipboard"
                     "org.kde.plasma.battery"
-                    "org.kde.plasma.brighness"
+                    "org.kde.plasma.brightness"
                     "org.kde.plasma.displays"
                     "org.kde.plasma.mediacontroller"
                     "org.kde.plasma.notifications"

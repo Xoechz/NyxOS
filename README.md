@@ -103,18 +103,18 @@ The name is inspired by the DOTA hero Nyx
     - homeManager
       - [nix.nix](/modules/nix.nix)
       - enable home-manager service with basic settings
+    - optimizationsPC
+      - [optimizations.nix](/modules/optimizations.nix)
+      - configure optimizations for PC hardware
+    - optimizationsLaptop
+      - [optimizations.nix](/modules/optimizations.nix)
+      - configure optimizations for laptop hardware
     - grub
       - [system.nix](/modules/system.nix)
       - configure grub bootloader
     - basicSystem
       - [system.nix](/modules/system.nix)
       - configure firmware updates, file system tools, and other basic utilities
-    - optimizationsPC
-      - [system.nix](/modules/system.nix)
-      - configure optimizations for PC hardware
-    - optimizationsLaptop
-      - [system.nix](/modules/system.nix)
-      - configure optimizations for laptop hardware
     - swap32
       - [system.nix](/modules/system.nix)
       - configure 32 GB swap
@@ -160,12 +160,6 @@ The name is inspired by the DOTA hero Nyx
     - cliUtilities
       - [utilities.nix](/modules/utilities.nix)
       - add useful  tools
-    - basics
-      - [utilities.nix](/modules/utilities.nix)
-      - basic packages needed for a functional system
-    - autoUpdate
-      - [utilities.nix](/modules/utilities.nix)
-      - automatic system updates
   - Home Modules:
     - defaultApplicationsKde
       - [apps.nix](/modules/apps.nix)

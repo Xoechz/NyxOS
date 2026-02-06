@@ -64,7 +64,7 @@
         etree = "eza -T --git -a -I '.git|node_modules|bin|obj'";
         rebuild = "sudo echo Rebuilding... && nh os switch";
         update = "sudo echo Updating... && nh os switch -u";
-        regen = "sudo echo Regenerating... && nix run ${config.home.homeDirectory}/NyxOS/flake.nix#write-flake";
+        regen = "sudo echo Regenerating... && nix run ${config.home.homeDirectory}/NyxOS#write-flake";
         cleanup = "sudo nix store optimise && nh clean all";
         pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
         pm-rebuild = "rebuild && pm-reset";
@@ -72,6 +72,9 @@
         full-rebuild = "cd ~/NyxOS && git pull && rebuild";
         full-update = "cd ~/NyxOS && git pull && update";
         deploy-to-pi = "rebuild --target-host NixPi -H NixPi";
+        deploy-to-fred = "rebuild --target-host fredPC -H fredPC";
+        deploy-to-eliasPC = "rebuild --target-host eliasPC -H eliasPC";
+        deploy-to-eliasLaptop = "rebuild --target-host eliasLaptop -H eliasLaptop";
         cat = "bat";
         dev-certs-reload = "mkdir -p ~/NyxOS/certs && dotnet dev-certs https --format PEM -ep ~/NyxOS/certs/$(hostname)-dev-cert.pem && rebuild";
       };
@@ -88,8 +91,8 @@
         setopt hist_ignore_dups
         setopt hist_verify
   
-        # Autostart tmux
-        if [ -z "$TMUX" ]; then
+        # Autostart tmux if not already inside a tmux session and if the terminal is kitty (to avoid issues with other terminal emulators like vscode's integrated terminal)
+        if [ -z "$TMUX" ] && [ "$TERM" = "xterm-kitty" ]; then
           tmux attach-session -t default || tmux new-session -s default
         fi
       '';

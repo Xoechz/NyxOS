@@ -16,7 +16,7 @@ let system = "x86_64-linux"; in {
     ];
   };
 
-  flake.modules.nixos.eliasPC = { lib, ... }: {
+  flake.modules.nixos.eliasPC = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
       languageEn
       fonts
@@ -48,8 +48,6 @@ let system = "x86_64-linux"; in {
       terminal
       elias
       cliUtilities
-      basics
-      autoUpdate
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

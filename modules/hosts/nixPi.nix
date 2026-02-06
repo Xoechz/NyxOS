@@ -16,7 +16,7 @@ let system = "aarch64-linux"; in {
     ];
   };
 
-  flake.modules.nixos.nixPi = { lib, ... }: {
+  flake.modules.nixos.nixPi = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
       languageEn
       basicFonts
@@ -32,7 +32,6 @@ let system = "aarch64-linux"; in {
       terminal
       elias
       cliUtilities
-      basics
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

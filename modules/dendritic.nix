@@ -8,8 +8,8 @@
   flake-file = {
     description = "NyxOS";
     inputs = {
-      nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-      nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+      nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     };
   };
 

@@ -58,16 +58,6 @@
     ];
   };
 
-  # System Module autoUpdate: automatic system updates
-  flake.modules.nixos.autoUpdate = { ... }: {
-    services.cron = {
-      enable = true;
-      systemCronJobs = [
-        "0 */2 * * *      root    cd /home/elias/NyxOS && ./update.sh >> /var/log/nixos-update.log 2>&1"
-      ];
-    };
-  };
-
   # Home Module git: configure git for home manager
   flake.modules.homeManager.git = { ... }: {
     programs.git = {

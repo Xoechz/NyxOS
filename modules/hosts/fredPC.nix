@@ -16,7 +16,7 @@ let system = "x86_64-linux"; in {
     ];
   };
 
-  flake.modules.nixos.fredPC = { lib, ... }: {
+  flake.modules.nixos.fredPC = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
       firefox
       chromium-no-gpu
@@ -42,8 +42,6 @@ let system = "x86_64-linux"; in {
       elias
       others
       cliUtilities
-      basics
-      autoUpdate
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

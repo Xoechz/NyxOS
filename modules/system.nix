@@ -90,7 +90,7 @@
   };
 
   # System Module sound: configure sound settings
-  flake.modules.nixos.sound = { pkgs, lib, config, ... }: {
+  flake.modules.nixos.sound = { pkgs, lib, ... }: {
     security.rtkit.enable = true;
 
     services = {
@@ -104,16 +104,7 @@
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
-        jack.enable = true;
       };
-    };
-
-    environment.variables = {
-      # Combine required library search paths; force to avoid conflicts with other modules
-      LD_LIBRARY_PATH = lib.mkForce (builtins.concatStringsSep ":" [
-        "/run/current-system/sw/lib" # base system libs
-        "${config.services.pipewire.package.jack}/lib" # pipewire jack (was defined elsewhere causing conflict)
-      ]);
     };
   };
 

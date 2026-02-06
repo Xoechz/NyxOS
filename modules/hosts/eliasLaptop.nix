@@ -49,7 +49,6 @@ let system = "x86_64-linux"; in {
       terminal
       elias
       cliUtilities
-      autoUpdate
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
