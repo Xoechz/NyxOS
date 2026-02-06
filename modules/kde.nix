@@ -177,7 +177,7 @@
             {
               iconTasks = {
                 launchers = [
-                  "applications:kitty.desktop"
+                  "applications:alacritty.desktop"
                   "applications:org.kde.dolphin.desktop"
                   "applications:thunderbird.desktop"
                   "applications:firefox.desktop"
@@ -590,7 +590,7 @@
         "plasmashell"."switch to next activity" = [ ];
         "plasmashell"."switch to previous activity" = [ ];
         "plasmashell"."toggle do not disturb" = [ ];
-        "services/kitty.desktop"."_launch" = "Meta+Space";
+        "services/alacritty.desktop"."_launch" = "Meta+Space";
         "services/org.kde.plasma.emojier.desktop"."_launch" = "Meta+Ctrl+Alt+Shift+Space";
         "services/org.kde.spectacle.desktop"."CurrentMonitorScreenShot" = "Print";
         "services/org.kde.spectacle.desktop"."OpenWithoutScreenshot" = [ ];
