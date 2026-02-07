@@ -226,7 +226,7 @@ The name is inspired by the DOTA hero Nyx
       - configure git for home manager
     - guiUtilities
       - [utilities.nix](/modules/utilities.nix)
-      - Usefull gui utilities
+      - Useful gui utilities
 - [modules/hosts](modules/hosts) => Per-host setup. Uses the defined modules
 - [images](images) => Background and ReadMe images
 - [workspaces](workspaces) => Workspaces for different tasks

@@ -52,7 +52,6 @@
         "x-scheme-handler/about" = "firefox.desktop";
         "x-scheme-handler/unknown" = "firefox.desktop";
         "application/pdf" = "firefox.desktop";
-        "default-web-browser " = "firefox.desktop";
       };
     };
   };

@@ -10,7 +10,7 @@
       extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
       shell = pkgs.zsh;
 
-      # To generate SSH keys:#
+      # To generate SSH keys:
       # elias:
       # ssh-keygen -t ed25519 -N ""
       # cat ~/.ssh/id_ed25519.pub
