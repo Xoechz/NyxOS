@@ -1,272 +1,174 @@
-{ pkgs, lib, ... }:
-{
-  programs.nh = {
-    enable = true;
-    clean = {
-      enable = true;
-      extraArgs = "--keep-since 7d --keep 3";
-      dates = "weekly";
-    };
-    flake = "/home/elias/NyxOS";
+{ ... }: {
+  # System Module grub: configure grub bootloader
+  flake.modules.nixos.grub = { lib, ... }: {
+    boot.loader.efi.canTouchEfiVariables = true;
+
+    boot.loader.grub =
+      {
+        enable = true;
+        efiSupport = true;
+        device = lib.mkDefault "nodev";
+        useOSProber = lib.mkDefault false;
+        memtest86.enable = true;
+        extraEntries = lib.mkDefault ''
+          menuentry "UEFI Firmware Settings" --class efi {
+            fwsetup
+          }
+        '';
+      };
   };
 
-  # user setup
-  users.users.elias = {
-    isNormalUser = true;
-    description = "Elias";
-    # lpadmin is needed for printer setup
-    # video is needed for dvb-s access
-    extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
-    shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL71xmI34J5TlOzo6z0M3kTpzUTB7jxqiEvkALg4bcC6 root@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKDhjGdO4LZSBd21DrYSt1iJAC5f1kP1Q9yleTf9qZ7o root@EliasLaptop"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEkkeMQneWIvzI9mzolIl2nyzt7pnzHqlNfk4zDlPyw elias@NixPi"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKF/LtEbMhHudYUlzGlYi3gdO819/U5KC1aJ5XNSkRJi root@NixPi"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTsxwG/oZFKPLTH1SBVewZnWUaFJs9F+2o2SttnNv2j elias@FredPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWvZfUNVpUiiNM5ZWm7gExARtj/LXKADUGwnh/XuaNe root@FredPC"
+  # System Module basicSystem: configure firmware updates, file system tools, and other basic utilities
+  flake.modules.nixos.basicSystem = { ... }: {
+    time.timeZone = "Europe/Vienna";
+
+    hardware.enableRedistributableFirmware = true;
+
+    services.fwupd.enable = true;
+    services.fstrim.enable = true;
+
+    boot.supportedFilesystems = [
+      "ntfs"
     ];
   };
 
-  # To generate SSH keys:#
-  # elias:
-  # ssh-keygen -t ed25519 -N ""
-  # cat ~/.ssh/id_ed25519.pub
+  # System Module swap32: configure 32 GB swap
+  flake.modules.nixos.swap32 = { ... }: {
+    zramSwap.enable = true;
+    swapDevices = [{
+      device = "/var/lib/swapfile";
+      size = 32 * 1024; # 32 GB
+      randomEncryption.enable = true;
+    }];
+  };
 
-  # Create nixremote user for remote builds
-  users.users.nixremote = {
-    isSystemUser = true;
-    group = "nixremote";
-    home = "/var/lib/nixremote";
-    createHome = true;
-    shell = pkgs.zsh;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL71xmI34J5TlOzo6z0M3kTpzUTB7jxqiEvkALg4bcC6 root@EliasPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKDhjGdO4LZSBd21DrYSt1iJAC5f1kP1Q9yleTf9qZ7o root@EliasLaptop"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKEkkeMQneWIvzI9mzolIl2nyzt7pnzHqlNfk4zDlPyw elias@NixPi"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKF/LtEbMhHudYUlzGlYi3gdO819/U5KC1aJ5XNSkRJi root@NixPi"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTsxwG/oZFKPLTH1SBVewZnWUaFJs9F+2o2SttnNv2j elias@FredPC"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWvZfUNVpUiiNM5ZWm7gExARtj/LXKADUGwnh/XuaNe root@FredPC"
+  # System Module swap18: configure 18 GB swap
+  flake.modules.nixos.swap18 = { ... }: {
+    zramSwap.enable = true;
+    swapDevices = [{
+      device = "/var/lib/swapfile";
+      size = 18 * 1024; # 18 GB
+      randomEncryption.enable = true;
+    }];
+  };
+
+  # System Module swap8: configure 8 GB swap
+  flake.modules.nixos.swap8 = { ... }: {
+    zramSwap.enable = true;
+    swapDevices = [{
+      device = "/var/lib/swapfile";
+      size = 8 * 1024; # 8 GB
+      randomEncryption.enable = true;
+    }];
+  };
+
+  # System Module bluetooth: configure bluetooth settings
+  flake.modules.nixos.bluetooth = { ... }: {
+    # enables support for Bluetooth
+    hardware.bluetooth.enable = true;
+    # powers up the default Bluetooth controller on boot
+    hardware.bluetooth.powerOnBoot = true;
+    # allow reading device charge
+    hardware.bluetooth.settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
+
+  # System Module printing: configure printing services for the HP printer at home
+  flake.modules.nixos.printing = { pkgs, ... }: {
+    services.printing =
+      {
+        enable = true;
+        drivers = with pkgs; [ hplip ];
+      };
+
+    environment.systemPackages = with pkgs; [
+      hplip
     ];
   };
 
-  users.groups.nixremote = { };
+  # System Module sound: configure sound settings
+  flake.modules.nixos.sound = { pkgs, lib, ... }: {
+    security.rtkit.enable = true;
 
-  # Allow nixremote to run nix commands without password
-  security.sudo.extraRules = [
-    {
-      users = [ "nixremote" ];
-      commands = [
-        {
-          command = "${pkgs.nix}/bin/nix-store";
-          options = [ "NOPASSWD" ];
-        }
-        {
-          command = "${pkgs.nix}/bin/nix-daemon";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
+    services = {
+      dbus.packages = [ pkgs.gcr ];
 
-  # SSH known hosts for distributed builds
-  programs.ssh.knownHosts = {
-    EliasPC = {
-      hostNames = [ "EliasPC" "EliasPC.local" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBHAqDy+XbGANEjlFRgFu/KhiA1Y08RSekbArf/o/9H";
-    };
-    EliasLaptop = {
-      hostNames = [ "EliasLaptop" "EliasLaptop.local" ];
-      publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
-    };
-    FredPC = {
-      hostNames = [ "FredPC" "FredPC.local" ];
-      publicKey = "fredpc ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINO21u53GTTwxbOX+mmhuGVBHFX5kAOAgyeI06/NCblr";
-    };
-    NixPi = {
-      hostNames = [ "NixPi" "NixPi.local" ];
-      publicKey = "nixpi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyuYVNGKSrpwWacyBFdqPdFxRTNhu8bcmQ0sk8j786T";
+      geoclue2.enable = true;
+
+      pulseaudio.enable = false;
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+      };
     };
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Vienna";
+  # System Module cpuIntel: configure Intel CPU microcode updates
+  flake.modules.nixos.cpuIntel = { pkgs, ... }: {
+    hardware.cpu.intel.updateMicrocode = true;
 
-  # Install firefox.
-  programs.firefox = {
-    enable = true;
-  };
-
-  # Enable CUPS to print documents.
-  services.printing =
-    {
-      enable = true;
-      drivers = with pkgs; [ hplip ];
-    };
-
-  security.rtkit.enable = true;
-
-  # Enable sound with pipewire.
-  services = {
-    dbus.packages = [ pkgs.gcr ];
-
-    geoclue2.enable = true;
-
-    pulseaudio.enable = false;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
-  };
-
-  # Enable firewall settings
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      # SSH
-      22
-      # HTTP
-      80
-      # HTTPS
-      443
-      # Spotify
-      57621
-      # Steam Local Network Game Transfer and Remote Play
-      27015
-      27036
-      27040
-      # ddev
-      9003
-      # DNS
-      53
-    ];
-    allowedUDPPorts = [
-      # Spotify
-      5353
-      # Stardew Valley LAN Multiplayer
-      24642
-      # DNS
-      53
-      #Steam
-      27015
-    ];
-    allowedTCPPortRanges = [
-      # KDE Connect
-      { from = 1714; to = 1764; }
-    ];
-    allowedUDPPortRanges = [
-      # KDE Connect
-      { from = 1714; to = 1764; }
-      # Steam Local Network Game Transfer and Remote Play
-      { from = 27031; to = 27036; }
-    ];
-    trustedInterfaces = [ "docker0" ];
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    git
-    wget
-    curl
-
-    fastfetch
-    zip
-    xz
-    unzip
-
-    lm_sensors
-    sysstat
-
-    clinfo
-
-    wayland-utils
-    gparted
-
-    openssl
-
-    iptables
-    inetutils
-
-    gnome-multi-writer
-
-    # to add a hp printer via hplip
-    hplip
-
-    # nix
-    nixd
-    nixpkgs-fmt
-    nix-tree
-    nix-output-monitor
-    nvd
-
-    efibootmgr
-    powertop
-  ];
-
-  # enable ssh, so in the case of display failure, i can still access the machine
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-      PermitRootLogin = "yes";
-      PasswordAuthentication = false;
-      PubkeyAuthentication = true;
-    };
-    openFirewall = true;
-  };
-
-  programs.zsh.enable = true;
-  programs.command-not-found.enable = false;
-  programs.nix-index-database.comma.enable = true;
-
-  # Firmware updates
-  services.fwupd.enable = true;
-
-  # Filesystems
-  boot.supportedFilesystems = [
-    "ntfs"
-  ];
-
-  # resolved for wireguard
-  services.resolved.enable = true;
-  services.fstrim.enable = true;
-
-  # enable remote building to raspi
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  # cron job for automatic repo updates
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "0 */2 * * *      root    cd /home/elias/NyxOS && ./update.sh >> /var/log/nixos-update.log 2>&1"
+    environment.systemPackages = with pkgs; [
+      powertop
     ];
   };
 
-  # different kernels
-  # fast - default, overridden in FredPC
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
-  # leaning fast
-  # boot.kernelPackages = pkgs.linuxPackages_lqx;
-  # leaning stable
-  # boot.kernelPackages = pkgs.linuxPackages_xanmod;
-  # stable
-  # boot.kernelPackages = pkgs.linuxPackages;
+  # System Module gpuNvidia: configure Nvidia GPU settings
+  flake.modules.nixos.gpuNvidia = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      btop-cuda
+      nvtopPackages.nvidia
+    ];
 
-  services.system76-scheduler = {
-    enable = true;
-    settings.cfsProfiles.enable = true;
+    # Load nvidia driver for Xorg and Wayland
+    services.xserver.videoDrivers = [ "nvidia" ];
+
+    hardware = {
+      nvidia = {
+        modesetting.enable = true;
+        open = false;
+        nvidiaSettings = false;
+      };
+      graphics = {
+        enable = true;
+        enable32Bit = true;
+      };
+    };
   };
 
-  programs.nix-ld.enable = true;
+  # System Module gpuAmd: configure AMD GPU settings
+  flake.modules.nixos.gpuAmd = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      btop-rocm
+    ];
 
-  powerManagement.powertop.enable = false;
+    boot.initrd.kernelModules = [ "amdgpu" ];
+    services.xserver.videoDrivers = [ "amdgpu" ];
+    boot.kernelModules = [ "amdgpu" ];
+
+    systemd.tmpfiles.rules = [
+      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    ];
+
+    hardware = {
+      amdgpu = {
+        initrd.enable = true;
+        opencl.enable = true;
+      };
+      graphics = {
+        enable = true;
+        enable32Bit = true;
+      };
+    };
+
+    # Enable GPU frequency boosting
+    boot.extraModprobeConfig = ''
+      options amdgpu gpu_sched_hw_submission=2
+      options amdgpu ppfeature_mask=0xffffffff
+    '';
+  };
 }
