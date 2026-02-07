@@ -71,7 +71,7 @@
       DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_10_0}/bin/dotnet";
       DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
     };
-    # // TODO: merge the LD_LIBRARY_PATH with /run/current-system/sw/lib to fix libmsquic
+    # previous library path problems should be resolved by disabling jack
   };
 
   # System Module java: java development environment

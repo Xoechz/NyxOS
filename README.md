@@ -147,7 +147,7 @@ The name is inspired by the DOTA hero Nyx
       - configure nix-index
     - terminal
       - [terminal.nix](/modules/terminal.nix)
-      - kitty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+      - kitty + starship + direnv + fzf + eza + zsh
     - tv
       - [tv.nix](/modules/tv.nix)
       - dvb-s setup for tv
@@ -159,11 +159,8 @@ The name is inspired by the DOTA hero Nyx
       - user configuration for fred and gerhard
     - cliUtilities
       - [utilities.nix](/modules/utilities.nix)
-      - add useful  tools
+      - add useful tools
   - Home Modules:
-    - defaultApplicationsKde
-      - [apps.nix](/modules/apps.nix)
-      - set default applications for kde
     - libreoffice
       - [apps.nix](/modules/apps.nix)
       - configure libreoffice with basic settings
@@ -179,6 +176,9 @@ The name is inspired by the DOTA hero Nyx
     - media
       - [apps.nix](/modules/apps.nix)
       - configure media players
+    - mediaEditors
+      - [apps.nix](/modules/apps.nix)
+      - configure media editors(gimp, inkscape, kdenlive)
     - discord
       - [apps.nix](/modules/apps.nix)
       - configure discord with vencord
@@ -211,7 +211,7 @@ The name is inspired by the DOTA hero Nyx
       - enable home-manager service with basic settings
     - terminal
       - [terminal.nix](/modules/terminal.nix)
-      - kitty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+      - kitty + starship + direnv + fzf + eza + zsh
     - elias
       - [users.nix](/modules/users.nix)
       - home manager configuration for elias

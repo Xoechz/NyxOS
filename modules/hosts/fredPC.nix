@@ -47,7 +47,6 @@ let system = "x86_64-linux"; in {
     ];
 
     home-manager.sharedModules = with inputs.self.modules.homeManager; [
-      defaultApplicationsKde
       libreoffice
       email
       pdf
@@ -120,6 +119,6 @@ let system = "x86_64-linux"; in {
 
     boot.loader.grub.useOSProber = true;
 
-    system.stateVersion = "24.05";
+    system.stateVersion = "25.05";
   };
 }

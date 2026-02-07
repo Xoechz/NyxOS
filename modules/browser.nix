@@ -26,7 +26,7 @@
   };
 
   # Home Module betterfox: configure betterfox instead of firefox in home manager
-  flake.modules.homeManager.betterfox = { ... }: {
+  flake.modules.homeManager.betterfox = { lib, ... }: {
     imports = [ inputs.betterfox-nix.modules.homeManager.betterfox ];
 
     # In firefox
@@ -40,6 +40,19 @@
         profiles.elias = {
           enableAllSections = true;
         };
+      };
+    };
+
+    xdg.mimeApps = {
+      enable = lib.mkDefault true;
+      defaultApplications = {
+        "text/html" = "firefox.desktop";
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "x-scheme-handler/about" = "firefox.desktop";
+        "x-scheme-handler/unknown" = "firefox.desktop";
+        "application/pdf" = "firefox.desktop";
+        "default-web-browser " = "firefox.desktop";
       };
     };
   };

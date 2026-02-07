@@ -69,6 +69,6 @@ let system = "aarch64-linux"; in {
     # Enables the generation of /boot/extlinux/extlinux.conf
     boot.loader.generic-extlinux-compatible.enable = true;
 
-    system.stateVersion = "24.05";
+    system.stateVersion = "25.11";
   };
 }

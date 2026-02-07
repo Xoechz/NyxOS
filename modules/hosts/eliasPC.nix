@@ -54,12 +54,12 @@ let system = "x86_64-linux"; in {
 
     home-manager.users.elias = {
       imports = with inputs.self.modules.homeManager; [
-        defaultApplicationsKde
         libreoffice
         email
         teams
         pdf
         media
+        mediaEditors
         discord
         kdeConnect
         vscode

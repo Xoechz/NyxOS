@@ -14,7 +14,7 @@
     programs.nix-index-database.comma.enable = true;
   };
 
-  # System Module terminal: kitty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
+  # System Module terminal: kitty + starship + direnv + fzf + eza + zsh
   flake.modules.nixos.terminal = { ... }: {
     programs.zsh.enable = true;
 
@@ -23,8 +23,8 @@
     ];
   };
 
-  # Home Module terminal: kitty + tmux(mouse mode because i am a filthy casual) + starship + direnv + fzf + eza + zsh
-  flake.modules.homeManager.terminal = { config, ... }: {
+  # Home Module terminal: kitty + starship + direnv + fzf + eza + zsh
+  flake.modules.homeManager.terminal = { lib, config, ... }: {
     # kitty terminal
     programs.kitty = {
       enable = true;
@@ -38,17 +38,11 @@
       };
     };
 
-    xdg.mimeApps.defaultApplications = {
-      "terminal" = "kitty.desktop";
-    };
-
-    # tmux
-    programs.tmux = {
-      enable = true;
-      clock24 = true;
-      extraConfig = '' 
-        setw -g mouse on
-      '';
+    xdg.mimeApps = {
+      enable = lib.mkDefault true;
+      defaultApplications = {
+        "terminal" = "kitty.desktop";
+      };
     };
 
     # zsh
@@ -76,6 +70,7 @@
         deploy-to-eliasPC = "rebuild --target-host eliasPC -H eliasPC";
         deploy-to-eliasLaptop = "rebuild --target-host eliasLaptop -H eliasLaptop";
         cat = "bat";
+        ssh = "kitten ssh";
         dev-certs-reload = "mkdir -p ~/NyxOS/certs && dotnet dev-certs https --format PEM -ep ~/NyxOS/certs/$(hostname)-dev-cert.pem && rebuild";
       };
       history = {
@@ -90,11 +85,6 @@
         setopt hist_expire_dups_first
         setopt hist_ignore_dups
         setopt hist_verify
-  
-        # Autostart tmux if not already inside a tmux session and if the terminal is kitty (to avoid issues with other terminal emulators like vscode's integrated terminal)
-        if [ -z "$TMUX" ] && [ "$TERM" = "xterm-kitty" ]; then
-          tmux attach-session -t default || tmux new-session -s default
-        fi
       '';
       # required for the history search to work properly
       oh-my-zsh = {

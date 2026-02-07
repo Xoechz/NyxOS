@@ -23,16 +23,6 @@
     ];
   };
 
-  # Home Module defaultApplicationsKde: set default applications for kde
-  flake.modules.homeManager.defaultApplicationsKde = { ... }: {
-    xdg.mimeApps = {
-      enable = true;
-      defaultApplications = {
-        "x-scheme-handler/file" = "org.kde.dolphin.desktop";
-      };
-    };
-  };
-
   # Home Module libreoffice: configure libreoffice with basic settings
   flake.modules.homeManager.libreoffice = { pkgs, ... }: {
     home.packages = with pkgs; [
@@ -44,12 +34,13 @@
   };
 
   # Home Module email: configure email clients
-  flake.modules.homeManager.email = { pkgs, ... }: {
+  flake.modules.homeManager.email = { pkgs, lib, ... }: {
     home.packages = with pkgs; [
       thunderbird
     ];
 
     xdg.mimeApps = {
+      enable = lib.mkDefault true;
       defaultApplications = {
         "x-scheme-handler/mailto" = "thunderbird.desktop";
         "text/calendar" = "thunderbird.desktop";
@@ -155,13 +146,14 @@
   };
 
   # Home Module vscode: configure vscode for home manager
-  flake.modules.homeManager.vscode = { pkgs, ... }: {
+  flake.modules.homeManager.vscode = { pkgs, lib, ... }: {
     programs.vscode = {
       enable = true;
       package = pkgs.vscode.fhs;
     };
 
     xdg.mimeApps = {
+      enable = lib.mkDefault true;
       defaultApplications = {
         "text/plain" = "code.desktop";
       };
@@ -178,8 +170,8 @@
     ];
   };
 
-  # Home module mediaEditors: configure media editors
-  flake.modules.homeManager.mediaEditors = { pkgs, pkgs-stable, ... }: {
+  # Home Module mediaEditors: configure media editors(gimp, inkscape, kdenlive)
+  flake.modules.homeManager.mediaEditors = { pkgs, pkgs-stable, lib, ... }: {
     home.packages = with pkgs; [
       inkscape
       adwaita-icon-theme
@@ -188,8 +180,11 @@
       pkgs-stable.kdePackages.kdenlive
     ];
 
-    xdg.mimeApps.defaultApplications = {
-      "image/svg+xml" = "inkscape.desktop";
+    xdg.mimeApps = {
+      enable = lib.mkDefault true;
+      defaultApplications = {
+        "image/svg+xml" = "inkscape.desktop";
+      };
     };
   };
 }
