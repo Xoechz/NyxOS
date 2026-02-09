@@ -29,7 +29,7 @@
   };
 
   # System Module baseSettings: common nix and nixpkgs settings for all systems
-  flake.modules.nixos.baseSettings = { pkgs, ... }: {
+  flake.modules.nixos.baseSettings = { pkgs, lib, system, ... }: {
     environment.systemPackages = with pkgs; [
       nixd
       nixpkgs-fmt
@@ -59,7 +59,7 @@
       };
     };
 
-    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    boot.binfmt.emulatedSystems = lib.mkIf (system == "x86_64-linux") [ "aarch64-linux" ];
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
