@@ -19,6 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:catppuccin/nix";
     };
+    danksearch = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:AvengeMedia/danksearch";
+    };
     dms = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -29,10 +33,6 @@
     dms-plugin-registry = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AvengeMedia/dms-plugin-registry";
-    };
-    danksearch = {
-      url = "github:AvengeMedia/danksearch";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-compat.url = "github:nixos/flake-compat";
     flake-file.url = "github:vic/flake-file";
@@ -62,7 +62,10 @@
     };
     import-tree.url = "github:vic/import-tree";
     niri = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+      };
       url = "github:sodiboo/niri-flake";
     };
     nix-index-database = {
