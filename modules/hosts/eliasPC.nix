@@ -60,6 +60,7 @@ let system = "x86_64-linux"; in {
         pdf
         media
         mediaEditors
+        obs
         discord
         kdeConnect
         vscode
