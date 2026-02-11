@@ -33,9 +33,10 @@
 
     environment.systemPackages = with pkgs; [
       xwayland-satellite # xwayland support
-      nautilus
+      kdePackages.dolphin
 
       xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
       i2c-tools
       brightnessctl
 
@@ -43,6 +44,7 @@
     ];
 
     services.accounts-daemon.enable = true;
+    services.upower.enable = true;
 
     users.users.elias.extraGroups = [ "i2c" ];
 
@@ -58,9 +60,9 @@
         pkgs.xdg-desktop-portal-gnome
       ];
       config = {
-        common.default = [ "gnome" ];
+        common.default = [ "gtk" ];
         niri = {
-          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
         };
       };
     };
@@ -531,14 +533,8 @@
       # Configuration from settings.json
       settings = {
         currentThemeName = "custom";
-        currentThemeCategory = "v";
+        currentThemeCategory = "custom";
         customThemeFile = "${config.home.homeDirectory}/NyxOS/dms/theme.json";
-        registryThemeVariants = {
-          catppuccin = {
-            flavor = "mocha";
-            accent = "peach";
-          };
-        };
         popupTransparency = 1;
         widgetBackgroundColor = "sch";
         widgetColorMode = "default";

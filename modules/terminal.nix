@@ -59,7 +59,7 @@
         rebuild = "sudo echo Rebuilding... && nh os switch";
         update = "sudo echo Updating... && nh os switch -u";
         update-lock = "sudo echo Updating Lock file... && nix flake update";
-        regenerate = "sudo echo Regenerating... && nix run ${config.home.homeDirectory}/NyxOS#write-flake";
+        regenerate = "echo Regenerating... && nix run ${config.home.homeDirectory}/NyxOS#write-flake";
         cleanup = "sudo nix store optimise && nh clean all";
         pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";
         pm-rebuild = "rebuild && pm-reset";
