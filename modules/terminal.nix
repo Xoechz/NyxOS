@@ -57,8 +57,8 @@
         ll = "eza -la --git";
         etree = "eza -T --git -a -I '.git|node_modules|bin|obj'";
         rebuild = "sudo echo Rebuilding... && nh os switch";
-        update = "sudo echo Updating... && nh os switch -u";
-        update-lock = "sudo echo Updating Lock file... && nix flake update";
+        update = "sudo echo Updating... && nh os switch -u"; # sudo echo to the password has to be entered at the start instead of in the middle of the execution
+        update-lock = "echo Updating Lock file... && nix flake update";
         regenerate = "echo Regenerating... && nix run ${config.home.homeDirectory}/NyxOS#write-flake";
         cleanup = "sudo nix store optimise && nh clean all";
         pm-reset = "rm ~/.local/share/plasma-manager/last_run_* && ~/.local/share/plasma-manager/run_all.sh";

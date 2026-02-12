@@ -6,9 +6,9 @@ This file contains reference links for configuring NixOS.
 
 - Wiki: https://nixos.wiki/wiki/NixOS
 
-## Dendric Nix
+## Dendritic Nix
 
-The configuration uses the Dendric Nix Pattern, which uses flake-parts modules to structure the configuration.
+The configuration uses the Dendritic Nix Pattern, which uses flake-parts modules to structure the configuration.
 
 - Overview: https://dendrix.oeiuwq.com/Dendritic.html
 - Design Guide: https://github.com/Doc-Steve/dendritic-design-with-flake-parts

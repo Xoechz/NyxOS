@@ -37,16 +37,14 @@
 
       xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
-      i2c-tools
       brightnessctl
+      wl-mirror
 
       catppuccin-cursors.mochaDark
     ];
 
     services.accounts-daemon.enable = true;
     services.upower.enable = true;
-
-    users.users.elias.extraGroups = [ "i2c" ];
 
     programs.niri.enable = true;
     nixpkgs.overlays = [ inputs.niri.overlays.niri ];
@@ -86,6 +84,7 @@
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-gnome
+        pkgs.kdePackages.xdg-desktop-portal-kde
       ];
       config = {
         common.default = [ "gnome" ];
@@ -1069,7 +1068,7 @@
     xdg.mimeApps = {
       enable = lib.mkDefault true;
       defaultApplications = {
-        "x-scheme-handler/kdeconnect" = "nautilus.desktop";
+        "x-scheme-handler/kdeconnect" = "org.kde.dolphin.desktop";
       };
     };
   };
