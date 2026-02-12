@@ -30,7 +30,7 @@ let system = "x86_64-linux"; in {
       docker
       devCerts
       steam
-      kde
+      niri
       ssh
       firewallDesktop
       vpn
@@ -67,7 +67,6 @@ let system = "x86_64-linux"; in {
         vscode
         betterfox
         minecraft
-        plasma-manager
         sailing
         elias
         git
