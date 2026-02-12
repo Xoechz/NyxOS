@@ -66,6 +66,12 @@
     };
   };
 
+  # System Module baseDesktop: basic desktop settings
+  flake.modules.nixos.baseDesktop = { ... }: {
+    security.polkit.enable = true;
+    services.dbus.enable = true;
+  };
+
   # System Module fonts: configure additional fonts
   flake.modules.nixos.fonts = { pkgs, ... }: {
     fonts = {

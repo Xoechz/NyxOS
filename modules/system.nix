@@ -26,8 +26,6 @@
 
     services.fwupd.enable = true;
     services.fstrim.enable = true;
-    security.polkit.enable = true;
-    services.dbus.enable = true;
 
     boot.supportedFilesystems = [
       "ntfs"

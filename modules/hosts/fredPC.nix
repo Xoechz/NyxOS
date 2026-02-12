@@ -22,6 +22,7 @@ let system = "x86_64-linux"; in {
       chromium-no-gpu
       languageDe
       fonts
+      baseDesktop
       catppuccin
       docker
       steam

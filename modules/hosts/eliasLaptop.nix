@@ -20,6 +20,7 @@ let system = "x86_64-linux"; in {
     imports = with inputs.self.modules.nixos; [
       languageEn
       fonts
+      baseDesktop
       catppuccin
       python
       latex
