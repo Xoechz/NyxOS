@@ -103,13 +103,13 @@
       };
   };
 
-  # Home Module discord: configure discord with vencord
+  # Home Module discord: configure vesktop, a discord client
   flake.modules.homeManager.discord = { pkgs, ... }: {
     home.packages = with pkgs; [
       vesktop
     ];
 
-    xdg.configFile."Vencord/themes/custom.css".text = ''
+    xdg.configFile."vesktop/themes/custom.css".text = ''
       /**
       * @name Catppuccin Mocha
       * @author winston#0001

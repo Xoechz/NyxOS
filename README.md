@@ -181,7 +181,7 @@ The name is inspired by the DOTA hero Nyx
       - configure media editors(gimp, inkscape, kdenlive)
     - discord
       - [apps.nix](/modules/apps.nix)
-      - configure discord with vencord
+      - configure vesktop, a discord client
     - kdeConnect
       - [apps.nix](/modules/apps.nix)
       - configure kdeconnect for home manager
