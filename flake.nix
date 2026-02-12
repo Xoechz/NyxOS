@@ -19,6 +19,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:catppuccin/nix";
     };
+    danksearch = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:AvengeMedia/danksearch";
+    };
+    dms = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        quickshell.follows = "quickshell";
+      };
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+    };
+    dms-plugin-registry = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:AvengeMedia/dms-plugin-registry";
+    };
     flake-compat.url = "github:nixos/flake-compat";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
@@ -46,6 +61,13 @@
       url = "github:nix-community/home-manager";
     };
     import-tree.url = "github:vic/import-tree";
+    niri = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+      };
+      url = "github:sodiboo/niri-flake";
+    };
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
@@ -67,6 +89,10 @@
         nixpkgs.follows = "nixpkgs";
       };
       url = "github:nix-community/plasma-manager";
+    };
+    quickshell = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
     };
     spicetify-nix = {
       inputs = {

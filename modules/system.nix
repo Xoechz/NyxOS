@@ -26,6 +26,8 @@
 
     services.fwupd.enable = true;
     services.fstrim.enable = true;
+    security.polkit.enable = true;
+    services.dbus.enable = true;
 
     boot.supportedFilesystems = [
       "ntfs"
@@ -90,7 +92,7 @@
   };
 
   # System Module sound: configure sound settings
-  flake.modules.nixos.sound = { pkgs, lib, ... }: {
+  flake.modules.nixos.sound = { pkgs, ... }: {
     security.rtkit.enable = true;
 
     services = {
@@ -104,8 +106,14 @@
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
+        wireplumber.enable = true;
       };
     };
+
+    environment.systemPackages = with pkgs; [
+      playerctl
+      pavucontrol
+    ];
   };
 
   # System Module cpuIntel: configure Intel CPU microcode updates

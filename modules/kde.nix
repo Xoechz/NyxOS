@@ -38,7 +38,7 @@
       elisa
     ];
 
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    environment.variables.NIXOS_OZONE_WL = "1";
 
     nixpkgs.overlays = lib.singleton (final: prev: {
       kdePackages = prev.kdePackages.overrideScope (

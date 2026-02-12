@@ -29,7 +29,7 @@ let system = "x86_64-linux"; in {
       docker
       devCerts
       steam
-      kde
+      niri
       ssh
       firewallDesktop
       vpn
@@ -61,12 +61,12 @@ let system = "x86_64-linux"; in {
         pdf
         media
         mediaEditors
+        obs
         discord
         kdeConnect
         vscode
         betterfox
         minecraft
-        plasma-manager
         sailing
         elias
         git
