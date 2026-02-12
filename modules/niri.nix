@@ -52,24 +52,10 @@
     nixpkgs.overlays = [ inputs.niri.overlays.niri ];
     programs.niri.package = pkgs.niri-unstable;
 
-    xdg.portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-gnome
-      ];
-      config = {
-        common.default = [ "gtk" ];
-        niri = {
-          "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
-        };
-      };
-    };
-
     environment.variables = {
       NIXOS_OZONE_WL = "1";
       QT_QPA_PLATFORMTHEME = "gtk3";
+      XDG_CURRENT_DESKTOP = "niri:GNOME";
     };
 
     # DMS has its own polkit agent, so we disable niri's to avoid conflicts
@@ -94,6 +80,23 @@
       inputs.danksearch.homeModules.dsearch
     ];
 
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-gnome
+      ];
+      config = {
+        common.default = [ "gnome" ];
+        niri = {
+          "org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+        };
+      };
+    };
+
     programs.dsearch = {
       enable = true;
 
@@ -103,7 +106,7 @@
         listen_addr = ":43654";
 
         # Index settings
-        index_path = "~/.cache/danksearch/index";
+        index_path = "${config.home.homeDirectory}/.cache/danksearch/index";
         max_file_bytes = 8388608; # 8MB
         worker_count = 4;
         index_all_files = true;
@@ -140,7 +143,7 @@
         # Index paths configuration
         index_paths = [
           {
-            path = "~";
+            path = "${config.home.homeDirectory}";
             max_depth = 8;
             exclude_hidden = true;
             exclude_dirs = [ "node_modules" ".git" "target" "dist" "bin" "obj" "build" ];
@@ -176,6 +179,19 @@
             ];
           };
           hotkey-overlay.skip-at-startup = true; # Don't show the hotkey overlay on startup
+          window-rules = [
+            {
+              matches = [{
+                is-window-cast-target = true;
+              }];
+              focus-ring.active.color = "#ff0000";
+              focus-ring.inactive.color = "#900030";
+              border.inactive.color = "#900030";
+              shadow.color = "#900030";
+              tab-indicator.active.color = "#ff0000";
+              tab-indicator.inactive.color = "#900030";
+            }
+          ];
           # window-rule could be useful to exclude certain windows from being tiled.
           gestures = {
             hot-corners.enable = false;
@@ -228,6 +244,14 @@
             "Mod+V" = {
               action.spawn = [ "dms" "ipc" "clipboard" "toggle" ];
               hotkey-overlay.title = "Toggle Clipboard Manager";
+            };
+
+            "Mod+P".action.set-dynamic-cast-window = [ ];
+
+            "Mod+Ctrl+P" = {
+              action.spawn-sh = "wl-mirror $(niri msg --json focused-output | jq -r .name)";
+              repeat = false;
+              hotkey-overlay.title = "Start Screen Mirror";
             };
 
             # Powers off the monitors. To turn them back on, do any input like

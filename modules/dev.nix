@@ -39,7 +39,6 @@
           pkgs.zlib
           pkgs.libGL
           pkgs.fontconfig
-          pkgs.xorg.libX11
           pkgs.libxkbcommon
           pkgs.freetype
           pkgs.dbus

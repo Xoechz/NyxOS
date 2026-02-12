@@ -106,9 +106,7 @@
   # Home Module discord: configure discord with vencord
   flake.modules.homeManager.discord = { pkgs, ... }: {
     home.packages = with pkgs; [
-      (discord.override {
-        withVencord = true;
-      })
+      vesktop
     ];
 
     xdg.configFile."Vencord/themes/custom.css".text = ''
@@ -140,7 +138,6 @@
       plugins = with pkgs.obs-studio-plugins; [
         wlrobs
         obs-backgroundremoval
-        obs-pipewire-audio-capture
       ];
     };
   };
