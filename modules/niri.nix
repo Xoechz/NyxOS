@@ -178,7 +178,10 @@
               { proportion = 1.0; }
             ];
           };
-          hotkey-overlay.skip-at-startup = true; # Don't show the hotkey overlay on startup
+          hotkey-overlay = {
+            skip-at-startup = true; # Don't show the hotkey overlay on startup
+            hide-not-bound = true; # Don't show actions that don't have hotkeys bound to them
+          };
           window-rules = [
             {
               matches = [{
@@ -219,7 +222,10 @@
           };
           binds = {
             # shows a list of important hotkeys.
-            "Mod+I".action.show-hotkey-overlay = [ ];
+            "Mod+I" = {
+              action.show-hotkey-overlay = [ ];
+              hotkey-overlay.title = "Show Hotkeys";
+            };
 
             "Mod+T" = {
               action.spawn = "kitty";
@@ -243,10 +249,13 @@
 
             "Mod+V" = {
               action.spawn = [ "dms" "ipc" "clipboard" "toggle" ];
-              hotkey-overlay.title = "Toggle Clipboard Manager";
+              hotkey-overlay.title = "Open Clipboard";
             };
 
-            "Mod+P".action.set-dynamic-cast-window = [ ];
+            "Mod+P" = {
+              action.set-dynamic-cast-window = [ ];
+              hotkey-overlay.title = "Set Focused Window as Screencast Target";
+            };
 
             "Mod+Ctrl+P" = {
               action.spawn-sh = "wl-mirror $(niri msg --json focused-output | jq -r .name)";
@@ -256,83 +265,113 @@
 
             # Powers off the monitors. To turn them back on, do any input like
             # moving the mouse or pressing any other key.
-            "Mod+Shift+P".action.power-off-monitors = [ ];
+            "Mod+Shift+P" = {
+              action.power-off-monitors = [ ];
+              hotkey-overlay.title = "Power Off Monitors";
+            };
 
             # Open/close the Overview: a zoomed-out view of workspaces and windows.
             # or do a four-finger swipe up on a touchpad.
             "Mod+Tab" = {
               action.toggle-overview = [ ];
               repeat = false;
+              hotkey-overlay.title = "Toggle Overview";
             };
 
             "Alt+F4" = {
               action.close-window = [ ];
               repeat = false;
+              hotkey-overlay.title = "Close Window";
             };
 
             # Focus navigation with arrow keys or WASD
             # Arrow key navigation
-            "Mod+Left".action.focus-column-or-monitor-left = [ ];
-            "Mod+Down".action.focus-window-or-monitor-down = [ ];
-            "Mod+Up".action.focus-window-or-monitor-up = [ ];
-            "Mod+Right".action.focus-column-or-monitor-right = [ ];
-            "Mod+A".action.focus-column-or-monitor-left = [ ];
-            "Mod+S".action.focus-window-or-monitor-down = [ ];
-            "Mod+W".action.focus-window-or-monitor-up = [ ];
-            "Mod+D".action.focus-column-or-monitor-right = [ ];
+            "Mod+Left" = {
+              action.focus-column-or-monitor-left = [ ];
+              hotkey-overlay.title = "Focus Left Column or Monitor (Also Mod+A, +Shift => Monitor, +Ctrl => Move, +Shift+Ctrl => Move to Monitor)";
+            };
+            "Mod+Down" = {
+              action.focus-window-or-monitor-down = [ ];
+              hotkey-overlay.title = "Focus Window or Monitor Down (Also Mod+S, +Shift => Monitor, +Ctrl => Move, +Shift+Ctrl => Move to Monitor)";
+            };
+            "Mod+Up" = {
+              action.focus-window-or-monitor-up = [ ];
+              hotkey-overlay.title = "Focus Window or Monitor Up (Also Mod+W, +Shift => Monitor, +Ctrl => Move, +Shift+Ctrl => Move to Monitor)";
+            };
+            "Mod+Right" = {
+              action.focus-column-or-monitor-right = [ ];
+              hotkey-overlay.title = "Focus Right Column or Monitor (Also Mod+D, +Shift => Monitor, +Ctrl => Move, +Shift+Ctrl => Move to Monitor)";
+            };
+
+            "Mod+A" = { action.focus-column-or-monitor-left = [ ]; };
+            "Mod+S" = { action.focus-window-or-monitor-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+W" = { action.focus-window-or-monitor-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+D" = { action.focus-column-or-monitor-right = [ ]; hotkey-overlay.hidden = true; };
 
             # Ctrl arrow movement
-            "Mod+Ctrl+Left".action.move-column-left-or-to-monitor-left = [ ];
-            "Mod+Ctrl+Down".action.move-window-down = [ ];
-            "Mod+Ctrl+Up".action.move-window-up = [ ];
-            "Mod+Ctrl+Right".action.move-column-right-or-to-monitor-right = [ ];
-            "Mod+Ctrl+A".action.move-column-left-or-to-monitor-left = [ ];
-            "Mod+Ctrl+S".action.move-window-down = [ ];
-            "Mod+Ctrl+W".action.move-window-up = [ ];
-            "Mod+Ctrl+D".action.move-column-right-or-to-monitor-right = [ ];
+            "Mod+Ctrl+Left" = { action.move-column-left-or-to-monitor-left = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+Down" = { action.move-window-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+Up" = { action.move-window-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+Right" = { action.move-column-right-or-to-monitor-right = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+A" = { action.move-column-left-or-to-monitor-left = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+S" = { action.move-window-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+W" = { action.move-window-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+D" = { action.move-column-right-or-to-monitor-right = [ ]; hotkey-overlay.hidden = true; };
 
             # Home and End keys for column edge navigation
-            "Mod+Home".action.focus-column-first = [ ];
-            "Mod+End".action.focus-column-last = [ ];
-            "Mod+Ctrl+Home".action.move-column-to-first = [ ];
-            "Mod+Ctrl+End".action.move-column-to-last = [ ];
+            "Mod+Home" = {
+              action.focus-column-first = [ ];
+              hotkey-overlay.title = "Focus First Column (+Ctrl => Move)";
+            };
+            "Mod+End" = {
+              action.focus-column-last = [ ];
+              hotkey-overlay.title = "Focus Last Column (+Ctrl => Move)";
+            };
+            "Mod+Ctrl+Home" = { action.move-column-to-first = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+End" = { action.move-column-to-last = [ ]; hotkey-overlay.hidden = true; };
 
             # Monitor focus with Shift modifiers
-            "Mod+Shift+Left".action.focus-monitor-left = [ ];
-            "Mod+Shift+Down".action.focus-monitor-down = [ ];
-            "Mod+Shift+Up".action.focus-monitor-up = [ ];
-            "Mod+Shift+Right".action.focus-monitor-right = [ ];
-            "Mod+Shift+A".action.focus-monitor-left = [ ];
-            "Mod+Shift+S".action.focus-monitor-down = [ ];
-            "Mod+Shift+W".action.focus-monitor-up = [ ];
-            "Mod+Shift+D".action.focus-monitor-right = [ ];
+            "Mod+Shift+Left" = { action.focus-monitor-left = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Down" = { action.focus-monitor-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Up" = { action.focus-monitor-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Right" = { action.focus-monitor-right = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+A" = { action.focus-monitor-left = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+S" = { action.focus-monitor-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+W" = { action.focus-monitor-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+D" = { action.focus-monitor-right = [ ]; hotkey-overlay.hidden = true; };
 
             # Move columns to different monitors
-            "Mod+Shift+Ctrl+Left".action.move-column-to-monitor-left = [ ];
-            "Mod+Shift+Ctrl+Down".action.move-column-to-monitor-down = [ ];
-            "Mod+Shift+Ctrl+Up".action.move-column-to-monitor-up = [ ];
-            "Mod+Shift+Ctrl+Right".action.move-column-to-monitor-right = [ ];
-            "Mod+Shift+Ctrl+A".action.move-column-to-monitor-left = [ ];
-            "Mod+Shift+Ctrl+S".action.move-column-to-monitor-down = [ ];
-            "Mod+Shift+Ctrl+W".action.move-column-to-monitor-up = [ ];
-            "Mod+Shift+Ctrl+D".action.move-column-to-monitor-right = [ ];
+            "Mod+Shift+Ctrl+Left" = { action.move-column-to-monitor-left = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Ctrl+Down" = { action.move-column-to-monitor-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Ctrl+Up" = { action.move-column-to-monitor-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Ctrl+Right" = { action.move-column-to-monitor-right = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Ctrl+A" = { action.move-column-to-monitor-left = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Ctrl+S" = { action.move-column-to-monitor-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Ctrl+W" = { action.move-column-to-monitor-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Ctrl+D" = { action.move-column-to-monitor-right = [ ]; hotkey-overlay.hidden = true; };
 
-            "Mod+Page_Down".action.focus-workspace-down = [ ];
-            "Mod+Page_Up".action.focus-workspace-up = [ ];
-            "Mod+E".action.focus-workspace-down = [ ];
-            "Mod+Q".action.focus-workspace-up = [ ];
+            "Mod+Page_Down" = {
+              action.focus-workspace-down = [ ];
+              hotkey-overlay.title = "Focus Next Workspace (Also Mod+E, +Shift => Move Workspace, +Ctrl => Move focused column)";
+            };
+            "Mod+Page_Up" = {
+              action.focus-workspace-up = [ ];
+              hotkey-overlay.title = "Focus Previous Workspace (Also Mod+Q, +Shift => Move Workspace, +Ctrl => Move focused column)";
+            };
+            "Mod+E" = { action.focus-workspace-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Q" = { action.focus-workspace-up = [ ]; hotkey-overlay.hidden = true; };
 
             # Move columns to different workspaces
-            "Mod+Ctrl+Page_Down".action.move-column-to-workspace-down = [ ];
-            "Mod+Ctrl+Page_Up".action.move-column-to-workspace-up = [ ];
-            "Mod+Ctrl+E".action.move-column-to-workspace-down = [ ];
-            "Mod+Ctrl+Q".action.move-column-to-workspace-up = [ ];
+            "Mod+Ctrl+Page_Down" = { action.move-column-to-workspace-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+Page_Up" = { action.move-column-to-workspace-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+E" = { action.move-column-to-workspace-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+Q" = { action.move-column-to-workspace-up = [ ]; hotkey-overlay.hidden = true; };
 
             # Move entire workspaces to adjacent positions
-            "Mod+Shift+Page_Down".action.move-workspace-down = [ ];
-            "Mod+Shift+Page_Up".action.move-workspace-up = [ ];
-            "Mod+Shift+E".action.move-workspace-down = [ ];
-            "Mod+Shift+Q".action.move-workspace-up = [ ];
+            "Mod+Shift+Page_Down" = { action.move-workspace-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Page_Up" = { action.move-workspace-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+E" = { action.move-workspace-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Shift+Q" = { action.move-workspace-up = [ ]; hotkey-overlay.hidden = true; };
 
             # Mouse wheel scroll bindings
             # You can bind mouse wheel scroll ticks using the following syntax.
@@ -343,96 +382,128 @@
             "Mod+WheelScrollDown" = {
               action.focus-column-or-monitor-right = [ ];
               cooldown-ms = 100;
+              hotkey-overlay.title = "Focus right Column or Monitor (+Shift => Workspace, +Ctrl => Move, +Shift+Ctrl => Move to Workspace)";
             };
             "Mod+WheelScrollUp" = {
               action.focus-column-or-monitor-left = [ ];
               cooldown-ms = 100;
+              hotkey-overlay.title = "Focus left Column or Monitor (+Shift => Workspace, +Ctrl => Move, +Shift+Ctrl => Move to Workspace)";
             };
             "Mod+Ctrl+WheelScrollDown" = {
               action.move-column-right-or-to-monitor-right = [ ];
               cooldown-ms = 100;
+              hotkey-overlay.hidden = true;
             };
             "Mod+Ctrl+WheelScrollUp" = {
               action.move-column-left-or-to-monitor-left = [ ];
               cooldown-ms = 100;
+              hotkey-overlay.hidden = true;
             };
             "Mod+Shift+WheelScrollDown" = {
               action.focus-workspace-down = [ ];
               cooldown-ms = 100;
+              hotkey-overlay.hidden = true;
             };
             "Mod+Shift+WheelScrollUp" = {
               action.focus-workspace-up = [ ];
               cooldown-ms = 100;
+              hotkey-overlay.hidden = true;
             };
             "Mod+Ctrl+Shift+WheelScrollDown" = {
               action.move-column-to-workspace-down = [ ];
               cooldown-ms = 100;
+              hotkey-overlay.hidden = true;
             };
             "Mod+Ctrl+Shift+WheelScrollUp" = {
               action.move-column-to-workspace-up = [ ];
               cooldown-ms = 100;
+              hotkey-overlay.hidden = true;
             };
 
-            "Mod+WheelScrollRight".action.focus-workspace-down = [ ];
-            "Mod+WheelScrollLeft".action.focus-workspace-up = [ ];
-            "Mod+Ctrl+WheelScrollRight".action.move-column-to-workspace-down = [ ];
-            "Mod+Ctrl+WheelScrollLeft".action.move-column-to-workspace-up = [ ];
-            "Mod+MouseForward".action.focus-workspace-down = [ ];
-            "Mod+MouseBack".action.focus-workspace-up = [ ];
-            "Mod+Ctrl+MouseForward".action.move-column-to-workspace-down = [ ];
-            "Mod+Ctrl+MouseBack".action.move-column-to-workspace-up = [ ];
+            "Mod+WheelScrollRight" = {
+              action.focus-workspace-down = [ ];
+              hotkey-overlay.title = "Focus Next Workspace (also MouseForward, +Ctrl => Move focused column)";
+            };
+            "Mod+WheelScrollLeft" = {
+              action.focus-workspace-up = [ ];
+              hotkey-overlay.title = "Focus Previous Workspace (also MouseBack, +Ctrl => Move focused column)";
+            };
+            "Mod+Ctrl+WheelScrollRight" = { action.move-column-to-workspace-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+WheelScrollLeft" = { action.move-column-to-workspace-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+MouseForward" = { action.focus-workspace-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+MouseBack" = { action.focus-workspace-up = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+MouseForward" = { action.move-column-to-workspace-down = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+MouseBack" = { action.move-column-to-workspace-up = [ ]; hotkey-overlay.hidden = true; };
 
             # Direct workspace selection by number
             # For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
             # will all refer to the 3rd workspace.
-            "Mod+1".action.focus-workspace = 1;
-            "Mod+2".action.focus-workspace = 2;
-            "Mod+3".action.focus-workspace = 3;
-            "Mod+4".action.focus-workspace = 4;
-            "Mod+5".action.focus-workspace = 5;
-            "Mod+6".action.focus-workspace = 6;
-            "Mod+7".action.focus-workspace = 7;
-            "Mod+8".action.focus-workspace = 8;
-            "Mod+9".action.focus-workspace = 9;
+            "Mod+1" = {
+              action.focus-workspace = 1;
+              hotkey-overlay.title = "Focus Workspace 1-9 (+Ctrl => Move focused column)";
+            };
+            "Mod+2" = { action.focus-workspace = 2; hotkey-overlay.hidden = true; };
+            "Mod+3" = { action.focus-workspace = 3; hotkey-overlay.hidden = true; };
+            "Mod+4" = { action.focus-workspace = 4; hotkey-overlay.hidden = true; };
+            "Mod+5" = { action.focus-workspace = 5; hotkey-overlay.hidden = true; };
+            "Mod+6" = { action.focus-workspace = 6; hotkey-overlay.hidden = true; };
+            "Mod+7" = { action.focus-workspace = 7; hotkey-overlay.hidden = true; };
+            "Mod+8" = { action.focus-workspace = 8; hotkey-overlay.hidden = true; };
+            "Mod+9" = { action.focus-workspace = 9; hotkey-overlay.hidden = true; };
 
             # Move to workspace number
-            "Mod+Ctrl+1".action.move-column-to-workspace = 1;
-            "Mod+Ctrl+2".action.move-column-to-workspace = 2;
-            "Mod+Ctrl+3".action.move-column-to-workspace = 3;
-            "Mod+Ctrl+4".action.move-column-to-workspace = 4;
-            "Mod+Ctrl+5".action.move-column-to-workspace = 5;
-            "Mod+Ctrl+6".action.move-column-to-workspace = 6;
-            "Mod+Ctrl+7".action.move-column-to-workspace = 7;
-            "Mod+Ctrl+8".action.move-column-to-workspace = 8;
-            "Mod+Ctrl+9".action.move-column-to-workspace = 9;
+            "Mod+Ctrl+1" = { action.move-column-to-workspace = 1; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+2" = { action.move-column-to-workspace = 2; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+3" = { action.move-column-to-workspace = 3; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+4" = { action.move-column-to-workspace = 4; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+5" = { action.move-column-to-workspace = 5; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+6" = { action.move-column-to-workspace = 6; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+7" = { action.move-column-to-workspace = 7; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+8" = { action.move-column-to-workspace = 8; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+9" = { action.move-column-to-workspace = 9; hotkey-overlay.hidden = true; };
 
             # The following binds move the focused window in and out of a column.
             # If the window is alone, they will consume it into the nearby column to the side.
             # If the window is already in a column, they will expel it out.
-            "Mod+Comma".action.consume-or-expel-window-left = [ ];
-            "Mod+Period".action.consume-or-expel-window-right = [ ];
+            "Mod+Comma" = {
+              action.consume-or-expel-window-left = [ ];
+              hotkey-overlay.title = "Consume or Expel Window Left (This means stacking it to the column to the left / breaking it out of a stack to the left)";
+            };
+            "Mod+Period" = {
+              action.consume-or-expel-window-right = [ ];
+              hotkey-overlay.title = "Consume or Expel Window Right (This means stacking it to the column to the right / breaking it out of a stack to the right)";
+            };
 
             # Column width/height switching
-            "Mod+R".action.switch-preset-column-width = [ ];
-            "Mod+Shift+R".action.switch-preset-window-height = [ ];
-            "Mod+Ctrl+R".action.reset-window-height = [ ];
+            "Mod+R" = {
+              action.switch-preset-column-width = [ ];
+              hotkey-overlay.title = "Switch Preset Column Widths (0.33, 0.5, 0.66, 0.9, 1.0) (+Shift => Switch Preset Window Heights, +Ctrl => Reset Column Height)";
+            };
+            "Mod+Shift+R" = { action.switch-preset-window-height = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+R" = { action.reset-window-height = [ ]; hotkey-overlay.hidden = true; };
 
             # Column/window sizing and positioning
             # While maximize-column leaves gaps and borders around the window,
             # maximize-window-to-edges doesn't: the window expands to the edges of the screen.
             # This bind corresponds to normal window maximizing,
             # e.g. by double-clicking on the titlebar.
-            "Mod+F".action.maximize-column = [ ];
-            "Mod+Shift+F".action.fullscreen-window = [ ];
-            "Mod+M".action.maximize-window-to-edges = [ ];
-
-            # Expand the focused column to space not taken up by other fully visible columns.
-            # Makes the column "fill the rest of the space".
-            "Mod+Ctrl+F".action.expand-column-to-available-width = [ ];
+            "Mod+F" = {
+              action.maximize-column = [ ];
+              hotkey-overlay.title = "Maximize Column (+Shift => Maximize Window to Edges, +Ctrl => Expand Column to Available Width)";
+            };
+            "Mod+Shift+F" = { action.fullscreen-window = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+Ctrl+F" = { action.expand-column-to-available-width = [ ]; hotkey-overlay.hidden = true; };
+            "Mod+M" = {
+              action.maximize-window-to-edges = [ ];
+              hotkey-overlay.title = "Maximize Window to Edges";
+            };
 
             # Column centering
-            "Mod+C".action.center-column = [ ];
-            "Mod+Ctrl+C".action.center-visible-columns = [ ];
+            "Mod+C" = {
+              action.center-column = [ ];
+              hotkey-overlay.title = "Center Column in Output (+Ctrl => Center Visible Columns)";
+            };
+            "Mod+Ctrl+C" = { action.center-visible-columns = [ ]; hotkey-overlay.hidden = true; };
 
             # Finer width adjustments.
             # This command can also:
@@ -442,26 +513,41 @@
             # * adjust width as a percentage of screen width: "-10%" or "+10%"
             # Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
             # set-column-width "100" will make the column occupy 200 physical screen pixels.
-            "Mod+Y".action.set-column-width = "-10%";
-            "Mod+X".action.set-column-width = "+10%";
+            "Mod+Y" = {
+              action.set-column-width = "-10%";
+              hotkey-overlay.title = "Decrease Column Width by 10% (+Shift => Decrease Window Height by 10%)";
+            };
+            "Mod+X" = {
+              action.set-column-width = "+10%";
+              hotkey-overlay.title = "Increase Column Width by 10% (+Shift => Increase Window Height by 10%)";
+            };
 
             # Finer height adjustments when in column with other windows.
-            "Mod+Shift+Y".action.set-window-height = "-10%";
-            "Mod+Shift+X".action.set-window-height = "+10%";
+            "Mod+Shift+Y" = { action.set-window-height = "-10%"; hotkey-overlay.hidden = true; };
+            "Mod+Shift+X" = { action.set-window-height = "+10%"; hotkey-overlay.hidden = true; };
 
             # Move the focused window between the floating and the tiling layout.
-            "Mod+dead_circumflex".action.toggle-window-floating = [ ];
-            "Mod+Shift+dead_circumflex".action.switch-focus-between-floating-and-tiling = [ ];
+            "Mod+dead_circumflex" = {
+              action.toggle-window-floating = [ ];
+              hotkey-overlay.title = "Toggle Window Floating/Tiling (dead_circumflex is the key above Tab ^°, +Shift => Switch Focus Between Floating and Tiling)";
+            };
+            "Mod+Shift+dead_circumflex" = { action.switch-focus-between-floating-and-tiling = [ ]; hotkey-overlay.hidden = true; };
 
             # Toggle tabbed column display mode.
             # Windows in this column will appear as vertical tabs,
             # rather than stacked on top of each other.
-            "Mod+G".action.toggle-column-tabbed-display = [ ];
+            "Mod+G" = {
+              action.toggle-column-tabbed-display = [ ];
+              hotkey-overlay.title = "Toggle Column Tabbed Display (Instead of stacked windows, show them as tabs)";
+            };
 
             # Screenshots
-            "Print".action.screenshot = [ ];
-            "Ctrl+Print".action.screenshot-screen = [ ];
-            "Alt+Print".action.screenshot-window = [ ];
+            "Print" = {
+              action.screenshot = [ ];
+              hotkey-overlay.title = "Take Screenshot (+Ctrl => Screenshot Screen, +Alt => Screenshot Window)";
+            };
+            "Ctrl+Print" = { action.screenshot-screen = [ ]; hotkey-overlay.hidden = true; };
+            "Alt+Print" = { action.screenshot-window = [ ]; hotkey-overlay.hidden = true; };
 
             # Applications such as remote-desktop clients and software KVM switches may
             # request that niri stops processing the keyboard shortcuts defined here
@@ -473,53 +559,67 @@
             "Mod+Escape" = {
               action.toggle-keyboard-shortcuts-inhibit = [ ];
               allow-inhibiting = false;
+              hotkey-overlay.title = "Toggle Keyboard Shortcuts Inhibit (Used by some applications to disable niri shortcuts while they're focused)";
             };
 
             # The quit action will show a confirmation dialog to avoid accidental exits.
-            "Ctrl+Alt+Delete".action.quit = [ ];
+            "Ctrl+Alt+Delete" = {
+              action.quit = [ ];
+              hotkey-overlay.title = "Quit Niri";
+            };
 
             # Audio controls
             "XF86AudioRaiseVolume" = {
               action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0";
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
             "XF86AudioLowerVolume" = {
               action.spawn-sh = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-";
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
             "XF86AudioMute" = {
               action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
             "XF86AudioMicMute" = {
               action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
 
             "XF86AudioPlay" = {
               action.spawn-sh = "playerctl play-pause";
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
             "XF86AudioStop" = {
               action.spawn-sh = "playerctl stop";
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
             "XF86AudioPrev" = {
               action.spawn-sh = "playerctl previous";
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
             "XF86AudioNext" = {
               action.spawn-sh = "playerctl next";
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
 
             "XF86MonBrightnessUp" = {
               action.spawn = [ "brightnessctl" "--class=backlight" "set" "+10%" ];
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
             "XF86MonBrightnessDown" = {
               action.spawn = [ "brightnessctl" "--class=backlight" "set" "10%-" ];
               allow-when-locked = true;
+              hotkey-overlay.hidden = true;
             };
           };
         };
