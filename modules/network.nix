@@ -30,6 +30,10 @@
         hostNames = [ "NixPi" "NixPi.local" ];
         publicKey = "nixpi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyuYVNGKSrpwWacyBFdqPdFxRTNhu8bcmQ0sk8j786T";
       };
+      GitHub = {
+        hostNames = [ "GitHub" "GitHub.com" ];
+        publicKey = "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+      };
     };
   };
 
