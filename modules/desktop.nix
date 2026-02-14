@@ -225,8 +225,14 @@
     catppuccin = {
       enable = true;
       flavor = "mocha";
-      accent = "pink";
+      accent = "peach";
+      cursors = {
+        enable = true;
+        accent = "dark";
+      };
     };
+
+    xdg.icons.fallbackCursorThemes = [ "catppuccin-mocha-dark-cursors" ];
 
     home-manager.sharedModules = [
       inputs.self.modules.homeManager.catppuccin
@@ -234,14 +240,67 @@
   };
 
   # Home Module catppuccin: configure catppuccin theming in home manager
-  flake.modules.homeManager.catppuccin = { ... }: {
-    imports = [ inputs.catppuccin.homeModules.catppuccin ];
+  flake.modules.homeManager.catppuccin = { pkgs, lib, ... }:
+    let
+      catppuccin-papirus-icons = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "peach";
+      };
+    in
+    {
+      imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-      accent = "pink";
-      vscode.profiles.default.enable = false; # vscode setup is done non declaratively. Sorry!
+      catppuccin = {
+        enable = true;
+        flavor = "mocha";
+        accent = "peach";
+        cursors = {
+          enable = true;
+          accent = "dark";
+        };
+        kvantum.enable = true;
+        kvantum.apply = true;
+        gtk.icon.enable = true;
+
+        vscode.profiles.default.enable = false; # vscode setup is done non declaratively. Sorry!
+      };
+
+      home.packages = [
+        catppuccin-papirus-icons
+      ];
+
+      gtk = {
+        enable = true;
+        theme = {
+          name = "catppuccin-mocha-peach-standard";
+          package = pkgs.catppuccin-gtk.override {
+            size = "standard";
+            accents = [ "peach" ];
+            variant = "mocha";
+          };
+        };
+        iconTheme = lib.mkForce {
+          name = "Papirus-Dark";
+          package = catppuccin-papirus-icons;
+        };
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+          gtk-decoration-layout = "icon:minimize,maximize,close";
+          gtk-toolbar-style = 3;
+
+        };
+        gtk4.extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+          gtk-decoration-layout = "icon:minimize,maximize,close";
+        };
+      };
+
+      qt = {
+        enable = true;
+        style = {
+          name = "kvantum";
+        };
+        platformTheme.name = "kvantum";
+      };
     };
-  };
 }

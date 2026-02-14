@@ -15,6 +15,8 @@
     environment.systemPackages = with pkgs; [
       mangohud
       protonup-qt
+      xrdb
+      xsettingsd
     ];
   };
 
