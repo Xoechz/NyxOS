@@ -9,6 +9,7 @@ let system = "x86_64-linux"; in {
         system = system;
         config.allowUnfree = true;
       };
+      swapSize = 32; # GB
     };
     modules = [
       inputs.self.modules.nixos.eliasPC
@@ -40,7 +41,7 @@ let system = "x86_64-linux"; in {
       grub
       basicSystem
       optimizationsPC
-      swap32
+      swap
       printing
       sound
       cpuIntel
@@ -53,27 +54,36 @@ let system = "x86_64-linux"; in {
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    home-manager.users.elias = {
-      imports = with inputs.self.modules.homeManager; [
-        libreoffice
-        email
-        teams
-        pdf
-        media
-        mediaEditors
-        obs
-        discord
-        kdeConnect
-        vscode
-        betterfox
-        minecraft
-        sailing
-        elias
-        git
-        guiUtilities
-      ];
+    home-manager = {
+      extraSpecialArgs = {
+        pkgs-stable = import inputs.nixpkgs-stable {
+          system = system;
+          config.allowUnfree = true;
+        };
+        showBattery = false; # Show battery status in the system tray (not needed for a desktop PC)
+      };
+      users.elias = {
+        imports = with inputs.self.modules.homeManager; [
+          libreoffice
+          email
+          teams
+          pdf
+          media
+          mediaEditors
+          obs
+          discord
+          kdeConnect
+          vscode
+          betterfox
+          minecraft
+          sailing
+          elias
+          git
+          guiUtilities
+        ];
 
-      home.stateVersion = "24.05";
+        home.stateVersion = "24.05";
+      };
     };
 
     boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];

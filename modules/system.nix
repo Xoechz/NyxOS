@@ -32,32 +32,12 @@
     ];
   };
 
-  # System Module swap32: configure 32 GB swap
-  flake.modules.nixos.swap32 = { ... }: {
+  # System Module swap: configure swap
+  flake.modules.nixos.swap = { swapSize, ... }: {
     zramSwap.enable = true;
     swapDevices = [{
       device = "/var/lib/swapfile";
-      size = 32 * 1024; # 32 GB
-      randomEncryption.enable = true;
-    }];
-  };
-
-  # System Module swap18: configure 18 GB swap
-  flake.modules.nixos.swap18 = { ... }: {
-    zramSwap.enable = true;
-    swapDevices = [{
-      device = "/var/lib/swapfile";
-      size = 18 * 1024; # 18 GB
-      randomEncryption.enable = true;
-    }];
-  };
-
-  # System Module swap8: configure 8 GB swap
-  flake.modules.nixos.swap8 = { ... }: {
-    zramSwap.enable = true;
-    swapDevices = [{
-      device = "/var/lib/swapfile";
-      size = 8 * 1024; # 8 GB
+      size = swapSize * 1024; # GB
       randomEncryption.enable = true;
     }];
   };

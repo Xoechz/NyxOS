@@ -185,12 +185,6 @@
       useGlobalPkgs = true;
       useUserPackages = true;
       sharedModules = [ inputs.self.modules.homeManager.homeManager ];
-      extraSpecialArgs = {
-        pkgs-stable = import inputs.nixpkgs-stable {
-          system = system;
-          config.allowUnfree = true;
-        };
-      };
     };
   };
 

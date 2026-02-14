@@ -115,15 +115,9 @@ The name is inspired by the DOTA hero Nyx
     - basicSystem
       - [system.nix](/modules/system.nix)
       - configure firmware updates, file system tools, and other basic utilities
-    - swap32
+    - swap
       - [system.nix](/modules/system.nix)
-      - configure 32 GB swap
-    - swap18
-      - [system.nix](/modules/system.nix)
-      - configure 18 GB swap
-    - swap8
-      - [system.nix](/modules/system.nix)
-      - configure 8 GB swap
+      - configure swap
     - bluetooth
       - [system.nix](/modules/system.nix)
       - configure bluetooth settings

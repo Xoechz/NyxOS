@@ -9,6 +9,7 @@ let system = "aarch64-linux"; in {
         system = system;
         config.allowUnfree = true;
       };
+      swapSize = 8; # GB
     };
     modules = [
       inputs.self.modules.nixos.nixPi
@@ -28,7 +29,7 @@ let system = "aarch64-linux"; in {
       nh
       homeManager
       basicSystem
-      swap8
+      swap
       terminal
       elias
       cliUtilities
@@ -36,13 +37,22 @@ let system = "aarch64-linux"; in {
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    home-manager.users.elias = {
-      imports = with inputs.self.modules.homeManager; [
-        elias
-        git
-      ];
+    home-manager = {
+      extraSpecialArgs = {
+        pkgs-stable = import inputs.nixpkgs-stable {
+          system = system;
+          config.allowUnfree = true;
+        };
+        showBattery = false; # Show battery status in the system tray (not needed for a server)
+      };
+      users.elias = {
+        imports = with inputs.self.modules.homeManager; [
+          elias
+          git
+        ];
 
-      home.stateVersion = "24.05";
+        home.stateVersion = "24.05";
+      };
     };
 
     boot.initrd.availableKernelModules = [ "usbhid" ];

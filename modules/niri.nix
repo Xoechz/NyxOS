@@ -83,7 +83,7 @@
   };
 
   # Home Module niri: Niri + DankMaterialShell
-  flake.modules.homeManager.niri = { pkgs, lib, config, ... }: {
+  flake.modules.homeManager.niri = { pkgs, lib, config, showBattery, ... }: {
     imports = [
       inputs.dms.homeModules.dank-material-shell
       inputs.dms.homeModules.niri
@@ -948,8 +948,12 @@
                 id = "memUsage";
                 enabled = true;
               }
-              {
+              (lib.mkIf showBattery {
                 id = "battery";
+                enabled = true;
+              })
+              {
+                id = "colorPicker";
                 enabled = true;
               }
               {
@@ -966,6 +970,10 @@
               }
               {
                 id = "controlCenterButton";
+                enabled = true;
+              }
+              {
+                id = "powerMenuButton";
                 enabled = true;
               }
             ];

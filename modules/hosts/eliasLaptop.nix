@@ -9,6 +9,7 @@ let system = "x86_64-linux"; in {
         system = system;
         config.allowUnfree = true;
       };
+      swapSize = 18; # GB
     };
     modules = [
       inputs.self.modules.nixos.eliasLaptop
@@ -40,7 +41,7 @@ let system = "x86_64-linux"; in {
       grub
       basicSystem
       optimizationsLaptop
-      swap18
+      swap
       bluetooth
       printing
       sound
@@ -54,27 +55,36 @@ let system = "x86_64-linux"; in {
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    home-manager.users.elias = {
-      imports = with inputs.self.modules.homeManager; [
-        libreoffice
-        email
-        teams
-        pdf
-        media
-        mediaEditors
-        obs
-        discord
-        kdeConnect
-        vscode
-        betterfox
-        minecraft
-        sailing
-        elias
-        git
-        guiUtilities
-      ];
+    home-manager = {
+      extraSpecialArgs = {
+        pkgs-stable = import inputs.nixpkgs-stable {
+          system = system;
+          config.allowUnfree = true;
+        };
+        showBattery = true; # Show battery status in the system tray
+      };
+      users.elias = {
+        imports = with inputs.self.modules.homeManager; [
+          libreoffice
+          email
+          teams
+          pdf
+          media
+          mediaEditors
+          obs
+          discord
+          kdeConnect
+          vscode
+          betterfox
+          minecraft
+          sailing
+          elias
+          git
+          guiUtilities
+        ];
 
-      home.stateVersion = "24.05";
+        home.stateVersion = "24.05";
+      };
     };
 
     boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
