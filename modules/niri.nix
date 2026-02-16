@@ -804,7 +804,7 @@
         weatherEnabled = false;
         networkPreference = "auto";
         vpnLastConnected = "";
-        iconTheme = "Papirus-Dark";
+        iconTheme = "Numix-Circle";
         launcherLogoMode = "os";
         launcherLogoColorOverride = "primary";
         launcherLogoColorInvertOnMode = false;
