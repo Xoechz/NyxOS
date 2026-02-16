@@ -219,7 +219,7 @@
   };
 
   # System Module catppuccin: configure catppuccin theming
-  flake.modules.nixos.catppuccin = { pkgs, ... }: {
+  flake.modules.nixos.catppuccin = { ... }: {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
     catppuccin = {
@@ -234,60 +234,70 @@
 
     xdg.icons.fallbackCursorThemes = [ "catppuccin-mocha-dark-cursors" ];
 
-    environment.systemPackages = [ pkgs.numix-icon-theme-circle ];
-
     home-manager.sharedModules = [
       inputs.self.modules.homeManager.catppuccin
     ];
   };
 
   # Home Module catppuccin: configure catppuccin theming in home manager
-  flake.modules.homeManager.catppuccin = { pkgs, lib, ... }: {
-    imports = [ inputs.catppuccin.homeModules.catppuccin ];
-
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-      accent = "peach";
-      cursors = {
-        enable = true;
-        accent = "dark";
+  flake.modules.homeManager.catppuccin = { pkgs, lib, ... }:
+    let
+      catppuccin-papirus-icons = pkgs.catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "peach";
       };
-      gtk.icon.enable = true;
-      kvantum.enable = false;
+    in
+    {
+      imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-      vscode.profiles.default.enable = false; # vscode setup is done non declaratively. Sorry!
-    };
+      catppuccin = {
+        enable = true;
+        flavor = "mocha";
+        accent = "peach";
+        cursors = {
+          enable = true;
+          accent = "dark";
+        };
 
-    gtk = {
-      enable = true;
-      theme = {
-        name = "catppuccin-mocha-peach-standard";
-        package = pkgs.catppuccin-gtk.override {
-          size = "standard";
-          accents = [ "peach" ];
-          variant = "mocha";
+        gtk.icon.enable = true;
+        kvantum.enable = false;
+
+        vscode.profiles.default.enable = false; # vscode setup is done non declaratively. Sorry!
+      };
+
+      home.packages = [
+        catppuccin-papirus-icons
+      ];
+
+      gtk = {
+        enable = true;
+        theme = {
+          name = "catppuccin-mocha-peach-standard";
+          package = pkgs.catppuccin-gtk.override {
+            size = "standard";
+            accents = [ "peach" ];
+            variant = "mocha";
+          };
+        };
+        iconTheme = lib.mkForce {
+          name = "Papirus-Dark";
+          package = catppuccin-papirus-icons;
+        };
+        gtk3.extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+          gtk-decoration-layout = "icon:minimize,maximize,close";
+          gtk-toolbar-style = 3;
+
+        };
+        gtk4.extraConfig = {
+          gtk-application-prefer-dark-theme = true;
+          gtk-decoration-layout = "icon:minimize,maximize,close";
         };
       };
-      iconTheme = lib.mkForce {
-        name = "Numix-Circle";
-        package = pkgs.numix-icon-theme-circle;
-      };
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = true;
-        gtk-decoration-layout = "icon:minimize,maximize,close";
-        gtk-toolbar-style = 3;
 
-      };
-      gtk4.extraConfig = {
-        gtk-application-prefer-dark-theme = true;
-        gtk-decoration-layout = "icon:minimize,maximize,close";
+      qt = {
+        enable = true;
+        platformTheme.name = "gtk3";
       };
     };
-
-    qt = {
-      enable = true;
-      platformTheme.name = "gtk3";
-    };
-  };
 }
