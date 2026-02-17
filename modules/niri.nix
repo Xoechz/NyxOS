@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
+  # //TODO: check if KDEConnect works now update to newest DMS version
   # System Module niri: Niri + DankMaterialShell
   flake.modules.nixos.niri = { pkgs, ... }: {
     imports = [
@@ -1054,6 +1054,7 @@
       plugins = {
         # Simply enable plugins by their ID (from the registry)
         dockerManager.enable = true;
+        # //TODO: check if KDEConnect works now
       };
     };
 
