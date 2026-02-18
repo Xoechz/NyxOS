@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  # //TODO: check if KDEConnect works now update to newest DMS version
+
   # System Module niri: Niri + DankMaterialShell
   flake.modules.nixos.niri = { pkgs, ... }: {
     imports = [
@@ -649,13 +649,20 @@
         popupTransparency = 1;
         widgetBackgroundColor = "sch";
         widgetColorMode = "default";
+        controlCenterTileColorMode = "primary";
+        buttonColorMode = "primary";
         cornerRadius = 12;
         use24HourClock = true;
         showSeconds = true;
+        padHours12Hour = false;
         useFahrenheit = false;
         nightModeEnabled = false;
         animationSpeed = 1;
         customAnimationDuration = 500;
+        syncComponentAnimationSpeeds = true;
+        popoutAnimationSpeed = 1;
+        modalAnimationSpeed = 1;
+        enableRippleEffects = true;
         wallpaperFillMode = "Fill";
         blurredWallpaperLayer = false;
         blurWallpaperOnOverview = false;
@@ -734,19 +741,32 @@
             enabled = true;
             width = 50;
           }
+          {
+            id = "colorPicker";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "idleInhibitor";
+            enabled = true;
+            width = 50;
+          }
         ];
         showWorkspaceIndex = true;
         showWorkspaceName = false;
         showWorkspacePadding = false;
         workspaceScrolling = false;
         showWorkspaceApps = true;
+        workspaceDragReorder = true;
         maxWorkspaceIcons = 3;
+        workspaceAppIconSizeOffset = 0;
         groupWorkspaceApps = true;
         workspaceFollowFocus = false;
         showOccupiedWorkspacesOnly = false;
         reverseScrolling = false;
         dwlShowAllTags = false;
         workspaceColorMode = "default";
+        workspaceOccupiedColorMode = "none";
         workspaceUnfocusedColorMode = "default";
         workspaceUrgentColorMode = "default";
         workspaceFocusedBorderEnabled = false;
@@ -757,26 +777,27 @@
         scrollTitleEnabled = true;
         audioVisualizerEnabled = true;
         audioScrollMode = "volume";
+        audioWheelScrollAmount = 5;
         clockCompactMode = false;
         focusedWindowCompactMode = false;
         runningAppsCompactMode = true;
+        barMaxVisibleApps = 0;
+        barMaxVisibleRunningApps = 0;
+        barShowOverflowBadge = true;
+        appsDockHideIndicators = false;
+        appsDockColorizeActive = false;
+        appsDockActiveColorMode = "primary";
+        appsDockEnlargeOnHover = true;
+        appsDockEnlargePercentage = 125;
+        appsDockIconSizePercentage = 100;
         keyboardLayoutNameCompactMode = false;
         runningAppsCurrentWorkspace = false;
         runningAppsGroupByApp = false;
+        runningAppsCurrentMonitor = false;
         appIdSubstitutions = [
           {
             pattern = "Spotify";
             replacement = "spotify";
-            type = "exact";
-          }
-          {
-            pattern = "beepertexts";
-            replacement = "beeper";
-            type = "exact";
-          }
-          {
-            pattern = "home assistant desktop";
-            replacement = "homeassistant-desktop";
             type = "exact";
           }
           {
@@ -796,14 +817,27 @@
         mediaSize = 1;
         appLauncherViewMode = "list";
         spotlightModalViewMode = "list";
+        browserPickerViewMode = "grid";
+        browserUsageHistory = { };
+        appPickerViewMode = "grid";
+        filePickerUsageHistory = { };
         sortAppsAlphabetically = false;
         appLauncherGridColumns = 4;
         spotlightCloseNiriOverview = true;
+        spotlightSectionViewModes = {
+          apps = "list";
+        };
+        appDrawerSectionViewModes = { };
         niriOverviewOverlayEnabled = true;
+        dankLauncherV2Size = "compact";
+        dankLauncherV2BorderEnabled = true;
+        dankLauncherV2BorderThickness = 2;
+        dankLauncherV2BorderColor = "primary";
+        dankLauncherV2ShowFooter = true;
+        dankLauncherV2UnloadOnClose = false;
         useAutoLocation = false;
         weatherEnabled = false;
         networkPreference = "auto";
-        vpnLastConnected = "";
         iconTheme = "Papirus-Dark";
         launcherLogoMode = "os";
         launcherLogoColorOverride = "primary";
@@ -862,24 +896,26 @@
         lockScreenShowDate = true;
         lockScreenShowProfileImage = false;
         lockScreenShowPasswordField = true;
-        enableFprint = false;
-        maxFprintTries = 15;
+        lockScreenShowMediaPlayer = true;
+        lockScreenPowerOffMonitorsOnLock = false;
+        lockAtStartup = false;
         lockScreenActiveMonitor = "all";
-        lockScreenNotificationMode = 0;
-        hideBrightnessSlider = false;
+        lockScreenInactiveColor = "#000000";
         notificationTimeoutLow = 5000;
         notificationTimeoutNormal = 5000;
         notificationTimeoutCritical = 0;
         notificationCompactMode = false;
         notificationPopupPosition = 0;
+        notificationAnimationSpeed = 1;
         notificationHistoryEnabled = true;
         notificationHistoryMaxCount = 50;
         notificationHistoryMaxAgeDays = 7;
         notificationHistorySaveLow = true;
         notificationHistorySaveNormal = true;
         notificationHistorySaveCritical = true;
-        osdAlwaysShowValue = false;
-        osdPosition = 5;
+        notificationPopupShadowEnabled = true;
+        notificationPopupPrivacyMode = false;
+        hideBrightnessSlider = false;
         osdVolumeEnabled = true;
         osdMediaVolumeEnabled = true;
         osdBrightnessEnabled = true;
@@ -890,6 +926,9 @@
         osdAudioOutputEnabled = true;
         powerActionConfirm = true;
         powerActionHoldDuration = 0.25;
+        osdAlwaysShowValue = true;
+        osdPosition = 5;
+        osdMediaPlaybackEnabled = true;
         powerMenuActions = [
           "reboot"
           "logout"
@@ -905,6 +944,9 @@
         updaterCustomCommand = "";
         updaterTerminalAdditionalParams = "";
         displayNameMode = "system";
+        displayProfileAutoSelect = false;
+        displayShowDisconnected = false;
+        displaySnapToEdge = true;
         barConfigs = [
           {
             id = "default";
@@ -917,8 +959,9 @@
               "launcherButton"
               "workspaceSwitcher"
               {
-                id = "runningApps";
+                id = "appsDock";
                 enabled = true;
+                barShowOverflowBadge = true;
               }
             ];
             centerWidgets = [
@@ -953,7 +996,7 @@
                 enabled = true;
               })
               {
-                id = "colorPicker";
+                id = "dankKDEConnect";
                 enabled = true;
               }
               {
@@ -999,15 +1042,17 @@
             popupGapsAuto = true;
             popupGapsManual = 4;
             scrollYBehavior = "column";
-            scrollXBehavior = "none";
+            scrollXBehavior = "workspace";
             widgetOutlineEnabled = false;
             widgetOutlineColor = "primary";
+            clickThrough = false;
           }
         ];
         builtInPluginSettings = {
           dms_settings_search = {
             trigger = "?";
           };
+          clipboardEnterToPaste = false;
         };
       };
 
@@ -1026,7 +1071,7 @@
         wallpaperCyclingEnabled = true;
         wallpaperCyclingMode = "interval";
         wallpaperCyclingInterval = 10;
-        nightModeEnabled = false;
+        nightModeEnabled = true;
         nightModeTemperature = 4500;
         nightModeHighTemperature = 6500;
         nightModeAutoEnabled = true;
@@ -1049,12 +1094,16 @@
         nonNvidiaGpuTempEnabled = false;
         enabledGpuPciIds = [ ];
         wifiDeviceOverride = "";
+        searchAppActions = false;
       };
 
       plugins = {
         # Simply enable plugins by their ID (from the registry)
-        dockerManager.enable = true;
-        # //TODO: check if KDEConnect works now
+        dockerManager = {
+          enable = true;
+          settings.terminalApp = "kitty";
+        };
+        dankKDEConnect.enable = true;
       };
     };
 
