@@ -1070,7 +1070,7 @@
         nightModeStartMinute = 0;
         nightModeEndHour = 5;
         nightModeEndMinute = 0;
-        barPinnedApps = [ "kitty" "thunar" "thunderbird" "firefox" "code" "steam" "discord" ]; # //TODO: add taskbar pinned apps
+        barPinnedApps = [ "kitty" "thunar" "thunderbird" "firefox" "code" "steam" "vesktop" ]; # //TODO: add taskbar pinned apps
         hiddenTrayIds = [ ];
         recentColors = [ ];
         showThirdPartyPlugins = false;

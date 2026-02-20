@@ -8,14 +8,13 @@
   };
 
   # System Module kde
-  flake.modules.nixos.kde = { pkgs, lib, ... }: {
+  flake.modules.nixos.kde = { pkgs, ... }: {
     # Enable the X11 windowing system. Disabling it seems to break a lot of stuff.
     services.xserver.enable = true;
 
     # Configure keymap in X11
     services.xserver.xkb = {
       layout = "at";
-      variant = "";
     };
 
     # Enable the KDE Plasma Desktop Environment.
@@ -36,8 +35,6 @@
       konsole
       elisa
     ];
-
-    environment.variables.NIXOS_OZONE_WL = "1";
   };
 
   # Home Module plasma-manager: configure plasma manager
@@ -132,7 +129,7 @@
                   "applications:firefox.desktop"
                   "applications:code.desktop"
                   "applications:steam.desktop"
-                  "applications:discord.desktop"
+                  "applications:vesktop.desktop"
                 ];
                 appearance = {
                   showTooltips = true;

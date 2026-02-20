@@ -24,8 +24,6 @@ let system = "x86_64-linux"; in {
       languageDe
       fonts
       baseDesktop
-      catppuccin
-      docker
       steam
       kde
       ssh
@@ -44,6 +42,7 @@ let system = "x86_64-linux"; in {
       elias
       others
       cliUtilities
+      tv
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -69,8 +68,6 @@ let system = "x86_64-linux"; in {
       users = {
         elias = {
           imports = with inputs.self.modules.homeManager; [
-            betterfox
-            plasma-manager
             elias
             git
           ];
