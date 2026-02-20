@@ -67,9 +67,9 @@
         full-rebuild = "cd ~/NyxOS && git pull && rebuild";
         full-update = "cd ~/NyxOS && git pull && update";
         deploy-to-pi = "rebuild --target-host NixPi -H NixPi";
-        deploy-to-fred = "rebuild --target-host fredPC -H fredPC";
-        deploy-to-eliasPC = "rebuild --target-host eliasPC -H eliasPC";
-        deploy-to-eliasLaptop = "rebuild --target-host eliasLaptop -H eliasLaptop";
+        deploy-to-fredPC = "rebuild --target-host FredPC -H FredPC";
+        deploy-to-eliasPC = "rebuild --target-host EliasPC -H EliasPC";
+        deploy-to-eliasLaptop = "rebuild --target-host EliasLaptop -H EliasLaptop";
         cat = "bat";
         ssh = "kitten ssh";
         dev-certs-reload = "mkdir -p ~/NyxOS/certs && dotnet dev-certs https --format PEM -ep ~/NyxOS/certs/$(hostname)-dev-cert.pem && rebuild";
