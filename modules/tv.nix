@@ -14,6 +14,7 @@
     environment.systemPackages = with pkgs; [
       w_scan2
       dvb-apps
+      usbutils
       tvheadend
       oscam
     ];
@@ -45,5 +46,7 @@
       group = "video";
       isSystemUser = true;
     };
+
+    networking.firewall.allowedTCPPorts = [ 9981 9982 8888 ];
   };
 }

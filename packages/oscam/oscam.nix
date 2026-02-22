@@ -1,4 +1,4 @@
-{ stdenv, fetchzip }:
+{ stdenv, fetchzip, libusb1, cmake, pkg-config, usbutils, makeWrapper }:
 
 stdenv.mkDerivation rec {
   pname = "oscam";
@@ -9,9 +9,15 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-gTitrFnuLAKDWEEJltTEn8S4giFm0UTaeLrm4QPigPk=";
   };
 
-  installPhase = ''
-    mkdir -p $out/bin
-    cp Distribution/oscam-2.26.02-11943@-x86_64-unknown-linux-gnu $out/bin/oscam
-    chmod +x $out/bin/oscam
+  nativeBuildInputs = [ cmake pkg-config makeWrapper ];
+  buildInputs = [ libusb1 usbutils ];
+
+  cmakeFlags = [
+    "-DUSE_LIBUSB=1"
+  ];
+
+  postFixup = ''
+    wrapProgram $out/bin/oscam \
+      --prefix PATH : ${usbutils}/bin
   '';
 }
