@@ -86,6 +86,7 @@
       in
       {
         enable = true;
+        wayland = false;
 
         enabledExtensions = with spicePkgs.extensions; [
           shuffle # shuffle+ (special characters are sanitized out of extension names)
