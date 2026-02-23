@@ -10,6 +10,7 @@ let system = "x86_64-linux"; in {
         config.allowUnfree = true;
       };
       swapSize = 32; # GB
+      users = [ "elias" "fred" "gerhard" ];
     };
     modules = [
       inputs.self.modules.nixos.fredPC
@@ -43,6 +44,7 @@ let system = "x86_64-linux"; in {
       others
       cliUtilities
       tv
+      winboat
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

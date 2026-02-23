@@ -58,14 +58,17 @@ The name is inspired by the DOTA hero Nyx
     - go
       - [dev.nix](/modules/dev.nix)
       - go development environment
-    - docker
-      - [dev.nix](/modules/dev.nix)
-      - enable and configure docker for development
     - devCerts
       - [dev.nix](/modules/dev.nix)
       - add development certificates to the system
+    - docker
+      - [virtualization.nix](/modules/virtualization.nix)
+      - enable and configure docker for development
+    - winboat
+      - [virtualization.nix](/modules/virtualization.nix)
+      - enable and configure winboat for running windows in a vm
     - vm
-      - [dev.nix](/modules/dev.nix)
+      - [virtualization.nix](/modules/virtualization.nix)
       - enable and configure virtual machine support for development
     - steam
       - [games.nix](/modules/games.nix)

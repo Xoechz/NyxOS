@@ -10,6 +10,7 @@ let system = "x86_64-linux"; in {
         config.allowUnfree = true;
       };
       swapSize = 32; # GB
+      users = [ "elias" ];
     };
     modules = [
       inputs.self.modules.nixos.eliasPC

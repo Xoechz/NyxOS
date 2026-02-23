@@ -10,6 +10,7 @@ let system = "aarch64-linux"; in {
         config.allowUnfree = true;
       };
       swapSize = 8; # GB
+      users = [ "elias" ];
     };
     modules = [
       inputs.self.modules.nixos.nixPi

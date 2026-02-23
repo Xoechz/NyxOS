@@ -115,24 +115,6 @@
     ];
   };
 
-  # System Module docker: enable and configure docker for development
-  flake.modules.nixos.docker = { pkgs, ... }: {
-    environment.systemPackages = with pkgs; [
-      # docker
-      dive
-    ];
-
-    # enable docker
-    virtualisation.docker = {
-      enable = true;
-      daemon.settings = {
-        dns = [ "8.8.8.8" "8.8.4.4" ];
-      };
-    };
-
-    users.extraGroups.docker.members = [ "elias" ];
-  };
-
   # System Module devCerts: add development certificates to the system
   flake.modules.nixos.devCerts = { lib, ... }: {
     security.pki.certificates =
@@ -142,22 +124,5 @@
         pemFiles = lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".pem" name) certFiles;
       in
       map (name: builtins.readFile (certsDir + "/${name}")) (builtins.attrNames pemFiles);
-  };
-
-  # System Module vm: enable and configure virtual machine support for development
-  flake.modules.nixos.vm = { ... }: {
-    virtualisation.virtualbox = {
-      host = {
-        enable = true;
-        enableExtensionPack = true;
-      };
-      guest = {
-        enable = true;
-        dragAndDrop = true;
-      };
-    };
-
-    boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
-    users.extraGroups.vboxusers.members = [ "elias" ];
   };
 }

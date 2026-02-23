@@ -25,7 +25,7 @@
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.tvheadend}/bin/tvheadend -u hts -g video -C -6 --http_port 9981 --htsp_port 9982";
+        ExecStart = "${pkgs.tvheadend}/bin/tvheadend -u hts -g video -C -6 --http_port 9981 --htsp_port 9982 -c /etc/tvheadend";
         Restart = "always";
         User = "hts";
         Group = "video";
@@ -47,6 +47,6 @@
       isSystemUser = true;
     };
 
-    networking.firewall.allowedTCPPorts = [ 9981 9982 8888 ];
+    networking.firewall.allowedTCPPorts = [ 9981 9982 15050 15080 ];
   };
 }
