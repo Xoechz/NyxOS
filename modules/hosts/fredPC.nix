@@ -48,6 +48,7 @@ let system = "x86_64-linux"; in {
     ];
 
     home-manager.sharedModules = with inputs.self.modules.homeManager; [
+      plasma-manager
       libreoffice
       email
       pdf
