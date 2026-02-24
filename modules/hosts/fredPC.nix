@@ -43,8 +43,6 @@ let system = "x86_64-linux"; in {
       elias
       others
       cliUtilities
-      tv
-      winboat
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
