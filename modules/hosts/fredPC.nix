@@ -150,16 +150,7 @@ let system = "x86_64-linux"; in {
 
     nixpkgs.hostPlatform = system;
 
-    boot.loader.grub.extraEntries = ''
-      menuentry "Windows" --class windows --class os {
-        insmod ntfs
-        search --no-floppy --set=root --fs-uuid C236-4D6C
-        chainloader /efi/Microsoft/Boot/bootmgfw.efi
-      };
-      menuentry "UEFI Firmware Settings" --class efi {
-        fwsetup
-      }
-    '';
+    boot.loader.grub.useOSProber = true;
 
     system.stateVersion = "25.05";
   };
