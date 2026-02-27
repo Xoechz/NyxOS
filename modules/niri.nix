@@ -6,7 +6,7 @@
       inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
     quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dms = {

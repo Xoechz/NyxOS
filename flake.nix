@@ -92,7 +92,7 @@
     };
     quickshell = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
     };
     spicetify-nix = {
       inputs = {

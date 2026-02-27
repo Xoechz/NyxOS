@@ -1,5 +1,6 @@
 { inputs, ... }: {
   flake-file.inputs = {
+    systems.url = "github:nix-systems/default";
     betterfox-nix = {
       url = "github:HeitorAugustoLN/betterfox-nix";
       inputs.nixpkgs.follows = "nixpkgs";
