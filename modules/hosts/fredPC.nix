@@ -80,12 +80,36 @@ let system = "x86_64-linux"; in {
             fred
           ];
 
+          xdg.mimeApps = {
+            enable = lib.mkDefault true;
+            defaultApplications = {
+              "text/html" = "chromium.desktop";
+              "x-scheme-handler/http" = "chromium.desktop";
+              "x-scheme-handler/https" = "chromium.desktop";
+              "x-scheme-handler/about" = "chromium.desktop";
+              "x-scheme-handler/unknown" = "chromium.desktop";
+              "application/pdf" = "chromium.desktop";
+            };
+          };
+
           home.stateVersion = "24.05";
         };
         gerhard = {
           imports = with inputs.self.modules.homeManager; [
             gerhard
           ];
+
+          xdg.mimeApps = {
+            enable = lib.mkDefault true;
+            defaultApplications = {
+              "text/html" = "chromium.desktop";
+              "x-scheme-handler/http" = "chromium.desktop";
+              "x-scheme-handler/https" = "chromium.desktop";
+              "x-scheme-handler/about" = "chromium.desktop";
+              "x-scheme-handler/unknown" = "chromium.desktop";
+              "application/pdf" = "chromium.desktop";
+            };
+          };
 
           home.stateVersion = "24.05";
         };
@@ -108,9 +132,9 @@ let system = "x86_64-linux"; in {
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-    fileSystems."/run/media/OldWindows" = {
-      device = "/dev/disk/by-uuid/A60E66E70E66B04B";
-      fsType = "ntfs";
+    fileSystems."/run/media/Storage" = {
+      device = "/dev/disk/by-uuid/1abb2332-124a-41c3-9577-d3bc243a8b58";
+      fsType = "ext4";
     };
 
     fileSystems."/run/media/Windows" = {
@@ -126,7 +150,16 @@ let system = "x86_64-linux"; in {
 
     nixpkgs.hostPlatform = system;
 
-    boot.loader.grub.useOSProber = true;
+    boot.loader.grub.extraEntries = ''
+      menuentry "Windows" --class windows --class os {
+        insmod ntfs
+        search --no-floppy --set=root --fs-uuid C236-4D6C
+        chainloader /efi/Microsoft/Boot/bootmgfw.efi
+      };
+      menuentry "UEFI Firmware Settings" --class efi {
+        fwsetup
+      }
+    '';
 
     system.stateVersion = "25.05";
   };

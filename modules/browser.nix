@@ -17,9 +17,10 @@
   };
 
   # System Module chromium-no-gpu: chromium with disabled gpu acceleration
-  flake.modules.nixos.chromium-no-gpu = { pkgs, ... }: {
+  flake.modules.nixos.chromium-no-gpu = { pkgs, lib, ... }: {
     environment.systemPackages = with pkgs; [
       (chromium.override {
+        enableWideVine = true;
         commandLineArgs = [ "--disable-gpu" ];
       })
     ];
