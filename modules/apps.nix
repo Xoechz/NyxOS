@@ -179,7 +179,7 @@
   # Home Module idea: configure jetbrains idea for home manager
   flake.modules.homeManager.idea = { pkgs, ... }: {
     home.packages = with pkgs; [
-      (jetbrains.plugins.addPlugins jetbrains.ideaUltimate [ "github-copilot" ])
+      jetbrains.idea
     ];
   };
 

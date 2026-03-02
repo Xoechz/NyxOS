@@ -133,6 +133,7 @@
           denylists = {
             #Adblocking
             ads = [
+              "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
               "https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt"
               "https://blocklistproject.github.io/Lists/ads.txt"
               "https://blocklistproject.github.io/Lists/malware.txt"

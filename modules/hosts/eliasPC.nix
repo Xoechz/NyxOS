@@ -75,6 +75,7 @@ let system = "x86_64-linux"; in {
           discord
           kdeConnect
           vscode
+          idea
           betterfox
           minecraft
           sailing
