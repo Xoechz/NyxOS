@@ -31,9 +31,15 @@ The name is inspired by the DOTA hero Nyx
     - basicFonts
       - [desktop.nix](/modules/desktop.nix)
       - configure basic fonts
+    - baseDesktop
+      - [desktop.nix](/modules/desktop.nix)
+      - basic desktop settings
     - fonts
       - [desktop.nix](/modules/desktop.nix)
       - configure additional fonts
+    - basicCatppuccin
+      - [desktop.nix](/modules/desktop.nix)
+      - configure catppuccin theming
     - catppuccin
       - [desktop.nix](/modules/desktop.nix)
       - configure catppuccin theming
@@ -76,6 +82,9 @@ The name is inspired by the DOTA hero Nyx
     - kde
       - [kde.nix](/modules/kde.nix)
       - setup kde settings
+    - niri
+      - [niri.nix](/modules/niri.nix)
+      - setup niri settings
     - ssh
       - [network.nix](/modules/network.nix)
       - enable and configure ssh server and client
@@ -148,9 +157,6 @@ The name is inspired by the DOTA hero Nyx
     - terminal
       - [terminal.nix](/modules/terminal.nix)
       - kitty + starship + direnv + fzf + eza + zsh
-    - tv
-      - [tv.nix](/modules/tv.nix)
-      - dvb-s setup for tv
     - elias
       - [users.nix](/modules/users.nix)
       - user configuration for elias
@@ -185,9 +191,18 @@ The name is inspired by the DOTA hero Nyx
     - kdeConnect
       - [apps.nix](/modules/apps.nix)
       - configure kdeconnect for home manager
+    - obs
+      - [apps.nix](/modules/apps.nix)
+      - configure obs studio
     - vscode
       - [apps.nix](/modules/apps.nix)
       - configure vscode for home manager
+    - vscodeNonFhs
+      - [apps.nix](/modules/apps.nix)
+      - configure vscode for home manager
+    - idea
+      - [apps.nix](/modules/apps.nix)
+      - configure jetbrains idea for home manager
     - qgis
       - [apps.nix](/modules/apps.nix)
       - configure qgis for home manager
@@ -203,6 +218,9 @@ The name is inspired by the DOTA hero Nyx
     - plasma-manager
       - [kde.nix](/modules/kde.nix)
       - configure plasma manager
+    - niri
+      - [niri.nix](/modules/niri.nix)
+      - setup niri settings
     - sailing
       - [network.nix](/modules/network.nix)
       - enable and configure sailing applications ;)

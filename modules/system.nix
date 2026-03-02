@@ -22,7 +22,8 @@
   flake.modules.nixos.basicSystem = { ... }: {
     time.timeZone = "Europe/Vienna";
 
-    hardware.enableRedistributableFirmware = true;
+    hardware.enableAllFirmware = true;
+    hardware.enableAllHardware = true;
 
     services.fwupd.enable = true;
     services.fstrim.enable = true;
@@ -61,11 +62,16 @@
     services.printing =
       {
         enable = true;
-        drivers = with pkgs; [ hplip ];
+        drivers = with pkgs; [ hplipWithPlugin ];
       };
 
+    hardware.sane = {
+      enable = true;
+      extraBackends = [ pkgs.hplipWithPlugin ];
+    };
+
     environment.systemPackages = with pkgs; [
-      hplip
+      hplipWithPlugin
     ];
   };
 

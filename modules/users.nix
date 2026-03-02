@@ -6,8 +6,7 @@
       description = "Elias";
 
       # lpadmin is needed for printer setup
-      # video is needed for dvb-s access
-      extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
+      extraGroups = [ "networkmanager" "wheel" "lpadmin" "lp" "scanner" ];
       shell = pkgs.zsh;
 
       # To generate SSH keys:
@@ -34,16 +33,14 @@
         isNormalUser = true;
         description = "Fred";
         # lpadmin is needed for printer setup
-        # video is needed for dvb-s access
-        extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
+        extraGroups = [ "networkmanager" "wheel" "lpadmin" "lp" "scanner" ];
         shell = pkgs.zsh;
       };
       gerhard = {
         isNormalUser = true;
         description = "Gerhard";
         # lpadmin is needed for printer setup
-        # video is needed for dvb-s access
-        extraGroups = [ "networkmanager" "wheel" "lpadmin" "video" ];
+        extraGroups = [ "networkmanager" "wheel" "lpadmin" "lp" "scanner" ];
         shell = pkgs.zsh;
       };
     };

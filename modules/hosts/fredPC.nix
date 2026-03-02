@@ -23,7 +23,7 @@ let system = "x86_64-linux"; in {
       firefox
       chromium-no-gpu
       languageDe
-      fonts
+      basicFonts
       baseDesktop
       steam
       kde
@@ -54,7 +54,7 @@ let system = "x86_64-linux"; in {
       pdf
       media
       kdeConnect
-      vscode
+      vscodeNonFhs
       guiUtilities
     ];
 

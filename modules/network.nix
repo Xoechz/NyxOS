@@ -133,7 +133,6 @@
           denylists = {
             #Adblocking
             ads = [
-              "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
               "https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt"
               "https://blocklistproject.github.io/Lists/ads.txt"
               "https://blocklistproject.github.io/Lists/malware.txt"
@@ -164,6 +163,7 @@
             "eliasLaptop.bruckner-domain.net" = "192.168.0.13";
             "eliasLaptop.lan" = "192.168.0.13";
             "fredPc.bruckner-domain.net" = "192.168.0.14";
+            "fredPc.lan" = "192.168.0.14";
           };
         };
         caching = {

@@ -161,6 +161,28 @@
     };
   };
 
+  # Home Module vscodeNonFhs: configure vscode for home manager
+  flake.modules.homeManager.vscodeNonFhs = { lib, ... }: {
+    programs.vscode.enable = true;
+
+    xdg.mimeApps = {
+      enable = lib.mkDefault true;
+      defaultApplications = {
+        "text/plain" = "code.desktop";
+      };
+      associations.added = {
+        "inode/directory" = "code.desktop";
+      };
+    };
+  };
+
+  # Home Module idea: configure jetbrains idea for home manager
+  flake.modules.homeManager.idea = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      (jetbrains.plugins.addPlugins jetbrains.ideaUltimate [ "github-copilot" ])
+    ];
+  };
+
   # Home Module qgis: configure qgis for home manager
   flake.modules.homeManager.qgis = { pkgs, ... }: {
     home.packages = with pkgs; [

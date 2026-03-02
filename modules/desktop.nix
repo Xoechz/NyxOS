@@ -50,6 +50,9 @@
   flake.modules.nixos.basicFonts = { pkgs, ... }: {
     fonts = {
       packages = with pkgs;[
+        corefonts
+        vista-fonts
+
         # JetBrains officially created font for developers
         nerd-fonts.jetbrains-mono
         # `0` and `O` very similar, characters are either very curvy or straight lined
