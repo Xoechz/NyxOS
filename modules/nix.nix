@@ -180,7 +180,7 @@
   };
 
   # System Module homeManager: enable home-manager service with basic settings
-  flake.modules.nixos.homeManager = { system, ... }: {
+  flake.modules.nixos.homeManager = { ... }: {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;

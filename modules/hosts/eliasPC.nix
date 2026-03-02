@@ -61,7 +61,7 @@ let system = "x86_64-linux"; in {
           system = system;
           config.allowUnfree = true;
         };
-        showBattery = false; # Show battery status in the system tray (not needed for a desktop PC)
+        isMobile = false; # Show battery status in the system tray (not needed for a desktop PC)
       };
       users.elias = {
         imports = with inputs.self.modules.homeManager; [

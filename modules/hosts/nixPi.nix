@@ -22,39 +22,22 @@ let system = "aarch64-linux"; in {
     imports = with inputs.self.modules.nixos; [
       languageEn
       basicFonts
-      catppuccin
+      basicCatppuccin
       ssh
       blocky
+      cloudflared
       firewallServer
       distributedBuild
       nh
-      homeManager
       basicSystem
       swap
-      terminal
       elias
       cliUtilities
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    home-manager = {
-      extraSpecialArgs = {
-        pkgs-stable = import inputs.nixpkgs-stable {
-          system = system;
-          config.allowUnfree = true;
-        };
-        showBattery = false; # Show battery status in the system tray (not needed for a server)
-      };
-      users.elias = {
-        imports = with inputs.self.modules.homeManager; [
-          elias
-          git
-        ];
-
-        home.stateVersion = "24.05";
-      };
-    };
+    programs.zsh.enable = true;
 
     boot.initrd.availableKernelModules = [ "usbhid" ];
     boot.initrd.kernelModules = [ ];

@@ -15,19 +15,19 @@
     # SSH known hosts for distributed builds
     programs.ssh.knownHosts = {
       EliasPC = {
-        hostNames = [ "EliasPC" "EliasPC.local" ];
+        hostNames = [ "EliasPC" "EliasPC.bruckner-domain.net" ];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBHAqDy+XbGANEjlFRgFu/KhiA1Y08RSekbArf/o/9H";
       };
       EliasLaptop = {
-        hostNames = [ "EliasLaptop" "EliasLaptop.local" ];
+        hostNames = [ "EliasLaptop" "EliasLaptop.bruckner-domain.net" ];
         publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
       };
       FredPC = {
-        hostNames = [ "FredPC" "FredPC.local" ];
+        hostNames = [ "FredPC" "FredPC.bruckner-domain.net" ];
         publicKey = "fredpc ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINO21u53GTTwxbOX+mmhuGVBHFX5kAOAgyeI06/NCblr";
       };
       NixPi = {
-        hostNames = [ "NixPi" "NixPi.local" ];
+        hostNames = [ "NixPi" "NixPi.bruckner-domain.net" ];
         publicKey = "nixpi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyuYVNGKSrpwWacyBFdqPdFxRTNhu8bcmQ0sk8j786T";
       };
       GitHub = {
@@ -115,7 +115,11 @@
     services.blocky = {
       enable = true;
       settings = {
+        certFile = "/etc/ssl/crt.pem";
+        keyFile = "/etc/ssl/key.pem";
         ports.dns = 53; # Port for incoming DNS Queries.
+        ports.https = 443; # Port for incoming DoH Queries.
+        ports.tls = 853; # Port for incoming DoT Queries.
         upstreams.groups.default = [
           "https://one.one.one.one/dns-query" # Using Cloudflare's DNS over HTTPS server for resolving queries.
         ];
@@ -149,12 +153,17 @@
         customDNS = {
           customTTL = "1h";
           mapping = {
+            "gateway.bruckner-domain.net" = "192.168.0.1";
             "gateway.lan" = "192.168.0.1";
+            "nixpi.bruckner-domain.net" = "192.168.0.10";
             "nixpi.lan" = "192.168.0.10";
+            "printer.bruckner-domain.net" = "192.168.0.11";
             "printer.lan" = "192.168.0.11";
+            "eliasPc.bruckner-domain.net" = "192.168.0.12";
             "eliasPc.lan" = "192.168.0.12";
+            "eliasLaptop.bruckner-domain.net" = "192.168.0.13";
             "eliasLaptop.lan" = "192.168.0.13";
-            "fredPc.lan" = "192.168.0.14";
+            "fredPc.bruckner-domain.net" = "192.168.0.14";
           };
         };
         caching = {
@@ -164,6 +173,31 @@
         };
       };
     };
+  };
+
+  # Systen Module cloudflared: enable and configure cloudflared tunnel for remote access to local services
+  flake.modules.nixos.cloudflared = { pkgs, ... }: {
+    services.cloudflared = {
+      enable = true;
+      tunnels."0e30ac2d-5c3e-4b6a-9c8c-2194ac5f60c2" = {
+        credentialsFile = "/etc/cloudflared/0e30ac2d-5c3e-4b6a-9c8c-2194ac5f60c2.json";
+        certificateFile = "/etc/cloudflared/cert.pem";
+        default = "http_status:404";
+      };
+    };
+
+    environment.systemPackages = with pkgs; [
+      cloudflared
+    ];
+
+    services.resolved.enable = true;
+
+    services.openssh.settings.Macs = [
+      "hmac-sha2-512-etm@openssh.com"
+      "hmac-sha2-256-etm@openssh.com"
+      "umac-128-etm@openssh.com"
+      "hmac-sha2-256"
+    ];
   };
 
   # Home Module sailing: enable and configure sailing applications ;)

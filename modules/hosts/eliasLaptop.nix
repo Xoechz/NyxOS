@@ -62,7 +62,7 @@ let system = "x86_64-linux"; in {
           system = system;
           config.allowUnfree = true;
         };
-        showBattery = true; # Show battery status in the system tray
+        isMobile = true; # Show battery status in the system tray
       };
       users.elias = {
         imports = with inputs.self.modules.homeManager; [

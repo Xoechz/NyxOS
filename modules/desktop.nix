@@ -219,6 +219,17 @@
   };
 
   # System Module catppuccin: configure catppuccin theming
+  flake.modules.nixos.basicCatppuccin = { ... }: {
+    imports = [ inputs.catppuccin.nixosModules.catppuccin ];
+
+    catppuccin = {
+      enable = true;
+      flavor = "mocha";
+      accent = "peach";
+    };
+  };
+
+  # System Module catppuccin: configure catppuccin theming
   flake.modules.nixos.catppuccin = { ... }: {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 

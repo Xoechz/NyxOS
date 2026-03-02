@@ -83,7 +83,7 @@
   };
 
   # Home Module niri: Niri + DankMaterialShell
-  flake.modules.homeManager.niri = { pkgs, lib, config, showBattery, ... }: {
+  flake.modules.homeManager.niri = { pkgs, lib, config, isMobile, ... }: {
     imports = [
       inputs.dms.homeModules.dank-material-shell
       inputs.dms.homeModules.niri
@@ -681,7 +681,7 @@
         showSystemTray = true;
         showClock = true;
         showNotificationButton = true;
-        showBattery = true;
+        isMobile = true;
         showControlCenterButton = true;
         showCapsLockIndicator = true;
         controlCenterShowNetworkIcon = true;
@@ -693,7 +693,7 @@
         controlCenterShowBrightnessPercent = false;
         controlCenterShowMicIcon = false;
         controlCenterShowMicPercent = false;
-        controlCenterShowBatteryIcon = false;
+        controlCenterisMobileIcon = false;
         controlCenterShowPrinterIcon = false;
         controlCenterShowScreenSharingIcon = true;
         showPrivacyButton = true;
@@ -981,7 +981,7 @@
                 id = "memUsage";
                 enabled = true;
               }
-              (lib.mkIf showBattery {
+              (lib.mkIf isMobile {
                 id = "battery";
                 enabled = true;
               })
