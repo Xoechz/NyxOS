@@ -174,6 +174,10 @@
         };
       };
     };
+
+    # Point system DNS to blocky
+    networking.nameservers = [ "127.0.0.1" ];
+    networking.dhcpcd.extraConfig = "nohook resolv.conf";
   };
 
   # Systen Module cloudflared: enable and configure cloudflared tunnel for remote access to local services
@@ -190,8 +194,6 @@
     environment.systemPackages = with pkgs; [
       cloudflared
     ];
-
-    services.resolved.enable = true;
 
     services.openssh.settings.Macs = [
       "hmac-sha2-512-etm@openssh.com"
