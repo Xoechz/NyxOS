@@ -24,8 +24,8 @@
   };
 
   # Home Module libreoffice: configure libreoffice with basic settings
-  flake.modules.homeManager.libreoffice = { pkgs, ... }: {
-    home.packages = with pkgs; [
+  flake.modules.homeManager.libreoffice = { pkgs-stable, ... }: {
+    home.packages = with pkgs-stable; [
       libreoffice-qt
       hunspell
       hunspellDicts.en_US
