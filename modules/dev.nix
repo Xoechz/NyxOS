@@ -76,7 +76,7 @@
   # System Module java: java development environment
   flake.modules.nixos.java = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
-      jdk21
+      jdk25
       jdk8
       ant
       maven
@@ -85,11 +85,11 @@
 
     programs.java = {
       enable = true;
-      package = pkgs.jdk21;
+      package = pkgs.jdk25;
     };
 
     environment.variables = {
-      JAVA_21_HOME = "${pkgs.jdk21.home}";
+      JAVA_25_HOME = "${pkgs.jdk21.home}";
       JAVA_8_HOME = "${pkgs.jdk8.home}";
     };
   };
