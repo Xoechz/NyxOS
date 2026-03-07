@@ -41,6 +41,9 @@
 
       # file previews
       libgsf
+
+      # archive support in thunar
+      file-roller
     ];
 
     services.accounts-daemon.enable = true;
