@@ -206,6 +206,9 @@ The name is inspired by the DOTA hero Nyx
     - qgis
       - [apps.nix](/modules/apps.nix)
       - configure qgis for home manager
+    - nomacs
+      - [apps.nix](/modules/apps.nix)
+      - configure nomacs image viewer for home manager
     - betterfox
       - [browser.nix](/modules/browser.nix)
       - configure betterfox instead of firefox in home manager

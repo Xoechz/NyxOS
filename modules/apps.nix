@@ -203,7 +203,25 @@
     xdg.mimeApps = {
       enable = lib.mkDefault true;
       defaultApplications = {
-        "image/svg+xml" = "inkscape.desktop";
+        "image/svg+xml" = "org.inkscape.Inkscape.desktop";
+      };
+    };
+  };
+
+  # Home Module nomacs: configure nomacs image viewer for home manager
+  flake.modules.homeManager.nomacs = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      nomacs
+    ];
+
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "image/png" = "org.nomacs.ImageLounge.desktop";
+        "image/jpeg" = "org.nomacs.ImageLounge.desktop";
+        "image/gif" = "org.nomacs.ImageLounge.desktop";
+        "image/bmp" = "org.nomacs.ImageLounge.desktop";
+        "image/webp" = "org.nomacs.ImageLounge.desktop";
       };
     };
   };

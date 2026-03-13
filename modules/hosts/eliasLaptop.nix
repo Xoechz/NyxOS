@@ -83,6 +83,7 @@ let system = "x86_64-linux"; in {
           elias
           git
           guiUtilities
+          nomacs
         ];
 
         home.stateVersion = "24.05";
