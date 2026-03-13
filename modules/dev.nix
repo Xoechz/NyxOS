@@ -89,7 +89,7 @@
     };
 
     environment.variables = {
-      JAVA_25_HOME = "${pkgs.jdk21.home}";
+      JAVA_25_HOME = "${pkgs.jdk25.home}";
       JAVA_8_HOME = "${pkgs.jdk8.home}";
     };
   };
