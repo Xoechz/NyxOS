@@ -13,27 +13,55 @@
     };
 
     # SSH known hosts for distributed builds
-    programs.ssh.knownHosts = {
-      EliasPC = {
-        hostNames = [ "EliasPC" "EliasPC.bruckner-domain.net" ];
-        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBHAqDy+XbGANEjlFRgFu/KhiA1Y08RSekbArf/o/9H";
+    programs.ssh = {
+      knownHosts = {
+        EliasPC = {
+          hostNames = [ "EliasPC" "EliasPC.bruckner-domain.net" ];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBHAqDy+XbGANEjlFRgFu/KhiA1Y08RSekbArf/o/9H";
+        };
+        EliasLaptop = {
+          hostNames = [ "EliasLaptop" "EliasLaptop.bruckner-domain.net" ];
+          publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
+        };
+        FredPC = {
+          hostNames = [ "FredPC" "FredPC.bruckner-domain.net" ];
+          publicKey = "fredpc ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINO21u53GTTwxbOX+mmhuGVBHFX5kAOAgyeI06/NCblr";
+        };
+        NixPi = {
+          hostNames = [ "NixPi" "NixPi.bruckner-domain.net" ];
+          publicKey = "nixpi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyuYVNGKSrpwWacyBFdqPdFxRTNhu8bcmQ0sk8j786T";
+        };
+        GitHub = {
+          hostNames = [ "GitHub" "GitHub.com" ];
+          publicKey = "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+        };
       };
-      EliasLaptop = {
-        hostNames = [ "EliasLaptop" "EliasLaptop.bruckner-domain.net" ];
-        publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
-      };
-      FredPC = {
-        hostNames = [ "FredPC" "FredPC.bruckner-domain.net" ];
-        publicKey = "fredpc ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINO21u53GTTwxbOX+mmhuGVBHFX5kAOAgyeI06/NCblr";
-      };
-      NixPi = {
-        hostNames = [ "NixPi" "NixPi.bruckner-domain.net" ];
-        publicKey = "nixpi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyuYVNGKSrpwWacyBFdqPdFxRTNhu8bcmQ0sk8j786T";
-      };
-      GitHub = {
-        hostNames = [ "GitHub" "GitHub.com" ];
-        publicKey = "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
-      };
+      extraConfig = "
+        Host EliasPC
+          HostName EliasPC.bruckner-domain.net
+          User elias
+        Host EliasLaptop
+          HostName EliasLaptop.bruckner-domain.net
+          User elias
+        Host FredPC
+          HostName FredPC.bruckner-domain.net
+          User elias
+        Host NixPi
+          HostName NixPi.bruckner-domain.net
+          User elias
+        Host swp
+          HostName 10.22.20.223
+          User admin
+          # Prevent using ssh-agent or another keyfile, useful for testing
+          IdentitiesOnly yes
+          IdentityFile /home/elias/.ssh/id-EliasLaptop
+        Host gitlab
+          HostName gitlab.fh-ooe.at
+          User git
+          # Prevent using ssh-agent or another keyfile, useful for testing
+          IdentitiesOnly yes
+          IdentityFile /home/elias/.ssh/id-git
+      ";
     };
   };
 
@@ -154,17 +182,11 @@
           customTTL = "1h";
           mapping = {
             "gateway.bruckner-domain.net" = "192.168.0.1";
-            "gateway.lan" = "192.168.0.1";
             "nixpi.bruckner-domain.net" = "192.168.0.10";
-            "nixpi.lan" = "192.168.0.10";
             "printer.bruckner-domain.net" = "192.168.0.11";
-            "printer.lan" = "192.168.0.11";
             "eliasPc.bruckner-domain.net" = "192.168.0.12";
-            "eliasPc.lan" = "192.168.0.12";
             "eliasLaptop.bruckner-domain.net" = "192.168.0.13";
-            "eliasLaptop.lan" = "192.168.0.13";
             "fredPc.bruckner-domain.net" = "192.168.0.14";
-            "fredPc.lan" = "192.168.0.14";
           };
         };
         caching = {
@@ -201,6 +223,11 @@
       "umac-128-etm@openssh.com"
       "hmac-sha2-256"
     ];
+  };
+
+  # System Module warp: enable and configure cloudflare warp client
+  flake.modules.nixos.warp = { ... }: {
+    services.cloudflare-warp.enable = true;
   };
 
   # Home Module sailing: enable and configure sailing applications ;)

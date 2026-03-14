@@ -36,6 +36,7 @@ let system = "x86_64-linux"; in {
       ssh
       firewallDesktop
       vpn
+      warp
       distributedBuild
       nh
       homeManager

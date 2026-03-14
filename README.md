@@ -103,6 +103,9 @@ The name is inspired by the DOTA hero Nyx
     - cloudflared
       - [network.nix](/modules/network.nix)
       - enable and configure cloudflared tunnel for remote access to local services
+    - warp
+      - [network.nix](/modules/network.nix)
+      - enable and configure cloudflare warp client
     - baseSettings
       - [nix.nix](/modules/nix.nix)
       - common nix and nixpkgs settings for all systems
