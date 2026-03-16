@@ -229,7 +229,12 @@
       enable = true;
       flavor = "mocha";
       accent = "peach";
+      cursors.enable = false;
     };
+
+    home-manager.sharedModules = [
+      inputs.self.modules.homeManager.basicCatppuccin
+    ];
   };
 
   # System Module catppuccin: configure catppuccin theming
@@ -314,4 +319,18 @@
         platformTheme.name = "gtk3";
       };
     };
+
+  # Home Module basicCatppuccin: configure catppuccin theming in home manager
+  flake.modules.homeManager.basicCatppuccin = { pkgs, lib, ... }: {
+    imports = [ inputs.catppuccin.homeModules.catppuccin ];
+
+    catppuccin = {
+      enable = true;
+      flavor = "mocha";
+      accent = "peach";
+      cursors.enable = false;
+      kvantum.enable = false;
+      vscode.profiles.default.enable = false;
+    };
+  };
 }

@@ -218,6 +218,9 @@ The name is inspired by the DOTA hero Nyx
     - catppuccin
       - [desktop.nix](/modules/desktop.nix)
       - configure catppuccin theming in home manager
+    - basicCatppuccin
+      - [desktop.nix](/modules/desktop.nix)
+      - configure catppuccin theming in home manager
     - minecraft
       - [games.nix](/modules/games.nix)
       - configure minecraft and related tools
