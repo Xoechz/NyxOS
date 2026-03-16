@@ -321,7 +321,7 @@
     };
 
   # Home Module basicCatppuccin: configure catppuccin theming in home manager
-  flake.modules.homeManager.basicCatppuccin = { pkgs, lib, ... }: {
+  flake.modules.homeManager.basicCatppuccin = { ... }: {
     imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
     catppuccin = {

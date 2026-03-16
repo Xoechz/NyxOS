@@ -9,7 +9,6 @@
         efiSupport = true;
         device = lib.mkDefault "nodev";
         useOSProber = lib.mkDefault false;
-        memtest86.enable = true;
         extraEntries = lib.mkDefault ''
           menuentry "UEFI Firmware Settings" --class efi {
             fwsetup
