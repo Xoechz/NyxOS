@@ -3,18 +3,17 @@
   flake.modules.nixos.grub = { lib, ... }: {
     boot.loader.efi.canTouchEfiVariables = true;
 
-    boot.loader.grub =
-      {
-        enable = true;
-        efiSupport = true;
-        device = lib.mkDefault "nodev";
-        useOSProber = lib.mkDefault false;
-        extraEntries = lib.mkDefault ''
-          menuentry "UEFI Firmware Settings" --class efi {
-            fwsetup
-          }
-        '';
-      };
+    boot.loader.grub = {
+      enable = true;
+      efiSupport = true;
+      device = lib.mkDefault "nodev";
+      useOSProber = lib.mkDefault false;
+      extraEntries = lib.mkDefault ''
+        menuentry "UEFI Firmware Settings" --class efi {
+          fwsetup
+        }
+      '';
+    };
   };
 
   # System Module basicSystem: configure firmware updates, file system tools, and other basic utilities

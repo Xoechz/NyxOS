@@ -1105,6 +1105,7 @@
         enable = lib.mkDefault true;
         defaultApplications = {
           "x-scheme-handler/kdeconnect" = "thunar.desktop";
+          "inode/directory" = "thunar.desktop";
         };
       };
       portal = {
