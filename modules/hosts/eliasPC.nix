@@ -119,6 +119,10 @@ let system = "x86_64-linux"; in {
       useDHCP = lib.mkDefault true;
       hostName = "EliasPC";
       networkmanager.enable = true;
+      interfaces.p5s0.wakeOnLan.enable = true;
+      firewall = {
+        allowedUDPPorts = [ 9 ]; # Wake-on-LAN uses UDP port 9
+      };
     };
 
     nixpkgs.hostPlatform = system;
