@@ -38,6 +38,9 @@
 
         # Optimize PCIe for performance
         PCIE_ASPM_ON_AC = "off";
+
+        # Keep Wake-on-LAN enabled; TLP defaults can disable it at boot.
+        WOL_DISABLE = "N";
       };
     };
   };

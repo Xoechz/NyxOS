@@ -118,8 +118,27 @@ let system = "x86_64-linux"; in {
     networking = {
       useDHCP = lib.mkDefault true;
       hostName = "EliasPC";
-      networkmanager.enable = true;
-      interfaces.p5s0.wakeOnLan.enable = true;
+      networkmanager = {
+        enable = true;
+        ensureProfiles.profiles."wired-wol" = {
+          connection = {
+            id = "wired-wol";
+            type = "ethernet";
+            interface-name = "enp5s0";
+            autoconnect = "true";
+            autoconnect-priority = "999";
+          };
+          "ethernet" = {
+            wake-on-lan = "64"; # magic packet bitmask (0x40)
+          };
+          ipv4.method = "auto";
+          ipv6 = {
+            method = "auto";
+            addr-gen-mode = "default";
+          };
+        };
+      };
+      interfaces.enp5s0.wakeOnLan.enable = true;
       firewall = {
         allowedUDPPorts = [ 9 ]; # Wake-on-LAN uses UDP port 9
       };
