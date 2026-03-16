@@ -57,6 +57,8 @@
       efibootmgr
 
       wakeonlan
+      # gparted has a gui but needs to be run as root, so we add it here to avoid confusion in the gui utilities section
+      gparted
     ];
   };
 
@@ -84,7 +86,6 @@
     home.packages = with pkgs; [
       baobab
       bruno
-      gparted
       gnome-multi-writer
     ];
   };

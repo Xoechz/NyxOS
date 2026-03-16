@@ -110,11 +110,6 @@ let system = "x86_64-linux"; in {
       fsType = "ext4";
     };
 
-    fileSystems."/run/media/elias/100GB-SSD" = {
-      device = "/dev/disk/by-uuid/2b788cd1-fa01-45ee-bf76-6c396e06015f";
-      fsType = "ext4";
-    };
-
     networking = {
       useDHCP = lib.mkDefault true;
       hostName = "EliasPC";
