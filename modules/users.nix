@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module elias: user configuration for elias
+  # System Module elias: create the elias user with wheel, networkmanager, and printing group memberships
   flake.modules.nixos.elias = { pkgs, ... }: {
     users.users.elias = {
       isNormalUser = true;
@@ -26,7 +26,7 @@
     };
   };
 
-  # System Module others: user configuration for fred and gerhard
+  # System Module others: create the fred and gerhard users with standard group memberships
   flake.modules.nixos.others = { pkgs, ... }: {
     users.users = {
       fred = {
@@ -46,19 +46,19 @@
     };
   };
 
-  # Home Module elias: home manager configuration for elias
+  # Home Module elias: set home directory and username for the elias Home Manager configuration
   flake.modules.homeManager.elias = { ... }: {
     home.username = "elias";
     home.homeDirectory = "/home/elias";
   };
 
-  # Home Module fred: home manager configuration for fred
+  # Home Module fred: set home directory and username for the fred Home Manager configuration
   flake.modules.homeManager.fred = { ... }: {
     home.username = "fred";
     home.homeDirectory = "/home/fred";
   };
 
-  # Home Module gerhard: home manager configuration for gerhard
+  # Home Module gerhard: set home directory and username for the gerhard Home Manager configuration
   flake.modules.homeManager.gerhard = { ... }: {
     home.username = "gerhard";
     home.homeDirectory = "/home/gerhard";

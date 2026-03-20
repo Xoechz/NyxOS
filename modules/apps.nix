@@ -7,7 +7,7 @@
     };
   };
 
-  # System Module flatpak: enable flatpak and add flathub repo
+  # System Module flatpak: enable Flatpak and register the Flathub repository
   flake.modules.nixos.flatpak = { pkgs, ... }: {
     services.flatpak.enable = true;
     systemd.services.flatpak-repo = {
@@ -23,7 +23,7 @@
     ];
   };
 
-  # Home Module libreoffice: configure libreoffice with basic settings
+  # Home Module libreoffice: install LibreOffice Qt with English and German spell-check dictionaries
   flake.modules.homeManager.libreoffice = { pkgs-stable, ... }: {
     home.packages = with pkgs-stable; [
       libreoffice-qt
@@ -33,7 +33,7 @@
     ];
   };
 
-  # Home Module email: configure email clients
+  # Home Module email: install Thunderbird and register it as the default mail and calendar handler
   flake.modules.homeManager.email = { pkgs, lib, ... }: {
     home.packages = with pkgs; [
       thunderbird
@@ -56,14 +56,14 @@
     };
   };
 
-  # Home Module teams: configure microsoft teams client
+  # Home Module teams: install Teams for Linux
   flake.modules.homeManager.teams = { pkgs, ... }: {
     home.packages = with pkgs; [
       teams-for-linux
     ];
   };
 
-  # Home Module pdf: configure pdf related tools
+  # Home Module pdf: install Okular and pdfarranger for viewing and rearranging PDF files
   flake.modules.homeManager.pdf = { pkgs, ... }: {
     home.packages = with pkgs; [
       pdfarranger
@@ -71,7 +71,7 @@
     ];
   };
 
-  # Home Module media: configure media players
+  # Home Module media: install VLC and cava, and configure Spicetify-themed Spotify with extensions
   flake.modules.homeManager.media = { pkgs, ... }: {
     imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
@@ -104,7 +104,7 @@
       };
   };
 
-  # Home Module discord: configure vesktop, a discord client
+  # Home Module discord: install Vesktop with Catppuccin Mocha CSS theme
   flake.modules.homeManager.discord = { pkgs, ... }: {
     home.packages = with pkgs; [
       vesktop
@@ -125,14 +125,14 @@
     '';
   };
 
-  # Home Module kdeConnect: configure kdeconnect for home manager
+  # Home Module kdeConnect: install KDE Connect for phone-desktop integration
   flake.modules.homeManager.kdeConnect = { pkgs, ... }: {
     home.packages = with pkgs; [
       kdePackages.kdeconnect-kde
     ];
   };
 
-  # Home module obs: configure obs studio
+  # Home Module obs: install OBS Studio with wlrobs and background-removal plugins
   flake.modules.homeManager.obs = { pkgs, ... }: {
     programs.obs-studio = {
       enable = true;
@@ -143,7 +143,7 @@
     };
   };
 
-  # Home Module vscode: configure vscode for home manager
+  # Home Module vscode: install VS Code (FHS wrapper) and set it as the default text editor
   flake.modules.homeManager.vscode = { pkgs, lib, ... }: {
     programs.vscode = {
       enable = true;
@@ -161,7 +161,7 @@
     };
   };
 
-  # Home Module vscodeNonFhs: configure vscode for home manager
+  # Home Module vscodeNonFhs: install VS Code (non-FHS) and set it as the default text editor
   flake.modules.homeManager.vscodeNonFhs = { lib, ... }: {
     programs.vscode.enable = true;
 
@@ -176,21 +176,21 @@
     };
   };
 
-  # Home Module idea: configure jetbrains idea for home manager
+  # Home Module idea: install JetBrains IntelliJ IDEA
   flake.modules.homeManager.idea = { pkgs, ... }: {
     home.packages = with pkgs; [
       jetbrains.idea
     ];
   };
 
-  # Home Module qgis: configure qgis for home manager
+  # Home Module qgis: install QGIS geographic information system
   flake.modules.homeManager.qgis = { pkgs, ... }: {
     home.packages = with pkgs; [
       qgis
     ];
   };
 
-  # Home Module mediaEditors: configure media editors(gimp, inkscape, kdenlive)
+  # Home Module mediaEditors: install GIMP, Inkscape, and kdenlive for image and video editing
   flake.modules.homeManager.mediaEditors = { pkgs, pkgs-stable, lib, ... }: {
     home.packages = with pkgs; [
       inkscape
@@ -208,7 +208,7 @@
     };
   };
 
-  # Home Module nomacs: configure nomacs image viewer for home manager
+  # Home Module nomacs: install Nomacs image viewer and register it as the default for common image formats
   flake.modules.homeManager.nomacs = { pkgs, ... }: {
     home.packages = with pkgs; [
       nomacs

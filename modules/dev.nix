@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module c: c and c++ development environment
+  # System Module c: install GCC, CMake, Make, GDB, Valgrind, GTest, Conan, and related C/C++ tooling
   flake.modules.nixos.c = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       gcc
@@ -17,7 +17,7 @@
     ];
   };
 
-  # System Module python: python development environment
+  # System Module python: install Python 3 with scientific and GUI libraries (numpy, matplotlib, pandas, pygobject, etc.)
   flake.modules.nixos.python = { pkgs, ... }:
     let
       pythonWithPackages = pkgs.python3.withPackages (ps:
@@ -51,14 +51,14 @@
       ];
     };
 
-  # System Module latex: latex development environment(some features need python)
+  # System Module latex: install the full TeX Live scheme for LaTeX document authoring
   flake.modules.nixos.latex = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       texlive.combined.scheme-full
     ];
   };
 
-  # System Module dotnet: dotnet development environment
+  # System Module dotnet: install .NET 10 SDK with ILSpy and set DOTNET_ROOT/DOTNET_BIN environment variables
   flake.modules.nixos.dotnet = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       dotnetCorePackages.sdk_10_0
@@ -73,7 +73,7 @@
     # previous library path problems should be resolved by disabling jack
   };
 
-  # System Module java: java development environment
+  # System Module java: install JDK 25 and JDK 8 with Ant, Maven, and Gradle; sets JAVA_25_HOME and JAVA_8_HOME
   flake.modules.nixos.java = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       jdk25
@@ -94,7 +94,7 @@
     };
   };
 
-  # System Module android: android development environment(needs java)
+  # System Module android: install Android Studio, SDK platform-tools, and adb; adds elias to the adbusers group
   flake.modules.nixos.android = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       android-studio
@@ -105,7 +105,7 @@
     users.extraGroups.adbusers.members = [ "elias" ];
   };
 
-  # System Module go: go development environment
+  # System Module go: install the Go toolchain with gopls, Delve debugger, and golangci-lint
   flake.modules.nixos.go = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       go
@@ -115,7 +115,7 @@
     ];
   };
 
-  # System Module devCerts: add development certificates to the system
+  # System Module devCerts: load all .pem certificates from the certs/ directory into the system trust store
   flake.modules.nixos.devCerts = { lib, ... }: {
     security.pki.certificates =
       let
@@ -124,5 +124,26 @@
         pemFiles = lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".pem" name) certFiles;
       in
       map (name: builtins.readFile (certsDir + "/${name}")) (builtins.attrNames pemFiles);
+  };
+
+  # Home Module opencode: enable the OpenCode AI coding agent with auto-update and Context7 MCP server
+  flake.modules.homeManager.opencode = { ... }: {
+    programs.opencode = {
+      enable = true;
+      settings = {
+        autoshare = false;
+        autoupdate = true;
+      };
+      enableMcpIntegration = true;
+    };
+
+    programs.mcp = {
+      enable = true;
+      servers = {
+        context7 = {
+          url = "https://mcp.context7.com/mcp";
+        };
+      };
+    };
   };
 }

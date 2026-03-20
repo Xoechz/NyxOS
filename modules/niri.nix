@@ -24,7 +24,7 @@
     };
   };
 
-  # System Module niri: Niri + DankMaterialShell
+  # System Module niri: enable the Niri tiling compositor with DankMaterialShell greeter, Thunar, and XWayland support
   flake.modules.nixos.niri = { pkgs, ... }: {
     imports = [
       inputs.niri.nixosModules.niri
@@ -85,7 +85,7 @@
     ];
   };
 
-  # Home Module niri: Niri + DankMaterialShell
+  # Home Module niri: configure Niri keybinds, layout, and the full DankMaterialShell bar with plugins and Danksearch
   flake.modules.homeManager.niri = { pkgs, lib, config, isMobile, ... }: {
     imports = [
       inputs.dms.homeModules.dank-material-shell

@@ -6,7 +6,7 @@
     };
   };
 
-  # System Module languageEn: configure english (uk) language settings mixed with austrian locale settings
+  # System Module languageEn: set English (GB) UI language with Austrian locale for measurements, currency, and time
   flake.modules.nixos.languageEn = { ... }: {
     i18n.defaultLocale = "en_GB.UTF-8";
 
@@ -26,7 +26,7 @@
     };
   };
 
-  # System Module languageDe: configure german (austria) language settings
+  # System Module languageDe: set German (Austria) language and locale for all LC categories
   flake.modules.nixos.languageDe = { ... }: {
     i18n.defaultLocale = "de_AT.UTF-8";
 
@@ -46,7 +46,7 @@
     };
   };
 
-  # System Module basicFonts: configure basic fonts
+  # System Module basicFonts: install core fonts and Nerd Font variants of JetBrains Mono and Noto, with sane defaults
   flake.modules.nixos.basicFonts = { pkgs, ... }: {
     fonts = {
       packages = with pkgs;[
@@ -69,13 +69,13 @@
     };
   };
 
-  # System Module baseDesktop: basic desktop settings
+  # System Module baseDesktop: enable polkit and D-Bus, required by all desktop environments
   flake.modules.nixos.baseDesktop = { ... }: {
     security.polkit.enable = true;
     services.dbus.enable = true;
   };
 
-  # System Module fonts: configure additional fonts
+  # System Module fonts: install the full Nerd Fonts collection (60+ families) plus core/Vista fonts
   flake.modules.nixos.fonts = { pkgs, ... }: {
     fonts = {
       packages = with pkgs;[
@@ -221,7 +221,7 @@
     };
   };
 
-  # System Module catppuccin: configure catppuccin theming
+  # System Module basicCatppuccin: apply Catppuccin Mocha/Peach theming system-wide without cursor theme
   flake.modules.nixos.basicCatppuccin = { ... }: {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
@@ -237,7 +237,7 @@
     ];
   };
 
-  # System Module catppuccin: configure catppuccin theming
+  # System Module catppuccin: apply full Catppuccin Mocha/Peach theming system-wide including cursor theme
   flake.modules.nixos.catppuccin = { ... }: {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
@@ -258,7 +258,7 @@
     ];
   };
 
-  # Home Module catppuccin: configure catppuccin theming in home manager
+  # Home Module catppuccin: apply full Catppuccin Mocha/Peach theming in Home Manager including GTK, Qt, icons, and cursor
   flake.modules.homeManager.catppuccin = { pkgs, lib, ... }:
     let
       catppuccin-papirus-icons = pkgs.catppuccin-papirus-folders.override {
@@ -320,7 +320,7 @@
       };
     };
 
-  # Home Module basicCatppuccin: configure catppuccin theming in home manager
+  # Home Module basicCatppuccin: apply Catppuccin Mocha/Peach theming in Home Manager without cursor theme
   flake.modules.homeManager.basicCatppuccin = { ... }: {
     imports = [ inputs.catppuccin.homeModules.catppuccin ];
 

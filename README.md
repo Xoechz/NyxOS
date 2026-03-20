@@ -15,245 +15,248 @@ The name is inspired by the DOTA hero Nyx
   - System Modules:
     - flatpak
       - [apps.nix](/modules/apps.nix)
-      - enable flatpak and add flathub repo
+      - enable Flatpak and register the Flathub repository
     - firefox
       - [browser.nix](/modules/browser.nix)
-      - configure basic firefox
+      - enable Firefox system-wide
     - chromium-no-gpu
       - [browser.nix](/modules/browser.nix)
-      - chromium with disabled gpu acceleration
+      - install Chromium with Widevine DRM and GPU acceleration disabled
     - languageEn
       - [desktop.nix](/modules/desktop.nix)
-      - configure english (uk) language settings mixed with austrian locale settings
+      - set English (GB) UI language with Austrian locale for measurements, currency, and time
     - languageDe
       - [desktop.nix](/modules/desktop.nix)
-      - configure german (austria) language settings
+      - set German (Austria) language and locale for all LC categories
     - basicFonts
       - [desktop.nix](/modules/desktop.nix)
-      - configure basic fonts
+      - install core fonts and Nerd Font variants of JetBrains Mono and Noto, with sane defaults
     - baseDesktop
       - [desktop.nix](/modules/desktop.nix)
-      - basic desktop settings
+      - enable polkit and D-Bus, required by all desktop environments
     - fonts
       - [desktop.nix](/modules/desktop.nix)
-      - configure additional fonts
+      - install the full Nerd Fonts collection (60+ families) plus core/Vista fonts
     - basicCatppuccin
       - [desktop.nix](/modules/desktop.nix)
-      - configure catppuccin theming
+      - apply Catppuccin Mocha/Peach theming system-wide without cursor theme
     - catppuccin
       - [desktop.nix](/modules/desktop.nix)
-      - configure catppuccin theming
+      - apply full Catppuccin Mocha/Peach theming system-wide including cursor theme
     - c
       - [dev.nix](/modules/dev.nix)
-      - c and c++ development environment
+      - install GCC, CMake, Make, GDB, Valgrind, GTest, Conan, and related C/C++ tooling
     - python
       - [dev.nix](/modules/dev.nix)
-      - python development environment
+      - install Python 3 with scientific and GUI libraries (numpy, matplotlib, pandas, pygobject, etc.)
     - latex
       - [dev.nix](/modules/dev.nix)
-      - latex development environment(some features need python)
+      - install the full TeX Live scheme for LaTeX document authoring
     - dotnet
       - [dev.nix](/modules/dev.nix)
-      - dotnet development environment
+      - install .NET 10 SDK with ILSpy and set DOTNET_ROOT/DOTNET_BIN environment variables
     - java
       - [dev.nix](/modules/dev.nix)
-      - java development environment
+      - install JDK 25 and JDK 8 with Ant, Maven, and Gradle; sets JAVA_25_HOME and JAVA_8_HOME
     - android
       - [dev.nix](/modules/dev.nix)
-      - android development environment(needs java)
+      - install Android Studio, SDK platform-tools, and adb; adds elias to the adbusers group
     - go
       - [dev.nix](/modules/dev.nix)
-      - go development environment
+      - install the Go toolchain with gopls, Delve debugger, and golangci-lint
     - devCerts
       - [dev.nix](/modules/dev.nix)
-      - add development certificates to the system
+      - load all .pem certificates from the certs/ directory into the system trust store
     - docker
       - [virtualization.nix](/modules/virtualization.nix)
-      - enable and configure docker for development
+      - enable Docker daemon with Google DNS and add all users in the users specialArg to the docker group
     - winboat
       - [virtualization.nix](/modules/virtualization.nix)
-      - enable and configure winboat for running windows in a vm
+      - enable QEMU/libvirt with SPICE USB redirection and virt-manager for Windows VMs
     - vm
       - [virtualization.nix](/modules/virtualization.nix)
-      - enable and configure virtual machine support for development
+      - enable VirtualBox with extension pack and guest additions for running virtual machines
     - steam
       - [games.nix](/modules/games.nix)
-      - configure steam and related tools
+      - enable Steam with Proton, Protontricks, MangoHud, Gamescope, and open firewall ports
     - kde
       - [kde.nix](/modules/kde.nix)
-      - setup kde settings
+      - enable KDE Plasma 6 on X11 with SDDM, Austrian keyboard layout, and trimmed default packages
     - niri
       - [niri.nix](/modules/niri.nix)
-      - setup niri settings
+      - enable the Niri tiling compositor with DankMaterialShell greeter, Thunar, and XWayland support
     - ssh
       - [network.nix](/modules/network.nix)
-      - enable and configure ssh server and client
+      - enable OpenSSH server (key-only auth) and configure client host aliases and known hosts
     - firewallDesktop
       - [network.nix](/modules/network.nix)
-      - enable and configure firewall with basic settings
+      - enable firewall with ports for SSH, Steam, Spotify, KDE Connect, and Stardew Valley LAN
     - firewallServer
       - [network.nix](/modules/network.nix)
-      - enable and configure firewall with server settings
+      - enable firewall with minimal ports for SSH, HTTP/HTTPS, and DNS only
     - vpn
       - [network.nix](/modules/network.nix)
-      - enable and configure mullvad and wireguard vpn
+      - enable Mullvad VPN service and install WireGuard tools
     - blocky
       - [network.nix](/modules/network.nix)
-      - enable and configure blocky adblocker
+      - run Blocky as a local DNS resolver with ad/malware blocking and custom LAN hostname mappings
     - cloudflared
       - [network.nix](/modules/network.nix)
-      - enable and configure cloudflared tunnel for remote access to local services
+      - run a Cloudflare Tunnel daemon for zero-trust remote access to local services
     - warp
       - [network.nix](/modules/network.nix)
-      - enable and configure cloudflare warp client
+      - enable Cloudflare WARP client for secure DNS and network privacy
     - baseSettings
       - [nix.nix](/modules/nix.nix)
-      - common nix and nixpkgs settings for all systems
+      - enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
     - distributedBuild
       - [nix.nix](/modules/nix.nix)
-      - settings for building on remote machines
+      - configure this machine to offload builds to EliasPC via SSH
     - distributedBuilder
       - [nix.nix](/modules/nix.nix)
-      - settings for providing building capabilities to other machines
+      - configure this machine to accept remote build jobs from other hosts
     - nh
       - [nix.nix](/modules/nix.nix)
-      - enable and configure nh
+      - enable nh with weekly auto-cleanup, keeping the last 3 generations for 7 days
     - homeManager
       - [nix.nix](/modules/nix.nix)
-      - enable home-manager service with basic settings
+      - integrate Home Manager as a NixOS module with shared global packages
     - optimizationsPC
       - [optimizations.nix](/modules/optimizations.nix)
-      - configure optimizations for PC hardware
+      - use the Zen kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
     - optimizationsLaptop
       - [optimizations.nix](/modules/optimizations.nix)
-      - configure optimizations for laptop hardware
+      - use the Zen kernel with TLP for AC/battery power profiles and an 80% charge threshold
     - grub
       - [system.nix](/modules/system.nix)
-      - configure grub bootloader
+      - configure GRUB EFI bootloader with a UEFI firmware entry
     - basicSystem
       - [system.nix](/modules/system.nix)
-      - configure firmware updates, file system tools, and other basic utilities
+      - set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support
     - swap
       - [system.nix](/modules/system.nix)
-      - configure swap
+      - configure zram swap and an encrypted swapfile sized via the swapSize specialArg (in GB)
     - bluetooth
       - [system.nix](/modules/system.nix)
-      - configure bluetooth settings
+      - enable Bluetooth, power on at boot, and enable experimental features for battery reporting
     - printing
       - [system.nix](/modules/system.nix)
-      - configure printing services for the HP printer at home
+      - enable CUPS with the HP HPLIP driver and SANE scanning support
     - sound
       - [system.nix](/modules/system.nix)
-      - configure sound settings
+      - enable PipeWire with ALSA and PulseAudio compatibility, rtkit, and media control tools
     - cpuIntel
       - [system.nix](/modules/system.nix)
-      - configure Intel CPU microcode updates
+      - enable Intel CPU microcode updates and install PowerTOP
     - gpuNvidia
       - [system.nix](/modules/system.nix)
-      - configure Nvidia GPU settings
+      - enable NVIDIA proprietary drivers with modesetting and 32-bit graphics support
     - gpuAmd
       - [system.nix](/modules/system.nix)
-      - configure AMD GPU settings
+      - enable AMDGPU driver with ROCm/OpenCL support, GPU frequency boosting, and 32-bit graphics
     - nixIndex
       - [terminal.nix](/modules/terminal.nix)
-      - configure nix-index
+      - enable nix-index-database with comma for running unlisted commands without installing them
     - terminal
       - [terminal.nix](/modules/terminal.nix)
-      - kitty + starship + direnv + fzf + eza + zsh
+      - enable ZSH system-wide and pull in the terminal Home Module for all users
     - elias
       - [users.nix](/modules/users.nix)
-      - user configuration for elias
+      - create the elias user with wheel, networkmanager, and printing group memberships
     - others
       - [users.nix](/modules/users.nix)
-      - user configuration for fred and gerhard
+      - create the fred and gerhard users with standard group memberships
     - cliUtilities
       - [utilities.nix](/modules/utilities.nix)
-      - add useful tools
+      - install network, filesystem, hardware, and diagnostic CLI tools (fastfetch, jq, curl, etc.)
   - Home Modules:
     - libreoffice
       - [apps.nix](/modules/apps.nix)
-      - configure libreoffice with basic settings
+      - install LibreOffice Qt with English and German spell-check dictionaries
     - email
       - [apps.nix](/modules/apps.nix)
-      - configure email clients
+      - install Thunderbird and register it as the default mail and calendar handler
     - teams
       - [apps.nix](/modules/apps.nix)
-      - configure microsoft teams client
+      - install Teams for Linux
     - pdf
       - [apps.nix](/modules/apps.nix)
-      - configure pdf related tools
+      - install Okular and pdfarranger for viewing and rearranging PDF files
     - media
       - [apps.nix](/modules/apps.nix)
-      - configure media players
+      - install VLC and cava, and configure Spicetify-themed Spotify with extensions
     - mediaEditors
       - [apps.nix](/modules/apps.nix)
-      - configure media editors(gimp, inkscape, kdenlive)
+      - install GIMP, Inkscape, and kdenlive for image and video editing
     - discord
       - [apps.nix](/modules/apps.nix)
-      - configure vesktop, a discord client
+      - install Vesktop with Catppuccin Mocha CSS theme
     - kdeConnect
       - [apps.nix](/modules/apps.nix)
-      - configure kdeconnect for home manager
+      - install KDE Connect for phone-desktop integration
     - obs
       - [apps.nix](/modules/apps.nix)
-      - configure obs studio
+      - install OBS Studio with wlrobs and background-removal plugins
     - vscode
       - [apps.nix](/modules/apps.nix)
-      - configure vscode for home manager
+      - install VS Code (FHS wrapper) and set it as the default text editor
     - vscodeNonFhs
       - [apps.nix](/modules/apps.nix)
-      - configure vscode for home manager
+      - install VS Code (non-FHS) and set it as the default text editor
     - idea
       - [apps.nix](/modules/apps.nix)
-      - configure jetbrains idea for home manager
+      - install JetBrains IntelliJ IDEA
     - qgis
       - [apps.nix](/modules/apps.nix)
-      - configure qgis for home manager
+      - install QGIS geographic information system
     - nomacs
       - [apps.nix](/modules/apps.nix)
-      - configure nomacs image viewer for home manager
+      - install Nomacs image viewer and register it as the default for common image formats
     - betterfox
       - [browser.nix](/modules/browser.nix)
-      - configure betterfox instead of firefox in home manager
+      - configure Firefox with Betterfox hardened user.js and set it as the default browser
     - catppuccin
       - [desktop.nix](/modules/desktop.nix)
-      - configure catppuccin theming in home manager
+      - apply full Catppuccin Mocha/Peach theming in Home Manager including GTK, Qt, icons, and cursor
     - basicCatppuccin
       - [desktop.nix](/modules/desktop.nix)
-      - configure catppuccin theming in home manager
+      - apply Catppuccin Mocha/Peach theming in Home Manager without cursor theme
+    - opencode
+      - [dev.nix](/modules/dev.nix)
+      - enable the OpenCode AI coding agent with auto-update and Context7 MCP server
     - minecraft
       - [games.nix](/modules/games.nix)
-      - configure minecraft and related tools
+      - install ATLauncher for managing Minecraft modpacks
     - plasma-manager
       - [kde.nix](/modules/kde.nix)
-      - configure plasma manager
+      - configure KWin, KRunner, screen locker, power settings, and session restore via plasma-manager
     - niri
       - [niri.nix](/modules/niri.nix)
-      - setup niri settings
+      - configure Niri keybinds, layout, and the full DankMaterialShell bar with plugins and Danksearch
     - sailing
       - [network.nix](/modules/network.nix)
-      - enable and configure sailing applications ;)
+      - install sailing applications ;)
     - homeManager
       - [nix.nix](/modules/nix.nix)
-      - enable home-manager service with basic settings
+      - enable Home Manager self-management with monthly auto-expiry of old generations
     - terminal
       - [terminal.nix](/modules/terminal.nix)
-      - kitty + starship + direnv + fzf + eza + zsh
+      - configure Kitty, ZSH with oh-my-zsh, Starship prompt, direnv, fzf, eza, ripgrep, and bat
     - elias
       - [users.nix](/modules/users.nix)
-      - home manager configuration for elias
+      - set home directory and username for the elias Home Manager configuration
     - fred
       - [users.nix](/modules/users.nix)
-      - home manager configuration for fred
+      - set home directory and username for the fred Home Manager configuration
     - gerhard
       - [users.nix](/modules/users.nix)
-      - home manager configuration for gerhard
+      - set home directory and username for the gerhard Home Manager configuration
     - git
       - [utilities.nix](/modules/utilities.nix)
-      - configure git for home manager
+      - configure Git with user identity, LFS, rebase-on-pull, and a log graph alias
     - guiUtilities
       - [utilities.nix](/modules/utilities.nix)
-      - Useful gui utilities
+      - install Baobab disk analyser, Bruno API client, and GNOME multi-writer
 - [modules/hosts](modules/hosts) => Per-host setup. Uses the defined modules
 - [images](images) => Background and ReadMe images
 - [workspaces](workspaces) => Workspaces for different tasks

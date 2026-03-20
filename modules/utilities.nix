@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module cliUtilities: add useful tools
+  # System Module cliUtilities: install network, filesystem, hardware, and diagnostic CLI tools (fastfetch, jq, curl, etc.)
   flake.modules.nixos.cliUtilities = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       fastfetch
@@ -62,7 +62,7 @@
     ];
   };
 
-  # Home Module git: configure git for home manager
+  # Home Module git: configure Git with user identity, LFS, rebase-on-pull, and a log graph alias
   flake.modules.homeManager.git = { ... }: {
     programs.git = {
       enable = true;
@@ -81,7 +81,7 @@
     };
   };
 
-  # Home Module guiUtilities: Useful gui utilities
+  # Home Module guiUtilities: install Baobab disk analyser, Bruno API client, and GNOME multi-writer
   flake.modules.homeManager.guiUtilities = { pkgs, ... }: {
     home.packages = with pkgs; [
       baobab

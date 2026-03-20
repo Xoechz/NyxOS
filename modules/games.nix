@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module steam: configure steam and related tools
+  # System Module steam: enable Steam with Proton, Protontricks, MangoHud, Gamescope, and open firewall ports
   flake.modules.nixos.steam = { pkgs, ... }: {
     programs.steam = {
       enable = true;
@@ -21,7 +21,7 @@
     ];
   };
 
-  # Home Module minecraft: configure minecraft and related tools
+  # Home Module minecraft: install ATLauncher for managing Minecraft modpacks
   flake.modules.homeManager.minecraft = { pkgs, ... }: {
     home.packages = with pkgs; [
       atlauncher

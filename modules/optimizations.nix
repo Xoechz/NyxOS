@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module optimizationsPC: configure optimizations for PC hardware
+  # System Module optimizationsPC: use the Zen kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
   flake.modules.nixos.optimizationsPC = { pkgs, lib, ... }: {
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
@@ -45,7 +45,7 @@
     };
   };
 
-  # System Module optimizationsLaptop: configure optimizations for laptop hardware
+  # System Module optimizationsLaptop: use the Zen kernel with TLP for AC/battery power profiles and an 80% charge threshold
   flake.modules.nixos.optimizationsLaptop = { pkgs, lib, ... }: {
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 

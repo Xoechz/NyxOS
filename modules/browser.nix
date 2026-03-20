@@ -10,14 +10,14 @@
     };
   };
 
-  # System Module firefox: configure basic firefox
+  # System Module firefox: enable Firefox system-wide
   flake.modules.nixos.firefox = { ... }: {
     programs.firefox = {
       enable = true;
     };
   };
 
-  # System Module chromium-no-gpu: chromium with disabled gpu acceleration
+  # System Module chromium-no-gpu: install Chromium with Widevine DRM and GPU acceleration disabled
   flake.modules.nixos.chromium-no-gpu = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       (chromium.override {
@@ -27,7 +27,7 @@
     ];
   };
 
-  # Home Module betterfox: configure betterfox instead of firefox in home manager
+  # Home Module betterfox: configure Firefox with Betterfox hardened user.js and set it as the default browser
   flake.modules.homeManager.betterfox = { lib, ... }: {
     imports = [ inputs.betterfox-nix.modules.homeManager.betterfox ];
 

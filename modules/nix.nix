@@ -28,7 +28,7 @@
     };
   };
 
-  # System Module baseSettings: common nix and nixpkgs settings for all systems
+  # System Module baseSettings: enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
   flake.modules.nixos.baseSettings = { pkgs, lib, system, ... }: {
     environment.systemPackages = with pkgs; [
       nixd
@@ -104,7 +104,7 @@
     ];
   };
 
-  # System Module distributedBuild: settings for building on remote machines
+  # System Module distributedBuild: configure this machine to offload builds to EliasPC via SSH
   flake.modules.nixos.distributedBuild = { ... }: {
     imports = [ inputs.self.modules.nixos.baseSettings ];
     nix = {
@@ -137,7 +137,7 @@
     };
   };
 
-  # System Module distributedBuilder: settings for providing building capabilities to other machines
+  # System Module distributedBuilder: configure this machine to accept remote build jobs from other hosts
   flake.modules.nixos.distributedBuilder = { ... }: {
     imports = [ inputs.self.modules.nixos.baseSettings ];
     nix = {
@@ -158,7 +158,7 @@
     };
   };
 
-  # System Module nh: enable and configure nh
+  # System Module nh: enable nh with weekly auto-cleanup, keeping the last 3 generations for 7 days
   flake.modules.nixos.nh = { lib, system, ... }: {
     nixpkgs.overlays = lib.singleton
       (final: prev: {
@@ -179,7 +179,7 @@
     };
   };
 
-  # System Module homeManager: enable home-manager service with basic settings
+  # System Module homeManager: integrate Home Manager as a NixOS module with shared global packages
   flake.modules.nixos.homeManager = { ... }: {
     home-manager = {
       useGlobalPkgs = true;
@@ -188,7 +188,7 @@
     };
   };
 
-  # Home Module homeManager: enable home-manager service with basic settings
+  # Home Module homeManager: enable Home Manager self-management with monthly auto-expiry of old generations
   flake.modules.homeManager.homeManager = { ... }: {
     services.home-manager = {
       autoExpire = {

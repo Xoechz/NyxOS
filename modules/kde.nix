@@ -7,7 +7,7 @@
     };
   };
 
-  # System Module kde
+  # System Module kde: enable KDE Plasma 6 on X11 with SDDM, Austrian keyboard layout, and trimmed default packages
   flake.modules.nixos.kde = { pkgs, ... }: {
     # Enable the X11 windowing system. Disabling it seems to break a lot of stuff.
     services.xserver.enable = true;
@@ -48,7 +48,7 @@
     ];
   };
 
-  # Home Module plasma-manager: configure plasma manager
+  # Home Module plasma-manager: configure KWin, KRunner, screen locker, power settings, and session restore via plasma-manager
   flake.modules.homeManager.plasma-manager = { ... }: {
     imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 

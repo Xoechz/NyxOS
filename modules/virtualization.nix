@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module docker: enable and configure docker for development
+  # System Module docker: enable Docker daemon with Google DNS and add all users in the users specialArg to the docker group
   flake.modules.nixos.docker = { pkgs, users, ... }: {
     environment.systemPackages = with pkgs; [
       # docker
@@ -17,7 +17,7 @@
     users.extraGroups.docker.members = users;
   };
 
-  # System Module vm: enable and configure virtual machine support for development
+  # System Module vm: enable VirtualBox with extension pack and guest additions for running virtual machines
   flake.modules.nixos.vm = { users, ... }: {
     virtualisation.virtualbox = {
       host = {
@@ -34,7 +34,7 @@
     users.extraGroups.vboxusers.members = users;
   };
 
-  # System Module winboat: enable and configure winboat for running windows in a vm
+  # System Module winboat: enable QEMU/libvirt with SPICE USB redirection and virt-manager for Windows VMs
   flake.modules.nixos.winboat = { pkgs, users, ... }: {
     virtualisation = {
       spiceUSBRedirection.enable = true;

@@ -6,7 +6,7 @@
     };
   };
 
-  # System Module nixIndex: configure nix-index
+  # System Module nixIndex: enable nix-index-database with comma for running unlisted commands without installing them
   flake.modules.nixos.nixIndex = { ... }: {
     imports = [ inputs.nix-index-database.nixosModules.nix-index ];
 
@@ -14,7 +14,7 @@
     programs.nix-index-database.comma.enable = true;
   };
 
-  # System Module terminal: kitty + starship + direnv + fzf + eza + zsh
+  # System Module terminal: enable ZSH system-wide and pull in the terminal Home Module for all users
   flake.modules.nixos.terminal = { ... }: {
     programs.zsh.enable = true;
 
@@ -23,7 +23,7 @@
     ];
   };
 
-  # Home Module terminal: kitty + starship + direnv + fzf + eza + zsh
+  # Home Module terminal: configure Kitty, ZSH with oh-my-zsh, Starship prompt, direnv, fzf, eza, ripgrep, and bat
   flake.modules.homeManager.terminal = { lib, config, ... }: {
     # kitty terminal
     programs.kitty = {

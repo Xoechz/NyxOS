@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module grub: configure grub bootloader
+  # System Module grub: configure GRUB EFI bootloader with a UEFI firmware entry
   flake.modules.nixos.grub = { lib, ... }: {
     boot.loader.efi.canTouchEfiVariables = true;
 
@@ -16,7 +16,7 @@
     };
   };
 
-  # System Module basicSystem: configure firmware updates, file system tools, and other basic utilities
+  # System Module basicSystem: set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support
   flake.modules.nixos.basicSystem = { ... }: {
     time.timeZone = "Europe/Vienna";
 
@@ -31,7 +31,7 @@
     ];
   };
 
-  # System Module swap: configure swap
+  # System Module swap: configure zram swap and an encrypted swapfile sized via the swapSize specialArg (in GB)
   flake.modules.nixos.swap = { swapSize, ... }: {
     zramSwap.enable = true;
     swapDevices = [{
@@ -41,7 +41,7 @@
     }];
   };
 
-  # System Module bluetooth: configure bluetooth settings
+  # System Module bluetooth: enable Bluetooth, power on at boot, and enable experimental features for battery reporting
   flake.modules.nixos.bluetooth = { ... }: {
     # enables support for Bluetooth
     hardware.bluetooth.enable = true;
@@ -55,7 +55,7 @@
     };
   };
 
-  # System Module printing: configure printing services for the HP printer at home
+  # System Module printing: enable CUPS with the HP HPLIP driver and SANE scanning support
   flake.modules.nixos.printing = { pkgs, ... }: {
     services.printing =
       {
@@ -73,7 +73,7 @@
     ];
   };
 
-  # System Module sound: configure sound settings
+  # System Module sound: enable PipeWire with ALSA and PulseAudio compatibility, rtkit, and media control tools
   flake.modules.nixos.sound = { pkgs, ... }: {
     security.rtkit.enable = true;
 
@@ -98,7 +98,7 @@
     ];
   };
 
-  # System Module cpuIntel: configure Intel CPU microcode updates
+  # System Module cpuIntel: enable Intel CPU microcode updates and install PowerTOP
   flake.modules.nixos.cpuIntel = { pkgs, ... }: {
     hardware.cpu.intel.updateMicrocode = true;
 
@@ -107,7 +107,7 @@
     ];
   };
 
-  # System Module gpuNvidia: configure Nvidia GPU settings
+  # System Module gpuNvidia: enable NVIDIA proprietary drivers with modesetting and 32-bit graphics support
   flake.modules.nixos.gpuNvidia = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       btop-cuda
@@ -130,7 +130,7 @@
     };
   };
 
-  # System Module gpuAmd: configure AMD GPU settings
+  # System Module gpuAmd: enable AMDGPU driver with ROCm/OpenCL support, GPU frequency boosting, and 32-bit graphics
   flake.modules.nixos.gpuAmd = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       btop-rocm

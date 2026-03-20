@@ -1,5 +1,5 @@
 { ... }: {
-  # System Module ssh: enable and configure ssh server and client
+  # System Module ssh: enable OpenSSH server (key-only auth) and configure client host aliases and known hosts
   flake.modules.nixos.ssh = { ... }: {
     services.openssh = {
       enable = true;
@@ -65,7 +65,7 @@
     };
   };
 
-  # System Module firewallDesktop: enable and configure firewall with basic settings
+  # System Module firewallDesktop: enable firewall with ports for SSH, Steam, Spotify, KDE Connect, and Stardew Valley LAN
   flake.modules.nixos.firewallDesktop = { ... }: {
     networking.firewall = {
       enable = true;
@@ -105,7 +105,7 @@
     };
   };
 
-  # System Module firewallServer: enable and configure firewall with server settings
+  # System Module firewallServer: enable firewall with minimal ports for SSH, HTTP/HTTPS, and DNS only
   flake.modules.nixos.firewallServer = { ... }: {
     networking.firewall = {
       enable = true;
@@ -126,7 +126,7 @@
     };
   };
 
-  # System Module vpn: enable and configure mullvad and wireguard vpn
+  # System Module vpn: enable Mullvad VPN service and install WireGuard tools
   flake.modules.nixos.vpn = { pkgs, ... }: {
     # needed for wireguard and mullvad to work properly
     services.resolved.enable = true;
@@ -138,7 +138,7 @@
     ];
   };
 
-  # System Module blocky: enable and configure blocky adblocker
+  # System Module blocky: run Blocky as a local DNS resolver with ad/malware blocking and custom LAN hostname mappings
   flake.modules.nixos.blocky = { ... }: {
     services.blocky = {
       enable = true;
@@ -202,7 +202,7 @@
     networking.dhcpcd.extraConfig = "nohook resolv.conf";
   };
 
-  # Systen Module cloudflared: enable and configure cloudflared tunnel for remote access to local services
+  # System Module cloudflared: run a Cloudflare Tunnel daemon for zero-trust remote access to local services
   flake.modules.nixos.cloudflared = { pkgs, ... }: {
     services.cloudflared = {
       enable = true;
@@ -225,12 +225,12 @@
     ];
   };
 
-  # System Module warp: enable and configure cloudflare warp client
+  # System Module warp: enable Cloudflare WARP client for secure DNS and network privacy
   flake.modules.nixos.warp = { ... }: {
     services.cloudflare-warp.enable = true;
   };
 
-  # Home Module sailing: enable and configure sailing applications ;)
+  # Home Module sailing: install sailing applications ;)
   flake.modules.homeManager.sailing = { pkgs, ... }: {
     home.packages = with pkgs; [
       tor-browser
