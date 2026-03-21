@@ -20,37 +20,49 @@ let system = "x86_64-linux"; in {
 
   flake.modules.nixos.eliasPC = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
-      languageEn
-      fonts
+      # desktop.nix
       baseDesktop
       catppuccin
-      python
-      latex
-      dotnet
-      java
-      go
-      docker
+      fonts
+      languageEn
+      # dev.nix
       devCerts
+      dotnet
+      go
+      java
+      latex
+      python
+      # games.nix
       steam
-      niri
-      ssh
+      # network.nix
       firewallDesktop
+      ssh
       vpn
+      # niri.nix
+      niri
+      # nix.nix
       distributedBuilder
-      nh
       homeManager
-      grub
-      basicSystem
+      nh
+      # optimizations.nix
       optimizationsPC
-      swap
-      printing
-      sound
+      # system.nix
+      basicSystem
       cpuIntel
       gpuAmd
+      grub
+      printing
+      sound
+      swap
+      # terminal.nix
       nixIndex
       terminal
+      # users.nix
       elias
+      # utilities.nix
       cliUtilities
+      # virtualization.nix
+      docker
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -65,25 +77,34 @@ let system = "x86_64-linux"; in {
       };
       users.elias = {
         imports = with inputs.self.modules.homeManager; [
-          libreoffice
+          # ai.nix
+          opencode
+          opencode-dotnet
+          opencode-java
+          # apps.nix
+          discord
           email
-          teams
-          pdf
+          idea
+          kdeConnect
+          libreoffice
           media
           mediaEditors
+          nomacs
           obs
-          discord
-          kdeConnect
+          pdf
+          teams
           vscode
-          idea
+          # browser.nix
           betterfox
+          # games.nix
           minecraft
+          # network.nix
           sailing
+          # users.nix
           elias
+          # utilities.nix
           git
           guiUtilities
-          nomacs
-          opencode
         ];
 
         home.stateVersion = "24.05";

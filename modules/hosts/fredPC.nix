@@ -20,41 +20,54 @@ let system = "x86_64-linux"; in {
 
   flake.modules.nixos.fredPC = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
-      firefox
+      # browser.nix
       chromium-no-gpu
-      languageDe
-      basicFonts
+      firefox
+      # desktop.nix
       baseDesktop
+      basicFonts
+      languageDe
+      # games.nix
       steam
+      # kde.nix
       kde
-      ssh
+      # network.nix
       firewallDesktop
+      ssh
+      # nix.nix
       distributedBuild
-      nh
       homeManager
-      grub
+      nh
+      # system.nix
       basicSystem
-      swap
+      cpuIntel
+      grub
       printing
       sound
-      cpuIntel
+      swap
+      # terminal.nix
       nixIndex
       terminal
+      # users.nix
       elias
       others
+      # utilities.nix
       cliUtilities
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
     home-manager.sharedModules = with inputs.self.modules.homeManager; [
-      plasma-manager
-      libreoffice
+      # apps.nix
       email
-      pdf
-      media
       kdeConnect
+      libreoffice
+      media
+      pdf
       vscodeNonFhs
+      # kde.nix
+      plasma-manager
+      # utilities.nix
       guiUtilities
     ];
 
@@ -69,7 +82,9 @@ let system = "x86_64-linux"; in {
       users = {
         elias = {
           imports = with inputs.self.modules.homeManager; [
+            # users.nix
             elias
+            # utilities.nix
             git
           ];
 
@@ -77,6 +92,7 @@ let system = "x86_64-linux"; in {
         };
         fred = {
           imports = with inputs.self.modules.homeManager; [
+            # users.nix
             fred
           ];
 
@@ -96,6 +112,7 @@ let system = "x86_64-linux"; in {
         };
         gerhard = {
           imports = with inputs.self.modules.homeManager; [
+            # users.nix
             gerhard
           ];
 
