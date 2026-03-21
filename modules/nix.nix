@@ -28,8 +28,8 @@
     };
   };
 
-  # System Module baseSettings: enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
-  flake.modules.nixos.baseSettings = { pkgs, lib, system, ... }: {
+  # System Module base-settings: enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
+  flake.modules.nixos.base-settings = { pkgs, lib, system, ... }: {
     environment.systemPackages = with pkgs; [
       nixd
       nixpkgs-fmt
@@ -104,9 +104,9 @@
     ];
   };
 
-  # System Module distributedBuild: configure this machine to offload builds to EliasPC via SSH
-  flake.modules.nixos.distributedBuild = { ... }: {
-    imports = [ inputs.self.modules.nixos.baseSettings ];
+  # System Module distributed-build: configure this machine to offload builds to EliasPC via SSH
+  flake.modules.nixos.distributed-build = { ... }: {
+    imports = [ inputs.self.modules.nixos.base-settings ];
     nix = {
       distributedBuilds = true;
       buildMachines = [
@@ -137,9 +137,9 @@
     };
   };
 
-  # System Module distributedBuilder: configure this machine to accept remote build jobs from other hosts
-  flake.modules.nixos.distributedBuilder = { ... }: {
-    imports = [ inputs.self.modules.nixos.baseSettings ];
+  # System Module distributed-builder: configure this machine to accept remote build jobs from other hosts
+  flake.modules.nixos.distributed-builder = { ... }: {
+    imports = [ inputs.self.modules.nixos.base-settings ];
     nix = {
       distributedBuilds = false;
       settings = {
@@ -179,17 +179,17 @@
     };
   };
 
-  # System Module homeManager: integrate Home Manager as a NixOS module with shared global packages
-  flake.modules.nixos.homeManager = { ... }: {
+  # System Module home-manager: integrate Home Manager as a NixOS module with shared global packages
+  flake.modules.nixos.home-manager = { ... }: {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      sharedModules = [ inputs.self.modules.homeManager.homeManager ];
+      sharedModules = [ inputs.self.modules.homeManager.home-manager ];
     };
   };
 
-  # Home Module homeManager: enable Home Manager self-management with monthly auto-expiry of old generations
-  flake.modules.homeManager.homeManager = { ... }: {
+  # Home Module home-manager: enable Home Manager self-management with monthly auto-expiry of old generations
+  flake.modules.homeManager.home-manager = { ... }: {
     services.home-manager = {
       autoExpire = {
         enable = true;

@@ -65,8 +65,8 @@
     };
   };
 
-  # System Module firewallDesktop: enable firewall with ports for SSH, Steam, Spotify, KDE Connect, and Stardew Valley LAN
-  flake.modules.nixos.firewallDesktop = { ... }: {
+  # System Module firewall-desktop: enable firewall with ports for SSH, Steam, Spotify, KDE Connect, and Stardew Valley LAN
+  flake.modules.nixos.firewall-desktop = { ... }: {
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [
@@ -105,8 +105,8 @@
     };
   };
 
-  # System Module firewallServer: enable firewall with minimal ports for SSH, HTTP/HTTPS, and DNS only
-  flake.modules.nixos.firewallServer = { ... }: {
+  # System Module firewall-server: enable firewall with minimal ports for SSH, HTTP/HTTPS, and DNS only
+  flake.modules.nixos.firewall-server = { ... }: {
     networking.firewall = {
       enable = true;
       allowedTCPPorts = [

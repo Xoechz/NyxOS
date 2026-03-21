@@ -125,8 +125,8 @@
     '';
   };
 
-  # Home Module kdeConnect: install KDE Connect for phone-desktop integration
-  flake.modules.homeManager.kdeConnect = { pkgs, ... }: {
+  # Home Module kde-connect: install KDE Connect for phone-desktop integration
+  flake.modules.homeManager.kde-connect = { pkgs, ... }: {
     home.packages = with pkgs; [
       kdePackages.kdeconnect-kde
     ];
@@ -161,8 +161,8 @@
     };
   };
 
-  # Home Module vscodeNonFhs: install VS Code (non-FHS) and set it as the default text editor
-  flake.modules.homeManager.vscodeNonFhs = { lib, ... }: {
+  # Home Module vscode-non-fhs: install VS Code (non-FHS) and set it as the default text editor
+  flake.modules.homeManager.vscode-non-fhs = { lib, ... }: {
     programs.vscode.enable = true;
 
     xdg.mimeApps = {
@@ -190,8 +190,8 @@
     ];
   };
 
-  # Home Module mediaEditors: install GIMP, Inkscape, and kdenlive for image and video editing
-  flake.modules.homeManager.mediaEditors = { pkgs, pkgs-stable, lib, ... }: {
+  # Home Module media-editors: install GIMP, Inkscape, and kdenlive for image and video editing
+  flake.modules.homeManager.media-editors = { pkgs, pkgs-stable, lib, ... }: {
     home.packages = with pkgs; [
       inkscape
       adwaita-icon-theme

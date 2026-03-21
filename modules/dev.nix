@@ -116,8 +116,8 @@
     ];
   };
 
-  # System Module devCerts: load all .pem certificates from the certs/ directory into the system trust store
-  flake.modules.nixos.devCerts = { lib, ... }: {
+  # System Module dev-certs: load all .pem certificates from the certs/ directory into the system trust store
+  flake.modules.nixos.dev-certs = { lib, ... }: {
     security.pki.certificates =
       let
         certsDir = ../certs;

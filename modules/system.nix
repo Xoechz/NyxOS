@@ -16,8 +16,8 @@
     };
   };
 
-  # System Module basicSystem: set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support
-  flake.modules.nixos.basicSystem = { ... }: {
+  # System Module basic-system: set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support
+  flake.modules.nixos.basic-system = { ... }: {
     time.timeZone = "Europe/Vienna";
 
     hardware.enableAllFirmware = true;
@@ -98,8 +98,8 @@
     ];
   };
 
-  # System Module cpuIntel: enable Intel CPU microcode updates and install PowerTOP
-  flake.modules.nixos.cpuIntel = { pkgs, ... }: {
+  # System Module cpu-intel: enable Intel CPU microcode updates and install PowerTOP
+  flake.modules.nixos.cpu-intel = { pkgs, ... }: {
     hardware.cpu.intel.updateMicrocode = true;
 
     environment.systemPackages = with pkgs; [
@@ -107,8 +107,8 @@
     ];
   };
 
-  # System Module gpuNvidia: enable NVIDIA proprietary drivers with modesetting and 32-bit graphics support
-  flake.modules.nixos.gpuNvidia = { pkgs, ... }: {
+  # System Module gpu-nvidia: enable NVIDIA proprietary drivers with modesetting and 32-bit graphics support
+  flake.modules.nixos.gpu-nvidia = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       btop-cuda
       nvtopPackages.nvidia
@@ -130,8 +130,8 @@
     };
   };
 
-  # System Module gpuAmd: enable AMDGPU driver with ROCm/OpenCL support, GPU frequency boosting, and 32-bit graphics
-  flake.modules.nixos.gpuAmd = { pkgs, ... }: {
+  # System Module gpu-amd: enable AMDGPU driver with ROCm/OpenCL support, GPU frequency boosting, and 32-bit graphics
+  flake.modules.nixos.gpu-amd = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       btop-rocm
     ];

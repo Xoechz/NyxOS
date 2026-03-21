@@ -6,8 +6,8 @@
     };
   };
 
-  # System Module nixIndex: enable nix-index-database with comma for running unlisted commands without installing them
-  flake.modules.nixos.nixIndex = { ... }: {
+  # System Module nix-index: enable nix-index-database with comma for running unlisted commands without installing them
+  flake.modules.nixos.nix-index = { ... }: {
     imports = [ inputs.nix-index-database.nixosModules.nix-index ];
 
     programs.command-not-found.enable = false;

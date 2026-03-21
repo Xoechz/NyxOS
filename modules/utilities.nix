@@ -1,6 +1,6 @@
 { ... }: {
-  # System Module cliUtilities: install network, filesystem, hardware, and diagnostic CLI tools (fastfetch, jq, curl, etc.)
-  flake.modules.nixos.cliUtilities = { pkgs, ... }: {
+  # System Module cli-utilities: install network, filesystem, hardware, and diagnostic CLI tools (fastfetch, jq, curl, etc.)
+  flake.modules.nixos.cli-utilities = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       fastfetch
       mtr
@@ -81,8 +81,8 @@
     };
   };
 
-  # Home Module guiUtilities: install Baobab disk analyser, Bruno API client, and GNOME multi-writer
-  flake.modules.homeManager.guiUtilities = { pkgs, ... }: {
+  # Home Module gui-utilities: install Baobab disk analyser, Bruno API client, and GNOME multi-writer
+  flake.modules.homeManager.gui-utilities = { pkgs, ... }: {
     home.packages = with pkgs; [
       baobab
       bruno

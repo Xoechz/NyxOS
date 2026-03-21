@@ -28,6 +28,22 @@ directly with `@mention`.
 
 ---
 
+## MCP Servers
+
+The following MCP servers are available to all agents in this session:
+
+| Server | Best used for |
+|--------|--------------|
+| `context7` | Library and framework documentation — look up nixpkgs package attributes, NixOS module options, Home Manager options, and upstream project APIs |
+| `mcp-nixos` | NixOS/Home Manager option resolution and package search directly against the Nix ecosystem — prefer this over context7 for NixOS/HM option queries |
+
+**When to use which:**
+- Querying a NixOS or Home Manager option (e.g. `services.openssh.*`, `programs.git.*`) → use `mcp-nixos`
+- Looking up a nixpkgs package's attributes, version, or derivation details → use `mcp-nixos`
+- Looking up upstream library docs, API references, or non-NixOS framework documentation → use `context7`
+
+---
+
 ## Reference Documentation
 
 - NixOS Wiki: <https://nixos.wiki/wiki/NixOS>
@@ -141,14 +157,14 @@ Every topic file in `modules/` follows this exact pattern:
   };
 
   # 2. NixOS system module
-  # System Module <moduleName>: <one-line description>
-  flake.modules.nixos.<moduleName> = { pkgs, lib, config, system, ... }: {
+  # System Module <module-name>: <one-line description>
+  flake.modules.nixos.<module-name> = { pkgs, lib, config, system, ... }: {
     # NixOS options
   };
 
   # 3. Home Manager module (when needed)
-  # Home Module <moduleName>: <one-line description>
-  flake.modules.homeManager.<moduleName> = { pkgs, lib, config, ... }: {
+  # Home Module <module-name>: <one-line description>
+  flake.modules.homeManager.<module-name> = { pkgs, lib, config, ... }: {
     # home-manager options
   };
 }
@@ -164,7 +180,8 @@ and import topic modules using `with inputs.self.modules.nixos; [...]`.
 | Item | Convention | Examples |
 |------|-----------|---------|
 | Module files | `camelCase.nix` | `apps.nix`, `desktop.nix`, `eliasPC.nix` |
-| NixOS module names | `camelCase` | `baseSettings`, `optimizationsPC`, `basicCatppuccin` |
+| NixOS module names | `kebab-case` | `base-settings`, `optimizations-pc`, `basic-catppuccin` |
+| Home Manager module names | `kebab-case` | `opencode-dotnet`, `plasma-manager`, `gui-utilities` |
 | `nixosConfigurations` keys | `PascalCase` | `EliasPC`, `EliasLaptop`, `FredPC`, `NixPi` |
 | Nix local variables (`let`) | `camelCase` | `catppuccinIcons`, `isMobile` |
 | NixOS option paths | follow upstream | `boot.loader.grub.device`, `services.openssh.enable` |
@@ -210,9 +227,9 @@ boot.loader.grub.device     = lib.mkDefault "nodev";
 
 ```nix
 imports = with inputs.self.modules.nixos; [
-  languageEn
+  language-en
   fonts
-  baseDesktop
+  base-desktop
   catppuccin
 ];
 ```
@@ -231,8 +248,8 @@ specialArgs = { system; pkgs-stable = ...; swapSize = 8; users = [ "elias" ]; };
 Each module definition **must** have a preceding comment in this exact format:
 
 ```nix
-# System Module <moduleName>: <description matching README>
-# Home Module <moduleName>: <description matching README>
+# System Module <module-name>: <description matching README>
+# Home Module <module-name>: <description matching README>
 ```
 
 **Every module defined in `modules/` must also be listed in `README.md`** under
@@ -267,5 +284,5 @@ shellAliases.rebuild = "nh os switch ${config.home.homeDirectory}/NyxOS";
   `aarch64-linux`. Use `lib.mkIf (system == "x86_64-linux") { ... }` for
   arch-specific config.
 - **Remote building.** When EliasPC is not available, builds run locally.
-  When this is an issue(should rarely be the case, only if tasks are very resource-intensive), ask if a connection to EliasPC should be astablished
-  through the cloudflare warp tunnen and waken on LAN magic packets.
+  When this is an issue(should rarely be the case, only if tasks are very resource-intensive), ask if a connection to EliasPC should be established
+  through the cloudflare warp tunnel and waken on LAN magic packets.

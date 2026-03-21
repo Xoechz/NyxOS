@@ -42,8 +42,8 @@
           - New flake inputs are declared inside `flake-file.inputs`, never in
             `flake.nix` (which is auto-generated — never edit it directly)
           - All new inputs must set `<name>.inputs.nixpkgs.follows = "nixpkgs"`
-          - System modules: `flake.modules.nixos.<camelCase>`
-          - Home Manager modules: `flake.modules.homeManager.<camelCase>`
+          - System modules: `flake.modules.nixos.<kebab-case>`
+          - Home Manager modules: `flake.modules.homeManager.<kebab-case>`
           - Each module definition must be preceded by a comment:
             `# System Module <name>: <description>` or
             `# Home Module <name>: <description>`
@@ -79,10 +79,14 @@
           | FredPC | x86_64-linux | KDE, German locale |
           | NixPi | aarch64-linux | Raspberry Pi server, no desktop |
 
-          ## When to use context7
+          ## When to use which MCP tool
 
-          Use the `context7` MCP tool to look up NixOS options, Home Manager options,
-          and nixpkgs package attributes before writing or reviewing Nix code.
+          Use `mcp-nixos` to query NixOS or Home Manager options, resolve option
+          types and defaults, and look up nixpkgs package attributes or versions.
+          This is the primary tool for any Nix-ecosystem lookup.
+
+          Use `context7` for upstream library docs, API references, and
+          non-NixOS framework documentation when mcp-nixos doesn't cover it.
         '';
       };
 
@@ -107,11 +111,23 @@
           - README.md description parity with the in-file comment
           - Inputs declared in `flake-file.inputs`, never in `flake.nix`
           - All new inputs following `nixpkgs` (`<name>.inputs.nixpkgs.follows = "nixpkgs"`)
-          - Correct naming conventions (camelCase modules, PascalCase host keys)
+          - Correct naming conventions (kebab-case module names, PascalCase host keys)
           - `lib.mkIf` / `lib.mkDefault` / `lib.mkForce` used appropriately
           - No hardcoded `/home/elias` — use `config.home.homeDirectory`
           - Architecture-specific blocks guarded with `lib.mkIf (system == "x86_64-linux")`
           - Package lists using `with pkgs; [ … ]` style
+
+          ## MCP tools
+
+          Two MCP servers are available — use the right one for the task:
+
+          - `mcp-nixos`: NixOS/Home Manager option resolution and package search.
+            Use this when querying any NixOS or HM option (e.g. `services.openssh.*`,
+            `programs.git.*`) or looking up nixpkgs package attributes and versions.
+            Prefer this over context7 for anything Nix-ecosystem-specific.
+          - `context7`: Upstream library and framework documentation.
+            Use this for non-NixOS API references, third-party project docs,
+            or when mcp-nixos doesn't have what you need.
 
           After making any change, run `nix flake check` to confirm evaluation is
           clean, then run a `--dry-run` build for the affected host to catch build
@@ -241,7 +257,7 @@
           store) and flag any evaluation errors. If all hosts evaluate cleanly, confirm.
         '';
 
-        init = ''
+        ninit = ''
           ---
           description: Analyse the project, create AGENTS.md, and inject subagent delegation rules
           agent: build
@@ -250,6 +266,8 @@
           Analyse this project and create or update an AGENTS.md file in the
           project root that describes the project structure, coding patterns,
           and conventions — exactly as the built-in /init command would.
+
+          If necessary, call the inbuilt /init command to generate the initial AGENTS.md.
 
           After writing AGENTS.md, append the following subagent delegation
           section if it is not already present (check before writing to keep

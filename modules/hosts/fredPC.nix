@@ -24,35 +24,35 @@ let system = "x86_64-linux"; in {
       chromium-no-gpu
       firefox
       # desktop.nix
-      baseDesktop
-      basicFonts
-      languageDe
+      base-desktop
+      basic-fonts
+      language-de
       # games.nix
       steam
       # kde.nix
       kde
       # network.nix
-      firewallDesktop
+      firewall-desktop
       ssh
       # nix.nix
-      distributedBuild
-      homeManager
+      distributed-build
+      home-manager
       nh
       # system.nix
-      basicSystem
-      cpuIntel
+      basic-system
+      cpu-intel
       grub
       printing
       sound
       swap
       # terminal.nix
-      nixIndex
+      nix-index
       terminal
       # users.nix
       elias
       others
       # utilities.nix
-      cliUtilities
+      cli-utilities
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
@@ -60,15 +60,15 @@ let system = "x86_64-linux"; in {
     home-manager.sharedModules = with inputs.self.modules.homeManager; [
       # apps.nix
       email
-      kdeConnect
+      kde-connect
       libreoffice
       media
       pdf
-      vscodeNonFhs
+      vscode-non-fhs
       # kde.nix
       plasma-manager
       # utilities.nix
-      guiUtilities
+      gui-utilities
     ];
 
     home-manager = {

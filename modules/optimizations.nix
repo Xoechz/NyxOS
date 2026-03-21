@@ -1,6 +1,6 @@
 { ... }: {
-  # System Module optimizationsPC: use the Zen kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
-  flake.modules.nixos.optimizationsPC = { pkgs, lib, ... }: {
+  # System Module optimizations-pc: use the Zen kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
+  flake.modules.nixos.optimizations-pc = { pkgs, lib, ... }: {
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
     services.system76-scheduler = {
@@ -45,8 +45,8 @@
     };
   };
 
-  # System Module optimizationsLaptop: use the Zen kernel with TLP for AC/battery power profiles and an 80% charge threshold
-  flake.modules.nixos.optimizationsLaptop = { pkgs, lib, ... }: {
+  # System Module optimizations-laptop: use the Zen kernel with TLP for AC/battery power profiles and an 80% charge threshold
+  flake.modules.nixos.optimizations-laptop = { pkgs, lib, ... }: {
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
     services.system76-scheduler = {

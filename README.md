@@ -22,26 +22,26 @@ The name is inspired by the DOTA hero Nyx
       - firefox
         - enable Firefox system-wide
     - **[desktop.nix](/modules/desktop.nix)**
-      - baseDesktop
+      - base-desktop
         - enable polkit and D-Bus, required by all desktop environments
-      - basicCatppuccin
+      - basic-catppuccin
         - apply Catppuccin Mocha/Peach theming system-wide without cursor theme
-      - basicFonts
+      - basic-fonts
         - install core fonts and Nerd Font variants of JetBrains Mono and Noto, with sane defaults
       - catppuccin
         - apply full Catppuccin Mocha/Peach theming system-wide including cursor theme
       - fonts
         - install the full Nerd Fonts collection (60+ families) plus core/Vista fonts
-      - languageDe
+      - language-de
         - set German (Austria) language and locale for all LC categories
-      - languageEn
+      - language-en
         - set English (GB) UI language with Austrian locale for measurements, currency, and time
     - **[dev.nix](/modules/dev.nix)**
       - android
         - install Android Studio, SDK platform-tools, and adb; adds elias to the adbusers group
       - c
         - install GCC, CMake, Make, GDB, Valgrind, GTest, Conan, and related C/C++ tooling
-      - devCerts
+      - dev-certs
         - load all .pem certificates from the certs/ directory into the system trust store
       - dotnet
         - install .NET 10 SDK with ILSpy and set DOTNET_ROOT/DOTNET_BIN environment variables
@@ -64,9 +64,9 @@ The name is inspired by the DOTA hero Nyx
         - run Blocky as a local DNS resolver with ad/malware blocking and custom LAN hostname mappings
       - cloudflared
         - run a Cloudflare Tunnel daemon for zero-trust remote access to local services
-      - firewallDesktop
+      - firewall-desktop
         - enable firewall with ports for SSH, Steam, Spotify, KDE Connect, and Stardew Valley LAN
-      - firewallServer
+      - firewall-server
         - enable firewall with minimal ports for SSH, HTTP/HTTPS, and DNS only
       - ssh
         - enable OpenSSH server (key-only auth) and configure client host aliases and known hosts
@@ -78,31 +78,31 @@ The name is inspired by the DOTA hero Nyx
       - niri
         - enable the Niri tiling compositor with DankMaterialShell greeter, Thunar, and XWayland support
     - **[nix.nix](/modules/nix.nix)**
-      - baseSettings
+      - base-settings
         - enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
-      - distributedBuild
+      - distributed-build
         - configure this machine to offload builds to EliasPC via SSH
-      - distributedBuilder
+      - distributed-builder
         - configure this machine to accept remote build jobs from other hosts
-      - homeManager
+      - home-manager
         - integrate Home Manager as a NixOS module with shared global packages
       - nh
         - enable nh with weekly auto-cleanup, keeping the last 3 generations for 7 days
     - **[optimizations.nix](/modules/optimizations.nix)**
-      - optimizationsLaptop
+      - optimizations-laptop
         - use the Zen kernel with TLP for AC/battery power profiles and an 80% charge threshold
-      - optimizationsPC
+      - optimizations-pc
         - use the Zen kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
     - **[system.nix](/modules/system.nix)**
-      - basicSystem
+      - basic-system
         - set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support
       - bluetooth
         - enable Bluetooth, power on at boot, and enable experimental features for battery reporting
-      - cpuIntel
+      - cpu-intel
         - enable Intel CPU microcode updates and install PowerTOP
-      - gpuAmd
+      - gpu-amd
         - enable AMDGPU driver with ROCm/OpenCL support, GPU frequency boosting, and 32-bit graphics
-      - gpuNvidia
+      - gpu-nvidia
         - enable NVIDIA proprietary drivers with modesetting and 32-bit graphics support
       - grub
         - configure GRUB EFI bootloader with a UEFI firmware entry
@@ -113,7 +113,7 @@ The name is inspired by the DOTA hero Nyx
       - swap
         - configure zram swap and an encrypted swapfile sized via the swapSize specialArg (in GB)
     - **[terminal.nix](/modules/terminal.nix)**
-      - nixIndex
+      - nix-index
         - enable nix-index-database with comma for running unlisted commands without installing them
       - terminal
         - enable ZSH system-wide and pull in the terminal Home Module for all users
@@ -123,7 +123,7 @@ The name is inspired by the DOTA hero Nyx
       - others
         - create the fred and gerhard users with standard group memberships
     - **[utilities.nix](/modules/utilities.nix)**
-      - cliUtilities
+      - cli-utilities
         - install network, filesystem, hardware, and diagnostic CLI tools (fastfetch, jq, curl, etc.)
     - **[virtualization.nix](/modules/virtualization.nix)**
       - docker
@@ -147,13 +147,13 @@ The name is inspired by the DOTA hero Nyx
         - install Thunderbird and register it as the default mail and calendar handler
       - idea
         - install JetBrains IntelliJ IDEA
-      - kdeConnect
+      - kde-connect
         - install KDE Connect for phone-desktop integration
       - libreoffice
         - install LibreOffice Qt with English and German spell-check dictionaries
       - media
         - install VLC and cava, and configure Spicetify-themed Spotify with extensions
-      - mediaEditors
+      - media-editors
         - install GIMP, Inkscape, and kdenlive for image and video editing
       - nomacs
         - install Nomacs image viewer and register it as the default for common image formats
@@ -167,13 +167,13 @@ The name is inspired by the DOTA hero Nyx
         - install Teams for Linux
       - vscode
         - install VS Code (FHS wrapper) and set it as the default text editor
-      - vscodeNonFhs
+      - vscode-non-fhs
         - install VS Code (non-FHS) and set it as the default text editor
     - **[browser.nix](/modules/browser.nix)**
       - betterfox
         - configure Firefox with Betterfox hardened user.js and set it as the default browser
     - **[desktop.nix](/modules/desktop.nix)**
-      - basicCatppuccin
+      - basic-catppuccin
         - apply Catppuccin Mocha/Peach theming in Home Manager without cursor theme
       - catppuccin
         - apply full Catppuccin Mocha/Peach theming in Home Manager including GTK, Qt, icons, and cursor
@@ -190,7 +190,7 @@ The name is inspired by the DOTA hero Nyx
       - niri
         - configure Niri keybinds, layout, and the full DankMaterialShell bar with plugins and Danksearch
     - **[nix.nix](/modules/nix.nix)**
-      - homeManager
+      - home-manager
         - enable Home Manager self-management with monthly auto-expiry of old generations
     - **[terminal.nix](/modules/terminal.nix)**
       - terminal
@@ -205,7 +205,7 @@ The name is inspired by the DOTA hero Nyx
     - **[utilities.nix](/modules/utilities.nix)**
       - git
         - configure Git with user identity, LFS, rebase-on-pull, and a log graph alias
-      - guiUtilities
+      - gui-utilities
         - install Baobab disk analyser, Bruno API client, and GNOME multi-writer
 - [modules/hosts](modules/hosts) => Per-host setup. Uses the defined modules
 - [images](images) => Background and ReadMe images

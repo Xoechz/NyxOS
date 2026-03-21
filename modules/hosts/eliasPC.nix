@@ -21,12 +21,12 @@ let system = "x86_64-linux"; in {
   flake.modules.nixos.eliasPC = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
       # desktop.nix
-      baseDesktop
+      base-desktop
       catppuccin
       fonts
-      languageEn
+      language-en
       # dev.nix
-      devCerts
+      dev-certs
       dotnet
       go
       java
@@ -35,32 +35,32 @@ let system = "x86_64-linux"; in {
       # games.nix
       steam
       # network.nix
-      firewallDesktop
+      firewall-desktop
       ssh
       vpn
       # niri.nix
       niri
       # nix.nix
-      distributedBuilder
-      homeManager
+      distributed-builder
+      home-manager
       nh
       # optimizations.nix
-      optimizationsPC
+      optimizations-pc
       # system.nix
-      basicSystem
-      cpuIntel
-      gpuAmd
+      basic-system
+      cpu-intel
+      gpu-amd
       grub
       printing
       sound
       swap
       # terminal.nix
-      nixIndex
+      nix-index
       terminal
       # users.nix
       elias
       # utilities.nix
-      cliUtilities
+      cli-utilities
       # virtualization.nix
       docker
     ] ++ [
@@ -85,10 +85,10 @@ let system = "x86_64-linux"; in {
           discord
           email
           idea
-          kdeConnect
+          kde-connect
           libreoffice
           media
-          mediaEditors
+          media-editors
           nomacs
           obs
           pdf
@@ -104,7 +104,7 @@ let system = "x86_64-linux"; in {
           elias
           # utilities.nix
           git
-          guiUtilities
+          gui-utilities
         ];
 
         home.stateVersion = "24.05";

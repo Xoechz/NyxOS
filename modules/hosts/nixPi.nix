@@ -21,27 +21,27 @@ let system = "aarch64-linux"; in {
   flake.modules.nixos.nixPi = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
       # desktop.nix
-      basicCatppuccin
-      basicFonts
-      languageEn
+      basic-catppuccin
+      basic-fonts
+      language-en
       # network.nix
       blocky
       cloudflared
-      firewallServer
+      firewall-server
       ssh
       # nix.nix
-      distributedBuild
-      homeManager
+      distributed-build
+      home-manager
       nh
       # system.nix
-      basicSystem
+      basic-system
       swap
       # terminal.nix
       terminal
       # users.nix
       elias
       # utilities.nix
-      cliUtilities
+      cli-utilities
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

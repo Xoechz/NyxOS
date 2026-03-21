@@ -6,8 +6,8 @@
     };
   };
 
-  # System Module languageEn: set English (GB) UI language with Austrian locale for measurements, currency, and time
-  flake.modules.nixos.languageEn = { ... }: {
+  # System Module language-en: set English (GB) UI language with Austrian locale for measurements, currency, and time
+  flake.modules.nixos.language-en = { ... }: {
     i18n.defaultLocale = "en_GB.UTF-8";
 
     i18n.extraLocaleSettings = {
@@ -26,8 +26,8 @@
     };
   };
 
-  # System Module languageDe: set German (Austria) language and locale for all LC categories
-  flake.modules.nixos.languageDe = { ... }: {
+  # System Module language-de: set German (Austria) language and locale for all LC categories
+  flake.modules.nixos.language-de = { ... }: {
     i18n.defaultLocale = "de_AT.UTF-8";
 
     i18n.extraLocaleSettings = {
@@ -46,8 +46,8 @@
     };
   };
 
-  # System Module basicFonts: install core fonts and Nerd Font variants of JetBrains Mono and Noto, with sane defaults
-  flake.modules.nixos.basicFonts = { pkgs, ... }: {
+  # System Module basic-fonts: install core fonts and Nerd Font variants of JetBrains Mono and Noto, with sane defaults
+  flake.modules.nixos.basic-fonts = { pkgs, ... }: {
     fonts = {
       packages = with pkgs;[
         corefonts
@@ -69,8 +69,8 @@
     };
   };
 
-  # System Module baseDesktop: enable polkit and D-Bus, required by all desktop environments
-  flake.modules.nixos.baseDesktop = { ... }: {
+  # System Module base-desktop: enable polkit and D-Bus, required by all desktop environments
+  flake.modules.nixos.base-desktop = { ... }: {
     security.polkit.enable = true;
     services.dbus.enable = true;
   };
@@ -221,8 +221,8 @@
     };
   };
 
-  # System Module basicCatppuccin: apply Catppuccin Mocha/Peach theming system-wide without cursor theme
-  flake.modules.nixos.basicCatppuccin = { ... }: {
+  # System Module basic-catppuccin: apply Catppuccin Mocha/Peach theming system-wide without cursor theme
+  flake.modules.nixos.basic-catppuccin = { ... }: {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
     catppuccin = {
@@ -233,7 +233,7 @@
     };
 
     home-manager.sharedModules = [
-      inputs.self.modules.homeManager.basicCatppuccin
+      inputs.self.modules.homeManager.basic-catppuccin
     ];
   };
 
@@ -320,8 +320,8 @@
       };
     };
 
-  # Home Module basicCatppuccin: apply Catppuccin Mocha/Peach theming in Home Manager without cursor theme
-  flake.modules.homeManager.basicCatppuccin = { ... }: {
+  # Home Module basic-catppuccin: apply Catppuccin Mocha/Peach theming in Home Manager without cursor theme
+  flake.modules.homeManager.basic-catppuccin = { ... }: {
     imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
     catppuccin = {
