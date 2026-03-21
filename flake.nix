@@ -7,101 +7,100 @@
 
   inputs = {
     betterfox-nix = {
+      url = "github:HeitorAugustoLN/betterfox-nix";
       inputs = {
         flake-parts.follows = "flake-parts";
         import-tree.follows = "import-tree";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
-      url = "github:HeitorAugustoLN/betterfox-nix";
     };
     catppuccin = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     danksearch = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AvengeMedia/danksearch";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         quickshell.follows = "quickshell";
       };
-      url = "github:AvengeMedia/DankMaterialShell/stable";
     };
     dms-plugin-registry = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-compat.url = "github:nixos/flake-compat";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
-      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
       url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
     };
     flake-utils = {
-      inputs.systems.follows = "systems";
       url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
     };
     git-hooks = {
+      url = "github:cachix/git-hooks.nix";
       inputs = {
         flake-compat.follows = "flake-compat";
         gitignore.follows = "gitignore";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:cachix/git-hooks.nix";
     };
     gitignore = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
     niri = {
+      url = "github:sodiboo/niri-flake";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
-      url = "github:sodiboo/niri-flake";
     };
     nix-index-database = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-output-monitor = {
+      url = "github:maralorn/nix-output-monitor";
       inputs = {
         flake-utils.follows = "flake-utils";
         git-hooks.follows = "git-hooks";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:maralorn/nix-output-monitor";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-lib.follows = "nixpkgs";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     plasma-manager = {
+      url = "github:nix-community/plasma-manager";
       inputs = {
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:nix-community/plasma-manager";
     };
     quickshell = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
-      url = "github:Gerg-L/spicetify-nix";
     };
     systems.url = "github:nix-systems/default";
   };
-
 }

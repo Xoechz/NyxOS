@@ -6,18 +6,40 @@ There is no TypeScript, Rust, Python, or other language source code in this repo
 
 ---
 
+## Subagents
+
+Three specialised subagents are available. The default agent should delegate to
+them automatically based on the nature of the task, or you can invoke them
+directly with `@mention`.
+
+| Subagent | Trigger conditions | Direct invocation |
+|---|---|---|
+| `nix-agent` | Any task that touches `.nix` files, `flake.nix`/`flake.lock`, NixOS/HM options, or system rebuild/deployment | `@nix-agent` |
+| `dotnet-agent` | Any task in a `.csproj`/`.sln` C# or .NET project — build, test, NuGet, refactor, format | `@dotnet-agent` |
+| `java-agent` | Any task in a Maven (`pom.xml`) or Gradle (`build.gradle[.kts]`) Java project — build, test, dependencies, format | `@java-agent` |
+
+**Delegation rules for the default agent:**
+
+- If the user's request modifies or creates any `*.nix` file → hand off to `@nix-agent`.
+- If the working directory (or any ancestor) contains a `*.csproj` or `*.sln` file → hand off to `@dotnet-agent`.
+- If the working directory (or any ancestor) contains a `pom.xml` or `build.gradle[.kts]` file → hand off to `@java-agent`.
+- When in doubt whether a task is Nix-related, err on the side of delegating to `@nix-agent`.
+- You may handle purely informational/read-only questions yourself without delegating.
+
+---
+
 ## Reference Documentation
 
-- NixOS Wiki: https://nixos.wiki/wiki/NixOS
-- Dendritic Pattern Overview: https://dendrix.oeiuwq.com/Dendritic.html
-- Dendritic Design Guide: https://github.com/Doc-Steve/dendritic-design-with-flake-parts
-- Niri Flake Docs: https://github.com/sodiboo/niri-flake/blob/main/docs.md
-- Niri NixOS Wiki: https://wiki.nixos.org/wiki/Niri
-- Niri Example Config: https://github.com/sodiboo/system/blob/main/personal/niri.mod.nix
-- DankMaterialShell (DMS) GitHub: https://github.com/AvengeMedia/DankMaterialShell
-- DMS Docs: https://danklinux.com/docs
-- DMS NixOS Flake Guide: https://danklinux.com/docs/dankmaterialshell/nixos-flake
-- DMS Example Config: https://gitlab.com/theblackdon/donix
+- NixOS Wiki: <https://nixos.wiki/wiki/NixOS>
+- Dendritic Pattern Overview: <https://dendrix.oeiuwq.com/Dendritic.html>
+- Dendritic Design Guide: <https://github.com/Doc-Steve/dendritic-design-with-flake-parts>
+- Niri Flake Docs: <https://github.com/sodiboo/niri-flake/blob/main/docs.md>
+- Niri NixOS Wiki: <https://wiki.nixos.org/wiki/Niri>
+- Niri Example Config: <https://github.com/sodiboo/system/blob/main/personal/niri.mod.nix>
+- DankMaterialShell (DMS) GitHub: <https://github.com/AvengeMedia/DankMaterialShell>
+- DMS Docs: <https://danklinux.com/docs>
+- DMS NixOS Flake Guide: <https://danklinux.com/docs/dankmaterialshell/nixos-flake>
+- DMS Example Config: <https://gitlab.com/theblackdon/donix>
 
 ---
 
@@ -244,3 +266,6 @@ shellAliases.rebuild = "nh os switch ${config.home.homeDirectory}/NyxOS";
 - **Multi-architecture.** Supported systems are `x86_64-linux` and
   `aarch64-linux`. Use `lib.mkIf (system == "x86_64-linux") { ... }` for
   arch-specific config.
+- **Remote building.** When EliasPC is not available, builds run locally.
+  When this is an issue(should rarely be the case, only if tasks are very resource-intensive), ask if a connection to EliasPC should be astablished
+  through the cloudflare warp tunnen and waken on LAN magic packets.

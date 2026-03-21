@@ -83,6 +83,7 @@ let system = "x86_64-linux"; in {
           git
           guiUtilities
           nomacs
+          opencode
         ];
 
         home.stateVersion = "24.05";
