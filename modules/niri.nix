@@ -159,6 +159,9 @@
           layout = {
             # Here i could make fancy shit
             gaps = 5;
+            focus-ring = {
+              active.color = "#fab387"; # catppuccin mocha peach
+            };
             preset-column-widths = [
               { proportion = 1.0 / 3.0; }
               { proportion = 1.0 / 2.0; }
