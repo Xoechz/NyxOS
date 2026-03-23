@@ -259,7 +259,7 @@
   };
 
   # Home Module catppuccin: apply full Catppuccin Mocha/Peach theming in Home Manager including GTK, Qt, icons, and cursor
-  flake.modules.homeManager.catppuccin = { pkgs, lib, ... }:
+  flake.modules.homeManager.catppuccin = { pkgs, lib, config, ... }:
     let
       catppuccin-papirus-icons = pkgs.catppuccin-papirus-folders.override {
         flavor = "mocha";
@@ -312,6 +312,7 @@
           gtk-application-prefer-dark-theme = true;
           gtk-decoration-layout = "icon:minimize,maximize,close";
         };
+        gtk4.theme = config.gtk.theme;
       };
 
       qt = {

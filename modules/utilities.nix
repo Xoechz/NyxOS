@@ -78,6 +78,7 @@
         core.autocrlf = "input";
       };
       lfs.enable = true;
+      signing.format = null;
     };
   };
 

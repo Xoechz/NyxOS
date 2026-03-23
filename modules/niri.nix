@@ -77,7 +77,6 @@
 
     programs.xfconf.enable = true; # To persist thunar config
     services.gvfs.enable = true; # Mount, trash, and other functionalities
-    services.samba.enable = true; # Remote drives
     services.tumbler.enable = true; # Thumbnail support for images
 
     home-manager.sharedModules = [
