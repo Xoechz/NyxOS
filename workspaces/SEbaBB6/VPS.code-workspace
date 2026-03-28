@@ -1,9 +1,13 @@
 {
 	"folders": [
 		{
-			"name": "SEbaBB6",
-			"path": "/home/elias/Repos/SEbaBB6/VPS"
+			"name": "ue1",
+			"path": "/home/elias/Repos/assignment-1-Xoechz"
 		},
+		// {
+		// 	"name": "SEbaBB6",
+		// 	"path": "/home/elias/Repos/SEbaBB6/VPS"
+		// },
 		{
 			"name": "NyxOS",
 			"path": "/home/elias/NyxOS"
