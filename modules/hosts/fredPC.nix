@@ -40,7 +40,7 @@ let system = "x86_64-linux"; in {
       nh
       # system.nix
       basic-system
-      cpu-intel
+      cpu-amd
       grub
       printing
       sound
@@ -133,9 +133,9 @@ let system = "x86_64-linux"; in {
       };
     };
 
-    boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "ums_realtek" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+    boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
     boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ "kvm-intel" ];
+    boot.kernelModules = [ "kvm-amd" ];
     boot.extraModulePackages = [ ];
 
     fileSystems."/" = {
@@ -169,6 +169,6 @@ let system = "x86_64-linux"; in {
 
     boot.loader.grub.useOSProber = true;
 
-    system.stateVersion = "25.05";
+    system.stateVersion = "26.05";
   };
 }

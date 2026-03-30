@@ -97,7 +97,9 @@ The name is inspired by the DOTA hero Nyx
       - basic-system
         - set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support
       - bluetooth
-        - enable Bluetooth, power on at boot, and enable experimental features for battery reporting
+        - enable Bluetooth, power on at boot, and enable experimental features for battery reportingcpu-in
+      - cpu-amd
+        - enable AMD CPU microcode updates
       - cpu-intel
         - enable Intel CPU microcode updates and install PowerTOP
       - gpu-amd

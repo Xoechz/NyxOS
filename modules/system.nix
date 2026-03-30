@@ -106,6 +106,11 @@
     ];
   };
 
+  # System Module cpu-amd: enable AMD CPU microcode updates
+  flake.modules.nixos.cpu-amd = { pkgs, ... }: {
+    hardware.cpu.amd.updateMicrocode = true;
+  };
+
   # System Module gpu-nvidia: enable NVIDIA proprietary drivers with modesetting and 32-bit graphics support
   flake.modules.nixos.gpu-nvidia = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [

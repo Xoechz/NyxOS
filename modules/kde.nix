@@ -16,7 +16,7 @@
     services.libinput.enable = true;
 
     # Ensure X11 input drivers are available
-    services.xserver.modules = [ pkgs.xorg.xf86inputlibinput ];
+    services.xserver.modules = [ pkgs.xf86-input-libinput ];
 
     # Configure keymap in X11
     services.xserver.xkb = {
