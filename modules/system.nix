@@ -107,7 +107,7 @@
   };
 
   # System Module cpu-amd: enable AMD CPU microcode updates
-  flake.modules.nixos.cpu-amd = { pkgs, ... }: {
+  flake.modules.nixos.cpu-amd = { ... }: {
     hardware.cpu.amd.updateMicrocode = true;
   };
 

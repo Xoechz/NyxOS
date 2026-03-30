@@ -41,6 +41,7 @@ let system = "x86_64-linux"; in {
       # system.nix
       basic-system
       cpu-amd
+      gpu-amd
       grub
       printing
       sound
