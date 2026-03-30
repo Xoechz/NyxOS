@@ -17,12 +17,11 @@
     };
   };
 
-  # System Module chromium-no-gpu: install Chromium with Widevine DRM and GPU acceleration disabled
-  flake.modules.nixos.chromium-no-gpu = { pkgs, ... }: {
+  # System Module chromium: install Chromium with Widevine DRM
+  flake.modules.nixos.chromium = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       (chromium.override {
         enableWideVine = true;
-        commandLineArgs = [ "--disable-gpu" ];
       })
     ];
   };

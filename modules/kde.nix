@@ -12,12 +12,6 @@
     # Enable the X11 windowing system. Disabling it seems to break a lot of stuff.
     services.xserver.enable = true;
 
-    # Enable libinput for X11 (essential for keyboard/mouse on X11)
-    services.libinput.enable = true;
-
-    # Ensure X11 input drivers are available
-    services.xserver.modules = [ pkgs.xf86-input-libinput ];
-
     # Configure keymap in X11
     services.xserver.xkb = {
       layout = "at";
@@ -26,12 +20,11 @@
     # Enable the KDE Plasma Desktop Environment.
     services.desktopManager.plasma6.enable = true;
 
-    # Use Plasma X11 for better compatibility with older hardware
+    # set KDE to wayland
     services.displayManager = {
-      defaultSession = "plasmax11";
-      sddm = {
+      defaultSession = "plasma";
+      plasma-login-manager = {
         enable = true;
-        wayland.enable = false;
       };
     };
 
@@ -41,10 +34,6 @@
       khelpcenter
       konsole
       elisa
-    ];
-
-    environment.systemPackages = with pkgs; [
-      kdePackages.kwin-x11
     ];
   };
 

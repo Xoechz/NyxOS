@@ -21,7 +21,7 @@ let system = "x86_64-linux"; in {
   flake.modules.nixos.fredPC = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
       # browser.nix
-      chromium-no-gpu
+      chromium
       firefox
       # desktop.nix
       base-desktop

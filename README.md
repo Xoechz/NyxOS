@@ -17,8 +17,8 @@ The name is inspired by the DOTA hero Nyx
       - flatpak
         - enable Flatpak and register the Flathub repository
     - **[browser.nix](/modules/browser.nix)**
-      - chromium-no-gpu
-        - install Chromium with Widevine DRM and GPU acceleration disabled
+      - chromium
+        - install Chromium with Widevine DRM
       - firefox
         - enable Firefox system-wide
     - **[desktop.nix](/modules/desktop.nix)**
