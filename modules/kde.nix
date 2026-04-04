@@ -23,8 +23,9 @@
     # set KDE to wayland
     services.displayManager = {
       defaultSession = "plasma";
-      plasma-login-manager = {
+      sddm = {
         enable = true;
+        wayland.enable = true;
       };
     };
 
