@@ -183,6 +183,13 @@
     ];
   };
 
+  # Home Module rider: install JetBrains Rider
+  flake.modules.homeManager.rider = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      jetbrains.rider
+    ];
+  };
+
   # Home Module qgis: install QGIS geographic information system
   flake.modules.homeManager.qgis = { pkgs, ... }: {
     home.packages = with pkgs; [

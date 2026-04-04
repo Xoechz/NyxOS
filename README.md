@@ -149,6 +149,8 @@ The name is inspired by the DOTA hero Nyx
         - install Thunderbird and register it as the default mail and calendar handler
       - idea
         - install JetBrains IntelliJ IDEA
+      - rider
+        - install JetBrains Rider
       - kde-connect
         - install KDE Connect for phone-desktop integration
       - libreoffice

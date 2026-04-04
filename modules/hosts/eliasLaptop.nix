@@ -87,6 +87,7 @@ let system = "x86_64-linux"; in {
           discord
           email
           idea
+          rider
           kde-connect
           libreoffice
           media
