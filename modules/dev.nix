@@ -59,11 +59,16 @@
   };
 
   # System Module dotnet: install .NET 10 SDK with ILSpy and set DOTNET_ROOT/DOTNET_BIN environment variables
-  flake.modules.nixos.dotnet = { pkgs, ... }: {
+  flake.modules.nixos.dotnet = { pkgs, config, ... }: {
     environment.systemPackages = with pkgs; [
       dotnetCorePackages.sdk_10_0
       ilspycmd
       libmsquic
+
+      # profiling
+      config.boot.kernelPackages.perf
+      lttng-tools
+      babeltrace
     ];
 
     environment.variables = {

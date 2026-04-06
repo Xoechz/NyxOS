@@ -25,6 +25,7 @@
 
     services.fwupd.enable = true;
     services.fstrim.enable = true;
+    services.envfs.enable = true;
 
     boot.supportedFilesystems = [
       "ntfs"
