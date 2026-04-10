@@ -68,7 +68,7 @@
       # profiling
       config.boot.kernelPackages.perf
       lttng-tools
-      babeltrace
+      hotspot
     ];
 
     environment.variables = {
