@@ -136,8 +136,8 @@ The name is inspired by the DOTA hero Nyx
         - enable QEMU/libvirt with SPICE USB redirection and virt-manager for Windows VMs
   - Home Modules:
     - **[ai.nix](/modules/ai.nix)**
-      - opencode
-        - enable the OpenCode AI coding agent with auto-update, Context7 MCP server, nix-module skill, and NixOS/Nix subagent with nix-check and nix-rebuild commands
+       - opencode
+         - enable the OpenCode AI coding agent with auto-update, Context7 MCP server, nix-module/caveman/caveman-commit/caveman-review skills, and NixOS/Nix subagent with nix-check and nix-rebuild commands
       - opencode-dotnet
         - extend OpenCode with the dotnet-dev skill and dotnet build/test/format commands
       - opencode-java

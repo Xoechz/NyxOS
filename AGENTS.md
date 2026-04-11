@@ -44,6 +44,34 @@ The following MCP servers are available to all agents in this session:
 
 ---
 
+## Hosts
+
+| Key | Arch | Notes |
+|-----|------|-------|
+| `EliasPC` | x86_64-linux | Intel CPU + AMD GPU, desktop, distributed-builder |
+| `EliasLaptop` | x86_64-linux | Intel CPU + NVIDIA GPU, mobile (`isMobile = true`) |
+| `FredPC` | x86_64-linux | KDE, German locale |
+| `NixPi` | aarch64-linux | Raspberry Pi server, no desktop |
+
+---
+
+## OpenCode Slash Commands
+
+These are defined in `modules/ai.nix` and available in every session:
+
+| Command | What it does |
+|---------|-------------|
+| `/nix-check` | Runs `nix flake check` and explains any errors |
+| `/nix-rebuild` | Dry-run builds all four hosts and summarises what would change |
+| `/dotnet-build` | `dotnet build` with error explanations |
+| `/dotnet-test` | `dotnet test` with failure summaries |
+| `/dotnet-format` | `dotnet format` with change report |
+| `/java-build` | Maven or Gradle build (auto-detected) with error explanations |
+| `/java-test` | Maven or Gradle test with failure summaries |
+| `/java-format` | `google-java-format` on all `.java` files |
+
+---
+
 ## Reference Documentation
 
 - NixOS Wiki: <https://nixos.wiki/wiki/NixOS>
@@ -277,12 +305,6 @@ shellAliases.rebuild = "nh os switch ${config.home.homeDirectory}/NyxOS";
 - **`nixpkgs` input follows `nixpkgs`** — all new flake inputs should set
   `<input>.inputs.nixpkgs.follows = "nixpkgs"` to avoid duplicate nixpkgs
   instances in the store.
-- **Unstable by default.** The primary nixpkgs is `nixos-unstable`. Use
-  `pkgs-stable` (passed via `specialArgs`) only for packages that break on
-  unstable (e.g. libreoffice, kdenlive).
-- **Multi-architecture.** Supported systems are `x86_64-linux` and
-  `aarch64-linux`. Use `lib.mkIf (system == "x86_64-linux") { ... }` for
-  arch-specific config.
-- **Remote building.** When EliasPC is not available, builds run locally.
-  When this is an issue(should rarely be the case, only if tasks are very resource-intensive), ask if a connection to EliasPC should be established
-  through the cloudflare warp tunnel and waken on LAN magic packets.
+- **Unstable by default.** Primary nixpkgs is `nixos-unstable`. `pkgs-stable` pins `nixos-25.11` (declared in `modules/dendritic.nix`). Use `pkgs-stable` only for packages that break on unstable (e.g. libreoffice, kdenlive).
+- **Multi-architecture.** Supported systems: `x86_64-linux`, `aarch64-linux`. Guard arch-specific config with `lib.mkIf (system == "x86_64-linux") { ... }`.
+- **Remote building.** When EliasPC unavailable and task is resource-intensive, ask whether to wake it via Cloudflare WARP tunnel + WoL magic packet.
