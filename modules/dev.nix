@@ -69,7 +69,6 @@
     environment.variables = {
       DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_10_0}/bin/dotnet";
       DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
-      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
     };
     # previous library path problems should be resolved by disabling jack
   };
