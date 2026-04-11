@@ -59,21 +59,17 @@
   };
 
   # System Module dotnet: install .NET 10 SDK with ILSpy and set DOTNET_ROOT/DOTNET_BIN environment variables
-  flake.modules.nixos.dotnet = { pkgs, config, ... }: {
+  flake.modules.nixos.dotnet = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       dotnetCorePackages.sdk_10_0
       ilspycmd
       libmsquic
-
-      # profiling
-      config.boot.kernelPackages.perf
-      lttng-tools
-      hotspot
     ];
 
     environment.variables = {
       DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_10_0}/bin/dotnet";
       DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
     };
     # previous library path problems should be resolved by disabling jack
   };
