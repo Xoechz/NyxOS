@@ -31,6 +31,24 @@
       hunspellDicts.en_US
       hunspellDicts.de_AT
     ];
+
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        # ODT
+        "application/vnd.oasis.opendocument.text" = "libreoffice-writer.desktop";
+        # ODS
+        "application/vnd.oasis.opendocument.spreadsheet" = "libreoffice-calc.desktop";
+        # ODP
+        "application/vnd.oasis.opendocument.presentation" = "libreoffice-impress.desktop";
+        # DOCX
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "libreoffice-writer.desktop";
+        # XLSX
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "libreoffice-calc.desktop";
+        # PPTX
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "libreoffice-impress.desktop";
+      };
+    };
   };
 
   # Home Module email: install Thunderbird and register it as the default mail and calendar handler
