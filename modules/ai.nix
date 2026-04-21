@@ -255,6 +255,7 @@
               "nix build* --no-link*": allow
               "nix-instantiate*": allow
               "nixpkgs-fmt*": allow
+              "statix*": allow
               "nixd*": allow
               "git status*": allow
               "git diff*": allow
@@ -422,6 +423,23 @@
 
           For each host: list any derivations that would be built (not already in the
           store) and flag any evaluation errors. If all hosts evaluate cleanly, confirm.
+        '';
+
+        nix-lint = ''
+          ---
+          description: Run statix check on the NyxOS repo and explain any warnings or errors
+          agent: build
+          ---
+
+          Run `statix check` in `~/NyxOS` and report the results.
+
+          !`cd ~/NyxOS && statix check 2>&1`
+
+          If there are warnings or errors:
+          1. Identify which file and line each finding is on
+          2. Explain what the lint rule means and why it matters
+          3. Show a corrected Nix snippet for each finding
+          If everything passes, confirm the repo is lint-clean.
         '';
 
         ninit = ''

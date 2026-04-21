@@ -36,6 +36,7 @@
       nix-tree
       nix-output-monitor
       nvd
+      statix # // TODO: fix statix smells
     ];
 
     nix = {

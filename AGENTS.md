@@ -63,6 +63,7 @@ These are defined in `modules/ai.nix` and available in every session:
 |---------|-------------|
 | `/nix-check` | Runs `nix flake check` and explains any errors |
 | `/nix-rebuild` | Dry-run builds all four hosts and summarises what would change |
+| `/nix-lint` | Runs `statix check` and explains any warnings/errors |
 | `/dotnet-build` | `dotnet build` with error explanations |
 | `/dotnet-test` | `dotnet test` with failure summaries |
 | `/dotnet-format` | `dotnet format` with change report |
@@ -163,10 +164,14 @@ nix eval .#nixosConfigurations.EliasPC.config.system.build.toplevel
 ```bash
 nixpkgs-fmt <file>.nix     # Format a single file
 nixpkgs-fmt .              # Format all .nix files recursively
+
+statix check               # Lint all .nix files for common mistakes
+statix fix                 # Auto-fix lint warnings in place
 ```
 
 - `nixd` is the Nix LSP (language server) — available system-wide.
-- There is no CI lint step configured; run `nixpkgs-fmt` manually before committing.
+- `statix` is a linter for Nix that catches common mistakes (e.g. redundant `rec`, deprecated builtins, anti-patterns).
+- There is no CI lint step configured; run `nixpkgs-fmt` and `statix check` manually before committing.
 - `nix flake check` also catches evaluation-time type errors.
 
 ---
