@@ -492,6 +492,9 @@
         nixos = {
           command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
         };
+        microsoft-learn = {
+          url = "https://learn.microsoft.com/api/mcp";
+        };
       };
     };
   };

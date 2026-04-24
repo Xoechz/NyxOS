@@ -11,8 +11,9 @@
   };
 
   # System Module firefox: enable Firefox system-wide
-  flake.modules.nixos.firefox = { ... }: {
+  flake.modules.nixos.firefox = { config, ... }: {
     programs.firefox = {
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       enable = true;
     };
   };
@@ -27,11 +28,12 @@
   };
 
   # Home Module betterfox: configure Firefox with Betterfox hardened user.js and set it as the default browser
-  flake.modules.homeManager.betterfox = { lib, ... }: {
+  flake.modules.homeManager.betterfox = { lib, config, ... }: {
     imports = [ inputs.betterfox-nix.modules.homeManager.betterfox ];
 
     # In firefox
     programs.firefox = {
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       enable = true;
       profiles.elias.extensions.force = true;
 
