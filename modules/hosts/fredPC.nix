@@ -2,11 +2,11 @@
 { inputs, ... }:
 let system = "x86_64-linux"; in {
   flake.nixosConfigurations.FredPC = inputs.nixpkgs.lib.nixosSystem {
-    system = system;
+    inherit system;
     specialArgs = {
-      system = system;
+      inherit system;
       pkgs-stable = import inputs.nixpkgs-stable {
-        system = system;
+        inherit system;
         config.allowUnfree = true;
       };
       swapSize = 32; # GB
@@ -75,7 +75,7 @@ let system = "x86_64-linux"; in {
     home-manager = {
       extraSpecialArgs = {
         pkgs-stable = import inputs.nixpkgs-stable {
-          system = system;
+          inherit system;
           config.allowUnfree = true;
         };
         isMobile = false; # Show battery status in the system tray (not needed for a desktop PC)

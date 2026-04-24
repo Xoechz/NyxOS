@@ -2,11 +2,11 @@
 { inputs, ... }:
 let system = "aarch64-linux"; in {
   flake.nixosConfigurations.NixPi = inputs.nixpkgs.lib.nixosSystem {
-    system = system;
+    inherit system;
     specialArgs = {
-      system = system;
+      inherit system;
       pkgs-stable = import inputs.nixpkgs-stable {
-        system = system;
+        inherit system;
         config.allowUnfree = true;
       };
       swapSize = 8; # GB
@@ -49,7 +49,7 @@ let system = "aarch64-linux"; in {
     home-manager = {
       extraSpecialArgs = {
         pkgs-stable = import inputs.nixpkgs-stable {
-          system = system;
+          inherit system;
           config.allowUnfree = true;
         };
         showBattery = false; # Show battery status in the system tray (not needed for a server)

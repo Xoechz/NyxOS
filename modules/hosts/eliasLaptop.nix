@@ -2,11 +2,11 @@
 { inputs, ... }:
 let system = "x86_64-linux"; in {
   flake.nixosConfigurations.EliasLaptop = inputs.nixpkgs.lib.nixosSystem {
-    system = system;
+    inherit system;
     specialArgs = {
-      system = system;
+      inherit system;
       pkgs-stable = import inputs.nixpkgs-stable {
-        system = system;
+        inherit system;
         config.allowUnfree = true;
       };
       swapSize = 18; # GB
@@ -72,7 +72,7 @@ let system = "x86_64-linux"; in {
     home-manager = {
       extraSpecialArgs = {
         pkgs-stable = import inputs.nixpkgs-stable {
-          system = system;
+          inherit system;
           config.allowUnfree = true;
         };
         isMobile = true; # Show battery status in the system tray
