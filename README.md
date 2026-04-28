@@ -129,7 +129,9 @@ The name is inspired by the DOTA hero Nyx
         - install network, filesystem, hardware, and diagnostic CLI tools (fastfetch, jq, curl, etc.)
     - **[virtualization.nix](/modules/virtualization.nix)**
       - docker
-        - enable Docker daemon with Google DNS and add all users in the users specialArg to the docker group
+        - enable Docker daemon with Google DNS and eager startup at boot
+      - docker-desktop
+        - includes docker and overrides startup to socket-activated (on-demand) for desktop use
       - vm
         - enable VirtualBox with extension pack and guest additions for running virtual machines
       - winboat

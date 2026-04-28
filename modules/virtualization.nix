@@ -1,12 +1,11 @@
-{ ... }: {
-  # System Module docker: enable Docker daemon with Google DNS and add all users in the users specialArg to the docker group
+{ inputs, ... }: {
+  # System Module docker: enable Docker daemon with Google DNS and eager startup at boot
   flake.modules.nixos.docker = { pkgs, users, ... }: {
     environment.systemPackages = with pkgs; [
       # docker
       dive
     ];
 
-    # enable docker
     virtualisation.docker = {
       enable = true;
       daemon.settings = {
@@ -15,6 +14,14 @@
     };
 
     users.extraGroups.docker.members = users;
+  };
+
+  # System Module docker-desktop: enable Docker with socket-activated (on-demand) startup for desktop use
+  flake.modules.nixos.docker-desktop = { lib, ... }: {
+    imports = [ inputs.self.modules.nixos.docker ];
+
+    # Don't eagerly start docker at boot — socket activation handles on-demand startup
+    systemd.services.docker.wantedBy = lib.mkForce [ ];
   };
 
   # System Module vm: enable VirtualBox with extension pack and guest additions for running virtual machines

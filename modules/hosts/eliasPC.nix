@@ -62,7 +62,7 @@ let system = "x86_64-linux"; in {
       # utilities.nix
       cli-utilities
       # virtualization.nix
-      docker
+      docker-desktop
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

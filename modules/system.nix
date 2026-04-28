@@ -113,7 +113,7 @@
   };
 
   # System Module gpu-nvidia: enable NVIDIA proprietary drivers with modesetting and 32-bit graphics support
-  flake.modules.nixos.gpu-nvidia = { pkgs, ... }: {
+  flake.modules.nixos.gpu-nvidia = { pkgs, config, ... }: {
     environment.systemPackages = with pkgs; [
       btop-cuda
       nvtopPackages.nvidia
@@ -127,6 +127,7 @@
         modesetting.enable = true;
         open = false;
         nvidiaSettings = false;
+        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       };
       graphics = {
         enable = true;
