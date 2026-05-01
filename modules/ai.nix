@@ -1,6 +1,6 @@
 { ... }: {
   # Home Module opencode: enable the OpenCode AI coding agent with auto-update, Context7 MCP server, nix-module/caveman/caveman-commit/caveman-review skills, and NixOS/Nix subagent with nix-check and nix-rebuild commands
-  flake.modules.homeManager.opencode = { pkgs, ... }: {
+  flake.modules.homeManager.opencode = { pkgs, pkgs-stable, ... }: {
     programs.opencode = {
       enable = true;
 
@@ -490,7 +490,7 @@
           url = "https://mcp.context7.com/mcp";
         };
         nixos = {
-          command = "${pkgs.mcp-nixos}/bin/mcp-nixos";
+          command = "${pkgs-stable.mcp-nixos}/bin/mcp-nixos";
         };
         microsoft-learn = {
           url = "https://learn.microsoft.com/api/mcp";
