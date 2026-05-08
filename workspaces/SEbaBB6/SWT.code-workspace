@@ -1,23 +1,12 @@
 {
 	"folders": [
 		{
-			"name": "SEbaBB6",
-			"path": "/home/elias/Repos/SEbaBB6/SWT"
-		},
-		{
-			"name": "Templates",
-			"path": "/home/elias/Repos/bb-g1-java-modules"
+			"name": "ue3",
+			"path": "/home/elias/Repos/bb-ue3-Xoechz"
 		},
 		{
 			"name": "NyxOS",
 			"path": "/home/elias/NyxOS"
 		}
-	],
-	"settings": {
-		"java.project.sourcePaths": [
-			"SWT/non-modular-timer-bean",
-			"SWT/non-modular-timer-client"
-		],
-		"java.project.referencedLibraries": []
-	}
+	]
 }
