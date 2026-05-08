@@ -83,8 +83,6 @@ let system = "x86_64-linux"; in {
         imports = with inputs.self.modules.homeManager; [
           # ai.nix
           opencode
-          opencode-dotnet
-          opencode-java
           # apps.nix
           discord
           email

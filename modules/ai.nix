@@ -1,11 +1,51 @@
 { ... }: {
-  # Home Module opencode: OpenCode agent + tiered subagents, delegate/cavekit skills, Context7/nixos MCP, nix-check/nix-rebuild/ck-* commands
+  # Home Module opencode: OpenCode agent + tiered subagents, delegate/cavekit/dotnet-dev/java-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands
   flake.modules.homeManager.opencode = { pkgs, localLlm, lib, ... }:
     let
-      liteModel = if localLlm then "ollama/qwen3.5:4b" else "opencode/big-pickle";
-      medModel = if localLlm then "ollama/qwen3.5:9b" else "github-copilot/gpt-5-mini";
+      liteModel = if localLlm then "ollama/qwen3.5:9b" else "github-copilot/gpt-5-mini";
+      medModel = "github-copilot/gpt-5-mini";
       heavyModel = "github-copilot/claude-haiku-4.5";
       maxModel = "github-copilot/claude-sonnet-4.6";
+      reviewModel = "github-copilot/gpt-5.3-codex";
+
+      # Shared permission lines injected into every agent frontmatter
+      # This string is crafted so that when interpolated inside the
+      # outer multi-line agent `''` strings the permission lines keep
+      # exactly 4 leading spaces. We force a zero-indent sentinel
+      # line (`${""}`) as the least-indented line so the following
+      # content lines retain their full indentation.
+      commonPerms = ''
+        ${""}"*": ask
+            "ls*": allow
+            "cat*": allow
+            "find*": allow
+            "which*": allow
+            "env": allow
+            "echo*": allow
+            "ps*": allow
+            "df*": allow
+            "du*": allow
+            "rg*": allow
+            "jq*": allow
+            "file*": allow
+            "stat*": allow
+            "wc*": allow
+            "head*": allow
+            "tail*": allow
+            "sort*": allow
+            "timeout*": allow
+            "rm -rf*": deny
+            "dd *": deny
+            "mkfs*": deny
+            "fdisk*": deny
+            "shred*": deny
+            "passwd*": deny
+            "useradd*": deny
+            "userdel*": deny
+            "usermod*": deny
+            "sudo rm*": deny
+            "git push --force*": deny
+            "git push -f*": deny'';
     in
     {
 
@@ -20,6 +60,14 @@
             nixpkgs-fmt = {
               command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" "$FILE" ];
               extensions = [ ".nix" ];
+            };
+            dotnet-format = {
+              command = [ "${pkgs.dotnetCorePackages.sdk_10_0}/bin/dotnet" "format" "--include" "$FILE" ];
+              extensions = [ ".cs" ];
+            };
+            google-java-format = {
+              command = [ "${pkgs.google-java-format}/bin/google-java-format" "--replace" "$FILE" ];
+              extensions = [ ".java" ];
             };
           };
           provider = lib.mkIf localLlm {
@@ -272,10 +320,10 @@
             | Tier   | Model                      | When to use                                    |
             |--------|----------------------------|------------------------------------------------|
             ${if localLlm then ''
-            | lite   | local qwen3.5:4b           | trivial, single-file, ≤10 lines, search replace|
-            | medium | local qwen3.5:9b           | moderate, ≤3 files, one unit                   |
+            | lite   | local qwen3.5:9b           | trivial, single-file, ≤10 lines, search replace|
+            | medium | gpt-5-mini                 | moderate, ≤3 files, one unit                   |
             '' else ''
-            | lite   | big-pickle (free)          | trivial, single-file, ≤10 lines                |
+            | lite   | gpt-5-mini                 | trivial, single-file, ≤10 lines                |
             | medium | gpt-5-mini                 | moderate, ≤3 files, one unit                   |
             ''}| heavy  | claude-haiku-4.5           | complex, 4+ files, deps, debug                 |
             | max    | claude-sonnet-4.6          | arch, security, deploy                         |
@@ -294,15 +342,14 @@
 
             1. Classify task using rules above
             2. Execute → `@<domain>-<tier>`
-            3. Plan work (no code) → `@<domain>-plan`
-            4. Escalate if subagent requests
-            5. Never downgrade
+            3. Escalate if subagent requests
+            4. Never downgrade
 
             ## Domains
 
-            - **dotnet** → `@dotnet-lite` / `@dotnet-medium` / `@dotnet-heavy` / `@dotnet-max` / `@dotnet-plan`
-            - **nix** → `@nix-lite` / `@nix-medium` / `@nix-heavy` / `@nix-max` / `@nix-plan`
-            - **java** → `@java-lite` / `@java-medium` / `@java-heavy` / `@java-max` / `@java-plan`
+            - **dotnet** → `@dotnet-lite` / `@dotnet-medium` / `@dotnet-heavy` / `@dotnet-max`
+            - **nix** → `@nix-lite` / `@nix-medium` / `@nix-heavy` / `@nix-max`
+            - **java** → `@java-lite` / `@java-medium` / `@java-heavy` / `@java-max`
 
             ## After completion
 
@@ -313,7 +360,7 @@
 
             ## Default agent rule
 
-            Never execute directly. Route, classify, plan delegation only.
+            Only plan and delegate changes, and manage workers
           '';
 
           cavekit = ''
@@ -473,6 +520,122 @@
 
             If no violations: "SPEC.md: clean. No drift detected."
           '';
+
+          dotnet-dev = ''
+            ---
+            name: dotnet-dev
+            description: .NET 10 and C# conventions on NixOS — SDK paths, build commands, NuGet, ILSpy decompilation.
+            compatibility: opencode
+            ---
+
+            ## Environment
+
+            - SDK: .NET 10 (`dotnetCorePackages.sdk_10_0`)
+            - `DOTNET_ROOT` → SDK's `share/dotnet`; `DOTNET_BIN` → `bin/dotnet` in SDK store path
+            - `ilspycmd` available for decompiling assemblies
+            - `libmsquic` available for QUIC transport
+
+            ## Commands
+
+            ```bash
+            dotnet build                             # build project/solution
+            dotnet build -c Release                  # release build
+            dotnet test                              # run all tests
+            dotnet test --logger "console;verbosity=detailed"
+            dotnet run                               # run project
+            dotnet publish -c Release -o ./out       # publish
+            dotnet add package <Name>                # add NuGet package
+            dotnet add package <Name> --version x.y.z
+            dotnet list package                      # list installed
+            dotnet list package --outdated           # find upgrades
+            dotnet restore                           # restore NuGet
+            dotnet format                            # auto-format
+            ilspycmd <assembly.dll>                  # decompile to stdout
+            ilspycmd <assembly.dll> -o ./decompiled  # decompile to dir
+            ```
+
+            ## NuGet workflow
+
+            1. `dotnet list package` — check existing
+            2. `dotnet add package <Name> --version x.y.z` — pin version
+            3. `dotnet restore && dotnet build` — confirm clean
+            - Prefer `dotnet add package` over manually editing `.csproj`
+            - `global.json` can pin SDK version if needed
+
+            ## Code style
+
+            - Target `net10.0`
+            - `.csproj`: `<Nullable>enable</Nullable>` + `<ImplicitUsings>enable</ImplicitUsings>`
+            - `Directory.Build.props` for shared multi-project settings
+            - File-scoped namespaces, primary constructors, records, pattern matching (C# 12+)
+            - Run `dotnet format` before committing
+          '';
+
+          java-dev = ''
+            ---
+            name: java-dev
+            description: Java conventions on NixOS — JDK 25 default, JDK 8 available, Maven and Gradle commands, google-java-format.
+            compatibility: opencode
+            ---
+
+            ## Environment
+
+            - Default JDK: 25 (`JAVA_HOME`, `JAVA_25_HOME`)
+            - Legacy JDK: 8 (`JAVA_8_HOME`)
+            - Build tools: `ant`, `mvn`, `gradle`, `./gradlew` (prefer wrapper)
+
+            ## Switching JDK
+
+            ```bash
+            JAVA_HOME=$JAVA_8_HOME mvn test   # single command with JDK 8
+            java -version                      # check active version
+            ```
+
+            ## Maven
+
+            ```bash
+            mvn compile                               # compile
+            mvn test                                  # test
+            mvn package                               # package (jar/war)
+            mvn package -DskipTests                   # skip tests
+            mvn install                               # install to local repo
+            mvn dependency:tree                       # dependency tree
+            mvn versions:display-dependency-updates   # find outdated deps
+            mvn clean package                         # clean then package
+            ```
+
+            ## Gradle
+
+            ```bash
+            ./gradlew build          # build
+            ./gradlew test           # test
+            ./gradlew dependencies   # dependency tree
+            ./gradlew clean build    # clean then build
+            gradle wrapper           # generate wrapper if missing
+            ```
+
+            ## Build tool detection
+
+            - `pom.xml` present → Maven
+            - `build.gradle` / `build.gradle.kts` present → Gradle
+            - Always prefer `./gradlew` over system `gradle`
+
+            ## Formatting
+
+            ```bash
+            google-java-format --replace src/Main.java
+            find . -name "*.java" -not -path "*/build/*" -not -path "*/.gradle/*" -not -path "*/target/*" \
+              | xargs google-java-format --replace
+            ```
+
+            Enforces Google Java Style. No config file needed or supported.
+
+            ## Code style
+
+            - Target Java 25 unless project specifies lower `--release`
+            - Use records, sealed classes, pattern matching where idiomatic
+            - Maven: declare `<java.version>` in `<properties>`, reference in `maven-compiler-plugin`
+          '';
         };
 
         # ── Agents ────────────────────────────────────────────────────────────
@@ -485,7 +648,7 @@
             model: ${maxModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "nix flake check*": allow
                 "nix flake show*": allow
                 "nix eval*": allow
@@ -507,8 +670,13 @@
                 "deploy-to-*": ask
             ---
 
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `nix-module` — NyxOS Dendritic conventions
+
             You are a NixOS configuration agent for the NyxOS repository.
-            Load the `nix-module` skill before working on any `.nix` file.
 
             ## Hard constraints
 
@@ -547,7 +715,7 @@
             model: ${maxModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "dotnet build*": allow
                 "dotnet test*": allow
                 "dotnet restore*": allow
@@ -559,7 +727,13 @@
                 "ilspycmd*": allow
             ---
 
-            You are a .NET 10 / C# agent on NixOS. Load the `dotnet-dev` skill at session start.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `dotnet-dev` — .NET 10 env, NuGet, C# style
+
+            You are a .NET 10 / C# agent on NixOS.
 
             ## Environment
 
@@ -588,7 +762,7 @@
             model: ${maxModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "mvn compile*": allow
                 "mvn test*": allow
                 "mvn package*": ask
@@ -604,7 +778,13 @@
                 "javac -version": allow
             ---
 
-            You are a Java agent on NixOS. Load the `java-dev` skill at session start.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `java-dev` — JDK 25, Maven/Gradle, google-java-format
+
+            You are a Java agent on NixOS.
 
             ## Environment
 
@@ -626,65 +806,6 @@
             - Maven: declare `<java.version>` in `<properties>`, reference in `maven-compiler-plugin`
           '';
 
-          csharp-plan = ''
-            ---
-            description: C# planning agent. Creates .NET specs and architecture plans. Plan only, no exec.
-            mode: subagent
-            model: ${heavyModel}
-            permission:
-              bash:
-                "*": ask
-                "dotnet --version": allow
-                "dotnet --list-sdks": allow
-                "dotnet --list-runtimes": allow
-              edit: deny
-            ---
-
-            C#/.NET planning agent. Specs, architecture plans, task breakdowns for .NET projects. No exec — plan only.
-            Load `dotnet-dev` skill.
-            Output: SPEC.md §T task table or plain markdown.
-            If asked to implement: "Planning only. Deploy to @dotnet-<tier>."
-          '';
-
-          java-plan = ''
-            ---
-            description: Java planning agent. Creates Java specs and architecture plans. Plan only, no exec.
-            mode: subagent
-            model: ${heavyModel}
-            permission:
-              bash:
-                "*": ask
-                "java -version": allow
-                "javac -version": allow
-              edit: deny
-            ---
-
-            Java planning agent. Specs, architecture plans, task breakdowns for Java projects. No exec — plan only.
-            Load `java-dev` skill.
-            Output: SPEC.md §T task table or plain markdown.
-            If asked to implement: "Planning only. Deploy to @java-<tier>."
-          '';
-
-          nix-plan = ''
-            ---
-            description: Nix planning agent. Creates NixOS module specs and architecture plans. Plan only, no exec.
-            mode: subagent
-            model: ${heavyModel}
-            permission:
-              bash:
-                "*": ask
-                "nix --version": allow
-                "nix flake show*": allow
-                "nix eval*": allow
-              edit: deny
-            ---
-
-            Nix planning agent. Specs, architecture plans, task breakdowns for NixOS/HM modules. No exec — plan only.
-            Load `nix-module` skill.
-            Output: SPEC.md §T task table or plain markdown.
-            If asked to implement: "Planning only. Deploy to @nix-<tier>."
-          '';
-
           dotnet-lite = ''
             ---
             description: Trivial .NET tasks — rename symbol, add using, fix typo, single-line change. Lightest model.
@@ -692,7 +813,7 @@
             model: ${liteModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "dotnet build*": allow
                 "dotnet restore*": allow
                 "dotnet list*": allow
@@ -701,7 +822,13 @@
                 "git diff*": allow
             ---
 
-            .NET agent for trivial, single-location changes. Load `dotnet-dev` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `dotnet-dev` — .NET 10 env, NuGet, C# style
+
+            .NET agent for trivial, single-location changes.
 
             Scope: rename symbol, add/remove using, fix typo, change literal, add null check. One file, ≤10 lines.
 
@@ -717,7 +844,7 @@
             model: ${medModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "dotnet build*": allow
                 "dotnet test*": allow
                 "dotnet restore*": allow
@@ -728,7 +855,13 @@
                 "git log*": allow
             ---
 
-            .NET agent for moderate tasks. Load `dotnet-dev` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `dotnet-dev` — .NET 10 env, NuGet, C# style
+
+             .NET agent for moderate tasks.
 
             Scope: impl or refactor method/class, write/fix unit tests, update model/DTO, change service impl. Up to 3 files.
 
@@ -744,7 +877,7 @@
             model: ${heavyModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "dotnet build*": allow
                 "dotnet test*": allow
                 "dotnet restore*": allow
@@ -760,7 +893,13 @@
                 "git show*": allow
             ---
 
-            .NET agent for complex tasks. Load `dotnet-dev` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `dotnet-dev` — .NET 10 env, NuGet, C# style
+
+            .NET agent for complex tasks.
 
             Scope: multi-file refactors, debug runtime errors, add NuGet deps, impl features across multiple classes/projects, perf investigation.
 
@@ -776,7 +915,7 @@
             model: ${liteModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "nix flake check*": allow
                 "nix eval*": allow
                 "nixpkgs-fmt*": allow
@@ -785,7 +924,13 @@
                 "git diff*": allow
             ---
 
-            Nix agent for trivial, single-location changes. Load `nix-module` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `nix-module` — NyxOS Dendritic conventions
+
+            Nix agent for trivial, single-location changes.
 
             Scope: add/remove pkg from list, toggle bool, change string. One file, ≤5 lines.
 
@@ -803,7 +948,7 @@
             model: ${medModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "nix flake check*": allow
                 "nix flake show*": allow
                 "nix eval*": allow
@@ -816,7 +961,13 @@
                 "git log*": allow
             ---
 
-            Nix agent for moderate tasks. Load `nix-module` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `nix-module` — NyxOS Dendritic conventions
+
+            Nix agent for moderate tasks.
 
             Scope: add new NixOS/HM module, wire service option, update host specialArgs, add flake input (via flake-file.inputs). Up to 2 files.
 
@@ -834,7 +985,7 @@
             model: ${heavyModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "nix flake check*": allow
                 "nix flake show*": allow
                 "nix eval*": allow
@@ -852,7 +1003,13 @@
                 "update-lock": ask
             ---
 
-            Nix agent for complex tasks. Load `nix-module` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `nix-module` — NyxOS Dendritic conventions
+
+            Nix agent for complex tasks.
 
             Scope: changes spanning multiple hosts, new flake inputs, module refactors, debug eval errors, update nixpkgs pins.
 
@@ -870,7 +1027,7 @@
             model: ${liteModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "mvn compile*": allow
                 "mvn clean*": allow
                 "./gradlew build*": allow
@@ -879,7 +1036,13 @@
                 "git diff*": allow
             ---
 
-            Java agent for trivial, single-location changes. Load `java-dev` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `java-dev` — JDK 25, Maven/Gradle, google-java-format
+
+            Java agent for trivial, single-location changes.
 
             Scope: rename symbol, add/remove import, fix typo, change literal. One file, ≤10 lines.
 
@@ -895,7 +1058,7 @@
             model: ${medModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "mvn compile*": allow
                 "mvn test*": allow
                 "mvn clean*": allow
@@ -909,7 +1072,13 @@
                 "git log*": allow
             ---
 
-            Java agent for moderate tasks. Load `java-dev` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `java-dev` — JDK 25, Maven/Gradle, google-java-format
+
+            Java agent for moderate tasks.
 
             Scope: impl or refactor method/class, write/fix tests, update model/service. Up to 3 files.
 
@@ -925,7 +1094,7 @@
             model: ${heavyModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "mvn compile*": allow
                 "mvn test*": allow
                 "mvn package*": ask
@@ -945,7 +1114,13 @@
                 "git show*": allow
             ---
 
-            Java agent for complex tasks. Load `java-dev` skill.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `java-dev` — JDK 25, Maven/Gradle, google-java-format
+
+            Java agent for complex tasks.
 
             Scope: multi-module refactors, dependency upgrades, debug runtime errors, impl features across modules.
 
@@ -958,10 +1133,10 @@
             ---
             description: Review .NET/C# changes for correctness, style, best practices. Read-only. Codex.
             mode: subagent
-            model: github-copilot/gpt-5.3-codex
+            model: ${reviewModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "dotnet build*": allow
                 "dotnet test*": allow
                 "git diff*": allow
@@ -971,7 +1146,13 @@
               edit: deny
             ---
 
-            .NET code reviewer. Load `dotnet-dev` skill. Read-only — no file edits.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `dotnet-dev` — .NET 10 env, NuGet, C# style
+
+            .NET code reviewer. Read-only — no file edits.
 
             ## Review checklist
 
@@ -998,10 +1179,10 @@
             ---
             description: Review Java changes for correctness, style, best practices. Read-only. Codex.
             mode: subagent
-            model: github-copilot/gpt-5.3-codex
+            model: ${reviewModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "mvn compile*": allow
                 "mvn test*": allow
                 "./gradlew build*": allow
@@ -1013,7 +1194,13 @@
               edit: deny
             ---
 
-            Java code reviewer. Load `java-dev` skill. Read-only — no file edits.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `java-dev` — JDK 25, Maven/Gradle, google-java-format
+
+            Java code reviewer. Read-only — no file edits.
 
             ## Review checklist
 
@@ -1039,10 +1226,10 @@
             ---
             description: Review Nix module changes for correctness, style, anti-patterns. Read-only. Codex.
             mode: subagent
-            model: github-copilot/gpt-5.3-codex
+            model: ${reviewModel}
             permission:
               bash:
-                "*": ask
+                ${commonPerms}
                 "nix flake check*": allow
                 "nix eval*": allow
                 "nix build* --dry-run*": allow
@@ -1055,7 +1242,13 @@
               edit: deny
             ---
 
-            Nix config reviewer. Load `nix-module` skill. Read-only — no file edits.
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `nix-module` — NyxOS Dendritic conventions
+
+            Nix config reviewer. Read-only — no file edits.
 
             ## Review checklist
 
@@ -1075,6 +1268,42 @@
             Severity: `bug` / `risk` / `nit`
 
             End: summary — flake check passed/failed, statix findings count, hosts affected.
+          '';
+
+          manager = ''
+            ---
+            description: Plans, classifies, delegates — orchestrates nix/dotnet/java subagents via delegate + cavekit skills. Never edits files or runs builds directly.
+            mode: primary
+            model: ${maxModel}
+            permission:
+              bash:
+                ${commonPerms}
+              edit: deny
+            ---
+
+            ## Skills
+
+            Load at session start:
+            - `caveman` — terse comms, save tokens
+            - `delegate` — classify complexity, route to correct @domain-tier subagent
+            - `cavekit` / `cavekit-build` — when SPEC.md present in repo root
+
+            ## Role
+
+            Plan, classify, delegate. Never implement directly.
+
+            1. Load `delegate` skill
+            2. Classify domain (nix/dotnet/java) + complexity (lite/medium/heavy/max)
+            3. Delegate to `@<domain>-<tier>`
+            4. After completion → invoke `@<domain>-review`
+            5. If SPEC.md exists → use `cavekit-build` protocol
+
+            ## Hard constraints
+
+            - Never edit files (`edit: deny`)
+            - Never run builds, deploys, or destructive commands
+            - Never commit unless user explicitly asks
+            - Read-only bash only (inspect context before delegating)
           '';
         };
 
@@ -1249,6 +1478,107 @@
 
             Report all §V, §I, and §T violations. No file changes.
           '';
+
+          dotnet-build = ''
+            ---
+            description: Build and surface any errors with fix suggestions
+            agent: build
+            ---
+
+            Run `dotnet build` in current project dir and analyse output.
+
+            !`dotnet build 2>&1`
+
+            If build errors:
+            1. Group by file
+            2. Explain each error concisely
+            3. Suggest corrected code snippet per error
+
+            Build succeeds: confirm and show warnings worth addressing.
+          '';
+
+          dotnet-test = ''
+            ---
+            description: Run tests and summarise failures with fix suggestions
+            agent: build
+            ---
+
+            Run test suite and summarise results.
+
+            !`dotnet test --logger "console;verbosity=normal" 2>&1`
+
+            Report:
+            - Total: passed / failed / skipped
+            - Per failing test: name, failure message, suggested fix
+            - Patterns across multiple failures (e.g. shared dependency issue)
+          '';
+
+          dotnet-format = ''
+            ---
+            description: Auto-format .NET project and report what changed
+            agent: build
+            ---
+
+            Auto-format project and report what was changed.
+
+            !`dotnet format --verbosity diagnostic 2>&1`
+
+            Report:
+            - Files that were reformatted
+            - Files that could not be formatted and why
+            - Nothing needed: confirm project already clean
+          '';
+
+          java-build = ''
+            ---
+            description: Build Java project with Maven or Gradle, surface any errors
+            agent: build
+            ---
+
+            Detect build tool and run a build.
+
+            !`ls pom.xml build.gradle build.gradle.kts 2>&1`
+            !`if [ -f pom.xml ]; then mvn compile 2>&1; elif [ -f build.gradle ] || [ -f build.gradle.kts ]; then ./gradlew build 2>&1; fi`
+
+            If compilation errors:
+            1. Group by file
+            2. Explain each error concisely
+            3. Suggest corrected code snippet per error
+
+            Build succeeds: confirm and show warnings worth addressing.
+          '';
+
+          java-test = ''
+            ---
+            description: Run tests with Maven or Gradle, summarise failures with fix suggestions
+            agent: build
+            ---
+
+            Detect build tool and run tests.
+
+            !`if [ -f pom.xml ]; then mvn test 2>&1; elif [ -f build.gradle ] || [ -f build.gradle.kts ]; then ./gradlew test 2>&1; fi`
+
+            Report:
+            - Total: passed / failed / skipped
+            - Per failing test: class + method, failure message, suggested fix
+            - Patterns across multiple failures
+          '';
+
+          java-format = ''
+            ---
+            description: Auto-format all Java source files and report what changed
+            agent: build
+            ---
+
+            Auto-format all Java source files in project and report what was changed.
+
+            !`find . -name "*.java" -not -path "*/build/*" -not -path "*/.gradle/*" -not -path "*/target/*" | xargs google-java-format --replace 2>&1`
+
+            Report:
+            - Files that were reformatted
+            - Files that could not be formatted and why
+            - Nothing needed: confirm project already clean
+          '';
         };
       };
 
@@ -1267,259 +1597,4 @@
         };
       };
     };
-
-  # Home Module opencode-dotnet: extend OpenCode with the dotnet-dev skill and dotnet build/test/format commands
-  flake.modules.homeManager.opencode-dotnet = { pkgs, ... }: {
-    programs.opencode = {
-      settings = {
-        formatter = {
-          dotnet-format = {
-            command = [ "${pkgs.dotnetCorePackages.sdk_10_0}/bin/dotnet" "format" "--include" "$FILE" ];
-            extensions = [ ".cs" ];
-          };
-        };
-      };
-
-      skills = {
-        dotnet-dev = ''
-          ---
-          name: dotnet-dev
-          description: .NET 10 and C# conventions on NixOS — SDK paths, build commands, NuGet, ILSpy decompilation.
-          compatibility: opencode
-          ---
-
-          ## Environment
-
-          - SDK: .NET 10 (`dotnetCorePackages.sdk_10_0`)
-          - `DOTNET_ROOT` → SDK's `share/dotnet`; `DOTNET_BIN` → `bin/dotnet` in SDK store path
-          - `ilspycmd` available for decompiling assemblies
-          - `libmsquic` available for QUIC transport
-
-          ## Commands
-
-          ```bash
-          dotnet build                             # build project/solution
-          dotnet build -c Release                  # release build
-          dotnet test                              # run all tests
-          dotnet test --logger "console;verbosity=detailed"
-          dotnet run                               # run project
-          dotnet publish -c Release -o ./out       # publish
-          dotnet add package <Name>                # add NuGet package
-          dotnet add package <Name> --version x.y.z
-          dotnet list package                      # list installed
-          dotnet list package --outdated           # find upgrades
-          dotnet restore                           # restore NuGet
-          dotnet format                            # auto-format
-          ilspycmd <assembly.dll>                  # decompile to stdout
-          ilspycmd <assembly.dll> -o ./decompiled  # decompile to dir
-          ```
-
-          ## NuGet workflow
-
-          1. `dotnet list package` — check existing
-          2. `dotnet add package <Name> --version x.y.z` — pin version
-          3. `dotnet restore && dotnet build` — confirm clean
-          - Prefer `dotnet add package` over manually editing `.csproj`
-          - `global.json` can pin SDK version if needed
-
-          ## Code style
-
-          - Target `net10.0`
-          - `.csproj`: `<Nullable>enable</Nullable>` + `<ImplicitUsings>enable</ImplicitUsings>`
-          - `Directory.Build.props` for shared multi-project settings
-          - File-scoped namespaces, primary constructors, records, pattern matching (C# 12+)
-          - Run `dotnet format` before committing
-        '';
-      };
-
-      commands = {
-        dotnet-build = ''
-          ---
-          description: Build and surface any errors with fix suggestions
-          agent: build
-          ---
-
-          Run `dotnet build` in current project dir and analyse output.
-
-          !`dotnet build 2>&1`
-
-          If build errors:
-          1. Group by file
-          2. Explain each error concisely
-          3. Suggest corrected code snippet per error
-
-          Build succeeds: confirm and show warnings worth addressing.
-        '';
-
-        dotnet-test = ''
-          ---
-          description: Run tests and summarise failures with fix suggestions
-          agent: build
-          ---
-
-          Run test suite and summarise results.
-
-          !`dotnet test --logger "console;verbosity=normal" 2>&1`
-
-          Report:
-          - Total: passed / failed / skipped
-          - Per failing test: name, failure message, suggested fix
-          - Patterns across multiple failures (e.g. shared dependency issue)
-        '';
-
-        dotnet-format = ''
-          ---
-          description: Auto-format .NET project and report what changed
-          agent: build
-          ---
-
-          Auto-format project and report what was changed.
-
-          !`dotnet format --verbosity diagnostic 2>&1`
-
-          Report:
-          - Files that were reformatted
-          - Files that could not be formatted and why
-          - Nothing needed: confirm project already clean
-        '';
-      };
-    };
-  };
-
-  # Home Module opencode-java: extend OpenCode with the java-dev skill and Maven/Gradle build/test/format commands
-  flake.modules.homeManager.opencode-java = { pkgs, ... }: {
-    programs.opencode = {
-      settings = {
-        formatter = {
-          google-java-format = {
-            command = [ "${pkgs.google-java-format}/bin/google-java-format" "--replace" "$FILE" ];
-            extensions = [ ".java" ];
-          };
-        };
-      };
-
-      skills = {
-        java-dev = ''
-          ---
-          name: java-dev
-          description: Java conventions on NixOS — JDK 25 default, JDK 8 available, Maven and Gradle commands, google-java-format.
-          compatibility: opencode
-          ---
-
-          ## Environment
-
-          - Default JDK: 25 (`JAVA_HOME`, `JAVA_25_HOME`)
-          - Legacy JDK: 8 (`JAVA_8_HOME`)
-          - Build tools: `ant`, `mvn`, `gradle`, `./gradlew` (prefer wrapper)
-
-          ## Switching JDK
-
-          ```bash
-          JAVA_HOME=$JAVA_8_HOME mvn test   # single command with JDK 8
-          java -version                      # check active version
-          ```
-
-          ## Maven
-
-          ```bash
-          mvn compile                               # compile
-          mvn test                                  # test
-          mvn package                               # package (jar/war)
-          mvn package -DskipTests                   # skip tests
-          mvn install                               # install to local repo
-          mvn dependency:tree                       # dependency tree
-          mvn versions:display-dependency-updates   # find outdated deps
-          mvn clean package                         # clean then package
-          ```
-
-          ## Gradle
-
-          ```bash
-          ./gradlew build          # build
-          ./gradlew test           # test
-          ./gradlew dependencies   # dependency tree
-          ./gradlew clean build    # clean then build
-          gradle wrapper           # generate wrapper if missing
-          ```
-
-          ## Build tool detection
-
-          - `pom.xml` present → Maven
-          - `build.gradle` / `build.gradle.kts` present → Gradle
-          - Always prefer `./gradlew` over system `gradle`
-
-          ## Formatting
-
-          ```bash
-          google-java-format --replace src/Main.java
-          find . -name "*.java" -not -path "*/build/*" -not -path "*/.gradle/*" -not -path "*/target/*" \
-            | xargs google-java-format --replace
-          ```
-
-          Enforces Google Java Style. No config file needed or supported.
-
-          ## Code style
-
-          - Target Java 25 unless project specifies lower `--release`
-          - Use records, sealed classes, pattern matching where idiomatic
-          - Maven: declare `<java.version>` in `<properties>`, reference in `maven-compiler-plugin`
-        '';
-      };
-
-      commands = {
-        java-build = ''
-          ---
-          description: Build Java project with Maven or Gradle, surface any errors
-          agent: build
-          ---
-
-          Detect build tool and run a build.
-
-          !`ls pom.xml build.gradle build.gradle.kts 2>&1`
-          !`if [ -f pom.xml ]; then mvn compile 2>&1; elif [ -f build.gradle ] || [ -f build.gradle.kts ]; then ./gradlew build 2>&1; fi`
-
-          If compilation errors:
-          1. Group by file
-          2. Explain each error concisely
-          3. Suggest corrected code snippet per error
-
-          Build succeeds: confirm and show warnings worth addressing.
-        '';
-
-        java-test = ''
-          ---
-          description: Run tests with Maven or Gradle, summarise failures with fix suggestions
-          agent: build
-          ---
-
-          Detect build tool and run tests.
-
-          !`if [ -f pom.xml ]; then mvn test 2>&1; elif [ -f build.gradle ] || [ -f build.gradle.kts ]; then ./gradlew test 2>&1; fi`
-
-          Report:
-          - Total: passed / failed / skipped
-          - Per failing test: class + method, failure message, suggested fix
-          - Patterns across multiple failures
-        '';
-
-        java-format = ''
-          ---
-          description: Auto-format all Java source files and report what changed
-          agent: build
-          ---
-
-          Auto-format all Java source files in project and report what was changed.
-
-          !`find . -name "*.java" -not -path "*/build/*" -not -path "*/.gradle/*" -not -path "*/target/*" | xargs google-java-format --replace 2>&1`
-
-          Report:
-          - Files that were reformatted
-          - Files that could not be formatted and why
-          - Nothing needed: confirm project already clean
-        '';
-      };
-    };
-  };
-
-  # //TODO: what often used permission calls should i add to the allowed calls?
 }

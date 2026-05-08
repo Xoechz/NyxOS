@@ -142,11 +142,7 @@ The name is inspired by the DOTA hero Nyx
   - Home Modules:
     - **[ai.nix](/modules/ai.nix)**
       - opencode
-        - enable the OpenCode AI coding agent with tiered subagents (lite/medium/heavy/max), delegate skill, cavekit skills, Context7 MCP server, nix-module/caveman/caveman-commit/caveman-review skills, and nix-check/nix-rebuild commands
-      - opencode-dotnet
-        - extend OpenCode with the dotnet-dev skill and dotnet build/test/format commands
-      - opencode-java
-        - extend OpenCode with the java-dev skill and Maven/Gradle build/test/format commands
+        - enable the OpenCode AI coding agent with tiered subagents (lite/medium/heavy/max), delegate/cavekit/dotnet-dev/java-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands, and hardened agent permissions
     - **[apps.nix](/modules/apps.nix)**
       - discord
         - install Vesktop with Catppuccin Mocha CSS theme

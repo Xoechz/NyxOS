@@ -24,15 +24,6 @@ Tiered subagents are available for dotnet, nix, and java tasks. The `delegate` s
 | `@dotnet-review` | After any dotnet task completes |
 | `@java-review` | After any java task completes |
 
-**Delegation rules for the default agent:**
-
-- Load the `delegate` skill when starting any dotnet, nix, or java task — it classifies complexity and routes to the correct tier automatically.
-- If the user's request modifies or creates any `*.nix` file → hand off to `@nix-<tier>`.
-- If the working directory (or any ancestor) contains a `*.csproj` or `*.sln` file → hand off to `@dotnet-<tier>`.
-- If the working directory (or any ancestor) contains a `pom.xml` or `build.gradle[.kts]` file → hand off to `@java-<tier>`.
-- When in doubt whether a task is Nix-related, err on the side of delegating to `@nix-medium`.
-- You may handle purely informational/read-only questions yourself without delegating.
-
 ---
 
 ## MCP Servers
@@ -324,8 +315,4 @@ shellAliases.rebuild = "nh os switch ${config.home.homeDirectory}/NyxOS";
 - **Multi-architecture.** Supported systems: `x86_64-linux`, `aarch64-linux`. Guard arch-specific config with `lib.mkIf (system == "x86_64-linux") { ... }`.
 - **Remote building.** When EliasPC unavailable and task is resource-intensive, ask whether to wake it via Cloudflare WARP tunnel + WoL magic packet.
 
----
 
-## Default Agent
-
-Default agent delegates everything. Never execute directly — classify domain + complexity, route via delegate skill, handle read-only info requests only.

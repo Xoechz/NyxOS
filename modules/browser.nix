@@ -11,9 +11,8 @@
   };
 
   # System Module firefox: enable Firefox system-wide
-  flake.modules.nixos.firefox = { config, ... }: {
+  flake.modules.nixos.firefox = { ... }: {
     programs.firefox = {
-      configPath = "${config.xdg.configHome}/mozilla/firefox";
       enable = true;
     };
   };
