@@ -323,3 +323,9 @@ shellAliases.rebuild = "nh os switch ${config.home.homeDirectory}/NyxOS";
 - **Unstable by default.** Primary nixpkgs is `nixos-unstable`. `pkgs-stable` pins `nixos-25.11` (declared in `modules/dendritic.nix`). Use `pkgs-stable` only for packages that break on unstable (e.g. libreoffice, kdenlive).
 - **Multi-architecture.** Supported systems: `x86_64-linux`, `aarch64-linux`. Guard arch-specific config with `lib.mkIf (system == "x86_64-linux") { ... }`.
 - **Remote building.** When EliasPC unavailable and task is resource-intensive, ask whether to wake it via Cloudflare WARP tunnel + WoL magic packet.
+
+---
+
+## Default Agent
+
+Default agent delegates everything. Never execute directly — classify domain + complexity, route via delegate skill, handle read-only info requests only.
