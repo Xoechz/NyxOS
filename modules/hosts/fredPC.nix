@@ -11,6 +11,7 @@ let system = "x86_64-linux"; in {
       };
       swapSize = 32; # GB
       users = [ "elias" "fred" "gerhard" ];
+      localLlm = false;
     };
     modules = [
       inputs.self.modules.nixos.fredPC
@@ -79,6 +80,7 @@ let system = "x86_64-linux"; in {
           config.allowUnfree = true;
         };
         isMobile = false; # Show battery status in the system tray (not needed for a desktop PC)
+        localLlm = false;
       };
       users = {
         elias = {

@@ -77,6 +77,9 @@ The name is inspired by the DOTA hero Nyx
     - **[niri.nix](/modules/niri.nix)**
       - niri
         - enable the Niri tiling compositor with DankMaterialShell greeter, Thunar, and XWayland support
+    - **[ollama.nix](/modules/ollama.nix)**
+      - ollama
+        - run Ollama with ROCm GPU acceleration for local LLM inference (EliasPC only)
     - **[nix.nix](/modules/nix.nix)**
       - base-settings
         - enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
@@ -138,8 +141,8 @@ The name is inspired by the DOTA hero Nyx
         - enable QEMU/libvirt with SPICE USB redirection and virt-manager for Windows VMs
   - Home Modules:
     - **[ai.nix](/modules/ai.nix)**
-       - opencode
-         - enable the OpenCode AI coding agent with auto-update, Context7 MCP server, nix-module/caveman/caveman-commit/caveman-review skills, and NixOS/Nix subagent with nix-check and nix-rebuild commands
+      - opencode
+        - enable the OpenCode AI coding agent with tiered subagents (lite/medium/heavy/max), delegate skill, cavekit skills, Context7 MCP server, nix-module/caveman/caveman-commit/caveman-review skills, and nix-check/nix-rebuild commands
       - opencode-dotnet
         - extend OpenCode with the dotnet-dev skill and dotnet build/test/format commands
       - opencode-java

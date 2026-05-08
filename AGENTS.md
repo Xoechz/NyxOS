@@ -8,22 +8,29 @@ There is no TypeScript, Rust, Python, or other language source code in this repo
 
 ## Subagents
 
-Three specialised subagents are available. The default agent should delegate to
-them automatically based on the nature of the task, or you can invoke them
-directly with `@mention`.
+Tiered subagents are available for dotnet, nix, and java tasks. The `delegate` skill handles automatic routing to the correct complexity tier before spending cloud tokens.
 
-| Subagent | Trigger conditions | Direct invocation |
-|---|---|---|
-| `nix-agent` | Any task that touches `.nix` files, `flake.nix`/`flake.lock`, NixOS/HM options, or system rebuild/deployment | `@nix-agent` |
-| `dotnet-agent` | Any task in a `.csproj`/`.sln` C# or .NET project — build, test, NuGet, refactor, format | `@dotnet-agent` |
-| `java-agent` | Any task in a Maven (`pom.xml`) or Gradle (`build.gradle[.kts]`) Java project — build, test, dependencies, format | `@java-agent` |
+| Domain | Tiers | Direct invocation |
+|--------|-------|-------------------|
+| `nix` | Any task that touches `.nix` files, `flake.nix`/`flake.lock`, NixOS/HM options, or system rebuild/deployment | `@nix-lite` / `@nix-medium` / `@nix-heavy` / `@nix-max` |
+| `dotnet` | Any task in a `.csproj`/`.sln` C# or .NET project — build, test, NuGet, refactor, format | `@dotnet-lite` / `@dotnet-medium` / `@dotnet-heavy` / `@dotnet-max` |
+| `java` | Any task in a Maven (`pom.xml`) or Gradle (`build.gradle[.kts]`) Java project — build, test, dependencies, format | `@java-lite` / `@java-medium` / `@java-heavy` / `@java-max` |
+
+**Review agents** — invoke after the implementing agent finishes:
+
+| Agent | When to invoke |
+|-------|---------------|
+| `@nix-review` | After any nix task completes |
+| `@dotnet-review` | After any dotnet task completes |
+| `@java-review` | After any java task completes |
 
 **Delegation rules for the default agent:**
 
-- If the user's request modifies or creates any `*.nix` file → hand off to `@nix-agent`.
-- If the working directory (or any ancestor) contains a `*.csproj` or `*.sln` file → hand off to `@dotnet-agent`.
-- If the working directory (or any ancestor) contains a `pom.xml` or `build.gradle[.kts]` file → hand off to `@java-agent`.
-- When in doubt whether a task is Nix-related, err on the side of delegating to `@nix-agent`.
+- Load the `delegate` skill when starting any dotnet, nix, or java task — it classifies complexity and routes to the correct tier automatically.
+- If the user's request modifies or creates any `*.nix` file → hand off to `@nix-<tier>`.
+- If the working directory (or any ancestor) contains a `*.csproj` or `*.sln` file → hand off to `@dotnet-<tier>`.
+- If the working directory (or any ancestor) contains a `pom.xml` or `build.gradle[.kts]` file → hand off to `@java-<tier>`.
+- When in doubt whether a task is Nix-related, err on the side of delegating to `@nix-medium`.
 - You may handle purely informational/read-only questions yourself without delegating.
 
 ---
@@ -36,11 +43,14 @@ The following MCP servers are available to all agents in this session:
 |--------|--------------|
 | `context7` | Library and framework documentation — look up nixpkgs package attributes, NixOS module options, Home Manager options, and upstream project APIs |
 | `mcp-nixos` | NixOS/Home Manager option resolution and package search directly against the Nix ecosystem — prefer this over context7 for NixOS/HM option queries |
+| `microsoft-learn` | Official Microsoft/Azure documentation — .NET APIs, C# language reference, Azure services |
 
 **When to use which:**
+
 - Querying a NixOS or Home Manager option (e.g. `services.openssh.*`, `programs.git.*`) → use `mcp-nixos`
 - Looking up a nixpkgs package's attributes, version, or derivation details → use `mcp-nixos`
 - Looking up upstream library docs, API references, or non-NixOS framework documentation → use `context7`
+- Looking up .NET/C# API docs, Azure services, or Microsoft platform docs → use `microsoft-learn`
 
 ---
 

@@ -11,6 +11,7 @@ let system = "x86_64-linux"; in {
       };
       swapSize = 32; # GB
       users = [ "elias" ];
+      localLlm = true;
     };
     modules = [
       inputs.self.modules.nixos.eliasPC
@@ -44,6 +45,8 @@ let system = "x86_64-linux"; in {
       distributed-builder
       home-manager
       nh
+      # ollama.nix
+      ollama
       # optimizations.nix
       optimizations-pc
       # system.nix
@@ -74,6 +77,7 @@ let system = "x86_64-linux"; in {
           config.allowUnfree = true;
         };
         isMobile = false; # Show battery status in the system tray (not needed for a desktop PC)
+        localLlm = true;
       };
       users.elias = {
         imports = with inputs.self.modules.homeManager; [

@@ -11,6 +11,7 @@ let system = "x86_64-linux"; in {
       };
       swapSize = 18; # GB
       users = [ "elias" ];
+      localLlm = false;
     };
     modules = [
       inputs.self.modules.nixos.eliasLaptop
@@ -76,6 +77,7 @@ let system = "x86_64-linux"; in {
           config.allowUnfree = true;
         };
         isMobile = true; # Show battery status in the system tray
+        localLlm = false;
       };
       users.elias = {
         imports = with inputs.self.modules.homeManager; [
