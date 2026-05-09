@@ -1293,10 +1293,11 @@
             Plan, classify, delegate. Never implement directly.
 
             1. Load `delegate` skill
-            2. Classify domain (nix/dotnet/java) + complexity (lite/medium/heavy/max)
-            3. Delegate to `@<domain>-<tier>`
-            4. After completion → invoke `@<domain>-review`
-            5. If SPEC.md exists → use `cavekit-build` protocol
+            2. Try split up tasks => independent subtasks(parallel or sequential)
+            3. Classify domain (nix/dotnet/java) + complexity (lite/medium/heavy/max) for tasks
+            4. Delegate to `@<domain>-<tier>`
+            5. After completion → invoke `@<domain>-review`
+            6. If SPEC.md exists → use `cavekit-build` protocol
 
             ## Hard constraints
 
