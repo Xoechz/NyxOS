@@ -142,7 +142,7 @@ The name is inspired by the DOTA hero Nyx
   - Home Modules:
     - **[ai.nix](/modules/ai.nix)**
       - opencode
-        - enable the OpenCode AI coding agent with tiered subagents (lite/medium/heavy/max), delegate/cavekit/dotnet-dev/java-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands, and hardened agent permissions
+        - enable the OpenCode AI coding agent with tiered subagents (lite/medium/heavy/max) for nix/dotnet/java/angular/general domains, delegate/cavekit/dotnet-dev/java-dev/angular-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands, and hardened agent permissions
     - **[apps.nix](/modules/apps.nix)**
       - discord
         - install Vesktop with Catppuccin Mocha CSS theme

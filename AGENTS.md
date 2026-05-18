@@ -15,6 +15,8 @@ Tiered subagents are available for dotnet, nix, and java tasks. The `delegate` s
 | `nix` | Any task that touches `.nix` files, `flake.nix`/`flake.lock`, NixOS/HM options, or system rebuild/deployment | `@nix-lite` / `@nix-medium` / `@nix-heavy` / `@nix-max` |
 | `dotnet` | Any task in a `.csproj`/`.sln` C# or .NET project — build, test, NuGet, refactor, format | `@dotnet-lite` / `@dotnet-medium` / `@dotnet-heavy` / `@dotnet-max` |
 | `java` | Any task in a Maven (`pom.xml`) or Gradle (`build.gradle[.kts]`) Java project — build, test, dependencies, format | `@java-lite` / `@java-medium` / `@java-heavy` / `@java-max` |
+| `angular` | Any task in an Angular project — components, services, templates, signals, routing, tests, a11y | `@angular-lite` / `@angular-medium` / `@angular-heavy` / `@angular-max` |
+| `general` | Any task not covered by other domains — JSON, YAML, TOML, CSV, shell scripts, config files, docs | `@general-lite` / `@general-medium` / `@general-heavy` / `@general-max` |
 
 **Review agents** — invoke after the implementing agent finishes:
 
@@ -23,6 +25,7 @@ Tiered subagents are available for dotnet, nix, and java tasks. The `delegate` s
 | `@nix-review` | After any nix task completes |
 | `@dotnet-review` | After any dotnet task completes |
 | `@java-review` | After any java task completes |
+| `@angular-review` | After any angular task completes |
 
 ---
 
@@ -314,5 +317,4 @@ shellAliases.rebuild = "nh os switch ${config.home.homeDirectory}/NyxOS";
 - **Unstable by default.** Primary nixpkgs is `nixos-unstable`. `pkgs-stable` pins `nixos-25.11` (declared in `modules/dendritic.nix`). Use `pkgs-stable` only for packages that break on unstable (e.g. libreoffice, kdenlive).
 - **Multi-architecture.** Supported systems: `x86_64-linux`, `aarch64-linux`. Guard arch-specific config with `lib.mkIf (system == "x86_64-linux") { ... }`.
 - **Remote building.** When EliasPC unavailable and task is resource-intensive, ask whether to wake it via Cloudflare WARP tunnel + WoL magic packet.
-
 
