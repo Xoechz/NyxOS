@@ -120,7 +120,7 @@
   flake.modules.nixos.dev-certs = { lib, ... }: {
     security.pki.certificates =
       let
-        certsDir = ../certs;
+        certsDir = ../resources/certs;
         certFiles = builtins.readDir certsDir;
         pemFiles = lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".pem" name) certFiles;
       in

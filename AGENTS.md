@@ -103,8 +103,7 @@ modules/           # All NixOS + Home Manager topic modules
   *.nix            # Topic modules (apps, browser, desktop, dev, kde, niri, …)
 templates/         # Starter dev-shell flake templates
 workspaces/        # VS Code .code-workspace files
-dms/               # DankMaterialShell theme.json
-certs/             # Dev TLS certificates
+resources/         # Static files referenced by config (e.g. DMS , certs)
 images/            # Wallpapers and screenshots
 ```
 
@@ -317,4 +316,3 @@ shellAliases.rebuild = "nh os switch ${config.home.homeDirectory}/NyxOS";
 - **Unstable by default.** Primary nixpkgs is `nixos-unstable`. `pkgs-stable` pins `nixos-25.11` (declared in `modules/dendritic.nix`). Use `pkgs-stable` only for packages that break on unstable (e.g. libreoffice, kdenlive).
 - **Multi-architecture.** Supported systems: `x86_64-linux`, `aarch64-linux`. Guard arch-specific config with `lib.mkIf (system == "x86_64-linux") { ... }`.
 - **Remote building.** When EliasPC unavailable and task is resource-intensive, ask whether to wake it via Cloudflare WARP tunnel + WoL magic packet.
-

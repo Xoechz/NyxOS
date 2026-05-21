@@ -650,7 +650,7 @@
       settings = {
         currentThemeName = "custom";
         currentThemeCategory = "custom";
-        customThemeFile = "${config.home.homeDirectory}/NyxOS/dms/theme.json";
+        customThemeFile = "${config.home.homeDirectory}/NyxOS/resources/dms/theme.json";
         popupTransparency = 1;
         widgetBackgroundColor = "sch";
         widgetColorMode = "default";

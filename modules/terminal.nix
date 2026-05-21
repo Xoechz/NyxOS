@@ -72,7 +72,7 @@
         deploy-to-eliasLaptop = "rebuild --target-host EliasLaptop -H EliasLaptop";
         cat = "bat";
         ssh = "kitten ssh";
-        dev-certs-reload = "mkdir -p ~/NyxOS/certs && dotnet dev-certs https --format PEM -ep ~/NyxOS/certs/$(hostname)-dev-cert.pem && rebuild";
+        dev-certs-reload = "mkdir -p ~/NyxOS/resources/certs && dotnet dev-certs https --format PEM -ep ~/NyxOS/resources/certs/$(hostname)-dev-cert.pem && rebuild";
         boot-eliaspc = "wakeonlan -i 192.168.0.255 d8:43:ae:22:f1:be";
       };
       history = {
