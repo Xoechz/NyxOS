@@ -18,15 +18,6 @@ Tiered subagents are available for dotnet, nix, and java tasks. The `delegate` s
 | `angular` | Any task in an Angular project — components, services, templates, signals, routing, tests, a11y | `@angular-lite` / `@angular-medium` / `@angular-heavy` / `@angular-max` |
 | `general` | Any task not covered by other domains — JSON, YAML, TOML, CSV, shell scripts, config files, docs | `@general-lite` / `@general-medium` / `@general-heavy` / `@general-max` |
 
-**Review agents** — invoke after the implementing agent finishes:
-
-| Agent | When to invoke |
-|-------|---------------|
-| `@nix-review` | After any nix task completes |
-| `@dotnet-review` | After any dotnet task completes |
-| `@java-review` | After any java task completes |
-| `@angular-review` | After any angular task completes |
-
 ---
 
 ## MCP Servers
@@ -68,12 +59,6 @@ These are defined in `modules/ai.nix` and available in every session:
 | `/nix-check` | Runs `nix flake check` and explains any errors |
 | `/nix-rebuild` | Dry-run builds all four hosts and summarises what would change |
 | `/nix-lint` | Runs `statix check` and explains any warnings/errors |
-| `/dotnet-build` | `dotnet build` with error explanations |
-| `/dotnet-test` | `dotnet test` with failure summaries |
-| `/dotnet-format` | `dotnet format` with change report |
-| `/java-build` | Maven or Gradle build (auto-detected) with error explanations |
-| `/java-test` | Maven or Gradle test with failure summaries |
-| `/java-format` | `google-java-format` on all `.java` files |
 
 ---
 

@@ -10,12 +10,12 @@ Classify by risk/size, delegate to correct tier. Do not execute directly first.
 
 ## Tiers
 
-| Tier   | Model                      | When to use                                    |
-|--------|----------------------------|------------------------------------------------|
-| lite   | gpt-5-mini                 | up to 3 files, simple low-risk edits           |
-| medium | claude-haiku-4.5           | main body: simple adds/refactors across projects |
-| heavy  | gpt-5.3-codex              | complex cross-project work, incl security      |
-| max    | claude-sonnet-4.6          | critical/last-resort or explicitly requested   |
+| Tier   | Model            | When to use                                    |
+|--------|------------------|------------------------------------------------|
+| lite   | @@LITE_MODEL@@   | up to 3 files, simple low-risk edits           |
+| medium | @@MEDIUM_MODEL@@ | main body: simple adds/refactors across projects |
+| heavy  | @@HEAVY_MODEL@@  | complex cross-project work, incl security      |
+| max    | @@MAX_MODEL@@    | critical/last-resort or explicitly requested   |
 
 ## Classification
 
@@ -76,21 +76,33 @@ Escalate to `max` when any are true:
 - Rename variable in one C# file -> `@dotnet-lite`
 - Add endpoint option + DTO + service + tests across projects -> `@dotnet-medium`
 - Debug 401 across middleware + service + auth policy and fix security flow -> `@dotnet-heavy`
-- Critical outage + repeated failed heavy attempts -> `@dotnet-max`
+- Critical outage + repeated failed attempts -> `@dotnet-max`
 - Fix typo + key in one YAML file -> `@general-lite`
 - Update configs + scripts across projects as one feature -> `@general-medium`
 - Complex cross-project migration with security implications -> `@general-heavy`
 - Crisis-level cross-system failure, explicit max request -> `@general-max`
+- Add pkg to list, toggle bool, fix typo in one .nix file -> `@nix-lite`
+- Add new NixOS/HM module, wire service, update specialArgs -> `@nix-medium`
+- Cross-host changes, new flake input, module refactor -> `@nix-heavy`
+- System deployment, critical eval failure, explicit max request -> `@nix-max`
+- Rename selector, fix template typo, add import -> `@angular-lite`
+- Implement component/service, write unit tests, update reactive form -> `@angular-medium`
+- Multi-file refactor, add lazy routes, signal-based state, debug runtime error -> `@angular-heavy`
+- Architecture-level Angular redesign, explicit max request -> `@angular-max`
+- Rename symbol, add import, fix typo in one Java file -> `@java-lite`
+- Implement or refactor method/class, write tests, update model -> `@java-medium`
+- Multi-module refactor, dependency upgrade, debug runtime error -> `@java-heavy`
+- Broad codebase-wide Java migration, explicit max request -> `@java-max`
 
 ## Domains
 
 - **general** → `@general-lite` / `@general-medium` / `@general-heavy` / `@general-max`
 - **dotnet** → `@dotnet-lite` / `@dotnet-medium` / `@dotnet-heavy` / `@dotnet-max`
-
-## After completion
-
-Invoke domain review agent if critical dotnet change → `@dotnet-review`
+- **java** → `@java-lite` / `@java-medium` / `@java-heavy` / `@java-max`
+- **nix** → `@nix-lite` / `@nix-medium` / `@nix-heavy` / `@nix-max`
+- **angular** → `@angular-lite` / `@angular-medium` / `@angular-heavy` / `@angular-max`
 
 ## Default agent rule
 
 Only plan, route, and manage workers
+
