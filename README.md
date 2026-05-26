@@ -77,9 +77,6 @@ The name is inspired by the DOTA hero Nyx
     - **[niri.nix](/modules/niri.nix)**
       - niri
         - enable the Niri tiling compositor with DankMaterialShell greeter, Thunar, and XWayland support
-    - **[ollama.nix](/modules/ollama.nix)**
-      - ollama
-        - run Ollama with ROCm GPU acceleration for local LLM inference (EliasPC only)
     - **[nix.nix](/modules/nix.nix)**
       - base-settings
         - enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools

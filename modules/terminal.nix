@@ -101,7 +101,7 @@
       enableZshIntegration = true;
 
       settings = {
-        add_newline = false;
+        add_newline = true;
         format = "$shell$username$os$hostname$nix_shell$git_branch$git_commit$git_status$git_state$directory$cmd_duration$character";
         shell = {
           disabled = false;

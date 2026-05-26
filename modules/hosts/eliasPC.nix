@@ -45,8 +45,6 @@ let system = "x86_64-linux"; in {
       distributed-builder
       home-manager
       nh
-      # ollama.nix
-      ollama
       # optimizations.nix
       optimizations-pc
       # system.nix

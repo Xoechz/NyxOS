@@ -54,17 +54,6 @@
               extensions = [ ".nix" ];
             };
           };
-          provider = lib.mkIf localLlm {
-            ollama = {
-              npm = "@ai-sdk/openai-compatible";
-              name = "Ollama (local)";
-              options.baseURL = "http://localhost:11434/v1";
-              models = {
-                "qwen3.5:4b".name = "Qwen3.5 4B (lite)";
-                "qwen3.5:9b".name = "Qwen3.5 9B (medium)";
-              };
-            };
-          };
         };
 
         enableMcpIntegration = true;
