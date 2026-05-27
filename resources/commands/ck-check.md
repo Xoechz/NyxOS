@@ -1,6 +1,6 @@
 ---
 description: Read-only drift report — check code against SPEC.md invariants and interfaces
-agent: build
+agent: manager
 ---
 
 Load `cavekit-check` skill and report drift.
