@@ -22,3 +22,7 @@ If a nuget package is needed or recommended. Ask the user to install it. Do not 
 - File-scoped namespaces, primary constructors, records, pattern matching (C# 12+)
 - Run `dotnet format` before committing
 - All package versions from `Directory.Packages.props` — no version attr on `<PackageReference>`
+- Use `var` when possible
+- Use expression-bodied members when possible
+- Use `using` declarations when possible
+- No 'Async' suffix on async methods, when no sync version exists
