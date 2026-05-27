@@ -1,6 +1,6 @@
 ---
 description: Dry-run build all NyxOS hosts, summarise what would change
-agent: build
+agent: manager
 ---
 
 Dry-run build all four NyxOS hosts, summarise what would be built/changed.
