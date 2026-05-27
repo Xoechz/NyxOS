@@ -1,6 +1,6 @@
 ---
 description: Execute next task from SPEC.md using cavekit build loop
-agent: build
+agent: manager
 ---
 
 Load `cavekit-build` skill and execute next todo task from SPEC.md.
