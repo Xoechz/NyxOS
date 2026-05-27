@@ -1,6 +1,6 @@
 ---
 description: Run statix check and explain any warnings or errors
-agent: build
+agent: manager
 ---
 
 Run `statix check` in `~/NyxOS` and report results.
