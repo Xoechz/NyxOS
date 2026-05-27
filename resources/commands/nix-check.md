@@ -1,6 +1,6 @@
 ---
 description: Run nix flake check and explain any errors
-agent: build
+agent: manager
 ---
 
 Run `nix flake check` in `~/NyxOS` and report results.
