@@ -1,6 +1,6 @@
 ---
 description: Create or amend SPEC.md using cavekit spec-driven development
-agent: build
+agent: manager
 ---
 
 Load `cavekit` skill and help user create or amend SPEC.md.
