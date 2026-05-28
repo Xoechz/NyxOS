@@ -12,10 +12,10 @@
 		//	"name": "ue3",
 		//	"path": "/home/elias/Repos/assignment-3-Xoechz"
 		//},
-		//{
-		//	"name": "ue4",
-		//	"path": "/home/elias/Repos/assignment-4-Xoechz"
-		//},
+		{
+			"name": "ue4",
+			"path": "/home/elias/Repos/assignment-4-Xoechz"
+		},
 		{
 			"name": "ue5",
 			"path": "/home/elias/Repos/assignment-5-Xoechz"
