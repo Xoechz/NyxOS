@@ -28,4 +28,6 @@ Hard constraints: never edit flake.nix directly.
 
 >3 files or >60 lines: "Exceeds lite scope. Escalate to @nix-medium."
 
-After: `nixpkgs-fmt` file → `nix flake check`.
+After: `nixpkgs-fmt` file
+
+no check or build

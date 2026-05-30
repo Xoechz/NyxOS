@@ -28,4 +28,6 @@ Hard constraints: never edit flake.nix. Inputs in flake-file.inputs blocks; run 
 
 Cross-host changes, arch decisions: "Exceeds medium scope. Escalate to @nix-heavy."
 
-After: `nixpkgs-fmt` edited files → `nix flake check` → `--dry-run` build for affected host.
+After: `nixpkgs-fmt` all → `statix check`
+
+no check or build

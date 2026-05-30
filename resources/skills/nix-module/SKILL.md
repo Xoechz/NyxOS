@@ -83,7 +83,7 @@ nixpkgs-fmt <file>.nix   # format single file
 nixpkgs-fmt .            # format all
 ```
 
-Do not build! Building is reserved for the developer, except when explicitly requested.
+Do not build or run flake check! Building is reserved for the developer, except when explicitly requested.
 
 Use only the LSP for checking.
 

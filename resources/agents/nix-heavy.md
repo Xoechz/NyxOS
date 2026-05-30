@@ -28,4 +28,6 @@ Hard constraints: never edit flake.nix.
 
 Deployment or system rebuild: "Requires deployment. Escalate to @nix-max."
 
-After: `nixpkgs-fmt` all → `statix check` → `nix flake check` → `--dry-run` for all affected hosts.
+After: `nixpkgs-fmt` all → `statix check`
+
+no check or build

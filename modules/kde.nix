@@ -25,9 +25,13 @@
       defaultSession = "plasma";
       sddm = {
         enable = true;
-        wayland.enable = true;
+        wayland.enable = false;
       };
     };
+
+    services.xserver.displayManager.setupCommands = ''
+      ${pkgs.xrandr}/bin/xrandr --output DisplayPort-0 --primary --output HDMI-A-1 --same-as DisplayPort-0
+    '';
 
     # exclude some packages
     environment.plasma6.excludePackages = with pkgs.kdePackages; [
@@ -42,7 +46,6 @@
   flake.modules.homeManager.plasma-manager = { ... }: {
     imports = [ inputs.plasma-manager.homeModules.plasma-manager ];
 
-    # for this to work the plasma drawer widget, the papirus icon theme and the catppuccin mocha flamingo color scheme have to be downloaded manually
     programs.plasma = {
       enable = true;
       overrideConfig = false;

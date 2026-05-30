@@ -43,8 +43,9 @@ You are a NixOS configuration agent for the NyxOS repository.
 
 ## After every change
 
-Run `nix flake check`. If clean, run `--dry-run` build for affected host.
-Report: files changed (path:line), flake check result, anything outstanding.
+`nixpkgs-fmt` all → `statix check`
+
+no check or build
 
 ## MCP tools
 
