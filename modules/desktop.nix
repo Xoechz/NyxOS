@@ -243,6 +243,7 @@
 
     catppuccin = {
       enable = true;
+      # autoEnable = true; # for 26.05
       flavor = "mocha";
       accent = "peach";
       cursors = {
@@ -271,6 +272,7 @@
 
       catppuccin = {
         enable = true;
+        # autoEnable = true; # for 26.05
         flavor = "mocha";
         accent = "peach";
         cursors = {
