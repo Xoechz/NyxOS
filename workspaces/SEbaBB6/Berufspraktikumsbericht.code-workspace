@@ -1,0 +1,17 @@
+{
+    "folders": [
+        {
+            "path": "/home/elias/Repos/Berufspraktikumsbericht"
+        },
+        {
+            "name": "NyxOS",
+            "path": "/home/elias/NyxOS"
+        }
+    ],
+    "settings": {
+        "ltex.enabled": [
+            "latex",
+            "bibtex"
+        ]
+    }
+}
