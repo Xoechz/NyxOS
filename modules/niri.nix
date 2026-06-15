@@ -922,7 +922,7 @@
         powerActionConfirm = true;
         powerActionHoldDuration = 0.25;
         osdAlwaysShowValue = true;
-        osdPosition = 5;
+        osdPosition = 3;
         osdMediaPlaybackEnabled = true;
         powerMenuActions = [
           "reboot"
