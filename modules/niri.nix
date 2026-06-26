@@ -994,10 +994,10 @@
                 id = "dankKDEConnect";
                 enabled = true;
               }
-              {
+              (lib.mkIf isMobile {
                 id = "warpToggle";
                 enabled = true;
-              }
+              })
               {
                 id = "notificationButton";
                 enabled = true;
