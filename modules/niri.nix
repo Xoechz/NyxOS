@@ -89,7 +89,7 @@
     imports = [
       inputs.dms.homeModules.dank-material-shell
       inputs.dms.homeModules.niri
-      inputs.dms-plugin-registry.modules.default
+      inputs.dms-plugin-registry.nixosModules.default
       inputs.danksearch.homeModules.dsearch
     ];
 
@@ -995,6 +995,10 @@
                 enabled = true;
               }
               {
+                id = "warpToggle";
+                enabled = true;
+              }
+              {
                 id = "notificationButton";
                 enabled = true;
               }
@@ -1099,6 +1103,7 @@
           settings.terminalApp = "kitty";
         };
         dankKDEConnect.enable = true;
+        warpToggle.enable = true;
       };
     };
 
