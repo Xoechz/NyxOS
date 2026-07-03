@@ -25,7 +25,7 @@
   };
 
   # System Module niri: enable the Niri tiling compositor with DankMaterialShell greeter, Thunar, and XWayland support
-  flake.modules.nixos.niri = { pkgs, ... }: {
+  flake.modules.nixos.niri = { pkgs, defaultUser, ... }: {
     imports = [
       inputs.niri.nixosModules.niri
       inputs.dms.nixosModules.dank-material-shell
@@ -63,7 +63,22 @@
 
     services.displayManager.dms-greeter = {
       enable = true;
-      compositor.name = "niri";
+      configHome = "/home/${defaultUser}";
+      compositor = {
+        name = "niri";
+        customConfig = ''
+          input {
+              keyboard {
+                  xkb {
+                      layout "at"
+                  }
+              }
+          }
+          hotkey-overlay {
+              skip-at-startup true
+          }
+        '';
+      };
     };
 
     programs.thunar = {

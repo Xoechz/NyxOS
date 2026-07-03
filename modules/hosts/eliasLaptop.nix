@@ -11,6 +11,7 @@ let system = "x86_64-linux"; in {
       };
       swapSize = 18; # GB
       users = [ "elias" ];
+      defaultUser = "elias";
       localLlm = false;
     };
     modules = [
@@ -29,10 +30,6 @@ let system = "x86_64-linux"; in {
       # dev.nix
       dev-certs
       dotnet
-      go
-      java
-      latex
-      python
       # games.nix
       steam
       # network.nix
@@ -86,8 +83,6 @@ let system = "x86_64-linux"; in {
           # apps.nix
           discord
           email
-          idea
-          rider
           kde-connect
           libreoffice
           media
@@ -95,7 +90,6 @@ let system = "x86_64-linux"; in {
           nomacs
           obs
           pdf
-          teams
           vscode
           # browser.nix
           betterfox

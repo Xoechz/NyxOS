@@ -123,8 +123,8 @@
   };
 
   # Home Module discord: install Vesktop with Catppuccin Mocha CSS theme
-  flake.modules.homeManager.discord = { pkgs, ... }: {
-    home.packages = with pkgs; [
+  flake.modules.homeManager.discord = { pkgs-stable, ... }: {
+    home.packages = with pkgs-stable; [
       vesktop
     ];
 

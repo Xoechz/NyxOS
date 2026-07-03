@@ -11,6 +11,7 @@ let system = "x86_64-linux"; in {
       };
       swapSize = 32; # GB
       users = [ "elias" ];
+      defaultUser = "elias";
       localLlm = true;
     };
     modules = [
@@ -29,8 +30,6 @@ let system = "x86_64-linux"; in {
       # dev.nix
       dev-certs
       dotnet
-      latex
-      python
       # games.nix
       steam
       # network.nix

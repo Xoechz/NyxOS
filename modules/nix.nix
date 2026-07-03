@@ -6,15 +6,10 @@
       inputs.systems.follows = "systems";
     };
     flake-compat.url = "github:nixos/flake-compat";
-    gitignore = {
-      url = "github:hercules-ci/gitignore.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
-      inputs.gitignore.follows = "gitignore";
     };
     nix-output-monitor = {
       url = "github:maralorn/nix-output-monitor";
