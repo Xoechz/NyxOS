@@ -90,9 +90,9 @@ The name is inspired by the DOTA hero Nyx
         - enable nh with weekly auto-cleanup, keeping the last 3 generations for 7 days
     - **[optimizations.nix](/modules/optimizations.nix)**
       - optimizations-laptop
-        - use the Zen kernel with TLP for AC/battery power profiles and an 80% charge threshold
+        - use the latest kernel with TLP for AC/battery power profiles and an 80% charge threshold
       - optimizations-pc
-        - use the Zen kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
+        - use the latest kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
     - **[system.nix](/modules/system.nix)**
       - basic-system
         - set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support
