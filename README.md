@@ -92,7 +92,7 @@ The name is inspired by the DOTA hero Nyx
       - optimizations-laptop
         - use the latest kernel with TLP for AC/battery power profiles and an 80% charge threshold
       - optimizations-pc
-        - use the latest kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
+        - use the latest kernel with minimal background services and desktop-appropriate sysctl tuning
     - **[system.nix](/modules/system.nix)**
       - basic-system
         - set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support

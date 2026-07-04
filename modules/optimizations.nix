@@ -1,47 +1,19 @@
 { ... }: {
-  # System Module optimizations-pc: use the latest kernel, enable TLP in performance mode, and disable USB/PCIe power-saving for desktop use
+  # System Module optimizations-pc: use the latest kernel with minimal background services and desktop-appropriate sysctl tuning
   flake.modules.nixos.optimizations-pc = { pkgs, lib, ... }: {
+    # previously this was set to zen kernel, but there were some issues when shutting down
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-
-    services.system76-scheduler = {
-      enable = true;
-      settings.cfsProfiles.enable = true;
-    };
 
     services.thermald.enable = true;
     services.power-profiles-daemon.enable = false;
     powerManagement.powertop.enable = false;
 
-    services.tlp = {
-      enable = true;
-      settings = {
-        # Aggressive CPU scaling for maximum performance
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-        CPU_BOOST_ON_AC = "1";
-        CPU_MIN_PERF_ON_AC = 0;
-        CPU_MAX_PERF_ON_AC = 100;
+    boot.kernelParams = [ "nowatchdog" "amdgpu.gpu_recovery=1" ];
 
-        # Disable runtime PM on AC to prevent USB devices from suspending
-        RUNTIME_PM_ON_AC = "off";
-
-        # Disable USB autosuspend to prevent input devices from suspending
-        USB_AUTOSUSPEND = 0;
-        USB_AUTOSUSPEND_ON_AC = 0;
-
-        # Optimize disk performance (use noop for SSDs)
-        SATA_LINKPWR_ON_AC = "med_power_with_dipm";
-        DISK_IDLE_SECS_ON_AC = 0;
-
-        # Disable audio powersave for better responsiveness
-        SOUND_POWER_SAVE_ON_AC = 0;
-
-        # Optimize PCIe for performance
-        PCIE_ASPM_ON_AC = "off";
-
-        # Keep Wake-on-LAN enabled; TLP defaults can disable it at boot.
-        WOL_DISABLE = "N";
-      };
+    boot.kernel.sysctl = {
+      "vm.swappiness" = 10;
+      "vm.dirty_ratio" = 5;
+      "vm.dirty_background_ratio" = 2;
     };
 
     # Remove network-online.target from boot dependency graph — prevents boot stall without disabling the service
@@ -51,12 +23,8 @@
 
   # System Module optimizations-laptop: use the latest kernel with TLP for AC/battery power profiles and an 80% charge threshold
   flake.modules.nixos.optimizations-laptop = { pkgs, lib, ... }: {
+    # previously this was set to zen kernel, but there were some issues when shutting down
     boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-
-    services.system76-scheduler = {
-      enable = true;
-      settings.cfsProfiles.enable = true;
-    };
 
     services.auto-cpufreq.enable = false;
     services.power-profiles-daemon.enable = false;
@@ -77,7 +45,7 @@
         CPU_MIN_PERF_ON_AC = 0;
         CPU_MAX_PERF_ON_AC = 90;
         CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 50;
+        CPU_MAX_PERF_ON_BAT = 75;
 
         CPU_BOOST_ON_AC = "1";
         CPU_BOOST_ON_BAT = "0";
@@ -117,6 +85,14 @@
         PLATFORM_PROFILE_ON_AC = "balanced-performance";
         PLATFORM_PROFILE_ON_BAT = "low-power";
       };
+    };
+
+    boot.kernelParams = [ "nowatchdog" ];
+
+    boot.kernel.sysctl = {
+      "vm.swappiness" = 10;
+      "vm.dirty_ratio" = 5;
+      "vm.dirty_background_ratio" = 2;
     };
 
     # Remove network-online.target from boot dependency graph — prevents boot stall without disabling the service
