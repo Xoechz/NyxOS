@@ -26,6 +26,7 @@
         handback = "resources/skills/handback/SKILL.md";
         domain-modeling = "resources/skills/domain-modeling/SKILL.md";
         grill-with-docs = "resources/skills/grill-with-docs/SKILL.md";
+        research = "resources/skills/research/SKILL.md";
       };
     };
 
