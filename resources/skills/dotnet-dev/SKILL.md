@@ -1,7 +1,6 @@
 ---
 name: dotnet-dev
 description: .NET 10 and C# conventions — SDK paths, build commands, NuGet
-compatibility: opencode
 ---
 
 ## Building
