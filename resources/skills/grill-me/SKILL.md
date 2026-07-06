@@ -8,3 +8,20 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
+
+## Caveman Encoding
+
+Default for all sections.
+
+- Drop articles/filler/extra auxiliaries when clear.
+- Prefer short verbs (`fix`, `add`).
+- Fragments allowed.
+
+Keep verbatim: code, paths, identifiers, URLs, numbers, error strings.
+
+Symbols:
+- `→` leads to/triggers
+- `∀` for all/every
+- `!` must
+- `≤` at most / `≥` at least
+- `&` and / `|` or
