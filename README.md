@@ -16,6 +16,9 @@ The name is inspired by the DOTA hero Nyx
     - **[apps.nix](/modules/apps.nix)**
       - flatpak
         - enable Flatpak and register the Flathub repository
+    - **[aspire-cli.nix](/modules/aspire-cli.nix)**
+      - aspire-cli
+        - install the Aspire CLI for .NET Aspire distributed applications
     - **[browser.nix](/modules/browser.nix)**
       - chromium
         - install Chromium with Widevine DRM

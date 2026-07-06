@@ -18,16 +18,7 @@
 
       enableMcpIntegration = true;
 
-      skills = {
-        nix-module = "resources/skills/nix-module/SKILL.md";
-        dotnet-dev = "resources/skills/dotnet-dev/SKILL.md";
-        grill-me = "resources/skills/grill-me/SKILL.md";
-        handoff = "resources/skills/handoff/SKILL.md";
-        handback = "resources/skills/handback/SKILL.md";
-        domain-modeling = "resources/skills/domain-modeling/SKILL.md";
-        grill-with-docs = "resources/skills/grill-with-docs/SKILL.md";
-        research = "resources/skills/research/SKILL.md";
-      };
+      skills = ../resources/skills;
     };
 
     programs.mcp = {
@@ -41,6 +32,9 @@
         };
         microsoft-learn = {
           url = "https://learn.microsoft.com/api/mcp";
+        };
+        openrouter = {
+          url = "https://mcp.openrouter.ai/mcp";
         };
       };
     };

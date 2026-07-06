@@ -21,6 +21,8 @@ let system = "x86_64-linux"; in {
 
   flake.modules.nixos.eliasPC = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
+      # aspire-cli.nix
+      aspire-cli
       # desktop.nix
       base-desktop
       catppuccin
