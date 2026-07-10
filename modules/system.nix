@@ -74,7 +74,7 @@
   };
 
   # System Module sound: enable PipeWire with ALSA and PulseAudio compatibility, rtkit, and media control tools
-  flake.modules.nixos.sound = { pkgs, ... }: {
+  flake.modules.nixos.sound = { pkgs, users, ... }: {
     security.rtkit.enable = true;
 
     services = {
@@ -92,9 +92,14 @@
       };
     };
 
+    nixpkgs.config.pulseaudio = true;
+
+    users.extraGroups.audio.members = users;
+
     environment.systemPackages = with pkgs; [
       playerctl
       pavucontrol
+      pulseaudio
     ];
   };
 
