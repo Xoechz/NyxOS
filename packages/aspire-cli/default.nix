@@ -1,5 +1,8 @@
-{ lib, buildDotnetModule, fetchFromGitHub, dotnetCorePackages, clang }:
+{ lib, buildDotnetModule, fetchFromGitHub, dotnetCorePackages, clang, stdenv }:
 
+let
+  dotnetRid = dotnetCorePackages.systemToDotnetRid stdenv.hostPlatform.system;
+in
 buildDotnetModule rec {
   pname = "aspire-cli";
   version = "13.4.6";
@@ -19,7 +22,28 @@ buildDotnetModule rec {
 
   selfContainedBuild = true;
 
-  dotnetInstallFlags = [ "-p:PublishAot=true" ];
+  # Hook hardcodes --no-build in publish, which causes ILC to drop .resx resources.
+  # Override install to run publish without --no-build. Build phase still runs first.
+  dontDotnetInstall = true;
+  installPhase = ''
+    runHook preInstall
+
+    dotnet publish src/Aspire.Cli/Aspire.Cli.csproj \
+      -maxcpucount:"$NIX_BUILD_CORES" \
+      -p:BuildInParallel=true \
+      -p:ContinuousIntegrationBuild=true \
+      -p:Deterministic=true \
+      -p:OverwriteReadOnlyFiles=true \
+      -p:PublishAot=true \
+      -p:SelfContained=true \
+      --configuration Release \
+      --runtime ${dotnetRid} \
+      --self-contained \
+      --no-restore \
+      --output $out/lib/aspire-cli
+
+    runHook postInstall
+  '';
 
   executables = [ "aspire" ];
 
