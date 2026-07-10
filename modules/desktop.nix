@@ -69,11 +69,33 @@
     };
   };
 
-  # System Module base-desktop: enable polkit and D-Bus, required by all desktop environments
-  flake.modules.nixos.base-desktop = { ... }: {
-    security.polkit.enable = true;
-    services.dbus.enable = true;
-  };
+  # System Module base-desktop: enable polkit, D-Bus, and dconf/GSettings (required by all desktop environments)
+  flake.modules.nixos.base-desktop = { pkgs, lib, ... }:
+    let
+      gsettingsPkg = pkgs.gsettings-desktop-schemas;
+      gtk3Pkg = pkgs.gtk3;
+      gtk4Pkg = pkgs.gtk4;
+      gsettingsDataDirs = [
+        "${gsettingsPkg}/share/gsettings-schemas/gsettings-desktop-schemas-${gsettingsPkg.version}"
+        "${gtk3Pkg}/share/gsettings-schemas/gtk+3-${gtk3Pkg.version}"
+        "${gtk4Pkg}/share/gsettings-schemas/gtk4-${gtk4Pkg.version}"
+      ];
+    in
+    {
+      security.polkit.enable = true;
+      services.dbus.enable = true;
+      programs.dconf.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        gsettings-desktop-schemas
+        gtk3
+        gtk4
+      ];
+
+      environment.extraInit = ''
+        export XDG_DATA_DIRS="$XDG_DATA_DIRS:${lib.concatStringsSep ":" gsettingsDataDirs}"
+      '';
+    };
 
   # System Module fonts: install the full Nerd Fonts collection (60+ families) plus core/Vista fonts
   flake.modules.nixos.fonts = { pkgs, ... }: {
@@ -238,7 +260,7 @@
   };
 
   # System Module catppuccin: apply full Catppuccin Mocha/Peach theming system-wide including cursor theme
-  flake.modules.nixos.catppuccin = { ... }: {
+  flake.modules.nixos.catppuccin = { pkgs, ... }: {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
 
     catppuccin = {
@@ -253,6 +275,10 @@
     };
 
     xdg.icons.fallbackCursorThemes = [ "catppuccin-mocha-dark-cursors" ];
+
+    environment.systemPackages = with pkgs;[
+      adwaita-icon-theme
+    ];
 
     home-manager.sharedModules = [
       inputs.self.modules.homeManager.catppuccin

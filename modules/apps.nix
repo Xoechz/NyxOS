@@ -214,15 +214,13 @@
       qgis
     ];
   };
-
   # Home Module media-editors: install GIMP, Inkscape, and kdenlive for image and video editing
-  flake.modules.homeManager.media-editors = { pkgs, pkgs-stable, lib, ... }: {
+  flake.modules.homeManager.media-editors = { pkgs, lib, ... }: {
     home.packages = with pkgs; [
       inkscape
-      adwaita-icon-theme
       gimp
-    ] ++ [
-      pkgs-stable.kdePackages.kdenlive
+      kdePackages.kdenlive
+      ffmpeg
     ];
 
     xdg.mimeApps = {
