@@ -1,0 +1,15 @@
+{
+    "folders": [
+        {
+            "name": "bachelor-demo-stuff",
+            "path": "/home/elias/Repos/bachelor-demo-stuff"
+        },
+        {
+            "name": "NyxOS",
+            "path": "/home/elias/NyxOS"
+        }
+    ],
+    "settings": {
+        "dotnet.defaultSolution": "/home/elias/Repos/bachelor-demo-stuff/BachelorDemoStuff.slnx"
+    }
+}
