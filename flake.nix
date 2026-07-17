@@ -26,8 +26,8 @@
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs = {
+        flake-compat.follows = "flake-compat";
         nixpkgs.follows = "nixpkgs";
-        quickshell.follows = "quickshell";
       };
     };
     dms-plugin-registry = {
@@ -83,10 +83,6 @@
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
-    };
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
