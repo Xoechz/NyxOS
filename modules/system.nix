@@ -33,13 +33,20 @@
   };
 
   # System Module swap: configure zram swap and an encrypted swapfile sized via the swapSize specialArg (in GB)
-  flake.modules.nixos.swap = { swapSize, ... }: {
+  flake.modules.nixos.swap = { swapSize, lib, ... }: {
     zramSwap.enable = true;
     swapDevices = [{
       device = "/var/lib/swapfile";
       size = swapSize * 1024; # GB
       randomEncryption.enable = true;
     }];
+
+    # Hibernation is impossible with random encryption — the swap UUID changes each boot.
+    # Disabling this prevents systemd-hibernate-resume from timing out on a stale UUID.
+    boot.resumeDevice = lib.mkDefault "";
+
+    # Prevent boot stall while mkswap-* sets up the encrypted swapfile backing device
+    systemd.services."mkswap-var-lib-swapfile".serviceConfig.TimeoutSec = "15s";
   };
 
   # System Module bluetooth: enable Bluetooth, power on at boot, and enable experimental features for battery reporting
