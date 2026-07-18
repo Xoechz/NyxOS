@@ -1107,7 +1107,7 @@
           "logout"
           "poweroff"
           "lock"
-          "suspend"
+          # "suspend"
           "restart"
         ];
         powerMenuDefaultAction = "poweroff";
