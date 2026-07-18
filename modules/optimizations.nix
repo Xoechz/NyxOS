@@ -1,8 +1,7 @@
 { ... }: {
   # System Module optimizations-pc: use the latest kernel with minimal background services and desktop-appropriate sysctl tuning
   flake.modules.nixos.optimizations-pc = { pkgs, lib, ... }: {
-    # previously this was set to zen kernel, but there were some issues when shutting down
-    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
     services.thermald.enable = true;
     services.power-profiles-daemon.enable = false;
@@ -23,8 +22,7 @@
 
   # System Module optimizations-laptop: use the latest kernel with TLP for AC/battery power profiles and an 80% charge threshold
   flake.modules.nixos.optimizations-laptop = { pkgs, lib, ... }: {
-    # previously this was set to zen kernel, but there were some issues when shutting down
-    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
     services.auto-cpufreq.enable = false;
     services.power-profiles-daemon.enable = false;
