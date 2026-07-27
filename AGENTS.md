@@ -6,20 +6,6 @@ There is no TypeScript, Rust, Python, or other language source code in this repo
 
 ---
 
-## Subagents
-
-Tiered subagents are available for dotnet, nix, and java tasks. The `delegate` skill handles automatic routing to the correct complexity tier before spending cloud tokens.
-
-| Domain | Tiers | Direct invocation |
-|--------|-------|-------------------|
-| `nix` | Any task that touches `.nix` files, `flake.nix`/`flake.lock`, NixOS/HM options, or system rebuild/deployment | `@nix-lite` / `@nix-medium` / `@nix-heavy` / `@nix-max` |
-| `dotnet` | Any task in a `.csproj`/`.sln` C# or .NET project — build, test, NuGet, refactor, format | `@dotnet-lite` / `@dotnet-medium` / `@dotnet-heavy` / `@dotnet-max` |
-| `java` | Any task in a Maven (`pom.xml`) or Gradle (`build.gradle[.kts]`) Java project — build, test, dependencies, format | `@java-lite` / `@java-medium` / `@java-heavy` / `@java-max` |
-| `angular` | Any task in an Angular project — components, services, templates, signals, routing, tests, a11y | `@angular-lite` / `@angular-medium` / `@angular-heavy` / `@angular-max` |
-| `general` | Any task not covered by other domains — JSON, YAML, TOML, CSV, shell scripts, config files, docs | `@general-lite` / `@general-medium` / `@general-heavy` / `@general-max` |
-
----
-
 ## MCP Servers
 
 The following MCP servers are available to all agents in this session:
@@ -50,18 +36,6 @@ The following MCP servers are available to all agents in this session:
 
 ---
 
-## OpenCode Slash Commands
-
-These are defined in `modules/ai.nix` and available in every session:
-
-| Command | What it does |
-|---------|-------------|
-| `/nix-check` | Runs `nix flake check` and explains any errors |
-| `/nix-rebuild` | Dry-run builds all four hosts and summarises what would change |
-| `/nix-lint` | Runs `statix check` and explains any warnings/errors |
-
----
-
 ## Reference Documentation
 
 - NixOS Wiki: <https://nixos.wiki/wiki/NixOS>
@@ -87,80 +61,11 @@ modules/           # All NixOS + Home Manager topic modules
   hosts/           # Per-machine configurations (eliasPC, eliasLaptop, fredPC, nixPi)
   *.nix            # Topic modules (apps, browser, desktop, dev, kde, niri, …)
 templates/         # Starter dev-shell flake templates
+packages/          # Self packaged programmes like aspire
 workspaces/        # VS Code .code-workspace files
 resources/         # Static files referenced by config (e.g. DMS , certs)
 images/            # Wallpapers and screenshots
 ```
-
----
-
-## Build & Apply Commands
-
-> `flake.nix` is auto-generated. To add a new flake input, declare it inside
-> the relevant module's `flake-file.inputs` block (see Module Structure below),
-> then run `regenerate`.
-
-| Command | Purpose |
-|---------|---------|
-| `rebuild` | Apply current config to the running system (`nh os switch`) |
-| `update` | Rebuild after updating all flake inputs (`nh os switch -u`) |
-| `update-lock` | Update `flake.lock` only (`nix flake update`) |
-| `regenerate` | Re-generate `flake.nix` from module declarations (`nix run ~/NyxOS#write-flake`) |
-| `cleanup` | Optimise store and remove old generations |
-| `full-rebuild` | `git pull && rebuild` |
-| `full-update` | `git pull && update` |
-
-### Build a specific host without switching
-
-```bash
-nix build .#nixosConfigurations.EliasPC.config.system.build.toplevel
-nix build .#nixosConfigurations.EliasLaptop.config.system.build.toplevel
-nix build .#nixosConfigurations.FredPC.config.system.build.toplevel
-nix build .#nixosConfigurations.NixPi.config.system.build.toplevel
-```
-
-### Remote deployment
-
-```bash
-deploy-to-pi
-deploy-to-fredPC
-deploy-to-eliasPC
-deploy-to-eliasLaptop
-```
-
----
-
-## Validation & "Testing"
-
-There is no traditional test suite. The Nix equivalents are:
-
-```bash
-# Validate all configurations evaluate without errors (fastest check)
-nix flake check
-
-# Dry-run build a specific host (catches evaluation + build errors, no activation)
-nix build .#nixosConfigurations.<HostName>.config.system.build.toplevel --dry-run
-
-# "Single test" equivalent — evaluate one host's config attribute
-nix eval .#nixosConfigurations.EliasPC.config.system.build.toplevel
-```
-
----
-
-## Formatting & Linting
-
-```bash
-nixpkgs-fmt <file>.nix     # Format a single file
-nixpkgs-fmt .              # Format all .nix files recursively
-
-statix check               # Lint all .nix files for common mistakes
-statix fix                 # Auto-fix lint warnings in place
-```
-
-- `nixd` is the Nix LSP (language server) — available system-wide.
-- `statix` is a linter for Nix that catches common mistakes (e.g. redundant `rec`, deprecated builtins, anti-patterns).
-- There is no CI lint step configured; run `nixpkgs-fmt` and `statix check` manually before committing.
-- `nix flake check` also catches evaluation-time type errors.
 
 ---
 
