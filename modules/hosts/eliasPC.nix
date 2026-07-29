@@ -31,6 +31,8 @@ let system = "x86_64-linux"; in {
       # dev.nix
       dev-certs
       dotnet
+      latex
+      python
       # games.nix
       steam
       # network.nix
