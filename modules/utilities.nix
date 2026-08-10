@@ -73,6 +73,7 @@
         };
         alias = {
           graph = "log --decorate --oneline --graph --max-count=20";
+          hardhead = "reset --hard HEAD";
         };
         pull.rebase = true;
         core.autocrlf = "input";
