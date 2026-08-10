@@ -33,6 +33,7 @@ The following MCP servers are available to all agents in this session:
 | `EliasLaptop` | x86_64-linux | Intel CPU + NVIDIA GPU, mobile (`isMobile = true`) |
 | `FredPC` | x86_64-linux | KDE, German locale |
 | `NixPi` | aarch64-linux | Raspberry Pi server, no desktop |
+| `PiKistn` | aarch64-linux | Raspberry Pi 4B kiosk, BierKistn Radio |
 
 ---
 

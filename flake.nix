@@ -15,6 +15,10 @@
         systems.follows = "systems";
       };
     };
+    bierkistn-radio = {
+      url = "git+file:///home/elias/Repos/BierKistnRadio";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -19,6 +19,9 @@ The name is inspired by the DOTA hero Nyx
     - **[aspire-cli.nix](/modules/aspire-cli.nix)**
       - aspire-cli
         - install the Aspire CLI for .NET Aspire distributed applications
+    - **[bierkistn.nix](/modules/bierkistn.nix)**
+      - bierkistn
+        - install the BierKistn Radio UI, spotifyd as the Spotify backend over the system D-Bus, and grant the kiosk user the D-Bus actions it needs
     - **[browser.nix](/modules/browser.nix)**
       - chromium
         - install Chromium with Widevine DRM
@@ -213,6 +216,11 @@ The name is inspired by the DOTA hero Nyx
       - gui-utilities
         - install Baobab disk analyser, Bruno API client, and GNOME multi-writer
 - [modules/hosts](modules/hosts) => Per-host setup. Uses the defined modules
+  - EliasPC (x86_64-linux, desktop)
+  - EliasLaptop (x86_64-linux, mobile)
+  - FredPC (x86_64-linux, KDE)
+  - NixPi (aarch64-linux, server)
+  - PiKistn (aarch64-linux, kiosk)
 - [images](images) => Background and ReadMe images
 - [workspaces](workspaces) => Workspaces for different tasks
 

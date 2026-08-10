@@ -29,6 +29,25 @@
         "type": "github"
       }
     },
+    "bierkistn-radio": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dirtyRev": "dcc60de0978b4b0cc8fd85489c1b93516bd4aa89-dirty",
+        "dirtyShortRev": "dcc60de-dirty",
+        "lastModified": 1786363355,
+        "narHash": "sha256-Nld+RLQRYsbosiiixEhn1ChctXEYq92pWaedImIztJU=",
+        "type": "git",
+        "url": "file:///home/elias/Repos/BierKistnRadio"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/elias/Repos/BierKistnRadio"
+      }
+    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": [
@@ -405,6 +424,7 @@
     "root": {
       "inputs": {
         "betterfox-nix": "betterfox-nix",
+        "bierkistn-radio": "bierkistn-radio",
         "catppuccin": "catppuccin",
         "danksearch": "danksearch",
         "dms": "dms",

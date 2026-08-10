@@ -4,11 +4,49 @@
             "path": "/home/elias/Repos/BierKistnRadio"
         },
         {
-            "path": "/home/elias/Repos/mat_skills"
-        },
-        {
             "name": "NyxOS",
             "path": "/home/elias/NyxOS"
         }
-    ]
+    ],
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.cmake-tools",
+            "llvm-vs-code-extensions.vscode-clangd",
+            "ms-vscode.cpptools",
+            "direnv.direnv-vscode"
+        ]
+    },
+    "settings": {
+        "[cpp]": {
+            "editor.formatOnSave": true
+        },
+        "[qml]": {
+            "editor.tabSize": 4
+        },
+        "C_Cpp.intelliSenseEngine": "disabled",
+        "clangd.arguments": [
+            "--compile-commands-dir=build"
+        ],
+        "cmake.buildDirectory": "${workspaceFolder}/build",
+        "cmake.configureOnOpen": true,
+        "cmake.configureSettings": {
+            "CMAKE_BUILD_TYPE": "Debug"
+        },
+        "cmake.generator": "Ninja",
+        "cmake.parallelJobs": 0,
+        "files.associations": {
+            "*.qml": "qml"
+        },
+        "files.watcherExclude": {
+            "**/.direnv/**": true,
+            "**/build/**": true,
+            "**/result/**": true
+        },
+        "search.exclude": {
+            "**/.direnv": true,
+            "**/build": true,
+            "**/result": true
+        },
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    }
 }

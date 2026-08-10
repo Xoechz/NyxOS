@@ -31,6 +31,10 @@
           hostNames = [ "NixPi" "NixPi.bruckner-domain.net" ];
           publicKey = "nixpi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyuYVNGKSrpwWacyBFdqPdFxRTNhu8bcmQ0sk8j786T";
         };
+        PiKistn = {
+          hostNames = [ "PiKistn" "PiKistn.bruckner-domain.net" ];
+          publicKey = "pikistn ssh-ed25519 PLACEHOLDER"; # TODO: replace with actual key after first deployment
+        };
         GitHub = {
           hostNames = [ "GitHub" "GitHub.com" ];
           publicKey = "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
@@ -49,6 +53,9 @@
         Host NixPi
           HostName NixPi.bruckner-domain.net
           User elias
+        Host PiKistn
+          HostName PiKistn.bruckner-domain.net
+          User kistn
         Host swp
           HostName 10.22.20.223
           User admin
