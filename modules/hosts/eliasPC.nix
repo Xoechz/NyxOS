@@ -29,10 +29,9 @@ let system = "x86_64-linux"; in {
       fonts
       language-en
       # dev.nix
+      c
       dev-certs
       dotnet
-      latex
-      python
       # games.nix
       steam
       # network.nix
