@@ -18,7 +18,7 @@ let system = "aarch64-linux"; in {
     ];
   };
 
-  flake.modules.nixos.piKistn = { lib, modulesPath, pkgs,... }: {
+  flake.modules.nixos.piKistn = { lib, modulesPath, pkgs, ... }: {
     imports = [
       inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ] ++ (with inputs.self.modules.nixos; [
@@ -196,6 +196,11 @@ let system = "aarch64-linux"; in {
     };
 
     nixpkgs.hostPlatform = system;
+    # Cross-compile instead of emulating: build natively on x86_64 producing
+    # aarch64-linux binaries. Without this, nixpkgs defaults buildPlatform to
+    # hostPlatform and the whole aarch64 toolchain runs under QEMU binfmt
+    # emulation (8-10x slower). Cross keeps the kernel build native ~30 min.
+    nixpkgs.buildPlatform = "x86_64-linux";
     system.stateVersion = "25.11";
   };
 }

@@ -38,6 +38,11 @@
       settings = {
         fallback = true;
 
+        # Parallelize: cores = build jobs within one derivation (kernel make -j),
+        # max-jobs = concurrent derivations. "auto" = all CPUs.
+        cores = 0; # 0 => use all cores
+        max-jobs = "auto";
+
         # Enable flakes and new nix commands
         experimental-features = [ "nix-command" "flakes" ];
 
