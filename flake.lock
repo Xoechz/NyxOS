@@ -36,16 +36,17 @@
         ]
       },
       "locked": {
-        "dirtyRev": "dcc60de0978b4b0cc8fd85489c1b93516bd4aa89-dirty",
-        "dirtyShortRev": "dcc60de-dirty",
-        "lastModified": 1786363355,
-        "narHash": "sha256-Nld+RLQRYsbosiiixEhn1ChctXEYq92pWaedImIztJU=",
-        "type": "git",
-        "url": "file:///home/elias/Repos/BierKistnRadio"
+        "lastModified": 1786468539,
+        "narHash": "sha256-iohjJy14yzrGwrchadYIfETex8EfHAMzusMYh3kPdsA=",
+        "owner": "Xoechz",
+        "repo": "BierKistnRadio",
+        "rev": "3bcbe9a32c2d81f2fcf8e508ee101b65761fc802",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/elias/Repos/BierKistnRadio"
+        "owner": "Xoechz",
+        "repo": "BierKistnRadio",
+        "type": "github"
       }
     },
     "catppuccin": {
@@ -366,6 +367,27 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786437054,
+        "narHash": "sha256-I++HzBBAgQ17UaLVU6aSm1/7LDo6c9xr8rAbpByWywE=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "6ed13b1d888d5cb07dbb0723eb1df86bbacd0b9c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1785090369,
@@ -439,6 +461,7 @@
         "niri": "niri",
         "nix-index-database": "nix-index-database",
         "nix-output-monitor": "nix-output-monitor",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "plasma-manager": "plasma-manager",

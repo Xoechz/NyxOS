@@ -16,7 +16,7 @@
       };
     };
     bierkistn-radio = {
-      url = "git+file:///home/elias/Repos/BierKistnRadio";
+      url = "github:Xoechz/BierKistnRadio";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin = {
