@@ -19,7 +19,9 @@ let system = "aarch64-linux"; in {
   };
 
   flake.modules.nixos.nixPi = { lib, modulesPath, ... }: {
-    imports = with inputs.self.modules.nixos; [
+    imports = [
+      inputs.nixos-hardware.nixosModules.raspberry-pi-4
+    ] ++ (with inputs.self.modules.nixos; [
       # desktop.nix
       basic-catppuccin
       basic-fonts
@@ -42,7 +44,7 @@ let system = "aarch64-linux"; in {
       elias
       # utilities.nix
       cli-utilities
-    ] ++ [
+    ]) ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
@@ -66,10 +68,10 @@ let system = "aarch64-linux"; in {
       };
     };
 
-    boot.initrd.availableKernelModules = [ "usbhid" ];
-    boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ ];
-    boot.extraModulePackages = [ ];
+    hardware.raspberry-pi.firmware = {
+      enable = true;
+      uboot.enable = true;
+    };
 
     fileSystems."/" = {
       device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
@@ -83,13 +85,6 @@ let system = "aarch64-linux"; in {
     };
 
     nixpkgs.hostPlatform = system;
-
-    # Use the extlinux boot loader. (NixOS wants to enable GRUB by default)
-    boot.loader.grub.enable = false;
-
-    # Enables the generation of /boot/extlinux/extlinux.conf
-    boot.loader.generic-extlinux-compatible.enable = true;
-
     system.stateVersion = "25.11";
   };
 }

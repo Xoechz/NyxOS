@@ -66,7 +66,8 @@
         show-leftovers = "nix-store --gc --print-roots | egrep -v '^(/nix/var|/run/\\w+-system|\\{memory|/proc)'";
         full-rebuild = "cd ~/NyxOS && git pull && rebuild";
         full-update = "cd ~/NyxOS && git pull && update";
-        deploy-to-pi = "rebuild --target-host NixPi -H NixPi";
+        deploy-to-nixPi = "rebuild --target-host NixPi -H NixPi";
+        deploy-to-piKistn = "rebuild --target-host PiKistn -H PiKistn";
         deploy-to-fredPC = "rebuild --target-host FredPC -H FredPC";
         deploy-to-eliasPC = "rebuild --target-host EliasPC -H EliasPC";
         deploy-to-eliasLaptop = "rebuild --target-host EliasLaptop -H EliasLaptop";

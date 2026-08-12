@@ -18,17 +18,22 @@ let system = "aarch64-linux"; in {
     ];
   };
 
-  flake.modules.nixos.piKistn = { lib, modulesPath, pkgs, ... }: {
-    imports = with inputs.self.modules.nixos; [
+  flake.modules.nixos.piKistn = { lib, modulesPath, pkgs,... }: {
+    imports = [
+      inputs.nixos-hardware.nixosModules.raspberry-pi-4
+    ] ++ (with inputs.self.modules.nixos; [
       # bierkistn.nix
       bierkistn
       # desktop.nix
+      basic-catppuccin
       basic-fonts
       language-en
       # network.nix
       ssh
       # nix.nix
+      distributed-build
       home-manager
+      firewall-desktop
       nh
       # system.nix
       basic-system
@@ -39,8 +44,104 @@ let system = "aarch64-linux"; in {
       terminal
       # utilities.nix
       cli-utilities
-    ] ++ [
+    ]) ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
+    ];
+
+    # The downstream RPi kernel does not build the ZFS module
+    boot.supportedFilesystems.zfs = lib.mkForce false;
+
+    boot.initrd.availableKernelModules = [ "usbhid" ];
+    boot.loader.grub.enable = false;
+    boot.loader.generic-extlinux-compatible.enable = true;
+
+    hardware.raspberry-pi.firmware = {
+      enable = true;
+      uboot.enable = true;
+    };
+
+    # Modesetting for Wayland/Cage via the vc4-fkms-v3d driver
+    hardware.raspberry-pi."4".fkms-3d.enable = true;
+
+    # Raspberry Pi base audio (onboard 3.5mm jack)
+    hardware.raspberry-pi."4".audio.enable = true;
+
+    # Waveshare 7" 1024x600 HDMI display config
+    hardware.raspberry-pi.configtxt.settings = {
+      all = {
+        hdmi_group = 2;
+        hdmi_mode = 87;
+        hdmi_cvt = "1024 600 60 6 0 0 0";
+        dtoverlay = [
+          "waveshare-ads7846,penirq=25,xmin=3900,xmax=200,ymin=200,ymax=3900,speed=50000,swapxy"
+        ];
+      };
+    };
+
+    # The waveshare-ads7846 overlay uses an ADS7846 resistive touch
+    # controller over SPI.  The firmware module only ships RPi-vendor
+    # overlays; provide this one inline so touch works without a
+    # downloaded .dtbo file.
+    hardware.deviceTree.overlays = [
+      {
+        name = "waveshare-ads7846";
+        dtsText = ''
+          /dts-v1/;
+          /plugin/;
+
+          / {
+            compatible = "brcm,bcm2711";
+
+            fragment@0 {
+              target = <&gpio>;
+              __overlay__ {
+                ads7846_pins: ads7846_pins {
+                  brcm,pins = <25 24 23 22>;
+                  brcm,function = <0 1 1 1>; /* in out out out */
+                };
+              };
+            };
+
+            fragment@1 {
+              target = <&spi0>;
+              __overlay__ {
+                status = "okay";
+              };
+            };
+
+            fragment@2 {
+              target = <&spi0>;
+              __overlay__ {
+                /* needed to avoid dtc warning */
+                #address-cells = <1>;
+                #size-cells = <0>;
+
+                ads7846: ads7846@0 {
+                  reg = <0>;
+                  compatible = "ti,ads7846";
+                  spi-max-frequency = <50000>;
+                  interrupts = <25 2>; /* high-to-low edge */
+                  interrupt-parent = <&gpio>;
+                  pendown-gpio = <&gpio 25 0>;
+                  ti,x-min = /bits/ 16 <200>;
+                  ti,x-max = /bits/ 16 <3900>;
+                  ti,y-min = /bits/ 16 <200>;
+                  ti,y-max = /bits/ 16 <3900>;
+                  ti,pressure-min = /bits/ 16 <0>;
+                  ti,pressure-max = /bits/ 16 <255>;
+                  ti,x-plate-ohms = /bits/ 16 <150>;
+                  ti,debounce-max = /bits/ 16 <10>;
+                  ti,debounce-tol = /bits/ 16 <3>;
+                  ti,debounce-rep = /bits/ 16 <1>;
+                  ti,settle-delay-usec = /bits/ 16 <100>;
+                  ti,keep-vref-on;
+                  swapxy = <1>;
+                };
+              };
+            };
+          };
+        '';
+      }
     ];
 
     services.cage = {
@@ -58,6 +159,12 @@ let system = "aarch64-linux"; in {
       description = "BierKistn Radio kiosk user";
       extraGroups = [ "networkmanager" "bluetooth" "audio" "video" "input" "wheel" ];
       shell = pkgs.zsh;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTZwgrSgkHT3WWJYIIe+dSvArtbp5JFetu6WpR5KC9t elias@EliasPC"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL71xmI34J5TlOzo6z0M3kTpzUTB7jxqiEvkALg4bcC6 root@EliasPC"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKDhjGdO4LZSBd21DrYSt1iJAC5f1kP1Q9yleTf9qZ7o root@EliasLaptop"
+      ];
     };
 
     home-manager = {
@@ -70,7 +177,6 @@ let system = "aarch64-linux"; in {
       };
       users.kistn = {
         imports = with inputs.self.modules.homeManager; [
-          # utilities.nix
           git
         ];
 
@@ -78,13 +184,8 @@ let system = "aarch64-linux"; in {
       };
     };
 
-    boot.initrd.availableKernelModules = [ "usbhid" ];
-    boot.initrd.kernelModules = [ ];
-    boot.kernelModules = [ ];
-    boot.extraModulePackages = [ ];
-
     fileSystems."/" = {
-      device = "/dev/disk/by-uuid/00000000-0000-0000-0000-000000000000";
+      device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
     };
 
@@ -95,10 +196,6 @@ let system = "aarch64-linux"; in {
     };
 
     nixpkgs.hostPlatform = system;
-
-    boot.loader.grub.enable = false;
-    boot.loader.generic-extlinux-compatible.enable = true;
-
     system.stateVersion = "25.11";
   };
 }

@@ -21,7 +21,7 @@ The name is inspired by the DOTA hero Nyx
         - install the Aspire CLI for .NET Aspire distributed applications
     - **[bierkistn.nix](/modules/bierkistn.nix)**
       - bierkistn
-        - install the BierKistn Radio UI, spotifyd as the Spotify backend over the system D-Bus, and grant the kiosk user the D-Bus actions it needs
+        - install the BierKistn Radio UI, spotifyd as a user service, always-discoverable A2DP-sink Bluetooth with best-effort AVRCP, and grant the kiosk user the D-Bus actions it needs
     - **[browser.nix](/modules/browser.nix)**
       - chromium
         - install Chromium with Widevine DRM

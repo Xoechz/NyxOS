@@ -4,6 +4,9 @@
             "path": "/home/elias/Repos/BierKistnRadio"
         },
         {
+            "path": "/home/elias/Repos/PiStarter"
+        },
+        {
             "name": "NyxOS",
             "path": "/home/elias/NyxOS"
         }
@@ -17,9 +20,7 @@
         ]
     },
     "settings": {
-        "[cpp]": {
-            "editor.formatOnSave": true
-        },
+        "editor.formatOnSaveMode": "file",
         "[qml]": {
             "editor.tabSize": 4
         },
@@ -47,6 +48,7 @@
             "**/build": true,
             "**/result": true
         },
-        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.formatOnSave": true
     }
 }

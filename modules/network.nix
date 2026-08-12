@@ -56,18 +56,6 @@
         Host PiKistn
           HostName PiKistn.bruckner-domain.net
           User kistn
-        Host swp
-          HostName 10.22.20.223
-          User admin
-          # Prevent using ssh-agent or another keyfile, useful for testing
-          IdentitiesOnly yes
-          IdentityFile /home/elias/.ssh/id-EliasLaptop
-        Host gitlab
-          HostName gitlab.fh-ooe.at
-          User git
-          # Prevent using ssh-agent or another keyfile, useful for testing
-          IdentitiesOnly yes
-          IdentityFile /home/elias/.ssh/id-git
       ";
     };
   };
@@ -85,6 +73,7 @@
         443
         # Spotify
         57621
+        57622
         # Steam Local Network Game Transfer and Remote Play
         27015
         27036
@@ -194,6 +183,7 @@
             "eliasPc.bruckner-domain.net" = "192.168.0.12";
             "eliasLaptop.bruckner-domain.net" = "192.168.0.13";
             "fredPc.bruckner-domain.net" = "192.168.0.14";
+            "piKistn.bruckner-domain.net" = "192.168.0.15";
           };
         };
         caching = {

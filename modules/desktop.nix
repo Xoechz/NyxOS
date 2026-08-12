@@ -249,6 +249,7 @@
 
     catppuccin = {
       enable = true;
+      autoEnable = true;
       flavor = "mocha";
       accent = "peach";
       cursors.enable = false;
