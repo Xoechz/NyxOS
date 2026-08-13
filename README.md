@@ -114,6 +114,8 @@ The name is inspired by the DOTA hero Nyx
         - enable NVIDIA proprietary drivers with modesetting and 32-bit graphics support
       - grub
         - configure GRUB EFI bootloader with a UEFI firmware entry
+      - pi4-system
+        - set timezone to Vienna, enable all firmware, fstrim and raspberry pi support
       - printing
         - enable CUPS with the HP HPLIP driver and SANE scanning support
       - sound

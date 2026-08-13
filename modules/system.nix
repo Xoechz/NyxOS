@@ -1,4 +1,15 @@
-{ ... }: {
+{ inputs, ... }: {
+  flake-file.inputs = {
+    nixos-hardware = {
+      # sorki/nixos-hardware @ srk/pi4audio fixes the audio-on-overlay to target
+      # <&sound> instead of the stale <&audio> (kernel 6.18 renamed the node),
+      # which otherwise breaks the device-tree build. TODO: drop back to
+      # github:NixOS/nixos-hardware/master once this lands upstream (PR #1985).
+      url = "github:sorki/nixos-hardware/srk/pi4audio";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   # System Module grub: configure GRUB EFI bootloader with a UEFI firmware entry
   flake.modules.nixos.grub = { lib, ... }: {
     boot.loader.efi.canTouchEfiVariables = true;
@@ -30,6 +41,35 @@
     boot.supportedFilesystems = [
       "ntfs"
     ];
+  };
+
+  # System Module pi4-system: set timezone to Vienna, enable all firmware, fstrim and raspberry pi support
+  flake.modules.nixos.pi4-system = { lib, ... }: {
+    imports = [
+      inputs.nixos-hardware.nixosModules.raspberry-pi-4
+    ];
+
+    time.timeZone = "Europe/Vienna";
+
+    hardware.enableAllFirmware = true;
+
+    services.fstrim.enable = true;
+    services.envfs.enable = true;
+
+    hardware.raspberry-pi.firmware = {
+      enable = true;
+      uboot.enable = true;
+    };
+
+    # The downstream RPi kernel does not build the ZFS module
+    boot.supportedFilesystems.zfs = lib.mkForce false;
+
+    # Cross-compile instead of emulating: build natively on x86_64 producing
+    # aarch64-linux binaries. Without this, nixpkgs defaults buildPlatform to
+    # hostPlatform and the whole aarch64 toolchain runs under QEMU binfmt
+    # emulation (8-10x slower). Both Pi hosts are cross-built from the x86
+    # build machine (EliasPC), never rebuilt in-place.
+    nixpkgs.buildPlatform = "x86_64-linux";
   };
 
   # System Module swap: configure zram swap and an encrypted swapfile sized via the swapSize specialArg (in GB)

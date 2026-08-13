@@ -45,6 +45,7 @@ let system = "x86_64-linux"; in {
       distributed-build
       home-manager
       nh
+      nix-utilities
       # optimizations.nix
       optimizations-laptop
       # system.nix
@@ -58,7 +59,7 @@ let system = "x86_64-linux"; in {
       swap
       # terminal.nix
       nix-index
-      terminal
+      zsh
       # users.nix
       elias
       # utilities.nix
@@ -101,6 +102,8 @@ let system = "x86_64-linux"; in {
           minecraft
           # network.nix
           sailing
+          # terminal.nix
+          kitty
           # users.nix
           elias
           # utilities.nix

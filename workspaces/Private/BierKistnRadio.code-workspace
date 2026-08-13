@@ -49,6 +49,9 @@
             "**/result": true
         },
         "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "[nix]": {
+            "editor.defaultFormatter": "jnoortheen.nix-ide"
+        }
     }
 }

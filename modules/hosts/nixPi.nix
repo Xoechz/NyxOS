@@ -19,12 +19,8 @@ let system = "aarch64-linux"; in {
   };
 
   flake.modules.nixos.nixPi = { lib, modulesPath, ... }: {
-    imports = [
-      inputs.nixos-hardware.nixosModules.raspberry-pi-4
-    ] ++ (with inputs.self.modules.nixos; [
+    imports = with inputs.self.modules.nixos; [
       # desktop.nix
-      basic-catppuccin
-      basic-fonts
       language-en
       # network.nix
       blocky
@@ -34,17 +30,16 @@ let system = "aarch64-linux"; in {
       # nix.nix
       distributed-build
       home-manager
-      nh
       # system.nix
-      basic-system
+      pi4-system
       swap
       # terminal.nix
-      terminal
+      zsh
       # users.nix
       elias
       # utilities.nix
-      cli-utilities
-    ]) ++ [
+      cli-utilities-minimal
+    ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
@@ -85,11 +80,6 @@ let system = "aarch64-linux"; in {
     };
 
     nixpkgs.hostPlatform = system;
-    # Cross-compile instead of emulating: build natively on x86_64 producing
-    # aarch64-linux binaries. Without this, nixpkgs defaults buildPlatform to
-    # hostPlatform and the whole aarch64 toolchain runs under QEMU binfmt
-    # emulation (8-10x slower). Cross keeps the kernel build native ~30 min.
-    nixpkgs.buildPlatform = "x86_64-linux";
     system.stateVersion = "25.11";
   };
 }

@@ -23,8 +23,8 @@
     };
   };
 
-  # System Module base-settings: enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
-  flake.modules.nixos.base-settings = { pkgs, lib, system, ... }: {
+  # Sytem Module nix-utilities: install Nix dev tools and utilities for managing NixOS systems
+  flake.modules.nixos.nix-utilities = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       nixd
       nixpkgs-fmt
@@ -33,6 +33,10 @@
       nvd
       statix
     ];
+  };
+
+  # System Module base-settings: enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
+  flake.modules.nixos.base-settings = { pkgs, lib, system, ... }: {
 
     nix = {
       settings = {

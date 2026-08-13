@@ -14,17 +14,17 @@
     programs.nix-index-database.comma.enable = true;
   };
 
-  # System Module terminal: enable ZSH system-wide and pull in the terminal Home Module for all users
-  flake.modules.nixos.terminal = { ... }: {
+  # System Module zsh: enable ZSH system-wide and pull in the zsh Home Module for all users
+  flake.modules.nixos.zsh = { ... }: {
     programs.zsh.enable = true;
 
     home-manager.sharedModules = [
-      inputs.self.modules.homeManager.terminal
+      inputs.self.modules.homeManager.zsh
     ];
   };
 
-  # Home Module terminal: configure Kitty, ZSH with oh-my-zsh, Starship prompt, direnv, fzf, eza, ripgrep, and bat
-  flake.modules.homeManager.terminal = { lib, config, ... }: {
+  # Home Module kitty: configure Kitty terminal with ZSH shell integration
+  flake.modules.homeManager.kitty = { lib, ... }: {
     # kitty terminal
     programs.kitty = {
       enable = true;
@@ -44,7 +44,10 @@
         "terminal" = "kitty.desktop";
       };
     };
+  };
 
+  # Home Module zsh: configure ZSH with oh-my-zsh, Starship prompt, direnv, fzf, eza, ripgrep, and bat
+  flake.modules.homeManager.zsh = { config, ... }: {
     # zsh
     programs.zsh = {
       enable = true;

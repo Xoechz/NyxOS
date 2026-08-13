@@ -62,6 +62,54 @@
     ];
   };
 
+  # System Module cli-utilities-minimal: install a minimal set of network, filesystem, hardware, and diagnostic CLI tools (curl, etc.)
+  flake.modules.nixos.cli-utilities-minimal = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      which
+      tree
+      iotop
+      iftop
+
+      strace
+      ltrace
+      lsof
+      traceroute
+
+      ethtool
+      pciutils
+      usbutils
+
+      hdparm
+
+      exfat
+
+      dmidecode
+
+      lm_sensors
+      sysstat
+
+      clinfo
+
+      parallel
+      libwebp
+
+      wget
+      curl
+
+      git
+      zip
+      xz
+      unzip
+
+      openssl
+
+      iptables
+      inetutils
+
+      wakeonlan
+    ];
+  };
+
   # Home Module git: configure Git with user identity, LFS, rebase-on-pull, and a log graph alias
   flake.modules.homeManager.git = { ... }: {
     programs.git = {

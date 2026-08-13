@@ -38,6 +38,7 @@ let system = "x86_64-linux"; in {
       distributed-build
       home-manager
       nh
+      nix-utilities
       # system.nix
       basic-system
       cpu-amd
@@ -48,7 +49,7 @@ let system = "x86_64-linux"; in {
       swap
       # terminal.nix
       nix-index
-      terminal
+      zsh
       # users.nix
       elias
       others
@@ -68,6 +69,8 @@ let system = "x86_64-linux"; in {
       vscode-non-fhs
       # kde.nix
       plasma-manager
+      # terminal.nix
+      kitty
       # utilities.nix
       gui-utilities
     ];

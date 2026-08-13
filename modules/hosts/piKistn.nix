@@ -19,51 +19,36 @@ let system = "aarch64-linux"; in {
   };
 
   flake.modules.nixos.piKistn = { lib, modulesPath, pkgs, ... }: {
-    imports = [
-      inputs.nixos-hardware.nixosModules.raspberry-pi-4
-    ] ++ (with inputs.self.modules.nixos; [
+    imports = with inputs.self.modules.nixos; [
       # bierkistn.nix
       bierkistn
       # desktop.nix
-      basic-catppuccin
-      basic-fonts
       language-en
       # network.nix
       ssh
+      firewall-desktop
       # nix.nix
       distributed-build
       home-manager
-      firewall-desktop
-      nh
       # system.nix
-      basic-system
+      pi4-system
       bluetooth
       sound
       swap
       # terminal.nix
-      terminal
+      zsh
       # utilities.nix
-      cli-utilities
-    ]) ++ [
+      cli-utilities-minimal
+    ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
-
-    # The downstream RPi kernel does not build the ZFS module
-    boot.supportedFilesystems.zfs = lib.mkForce false;
-
-    boot.initrd.availableKernelModules = [ "usbhid" ];
-    boot.loader.grub.enable = false;
-    boot.loader.generic-extlinux-compatible.enable = true;
-
-    hardware.raspberry-pi.firmware = {
-      enable = true;
-      uboot.enable = true;
-    };
 
     # Modesetting for Wayland/Cage via the vc4-fkms-v3d driver
     hardware.raspberry-pi."4".fkms-3d.enable = true;
 
-    # Raspberry Pi base audio (onboard 3.5mm jack)
+    # Raspberry Pi base audio (onboard 3.5mm jack).
+    # Requires the nixos-hardware fix (targets &sound, not &audio) — see
+    # system.nix which pins the srk/pi4audio fork for raspberry-pi-4.
     hardware.raspberry-pi."4".audio.enable = true;
 
     # Waveshare 7" 1024x600 HDMI display config
@@ -196,11 +181,6 @@ let system = "aarch64-linux"; in {
     };
 
     nixpkgs.hostPlatform = system;
-    # Cross-compile instead of emulating: build natively on x86_64 producing
-    # aarch64-linux binaries. Without this, nixpkgs defaults buildPlatform to
-    # hostPlatform and the whole aarch64 toolchain runs under QEMU binfmt
-    # emulation (8-10x slower). Cross keeps the kernel build native ~30 min.
-    nixpkgs.buildPlatform = "x86_64-linux";
     system.stateVersion = "25.11";
   };
 }
