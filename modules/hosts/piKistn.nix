@@ -9,7 +9,7 @@ let system = "aarch64-linux"; in {
         inherit system;
         config.allowUnfree = true;
       };
-      swapSize = 2; # GB
+      swapSize = 8; # GB
       users = [ "kistn" ];
     };
     modules = [
