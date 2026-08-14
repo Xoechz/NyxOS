@@ -28,7 +28,7 @@ let system = "aarch64-linux"; in {
       ssh
       firewall-desktop
       # nix.nix
-      distributed-build
+      distributed-build-client
       home-manager
       # system.nix
       pi4-system

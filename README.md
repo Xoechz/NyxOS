@@ -86,10 +86,12 @@ The name is inspired by the DOTA hero Nyx
     - **[nix.nix](/modules/nix.nix)**
       - base-settings
         - enable flakes, allow unfree packages, configure the Nix daemon, and install Nix dev tools
-      - distributed-build
-        - configure this machine to offload builds to EliasPC via SSH
-      - distributed-builder
-        - configure this machine to accept remote build jobs from other hosts
+      - distributed-build-client
+        - offload this machine's builds to EliasPC (preferred) and EliasLaptop via SSH
+      - distributed-builder-laptop
+        - offload the laptop's builds to EliasPC and serve others; sign local builds
+      - distributed-builder-pc
+        - accept remote builds on EliasPC and reuse the laptop's store as a substitute
       - home-manager
         - integrate Home Manager as a NixOS module with shared global packages
       - nh

@@ -1,4 +1,64 @@
 { inputs, ... }:
+let
+  # ---- Shared distributed-build definitions ----
+
+  # Topology (acyclic): PC is a pure server (never offloads); the laptop is a
+  # server that ALSO offloads to PC; other machines offload to PC (higher
+  # speedFactor) or the laptop. PC uses the laptop as an ssh-ng *substitute*
+  # only (fetch already-built paths), never offloading a build to it.
+  #
+  # Loop safety: builds only ever move DOWN the graph toward PC (the sink). No
+  # machine is a client of a machine that is also a client of it, so a cross-arch
+  # derivation can never bounce forever in `__build-remote`.
+
+  # Builder machine specs (shared by the client + laptop/pc builder modules).
+  pcMachine = {
+    hostName = "EliasPC";
+    systems = [ "x86_64-linux" "aarch64-linux" ];
+    sshUser = "nixremote";
+    maxJobs = 16;
+    speedFactor = 4; # faster → preferred
+    supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    mandatoryFeatures = [ ];
+    secretKeyFile = "/etc/nix/cache-priv-key.pem";
+    publicKey = "EliasPC:FeMYLAaSK5o419ftDiAxhHs6x3n+tIsEq+LlZif0pg4=";
+  };
+
+  laptopMachine = {
+    hostName = "EliasLaptop";
+    systems = [ "x86_64-linux" "aarch64-linux" ];
+    sshUser = "nixremote";
+    maxJobs = 8;
+    speedFactor = 1; # slower → fallback
+    supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+    mandatoryFeatures = [ ];
+    secretKeyFile = "/etc/nix/cache-priv-key.pem";
+    publicKey = "EliasLaptop:9Cj03cpXtCehD9jP+WGIk5rxZKc8a4FO6S0Qr9uw9mg=";
+  };
+
+  # Keys every machine must trust for any path it may import: the caches plus
+  # each builder's signing key.
+  trustedKeys = [
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    pcMachine.publicKey
+    laptopMachine.publicKey
+  ];
+
+  # Public caches always used for substitution.
+  cacheSubstituters = [
+    "https://nix-community.cachix.org"
+    "https://cache.nixos.org/"
+  ];
+
+  # buildMachines + ssh-ng substituter entries for a given list of builders.
+  asBuildMachines = builders: map (m: removeAttrs m [ "secretKeyFile" "publicKey" ]) builders;
+  asSubstituters = builders: map (m: "ssh-ng://${m.sshUser}@${m.hostName}") builders;
+
+  # Substitute preferentially from local builders first (reuse already-built
+  # paths), then fall back to the public caches. Earlier entries win in Nix.
+  preferredSubstituters = builders: asSubstituters builders ++ cacheSubstituters;
+in
 {
   flake-file.inputs = {
     flake-utils = {
@@ -114,57 +174,40 @@
     ];
   };
 
-  # System Module distributed-build: configure this machine to offload builds to EliasPC via SSH
-  flake.modules.nixos.distributed-build = { ... }: {
+  # System Module distributed-build-client: offload this machine's builds to EliasPC (preferred) and EliasLaptop via SSH
+  flake.modules.nixos.distributed-build-client = { ... }: {
     imports = [ inputs.self.modules.nixos.base-settings ];
     nix = {
       distributedBuilds = true;
-      buildMachines = [
-        {
-          hostName = "EliasPC";
-          systems = [ "x86_64-linux" "aarch64-linux" ];
-          sshUser = "nixremote";
-          maxJobs = 16;
-          speedFactor = 2;
-          supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-          mandatoryFeatures = [ ];
-        }
-        # // TODO: Maybe someday add more build machines and substitutes (NAS, new Laptop, retired Laptop)
-      ];
-
+      buildMachines = asBuildMachines [ pcMachine laptopMachine ];
       settings = {
-        substituters = [
-          "https://nix-community.cachix.org"
-          "https://cache.nixos.org/"
-          "ssh-ng://nixremote@EliasPC"
-        ];
-
-        trusted-public-keys = [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "EliasPC:FeMYLAaSK5o419ftDiAxhHs6x3n+tIsEq+LlZif0pg4="
-        ];
+        substituters = preferredSubstituters [ pcMachine laptopMachine ];
+        trusted-public-keys = trustedKeys;
       };
     };
   };
 
-  # System Module distributed-builder: configure this machine to accept remote build jobs from other hosts
-  flake.modules.nixos.distributed-builder = { ... }: {
+  # System Module distributed-builder-laptop: offload the laptop's builds to EliasPC and serve others; sign local builds
+  flake.modules.nixos.distributed-builder-laptop = { ... }: {
     imports = [ inputs.self.modules.nixos.base-settings ];
     nix = {
-      distributedBuilds = false;
+      distributedBuilds = true; # offloads to PC
+      buildMachines = asBuildMachines [ pcMachine ];
       settings = {
-        substituters = [
-          "https://nix-community.cachix.org"
-          "https://cache.nixos.org/"
-        ];
-
-        trusted-public-keys = [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
-
-        # generate a new keypair with `nix keygen /etc/nix/cache-priv-key.pem`
-        secret-key-files = "/etc/nix/cache-priv-key.pem";
+        substituters = preferredSubstituters [ pcMachine ];
+        trusted-public-keys = trustedKeys;
+        secret-key-files = laptopMachine.secretKeyFile;
       };
+    };
+  };
+
+  # System Module distributed-builder-pc: accept remote builds on EliasPC and reuse the laptop's store as a substitute
+  flake.modules.nixos.distributed-builder-pc = { ... }: {
+    imports = [ inputs.self.modules.nixos.base-settings ];
+    nix.settings = {
+      substituters = preferredSubstituters [ laptopMachine ];
+      trusted-public-keys = trustedKeys;
+      secret-key-files = pcMachine.secretKeyFile;
     };
   };
 

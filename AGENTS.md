@@ -29,8 +29,8 @@ The following MCP servers are available to all agents in this session:
 
 | Key | Arch | Notes |
 |-----|------|-------|
-| `EliasPC` | x86_64-linux | Intel CPU + AMD GPU, desktop, distributed-builder |
-| `EliasLaptop` | x86_64-linux | Intel CPU + NVIDIA GPU, mobile (`isMobile = true`) |
+| `EliasPC` | x86_64-linux | Intel CPU + AMD GPU, desktop, distributed-builder-pc (build sink) |
+| `EliasLaptop` | x86_64-linux | Intel CPU + NVIDIA GPU, mobile (`isMobile = true`), distributed-builder-laptop (offloads to PC, serves others) |
 | `FredPC` | x86_64-linux | KDE, German locale |
 | `NixPi` | aarch64-linux | Raspberry Pi server, no desktop |
 | `PiKistn` | aarch64-linux | Raspberry Pi 4B kiosk, BierKistn Radio |

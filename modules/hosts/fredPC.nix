@@ -35,7 +35,7 @@ let system = "x86_64-linux"; in {
       firewall-desktop
       ssh
       # nix.nix
-      distributed-build
+      distributed-build-clienta
       home-manager
       nh
       nix-utilities

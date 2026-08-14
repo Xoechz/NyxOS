@@ -42,7 +42,7 @@ let system = "x86_64-linux"; in {
       # niri.nix
       niri
       # nix.nix
-      distributed-build
+      distributed-builder-laptop
       home-manager
       nh
       nix-utilities
