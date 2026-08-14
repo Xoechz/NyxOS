@@ -24,6 +24,7 @@ let system = "aarch64-linux"; in {
       bierkistn
       # desktop.nix
       language-en
+      basic-fonts
       # network.nix
       ssh
       firewall-desktop

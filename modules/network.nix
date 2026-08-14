@@ -14,32 +14,6 @@
 
     # SSH known hosts for distributed builds
     programs.ssh = {
-      knownHosts = {
-        EliasPC = {
-          hostNames = [ "EliasPC" "EliasPC.bruckner-domain.net" ];
-          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBHAqDy+XbGANEjlFRgFu/KhiA1Y08RSekbArf/o/9H";
-        };
-        EliasLaptop = {
-          hostNames = [ "EliasLaptop" "EliasLaptop.bruckner-domain.net" ];
-          publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
-        };
-        FredPC = {
-          hostNames = [ "FredPC" "FredPC.bruckner-domain.net" ];
-          publicKey = "fredpc ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINO21u53GTTwxbOX+mmhuGVBHFX5kAOAgyeI06/NCblr";
-        };
-        NixPi = {
-          hostNames = [ "NixPi" "NixPi.bruckner-domain.net" ];
-          publicKey = "nixpi ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDyuYVNGKSrpwWacyBFdqPdFxRTNhu8bcmQ0sk8j786T";
-        };
-        PiKistn = {
-          hostNames = [ "PiKistn" "PiKistn.bruckner-domain.net" ];
-          publicKey = "pikistn ssh-ed25519 PLACEHOLDER"; # TODO: replace with actual key after first deployment
-        };
-        GitHub = {
-          hostNames = [ "GitHub" "GitHub.com" ];
-          publicKey = "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
-        };
-      };
       extraConfig = "
         Host EliasPC
           HostName EliasPC.bruckner-domain.net
