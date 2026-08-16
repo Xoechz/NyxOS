@@ -21,7 +21,7 @@ The name is inspired by the DOTA hero Nyx
         - install the Aspire CLI for .NET Aspire distributed applications
     - **[bierkistn.nix](/modules/bierkistn.nix)**
       - bierkistn
-        - install the BierKistn Radio UI, spotifyd as a user service, always-discoverable A2DP-sink Bluetooth with best-effort AVRCP, and grant the kiosk user the D-Bus actions it needs
+        - install the BierKistn Radio UI, always-discoverable A2DP-sink Bluetooth with best-effort AVRCP, grant the kiosk user the D-Bus actions it needs, and pull in the bierkistn Home Module for all users
     - **[browser.nix](/modules/browser.nix)**
       - chromium
         - install Chromium with Widevine DRM
@@ -147,6 +147,9 @@ The name is inspired by the DOTA hero Nyx
       - winboat
         - enable QEMU/libvirt with SPICE USB redirection and virt-manager for Windows VMs
   - Home Modules:
+    - **[bierkistn.nix](/modules/bierkistn.nix)**
+      - bierkistn
+        - run spotifyd as a user service on the A2DP sink, started via default.target (no graphical-session dependency under cage)
     - **[ai.nix](/modules/ai.nix)**
       - opencode
         - enable the OpenCode AI coding agent with tiered subagents (lite/medium/heavy/max) for nix/dotnet/java/angular/general domains, delegate/cavekit/dotnet-dev/java-dev/angular-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands, and hardened agent permissions

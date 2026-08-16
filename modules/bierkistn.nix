@@ -1,4 +1,4 @@
-{ ... }: {
+{ inputs, ... }: {
   flake-file.inputs = {
     bierkistn-radio = {
       url = "github:Xoechz/BierKistnRadio";
@@ -6,11 +6,27 @@
     };
   };
 
-  # System Module bierkistn: install the BierKistn Radio UI, spotifyd as a user service, always-discoverable A2DP-sink Bluetooth with best-effort AVRCP, and grant the kiosk user the D-Bus actions it needs
+  # System Module bierkistn: install the BierKistn Radio UI, always-discoverable A2DP-sink Bluetooth with best-effort AVRCP, grant the kiosk user the D-Bus actions it needs, and pull in the bierkistn Home Module for all users
   flake.modules.nixos.bierkistn = { pkgs, config, ... }: {
     environment.systemPackages = with pkgs; [
       spotifyd
+      bluez-tools
     ];
+
+    # Auto-accept pairing without PIN/code checks: bt-agent runs with the
+    # NoInputNoOutput capability, which answers every pairing request
+    # affirmatively (the kiosk has no display/keyboard to enter a code).
+    systemd.services.bt-agent = {
+      wantedBy = [ "bluetooth.target" ];
+      after = [ "bluetooth.service" ];
+      description = "Bluetooth pairing agent (auto-accept)";
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.bluez-tools}/bin/bt-agent --capability NoInputNoOutput";
+        Restart = "always";
+        RestartSec = 5;
+      };
+    };
 
     # Base discoverable + pairable policy. bluez starts the adapter with
     # these persisted; Discoverable/PairableTimeout=0 means "never expire".
@@ -48,12 +64,6 @@
       }];
     };
 
-    # D-Bus: no policy file needed. BlueZ owns org.bluez on the system bus
-    # (it has no session-bus option). Its stock policy
-    # (share/dbus-1/system.d/bluetooth.conf) grants every user
-    # send_destination=org.bluez, so the kiosk user can already call
-    # Adapter1.Set/Device1.Disconnect and watch properties without additions.
-
     services.avahi = {
       enable = true;
       publish = {
@@ -62,6 +72,22 @@
       };
       openFirewall = true;
     };
+
+    # Under the cage kiosk there is no graphical session and no audio client at
+    # boot, so pipewire's socket-activation never fires and wireplumber (which
+    # BindsTo pipewire.service) stays dead. That means no A2DP-sink profile is
+    # ever registered and phones pair but can't connect. Force the audio stack
+    # to start with the user session so the bluetooth sink is always available.
+    systemd.user.services = {
+      pipewire.wantedBy = [ "default.target" ];
+      wireplumber.wantedBy = [ "default.target" ];
+    };
+
+    # Pull the bierkistn Home Module in for every user with a home-manager
+    # configuration (runs spotifyd as a user service).
+    home-manager.sharedModules = [
+      inputs.self.modules.homeManager.bierkistn
+    ];
 
     environment.etc."spotifyd.conf".text = ''
       [global]
@@ -73,19 +99,6 @@
       zeroconf_port = 57622
     '';
 
-    systemd.user.services.spotifyd = {
-      enable = true;
-      description = "spotifyd — Spotify playing daemon";
-      after = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path /etc/spotifyd.conf --cache-path %h/.cache/spotifyd";
-        Restart = "always";
-        RestartSec = 12;
-      };
-    };
-
     security.polkit.extraConfig = ''
       polkit.addRule(function(action, subject) {
         if (subject.user == "kistn" && (
@@ -96,5 +109,23 @@
         }
       });
     '';
+  };
+
+  # Home Module bierkistn: run spotifyd as a user service on the A2DP sink, started via default.target (no graphical-session dependency under cage)
+  flake.modules.homeManager.bierkistn = { pkgs, ... }: {
+    systemd.user.services.spotifyd = {
+      Unit = {
+        Description = "spotifyd — Spotify playing daemon";
+        After = [ "default.target" ];
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path /etc/spotifyd.conf --cache-path %h/.cache/spotifyd";
+        Restart = "always";
+        RestartSec = 12;
+      };
+    };
   };
 }
