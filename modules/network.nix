@@ -14,6 +14,16 @@
 
     # SSH known hosts for distributed builds
     programs.ssh = {
+      knownHosts = {
+        EliasPC = {
+          hostNames = [ "EliasPC" "EliasPC.bruckner-domain.net" ];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPBHAqDy+XbGANEjlFRgFu/KhiA1Y08RSekbArf/o/9H";
+        };
+        EliasLaptop = {
+          hostNames = [ "EliasLaptop" "EliasLaptop.bruckner-domain.net" ];
+          publicKey = "eliaslaptop ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQVC/JIg4qiVV18O5p+nABWSrM6O4JRQPxY7XBUtQ+L";
+        };
+      };
       extraConfig = "
         Host EliasPC
           HostName EliasPC.bruckner-domain.net
