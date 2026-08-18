@@ -11,6 +11,8 @@
     environment.systemPackages = with pkgs; [
       spotifyd
       bluez-tools
+      ddcutil
+      i2c-tools
     ];
 
     # Auto-accept pairing without PIN/code checks: bt-agent runs with the
@@ -109,6 +111,9 @@
         }
       });
     '';
+
+    # brightness control via DDC/CI (requires ddcutil)
+    hardware.i2c.enable = true;
   };
 
   # Home Module bierkistn: run spotifyd as a user service on the A2DP sink, started via default.target (no graphical-session dependency under cage)

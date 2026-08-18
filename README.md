@@ -101,6 +101,9 @@ The name is inspired by the DOTA hero Nyx
         - use the latest kernel with TLP for AC/battery power profiles and an 80% charge threshold
       - optimizations-pc
         - use the latest kernel with minimal background services and desktop-appropriate sysctl tuning
+    - **[sd-image.nix](/modules/sd-image.nix)**
+      - sd-image
+        - build the NixPi configuration as a bootable SD card image (exposed as package nixpi-sd-image)
     - **[system.nix](/modules/system.nix)**
       - basic-system
         - set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support

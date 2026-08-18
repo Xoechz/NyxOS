@@ -49,7 +49,7 @@ let system = "aarch64-linux"; in {
           inherit system;
           config.allowUnfree = true;
         };
-        showBattery = false; # Show battery status in the system tray (not needed for a server)
+        showBattery = false; # Battery in the system tray (not needed for a server)
       };
       users.elias = {
         imports = with inputs.self.modules.homeManager; [
@@ -68,7 +68,9 @@ let system = "aarch64-linux"; in {
       uboot.enable = true;
     };
 
-    fileSystems."/" = {
+    # mkDefault so the sd-image builder (by-label NIXOS_SD) overrides this
+    # by-UUID mount when composing a bootable SD image.
+    fileSystems."/" = lib.mkDefault {
       device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
     };

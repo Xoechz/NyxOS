@@ -205,7 +205,9 @@ let system = "aarch64-linux"; in {
       };
     };
 
-    fileSystems."/" = {
+    # mkDefault so the sd-image builder (by-label NIXOS_SD) overrides this
+    # by-UUID mount when composing a bootable SD image.
+    fileSystems."/" = lib.mkDefault {
       device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
     };
@@ -214,7 +216,7 @@ let system = "aarch64-linux"; in {
     # config.txt + boot files from it at power-on, and the firmware activation
     # script repopulates it on every rebuild (it skips when not mounted, leaving
     # stale/partial firmware — which broke the display previously).
-    fileSystems."/boot/firmware" = {
+    fileSystems."/boot/firmware" = lib.mkDefault {
       device = "/dev/disk/by-label/FIRMWARE";
       fsType = "vfat";
       options = [ "nofail" ];

@@ -52,6 +52,7 @@
     time.timeZone = "Europe/Vienna";
 
     hardware.enableAllFirmware = true;
+    hardware.enableAllHardware = lib.mkForce false;
 
     services.fstrim.enable = true;
     services.envfs.enable = true;
