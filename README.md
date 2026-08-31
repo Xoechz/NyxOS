@@ -16,9 +16,6 @@ The name is inspired by the DOTA hero Nyx
     - **[apps.nix](/modules/apps.nix)**
       - flatpak
         - enable Flatpak and register the Flathub repository
-    - **[aspire-cli.nix](/modules/aspire-cli.nix)**
-      - aspire-cli
-        - install the Aspire CLI for .NET Aspire distributed applications
     - **[bierkistn.nix](/modules/bierkistn.nix)**
       - bierkistn
         - install the BierKistn Radio UI, always-discoverable A2DP-sink Bluetooth with best-effort AVRCP, grant the kiosk user the D-Bus actions it needs, and pull in the bierkistn Home Module for all users

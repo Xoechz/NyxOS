@@ -11,7 +11,7 @@ There is no TypeScript, Rust, Python, or other language source code in this repo
 The following MCP servers are available to all agents in this session:
 
 | Server | Best used for |
-|--------|--------------|
+| -------- | -------------- |
 | `context7` | Library and framework documentation — look up nixpkgs package attributes, NixOS module options, Home Manager options, and upstream project APIs |
 | `mcp-nixos` | NixOS/Home Manager option resolution and package search directly against the Nix ecosystem — prefer this over context7 for NixOS/HM option queries |
 | `microsoft-learn` | Official Microsoft/Azure documentation — .NET APIs, C# language reference, Azure services |
@@ -28,7 +28,7 @@ The following MCP servers are available to all agents in this session:
 ## Hosts
 
 | Key | Arch | Notes |
-|-----|------|-------|
+| ----- | ------ | ------- |
 | `EliasPC` | x86_64-linux | Intel CPU + AMD GPU, desktop, distributed-builder-pc (build sink) |
 | `EliasLaptop` | x86_64-linux | Intel CPU + NVIDIA GPU, mobile (`isMobile = true`), distributed-builder-laptop (offloads to PC, serves others) |
 | `FredPC` | x86_64-linux | KDE, German locale |
@@ -42,9 +42,9 @@ The following MCP servers are available to all agents in this session:
 - NixOS Wiki: <https://nixos.wiki/wiki/NixOS>
 - Dendritic Pattern Overview: <https://dendrix.oeiuwq.com/Dendritic.html>
 - Dendritic Design Guide: <https://github.com/Doc-Steve/dendritic-design-with-flake-parts>
-- Niri Flake Docs: <https://github.com/sodiboo/niri-flake/blob/main/docs.md>
+- Niri Flake Docs: <https://github.com/epireyn/niri-flake/blob/main/docs.md>
 - Niri NixOS Wiki: <https://wiki.nixos.org/wiki/Niri>
-- Niri Example Config: <https://github.com/sodiboo/system/blob/main/personal/niri.mod.nix>
+- Niri Example Config: <https://github.com/epireyn/system/blob/main/personal/niri.mod.nix>
 - DankMaterialShell (DMS) GitHub: <https://github.com/AvengeMedia/DankMaterialShell>
 - DMS Docs: <https://danklinux.com/docs>
 - DMS NixOS Flake Guide: <https://danklinux.com/docs/dankmaterialshell/nixos-flake>
@@ -62,7 +62,6 @@ modules/           # All NixOS + Home Manager topic modules
   hosts/           # Per-machine configurations (eliasPC, eliasLaptop, fredPC, nixPi)
   *.nix            # Topic modules (apps, browser, desktop, dev, kde, niri, …)
 templates/         # Starter dev-shell flake templates
-packages/          # Self packaged programmes like aspire
 workspaces/        # VS Code .code-workspace files
 resources/         # Static files referenced by config (e.g. DMS , certs)
 images/            # Wallpapers and screenshots
@@ -105,7 +104,7 @@ and import topic modules using `with inputs.self.modules.nixos; [...]`.
 ## Naming Conventions
 
 | Item | Convention | Examples |
-|------|-----------|---------|
+| ------ | ----------- | --------- |
 | Module files | `camelCase.nix` | `apps.nix`, `desktop.nix`, `eliasPC.nix` |
 | NixOS module names | `kebab-case` | `base-settings`, `optimizations-pc`, `basic-catppuccin` |
 | Home Manager module names | `kebab-case` | `opencode-dotnet`, `plasma-manager`, `gui-utilities` |
