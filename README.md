@@ -47,7 +47,7 @@ The name is inspired by the DOTA hero Nyx
       - dev-certs
         - load all .pem certificates from the certs/ directory into the system trust store
       - dotnet
-        - install .NET 10 SDK with ILSpy and set DOTNET_ROOT/DOTNET_BIN environment variables
+        - install .NET 10 SDK with ILSpy and the Aspire CLI, and set DOTNET_ROOT/DOTNET_BIN environment variables
       - go
         - install the Go toolchain with gopls, Delve debugger, and golangci-lint
       - java

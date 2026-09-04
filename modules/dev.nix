@@ -1,4 +1,11 @@
-{ ... }: {
+{ inputs, ... }: {
+  flake-file.inputs = {
+    aspire = {
+      url = "github:microsoft/aspire";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   # System Module c: install GCC, CMake, Make, GDB, Valgrind, GTest, Conan, and related C/C++ tooling
   flake.modules.nixos.c = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
@@ -58,13 +65,14 @@
     ];
   };
 
-  # System Module dotnet: install .NET 10 SDK with ILSpy and set DOTNET_ROOT/DOTNET_BIN environment variables
+  # System Module dotnet: install .NET 10 SDK with ILSpy and the Aspire CLI, and set DOTNET_ROOT/DOTNET_BIN environment variables
   flake.modules.nixos.dotnet = { pkgs, pkgs-stable, ... }: {
     environment.systemPackages = with pkgs; [
       dotnetCorePackages.sdk_10_0
       ilspycmd
     ] ++ [
       pkgs-stable.libmsquic
+      inputs.aspire.packages.${pkgs.system}.aspire-cli
     ];
 
     environment.variables = {

@@ -6,6 +6,10 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    aspire = {
+      url = "github:microsoft/aspire";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     betterfox-nix = {
       url = "github:HeitorAugustoLN/betterfox-nix";
       inputs = {
