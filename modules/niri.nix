@@ -12,6 +12,10 @@
         flake-compat.follows = "flake-compat";
       };
     };
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     dms-plugin-registry = {
       url = "github:AvengeMedia/dms-plugin-registry";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +24,12 @@
       url = "github:AvengeMedia/danksearch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dank-greeter = {
+      url = "github:AvengeMedia/dank-greeter";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   # System Module niri: enable the Niri tiling compositor with DankMaterialShell greeter, Thunar, and XWayland support
@@ -27,6 +37,7 @@
     imports = [
       inputs.niri.nixosModules.niri
       inputs.dms.nixosModules.dank-material-shell
+      inputs.dank-greeter.nixosModules.default
     ];
 
     environment.systemPackages = with pkgs; [
@@ -42,6 +53,10 @@
 
       # archive support in thunar
       file-roller
+    ]
+    ++ [
+      inputs.dgop.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.dank-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
     services.accounts-daemon.enable = true;
@@ -59,7 +74,7 @@
     # DMS has its own polkit agent, so we disable niri's to avoid conflicts
     systemd.user.services.niri-flake-polkit.enable = false;
 
-    services.displayManager.dms-greeter = {
+    programs.dms-greeter = {
       enable = true;
       configHome = "/home/${defaultUser}";
       compositor = {

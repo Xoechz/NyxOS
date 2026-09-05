@@ -66,13 +66,13 @@
   };
 
   # System Module dotnet: install .NET 10 SDK with ILSpy and the Aspire CLI, and set DOTNET_ROOT/DOTNET_BIN environment variables
-  flake.modules.nixos.dotnet = { pkgs, pkgs-stable, ... }: {
+  flake.modules.nixos.dotnet = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       dotnetCorePackages.sdk_10_0
       ilspycmd
+      libmsquic
     ] ++ [
-      pkgs-stable.libmsquic
-      inputs.aspire.packages.${pkgs.system}.aspire-cli
+      inputs.aspire.packages.${pkgs.stdenv.hostPlatform.system}.aspire-cli
     ];
 
     environment.variables = {

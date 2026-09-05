@@ -102,18 +102,18 @@
   };
 
   # System Module printing: enable CUPS with the HP HPLIP driver and SANE scanning support
-  flake.modules.nixos.printing = { pkgs, ... }: {
+  flake.modules.nixos.printing = { pkgs-stable, ... }: {
     services.printing = {
       enable = true;
-      drivers = with pkgs; [ hplipWithPlugin ];
+      drivers = with pkgs-stable; [ hplipWithPlugin ];
     };
 
     hardware.sane = {
       enable = true;
-      extraBackends = [ pkgs.hplipWithPlugin ];
+      extraBackends = [ pkgs-stable.hplipWithPlugin ];
     };
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs-stable; [
       hplipWithPlugin
     ];
   };
