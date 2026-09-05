@@ -91,7 +91,9 @@
     },
     "dank-greeter": {
       "inputs": {
-        "dank-qml-common": "dank-qml-common",
+        "dank-qml-common": [
+          "dank-qml-common"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -113,27 +115,11 @@
     "dank-qml-common": {
       "flake": false,
       "locked": {
-        "lastModified": 1788376015,
-        "narHash": "sha256-/tT8rTznLADndTwLBzdgzzgfJH1ZhYQibYo5v/F8U+U=",
+        "lastModified": 1788548424,
+        "narHash": "sha256-apbFBmER1Mac7uVozowOXzqFUsdKtTDlmmV3N+FY3TY=",
         "owner": "AvengeMedia",
         "repo": "dank-qml-common",
-        "rev": "26396ce432d6c71c3f5367438f96f4a8d667e160",
-        "type": "github"
-      },
-      "original": {
-        "owner": "AvengeMedia",
-        "repo": "dank-qml-common",
-        "type": "github"
-      }
-    },
-    "dank-qml-common_2": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1788376015,
-        "narHash": "sha256-/tT8rTznLADndTwLBzdgzzgfJH1ZhYQibYo5v/F8U+U=",
-        "owner": "AvengeMedia",
-        "repo": "dank-qml-common",
-        "rev": "26396ce432d6c71c3f5367438f96f4a8d667e160",
+        "rev": "d9774ae93a8f70ca7b5f4fa7d6636e88f95a1d58",
         "type": "github"
       },
       "original": {
@@ -184,7 +170,9 @@
     },
     "dms": {
       "inputs": {
-        "dank-qml-common": "dank-qml-common_2",
+        "dank-qml-common": [
+          "dank-qml-common"
+        ],
         "flake-compat": [
           "flake-compat"
         ],
@@ -544,6 +532,7 @@
         "bierkistn-radio": "bierkistn-radio",
         "catppuccin": "catppuccin",
         "dank-greeter": "dank-greeter",
+        "dank-qml-common": "dank-qml-common",
         "danksearch": "danksearch",
         "dgop": "dgop",
         "dms": "dms",

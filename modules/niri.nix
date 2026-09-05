@@ -10,6 +10,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
+        dank-qml-common.follows = "dank-qml-common";
       };
     };
     dgop = {
@@ -28,7 +29,12 @@
       url = "github:AvengeMedia/dank-greeter";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        dank-qml-common.follows = "dank-qml-common";
       };
+    };
+    dank-qml-common = {
+      url = "github:AvengeMedia/dank-qml-common";
+      flake = false;
     };
   };
 

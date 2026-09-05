@@ -29,7 +29,14 @@
     };
     dank-greeter = {
       url = "github:AvengeMedia/dank-greeter";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        dank-qml-common.follows = "dank-qml-common";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+    dank-qml-common = {
+      url = "github:AvengeMedia/dank-qml-common";
+      flake = false;
     };
     danksearch = {
       url = "github:AvengeMedia/danksearch";
@@ -42,6 +49,7 @@
     dms = {
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs = {
+        dank-qml-common.follows = "dank-qml-common";
         flake-compat.follows = "flake-compat";
         nixpkgs.follows = "nixpkgs";
       };
