@@ -56,6 +56,7 @@ let system = "aarch64-linux"; in {
       distributed-build-client
       home-manager
       # system.nix
+      brightness-control
       pi4-system
       bluetooth
       sound

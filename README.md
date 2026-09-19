@@ -104,6 +104,8 @@ The name is inspired by the DOTA hero Nyx
     - **[system.nix](/modules/system.nix)**
       - basic-system
         - set timezone to Vienna, enable all firmware, fwupd, fstrim, and NTFS support
+      - brightness-control
+        - install DDC/I2C tooling and enable access to external monitor brightness controls
       - bluetooth
         - enable Bluetooth, power on at boot, and enable experimental features for battery reportingcpu-in
       - cpu-amd

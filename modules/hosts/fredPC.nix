@@ -41,6 +41,7 @@ let system = "x86_64-linux"; in {
       nix-utilities
       # system.nix
       basic-system
+      brightness-control
       cpu-amd
       gpu-amd
       grub

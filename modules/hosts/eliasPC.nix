@@ -47,6 +47,7 @@ let system = "x86_64-linux"; in {
       optimizations-pc
       # system.nix
       basic-system
+      brightness-control
       cpu-intel
       gpu-amd
       grub

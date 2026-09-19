@@ -87,6 +87,16 @@
     boot.resumeDevice = lib.mkDefault "";
   };
 
+  # System Module brightness-control: install DDC/I2C tooling and enable access to external monitor brightness controls
+  flake.modules.nixos.brightness-control = { pkgs, ... }: {
+    environment.systemPackages = with pkgs; [
+      ddcutil
+      i2c-tools
+    ];
+
+    hardware.i2c.enable = true;
+  };
+
   # System Module bluetooth: enable Bluetooth, power on at boot, and enable experimental features for battery reporting
   flake.modules.nixos.bluetooth = { ... }: {
     # enables support for Bluetooth

@@ -49,6 +49,7 @@ let system = "x86_64-linux"; in {
       # system.nix
       basic-system
       bluetooth
+      brightness-control
       cpu-intel
       gpu-nvidia
       grub
