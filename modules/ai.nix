@@ -1,9 +1,16 @@
-{ ... }: {
+{ inputs, ... }: {
+  flake-file.inputs = {
+    opencode = {
+      url = "github:anomalyco/opencode/v1.18.31";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   # Home Module opencode: OpenCode agent + tiered subagents, delegate/cavekit/dotnet-dev/java-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands
   flake.modules.homeManager.opencode = { pkgs, ... }: {
     programs.opencode = {
       enable = true;
-
+      package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
       settings = {
         autoshare = false;
         share = "manual";

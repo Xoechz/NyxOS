@@ -229,56 +229,9 @@ let system = "aarch64-linux"; in {
     networking = {
       useDHCP = lib.mkDefault true;
       hostName = "PiKistn";
-      networkmanager = {
-        enable = true;
-        # Declarative Wi-Fi profile that autoconnects on boot.
-        #
-        # NOTE: PLACEHOLDER CREDENTIALS — Wi-Fi will NOT connect with these.
-        # Before building/flashing, set the real values:
-        #   ssid = "YourNetworkName";
-        #   psk  = "YourWifiPassword";
-        #
-        # Alternative: connect ONCE from the Pi, then rebuild without the
-        # ensureProfiles block below — the connection then persists in
-        # /etc/NetworkManager/system-connections, independent of this config.
-        #   1. Boot with this placeholder profile (console login Password123 or
-        #      Ethernet still work); Wi-Fi just won't join yet.
-        #   2. Create a real, persistent connection:
-        #        sudo nmcli connection delete pikistn-wifi
-        #        sudo nmcli device wifi connect "YourSSID" password "YourPassword"
-        #      (`nmcli device wifi connect` saves a new connection to
-        #      /etc/NetworkManager/system-connections with autoconnect=true; it
-        #      survives every `nixos-rebuild`.)
-        #   3. Rebuild/switch WITHOUT the ensureProfiles block below. Doing this
-        #      removes the placeholder unit; the saved /etc/... connection
-        #      remains and autoconnects on boot.
-        #      (Delete `pikistn-wifi` first to avoid NM autoconnect choosing
-        #      between two profiles for the same network. If you later re-add
-        #      ensureProfiles with different creds, that takes effect on next
-        #      boot and the saved one becomes the manual profile.)
-        ensureProfiles = {
-          profiles.pikistn-wifi = {
-            connection = {
-              id = "pikistn-wifi";
-              type = "wifi";
-              autoconnect = true;
-              # allow all users, incl. root, to use this connection
-              permissions = "";
-            };
-            wifi = {
-              ssid = "WIFI_SSID_PLACEHOLDER";
-              mode = "infrastructure";
-            };
-            wifi-security = {
-              key-mgmt = "wpa-psk";
-              psk = "WIFI_PSK_PLACEHOLDER";
-            };
-            ipv4.method = "auto";
-            ipv6.addr-gen-mode = "default";
-            ipv6.method = "auto";
-          };
-        };
-      };
+      # Connect to Wi-Fi network (replace with your actual SSID and password)
+      # sudo nmcli device wifi connect "YourSSID" password "YourPassword"
+      networkmanager.enable = true;
     };
 
     nixpkgs.hostPlatform = system;
