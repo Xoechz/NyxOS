@@ -98,11 +98,11 @@
   };
 
   # System Module bluetooth: enable Bluetooth, power on at boot, and enable experimental features for battery reporting
-  flake.modules.nixos.bluetooth = { ... }: {
+  flake.modules.nixos.bluetooth = { lib, ... }: {
     # enables support for Bluetooth
     hardware.bluetooth.enable = true;
     # powers up the default Bluetooth controller on boot
-    hardware.bluetooth.powerOnBoot = true;
+    hardware.bluetooth.powerOnBoot = lib.mkDefault true;
     # allow reading device charge
     hardware.bluetooth.settings = {
       General = {

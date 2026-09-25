@@ -58,7 +58,6 @@ let system = "aarch64-linux"; in {
       # system.nix
       brightness-control
       pi4-system
-      bluetooth
       sound
       swap
       # terminal.nix

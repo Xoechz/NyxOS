@@ -6,39 +6,23 @@
     };
   };
 
-  # System Module bierkistn: install the BierKistn Radio UI, always-discoverable A2DP-sink Bluetooth with best-effort AVRCP, grant the kiosk user the D-Bus actions it needs, and pull in the bierkistn Home Module for all users
+  # System Module bierkistn: install the BierKistn Radio UI, configure exclusive Spotify/Bluetooth source services and app-mediated pairing, grant the kiosk user required D-Bus actions, and pull in the bierkistn Home Module for all users
   flake.modules.nixos.bierkistn = { pkgs, config, ... }: {
     environment.systemPackages = with pkgs; [
       spotifyd
-      bluez-tools
+      ddcutil
     ];
 
-    # Auto-accept pairing without PIN/code checks: bt-agent runs with the
-    # NoInputNoOutput capability, which answers every pairing request
-    # affirmatively (the kiosk has no display/keyboard to enter a code).
-    systemd.services.bt-agent = {
-      wantedBy = [ "bluetooth.target" ];
-      after = [ "bluetooth.service" ];
-      description = "Bluetooth pairing agent (auto-accept)";
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.bluez-tools}/bin/bt-agent --capability NoInputNoOutput";
-        Restart = "always";
-        RestartSec = 5;
-      };
-    };
+    # Bluetooth is only brought up by the app after spotifyd has stopped.
+    # powerOnBoot and AutoEnable=false prevent radio startup/reconnection
+    # before the app has selected Bluetooth and registered its pairing agent.
 
-    # Base discoverable + pairable policy. bluez starts the adapter with
-    # these persisted; Discoverable/PairableTimeout=0 means "never expire".
-    # bluez drops Discoverable once a device connects — per ADR 0004 the app
-    # re-asserts `Adapter1.Set(Discoverable, true)` on entering BluetoothWaiting,
-    # so NO system enforcement service is needed.
-    hardware.bluetooth.settings.General = {
-      AutoEnable = true;
-      Discoverable = true;
-      DiscoverableTimeout = 0;
-      Pairable = true;
-      PairableTimeout = 0;
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+      settings.General = {
+        AutoEnable = false;
+      };
     };
 
     # A2DP-sink-only role. The speaker is a sink that phones drive; it never
@@ -103,7 +87,8 @@
       polkit.addRule(function(action, subject) {
         if (subject.user == "kistn" && (
           action.id.indexOf("org.freedesktop.NetworkManager.") === 0 ||
-          action.id.indexOf("org.freedesktop.login1.") === 0
+          action.id.indexOf("org.freedesktop.login1.") === 0 ||
+          action.id.indexOf("org.bluez.") === 0
         )) {
           return polkit.Result.YES;
         }
@@ -112,7 +97,7 @@
 
   };
 
-  # Home Module bierkistn: run spotifyd as a user service on the A2DP sink, started via default.target (no graphical-session dependency under cage)
+  # Home Module bierkistn: run spotifyd as spotifyd.service for app-controlled source switching, started via default.target and recoverable on crashes
   flake.modules.homeManager.bierkistn = { pkgs, ... }: {
     systemd.user.services.spotifyd = {
       Unit = {
@@ -124,7 +109,10 @@
       };
       Service = {
         ExecStart = "${pkgs.spotifyd}/bin/spotifyd --no-daemon --config-path /etc/spotifyd.conf --cache-path %h/.cache/spotifyd";
-        Restart = "always";
+        # An explicit systemctl --user stop is intentional during source
+        # changes; on-failure still recovers crashes without restarting a
+        # successfully stopped unit.
+        Restart = "on-failure";
         RestartSec = 12;
       };
     };

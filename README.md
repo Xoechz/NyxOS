@@ -18,7 +18,7 @@ The name is inspired by the DOTA hero Nyx
         - enable Flatpak and register the Flathub repository
     - **[bierkistn.nix](/modules/bierkistn.nix)**
       - bierkistn
-        - install the BierKistn Radio UI, always-discoverable A2DP-sink Bluetooth with best-effort AVRCP, grant the kiosk user the D-Bus actions it needs, and pull in the bierkistn Home Module for all users
+        - install the BierKistn Radio UI, configure exclusive Spotify/Bluetooth source services and app-mediated pairing, grant the kiosk user required D-Bus actions, and pull in the bierkistn Home Module for all users
     - **[browser.nix](/modules/browser.nix)**
       - chromium
         - install Chromium with Widevine DRM
@@ -151,7 +151,7 @@ The name is inspired by the DOTA hero Nyx
   - Home Modules:
     - **[bierkistn.nix](/modules/bierkistn.nix)**
       - bierkistn
-        - run spotifyd as a user service on the A2DP sink, started via default.target (no graphical-session dependency under cage)
+        - run spotifyd as spotifyd.service for app-controlled source switching, started via default.target and recoverable on crashes
     - **[ai.nix](/modules/ai.nix)**
       - opencode
         - enable the OpenCode AI coding agent with tiered subagents (lite/medium/heavy/max) for nix/dotnet/java/angular/general domains, delegate/cavekit/dotnet-dev/java-dev/angular-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands, and hardened agent permissions
