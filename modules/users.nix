@@ -24,6 +24,7 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWvZfUNVpUiiNM5ZWm7gExARtj/LXKADUGwnh/XuaNe root@FredPC"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOnA4KtcRr9j3EwLdKt4dEQMJjnkixTbQpqbzO0zze+f kistn@piKistn"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBtnZEAyPDQi5417EsCEX6dJE/e4X/l31zmLOGm+ee0I root@piKistn"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIg9gf+uBlFCOUGKiG4LycoXTOyH33it9E2471uzz/nZ"
       ];
     };
   };
