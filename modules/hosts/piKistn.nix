@@ -188,6 +188,7 @@ let system = "aarch64-linux"; in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL71xmI34J5TlOzo6z0M3kTpzUTB7jxqiEvkALg4bcC6 root@EliasPC"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8x7bIB+Ai92GiQ/m6SzFdUODBW0chhmwC0OERjofTi elias@EliasLaptop"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKDhjGdO4LZSBd21DrYSt1iJAC5f1kP1Q9yleTf9qZ7o root@EliasLaptop"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIg9gf+uBlFCOUGKiG4LycoXTOyH33it9E2471uzz/nZ"
       ];
     };
 

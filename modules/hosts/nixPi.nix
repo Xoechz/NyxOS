@@ -53,6 +53,8 @@ let system = "aarch64-linux"; in {
       };
       users.elias = {
         imports = with inputs.self.modules.homeManager; [
+          # shellScripts.nix
+          shell-scripts
           # users.nix
           elias
           # utilities.nix

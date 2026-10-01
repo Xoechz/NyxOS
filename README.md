@@ -212,6 +212,9 @@ The name is inspired by the DOTA hero Nyx
     - **[terminal.nix](/modules/terminal.nix)**
       - terminal
         - configure Kitty, ZSH with oh-my-zsh, Starship prompt, direnv, fzf, eza, ripgrep, and bat
+    - **[shellScripts.nix](/modules/shellScripts.nix)**
+      - shell-scripts
+        - provide Nix-built commands for rebuild, deployment, cleanup, system pinning, and common shell workflows
     - **[users.nix](/modules/users.nix)**
       - elias
         - set home directory and username for the elias Home Manager configuration

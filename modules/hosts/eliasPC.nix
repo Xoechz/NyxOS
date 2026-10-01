@@ -96,6 +96,8 @@ let system = "x86_64-linux"; in {
           minecraft
           # network.nix
           sailing
+          # shellScripts.nix
+          shell-scripts
           # terminal.nix
           kitty
           # users.nix

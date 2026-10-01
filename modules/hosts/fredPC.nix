@@ -70,6 +70,8 @@ let system = "x86_64-linux"; in {
       vscode-non-fhs
       # kde.nix
       plasma-manager
+      # shellScripts.nix
+      shell-scripts
       # terminal.nix
       kitty
       # utilities.nix
