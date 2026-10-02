@@ -105,10 +105,7 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    opencode = {
-      url = "github:anomalyco/opencode/v1.18.31";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    opencode.url = "github:anomalyco/opencode/v1.18.34";
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs = {

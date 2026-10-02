@@ -1,9 +1,6 @@
 { inputs, ... }: {
   flake-file.inputs = {
-    opencode = {
-      url = "github:anomalyco/opencode/v1.18.31";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    opencode.url = "github:anomalyco/opencode/v1.18.34";
   };
 
   # Home Module opencode: OpenCode agent + tiered subagents, delegate/cavekit/dotnet-dev/java-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands
@@ -39,9 +36,6 @@
         };
         microsoft-learn = {
           url = "https://learn.microsoft.com/api/mcp";
-        };
-        openrouter = {
-          url = "https://mcp.openrouter.ai/mcp";
         };
       };
     };
