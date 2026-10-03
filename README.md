@@ -151,7 +151,7 @@ The name is inspired by the DOTA hero Nyx
   - Home Modules:
     - **[bierkistn.nix](/modules/bierkistn.nix)**
       - bierkistn
-        - run spotifyd as spotifyd.service for app-controlled source switching, started via default.target and recoverable on crashes
+        - run spotifyd as spotifyd.service for app-controlled source switching, started after the audio stack via default.target with bounded start/stop and crash recovery
     - **[ai.nix](/modules/ai.nix)**
       - opencode
         - enable the OpenCode AI coding agent with tiered subagents (lite/medium/heavy/max) for nix/dotnet/java/angular/general domains, delegate/cavekit/dotnet-dev/java-dev/angular-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands, and hardened agent permissions
@@ -233,6 +233,7 @@ The name is inspired by the DOTA hero Nyx
   - FredPC (x86_64-linux, KDE)
   - NixPi (aarch64-linux, server)
   - PiKistn (aarch64-linux, kiosk)
+    - [BierKistn runtime contract and target verification](resources/bierkistnVerification.md)
 - [images](images) => Background and ReadMe images
 - [workspaces](workspaces) => Workspaces for different tasks
 

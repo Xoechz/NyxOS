@@ -10,31 +10,37 @@
       rebuild = makeCommand "rebuild" ''
         sudo echo Rebuilding...
         nh os switch "$@"
-      '' [ pkgs.nh pkgs.sudo ];
+      '' [ pkgs.nh ];
 
       update = makeCommand "update" ''
         sudo echo Updating...
         nh os switch -u "$@"
-      '' [ pkgs.nh pkgs.sudo ];
+      '' [ pkgs.nh ];
 
       pmReset = makeCommand "pm-reset" ''
         rm "${config.home.homeDirectory}/.local/share/plasma-manager/last_run_"*
         "${config.home.homeDirectory}/.local/share/plasma-manager/run_all.sh"
       '' [ pkgs.coreutils ];
 
-      deployPinnedNixPi = makeCommand "deploy-pinned-nixPi" ''
+      buildPinnedNixPi = makeCommand "build-pinned-nixPi" ''
         flake="${config.home.homeDirectory}/NyxOS"
         nixpi=$(nix build --no-link --print-out-paths "$flake#nixosConfigurations.NixPi.config.system.build.toplevel")
 
         sudo ln -sfn "$nixpi" /nix/var/nix/gcroots/NixPi-latest
-      '' [ pkgs.coreutils pkgs.nix pkgs.sudo ];
+      '' [ pkgs.coreutils pkgs.nix ];
 
-      deployPinnedPiKistn = makeCommand "deploy-pinned-piKistn" ''
+      buildPinnedPiKistn = makeCommand "build-pinned-piKistn" ''
         flake="${config.home.homeDirectory}/NyxOS"
         pikistn=$(nix build --no-link --print-out-paths "$flake#nixosConfigurations.PiKistn.config.system.build.toplevel")
 
         sudo ln -sfn "$pikistn" /nix/var/nix/gcroots/PiKistn-latest
-      '' [ pkgs.coreutils pkgs.nix pkgs.sudo ];
+      '' [ pkgs.coreutils pkgs.nix ];
+
+      deployToNixPi = makeCommand "deploy-to-nixPi" ''rebuild --target-host NixPi -H NixPi "$@"'' [ rebuild ];
+      deployToPiKistn = makeCommand "deploy-to-piKistn" ''rebuild --target-host PiKistn -H PiKistn "$@"'' [ rebuild ];
+      deployToFredPC = makeCommand "deploy-to-fredPC" ''rebuild --target-host FredPC -H FredPC "$@"'' [ rebuild ];
+      deployToEliasPC = makeCommand "deploy-to-eliasPC" ''rebuild --target-host EliasPC -H EliasPC "$@"'' [ rebuild ];
+      deployToEliasLaptop = makeCommand "deploy-to-eliasLaptop" ''rebuild --target-host EliasLaptop -H EliasLaptop "$@"'' [ rebuild ];
     in
     {
       home.packages = [
@@ -53,7 +59,7 @@
         (makeCommand "cleanup-nix" ''
           sudo nix store optimise
           nh clean all "$@"
-        '' [ pkgs.nh pkgs.nix pkgs.sudo ])
+        '' [ pkgs.nh pkgs.nix ])
         pmReset
         (makeCommand "pm-rebuild" ''
           rebuild
@@ -72,13 +78,15 @@
           git pull
           update "$@"
         '' [ pkgs.git update ])
-        (makeCommand "deploy-to-nixPi" ''rebuild --target-host NixPi -H NixPi "$@"'' [ rebuild ])
-        (makeCommand "deploy-to-piKistn" ''rebuild --target-host PiKistn -H PiKistn "$@"'' [ rebuild ])
-        (makeCommand "deploy-to-fredPC" ''rebuild --target-host FredPC -H FredPC "$@"'' [ rebuild ])
-        (makeCommand "deploy-to-eliasPC" ''rebuild --target-host EliasPC -H EliasPC "$@"'' [ rebuild ])
-        (makeCommand "deploy-to-eliasLaptop" ''rebuild --target-host EliasLaptop -H EliasLaptop "$@"'' [ rebuild ])
-        deployPinnedNixPi
-        deployPinnedPiKistn
+        deployToNixPi
+        deployToPiKistn
+        deployToFredPC
+        deployToEliasPC
+        deployToEliasLaptop
+        buildPinnedNixPi
+        buildPinnedPiKistn
+        (makeCommand "deploy-pinned-nixPi" ''build-pinned-nixPi && deploy-to-nixPi "$@"'' [ buildPinnedNixPi deployToNixPi ])
+        (makeCommand "deploy-pinned-piKistn" ''build-pinned-piKistn && deploy-to-piKistn "$@"'' [ buildPinnedPiKistn deployToPiKistn ])
         (makeCommand "dev-certs-reload" ''
           certs="${config.home.homeDirectory}/NyxOS/resources/certs"
           mkdir -p "$certs"

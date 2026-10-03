@@ -18,7 +18,7 @@ let system = "aarch64-linux"; in {
     ];
   };
 
-  flake.modules.nixos.piKistn = { lib, modulesPath, pkgs, ... }: {
+  flake.modules.nixos.piKistn = { config, lib, modulesPath, pkgs, ... }: {
     # Trim the Raspberry Pi firmware to only the files a Pi 4B needs. The stock
     # raspberrypifw package ships GPU boot code for every Pi generation
     # (ARMv6/7 start*.elf + Pi5 dtbs), ~25MB combined, which overflows the 30MB
@@ -56,7 +56,6 @@ let system = "aarch64-linux"; in {
       distributed-build-client
       home-manager
       # system.nix
-      brightness-control
       pi4-system
       sound
       swap
@@ -171,9 +170,17 @@ let system = "aarch64-linux"; in {
       extraArguments = [ "-m" "last" ];
       environment = {
         QT_QPA_PLATFORM = "wayland";
-        XDG_CACHE_HOME = "/home/kistn/.cache";
+        XDG_CACHE_HOME = "${config.users.users.kistn.home}/.cache";
       };
     };
+
+    # Cage is launched by a system service, not an interactive login shell.
+    # Give its app child the command-line tools required by the interface.
+    systemd.services.cage-tty1.path = with pkgs; [
+      pipewire
+      wireplumber
+      systemd
+    ];
 
     users.users.kistn = {
       isNormalUser = true;
