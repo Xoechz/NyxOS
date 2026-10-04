@@ -56,11 +56,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791024658,
-        "narHash": "sha256-GXYiA38ydUM+U6qlFlw2FslAXUDYDYzTAYDAz86+cyU=",
+        "lastModified": 1791118045,
+        "narHash": "sha256-fa+55eRqaByO0TMsgJC0DNxnRX9E8GuQaaRAiM1zIyU=",
         "owner": "Xoechz",
         "repo": "BierKistnRadio",
-        "rev": "5e988073ff8b725d8e86b7a16be11aa432729716",
+        "rev": "3272e09eb50f8189949c016e08aa1620394b5d6e",
         "type": "github"
       },
       "original": {

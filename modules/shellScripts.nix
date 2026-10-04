@@ -85,8 +85,8 @@
         deployToEliasLaptop
         buildPinnedNixPi
         buildPinnedPiKistn
-        (makeCommand "deploy-pinned-nixPi" ''build-pinned-nixPi && deploy-to-nixPi "$@"'' [ buildPinnedNixPi deployToNixPi ])
-        (makeCommand "deploy-pinned-piKistn" ''build-pinned-piKistn && deploy-to-piKistn "$@"'' [ buildPinnedPiKistn deployToPiKistn ])
+        (makeCommand "deploy-pinned-nixPi" ''deploy-to-nixPi "$@" && build-pinned-nixPi'' [ buildPinnedNixPi deployToNixPi ])
+        (makeCommand "deploy-pinned-piKistn" ''deploy-to-piKistn "$@" && build-pinned-piKistn'' [ buildPinnedPiKistn deployToPiKistn ])
         (makeCommand "dev-certs-reload" ''
           certs="${config.home.homeDirectory}/NyxOS/resources/certs"
           mkdir -p "$certs"
