@@ -24,6 +24,9 @@ The name is inspired by the DOTA hero Nyx
         - install Chromium with Widevine DRM
       - firefox
         - enable Firefox system-wide
+    - **[chatgpt.nix](/modules/chatgpt.nix)**
+      - chatgpt
+        - install the official ChatGPT desktop application with Codex
     - **[desktop.nix](/modules/desktop.nix)**
       - base-desktop
         - enable polkit and D-Bus, required by all desktop environments
@@ -235,6 +238,7 @@ The name is inspired by the DOTA hero Nyx
   - PiKistn (aarch64-linux, kiosk)
     - [BierKistn runtime contract and target verification](resources/bierkistnVerification.md)
 - [images](images) => Background and ReadMe images
+- [packages/chatgpt](packages/chatgpt) => Official ChatGPT/Codex desktop package for x86_64-linux, exposed as `chatgpt`
 - [workspaces](workspaces) => Workspaces for different tasks
 
 ### Fastfetch(Laptop)

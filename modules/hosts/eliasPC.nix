@@ -21,6 +21,8 @@ let system = "x86_64-linux"; in {
 
   flake.modules.nixos.eliasPC = { lib, modulesPath, ... }: {
     imports = with inputs.self.modules.nixos; [
+      # chatgpt.nix
+      chatgpt
       # desktop.nix
       base-desktop
       catppuccin
