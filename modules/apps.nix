@@ -107,14 +107,18 @@
         wayland = false;
 
         enabledExtensions = with spicePkgs.extensions; [
-          shuffle # shuffle+ (special characters are sanitized out of extension names)
-          playlistIcons
+          adblock
+          coverAmbience
           fullAlbumDate
-          wikify
-          songStats
-          betterGenres
+          history
           playNext
+          playlistIcons
+          showQueueDuration
+          shuffle
+          skipStats
+          songStats
           volumePercentage
+          wikify
         ];
 
         theme = spicePkgs.themes.catppuccin;
