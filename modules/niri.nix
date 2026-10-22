@@ -677,7 +677,7 @@
       enableDynamicTheming = false;
       enableSystemMonitoring = true; # System monitoring widgets (dgop)
       enableAudioWavelength = true; # Audio visualizer (cava)
-      enableCalendarEvents = true; # Calendar integration (khal)
+      enableCalendarEvents = false; # Calendar integration (khal)
       enableClipboardPaste = true; # Pasting items from the clipboard (wtype)
 
       # Configuration from settings.json

@@ -54,9 +54,11 @@
 
     services.avahi = {
       enable = true;
-      publish = {
-        enable = true;
-        addresses = true;
+      settings = {
+        publish = {
+          publish-addresses = true;
+          addresses = true;
+        };
       };
       openFirewall = true;
     };

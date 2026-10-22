@@ -145,8 +145,6 @@
       };
     };
 
-    nixpkgs.config.pulseaudio = true;
-
     users.extraGroups.audio.members = users;
 
     environment.systemPackages = with pkgs; [

@@ -91,14 +91,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-output-monitor = {
-      url = "github:maralorn/nix-output-monitor";
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        git-hooks.follows = "git-hooks";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     nixos-hardware = {
       url = "github:sorki/nixos-hardware/srk/pi4audio";
       inputs.nixpkgs.follows = "nixpkgs";

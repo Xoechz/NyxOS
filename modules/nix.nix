@@ -71,12 +71,6 @@ in
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
     };
-    nix-output-monitor = {
-      url = "github:maralorn/nix-output-monitor";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.git-hooks.follows = "git-hooks";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -215,14 +209,6 @@ in
 
   # System Module nh: enable nh with weekly auto-cleanup, keeping the last 3 generations for 7 days
   flake.modules.nixos.nh = { lib, system, ... }: {
-    nixpkgs.overlays = lib.singleton
-      (final: prev: {
-        # Override nh to use the latest nix-output-monitor
-        nh = prev.nh.override {
-          nix-output-monitor = inputs.nix-output-monitor.packages.${system}.default;
-        };
-      });
-
     programs.nh = {
       enable = true;
       clean = {
