@@ -65,9 +65,6 @@ let system = "x86_64-linux"; in {
       cli-utilities
       # virtualization.nix
       docker-desktop
-
-      # bierkistn
-      bierkistn
     ] ++ [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

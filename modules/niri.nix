@@ -210,6 +210,8 @@
               { proportion = 0.9; }
               { proportion = 1.0; }
             ];
+
+            border.enable = true;
           };
           hotkey-overlay = {
             skip-at-startup = true; # Don't show the hotkey overlay on startup
@@ -230,7 +232,7 @@
           ];
           # window-rule could be useful to exclude certain windows from being tiled.
           gestures = {
-            hot-corners.enable = false;
+            # hot-corners.enabled = false;
             dnd-edge-view-scroll = {
               delay-ms = 100;
               max-speed = 1500;
