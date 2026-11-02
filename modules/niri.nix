@@ -6,7 +6,7 @@
       inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "flake-compat";
