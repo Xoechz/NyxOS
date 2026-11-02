@@ -64,13 +64,6 @@
 
     # The downstream RPi kernel does not build the ZFS module
     boot.supportedFilesystems.zfs = lib.mkForce false;
-
-    # Cross-compile instead of emulating: build natively on x86_64 producing
-    # aarch64-linux binaries. Without this, nixpkgs defaults buildPlatform to
-    # hostPlatform and the whole aarch64 toolchain runs under QEMU binfmt
-    # emulation (8-10x slower). Both Pi hosts are cross-built from the x86
-    # build machine (EliasPC), never rebuilt in-place.
-    nixpkgs.buildPlatform = "x86_64-linux";
   };
 
   # System Module swap: configure zram swap and an encrypted swapfile sized via the swapSize specialArg (in GB)
