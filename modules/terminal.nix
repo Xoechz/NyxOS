@@ -46,6 +46,74 @@
     };
   };
 
+  # Home Module tmux: configure persistent terminal sessions with automatic ZSH startup and a session picker
+  flake.modules.homeManager.tmux = { config, lib, pkgs, ... }:
+    let
+      tmux = lib.getExe config.programs.tmux.package;
+      pickerFormat = "#{session_name}: #{pane_current_command} — #{pane_current_path}";
+    in
+    {
+      programs.tmux = {
+        enable = true;
+        shell = lib.getExe pkgs.zsh;
+        terminal = "tmux-256color";
+        prefix = "C-b";
+        mouse = true;
+        focusEvents = true;
+        historyLimit = 50000;
+        # Keep the socket accessible after the last login session ends.
+        secureSocket = false;
+        extraConfig = ''
+          set -as terminal-features ',xterm-kitty:RGB'
+          set -g window-size latest
+          set -g set-clipboard external
+          set -g status-left '#H [#S] '
+          set -g status-left-length 60
+          set -g status-right 'C-b s: sessions | C-b d: detach'
+          set -g status-right-length 45
+          bind s choose-tree -Zs -F '${pickerFormat}'
+        '';
+      };
+
+      home.packages = [
+        (pkgs.writeShellApplication {
+          name = "tjoin";
+          runtimeInputs = [ config.programs.tmux.package ];
+          text = ''
+            if (( $# > 1 )); then
+              printf '%s\n' 'Usage: tjoin [session-name]' >&2
+              exit 2
+            fi
+
+            # Use the current client when already inside tmux; never nest locally.
+            if (( $# == 1 )); then
+              if [[ -n "''${TMUX:-}" ]]; then
+                exec tmux switch-client -t "=$1"
+              else
+                exec tmux attach-session -t "=$1"
+              fi
+            elif [[ -n "''${TMUX:-}" ]]; then
+              exec tmux choose-tree -Zs -F '${pickerFormat}'
+            else
+              exec tmux attach-session \; choose-tree -Zs -F '${pickerFormat}'
+            fi
+          '';
+        })
+      ];
+
+      programs.zsh.initContent = lib.mkOrder 1500 ''
+        # A new PTY gets a fresh session, while subshells on the same PTY do not.
+        # Keep this shell alive so detaching returns to a usable plain shell.
+        if [[ -o interactive && -t 0 && -t 1 && "$TERM" != dumb &&
+              -z "$TMUX" && -z "$ZSH_EXECUTION_STRING" &&
+              -z "$NYX_TMUX_DISABLE" &&
+              "$NYX_TMUX_TERMINAL" != "$HOST:$TTY" ]]; then
+          export NYX_TMUX_TERMINAL="$HOST:$TTY"
+          ${tmux} new-session
+        fi
+      '';
+    };
+
   # Home Module zsh: configure ZSH with oh-my-zsh, Starship prompt, direnv, fzf, eza, ripgrep, and bat
   flake.modules.homeManager.zsh = { config, ... }: {
     # zsh

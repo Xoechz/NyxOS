@@ -132,8 +132,8 @@ The name is inspired by the DOTA hero Nyx
     - **[terminal.nix](/modules/terminal.nix)**
       - nix-index
         - enable nix-index-database with comma for running unlisted commands without installing them
-      - terminal
-        - enable ZSH system-wide and pull in the terminal Home Module for all users
+      - zsh
+        - enable ZSH system-wide and pull in the zsh Home Module for all users
     - **[users.nix](/modules/users.nix)**
       - elias
         - create the elias user with wheel, networkmanager, and printing group memberships
@@ -213,8 +213,12 @@ The name is inspired by the DOTA hero Nyx
       - home-manager
         - enable Home Manager self-management with monthly auto-expiry of old generations
     - **[terminal.nix](/modules/terminal.nix)**
-      - terminal
-        - configure Kitty, ZSH with oh-my-zsh, Starship prompt, direnv, fzf, eza, ripgrep, and bat
+      - kitty
+        - configure Kitty terminal with ZSH shell integration
+      - tmux
+        - configure persistent terminal sessions with automatic ZSH startup and a session picker
+      - zsh
+        - configure ZSH with oh-my-zsh, Starship prompt, direnv, fzf, eza, ripgrep, and bat
     - **[shellScripts.nix](/modules/shellScripts.nix)**
       - shell-scripts
         - provide Nix-built commands for rebuild, deployment, cleanup, system pinning, and common shell workflows

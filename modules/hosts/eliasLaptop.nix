@@ -102,6 +102,7 @@ let system = "x86_64-linux"; in {
           shell-scripts
           # terminal.nix
           kitty
+          tmux
           # users.nix
           elias
           # utilities.nix
