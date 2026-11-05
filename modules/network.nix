@@ -115,6 +115,7 @@
 
     environment.systemPackages = with pkgs; [
       wireguard-tools
+      mullvad-vpn
     ];
   };
 
