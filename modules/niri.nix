@@ -1250,13 +1250,13 @@
                 enabled = true;
                 id = "warpToggle";
               }
-              "notificationButton"
-              "systemTray"
-              "controlCenterButton"
               {
                 enabled = true;
                 id = "dankKDEConnect";
               }
+              "notificationButton"
+              "systemTray"
+              "controlCenterButton"
               {
                 enabled = true;
                 id = "powerMenuButton";
