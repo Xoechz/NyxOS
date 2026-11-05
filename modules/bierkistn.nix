@@ -57,7 +57,6 @@
       settings = {
         publish = {
           publish-addresses = true;
-          addresses = true;
         };
       };
       openFirewall = true;
