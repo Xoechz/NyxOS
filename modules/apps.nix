@@ -90,13 +90,33 @@
   };
 
   # Home Module media: install VLC and cava, and configure Spicetify-themed Spotify with extensions
-  flake.modules.homeManager.media = { pkgs, ... }: {
+  flake.modules.homeManager.media = { pkgs, lib, ... }: {
     imports = [ inputs.spicetify-nix.homeManagerModules.default ];
 
     home.packages = with pkgs; [
       cava
       vlc
     ];
+
+    xdg.mimeApps = {
+      enable = lib.mkDefault true;
+      defaultApplications = {
+        "video/mp4" = "vlc.desktop";
+        "video/mpeg" = "vlc.desktop";
+        "video/ogg" = "vlc.desktop";
+        "video/quicktime" = "vlc.desktop";
+        "video/webm" = "vlc.desktop";
+        "video/x-flv" = "vlc.desktop";
+        "video/x-m4v" = "vlc.desktop";
+        "video/x-matroska" = "vlc.desktop";
+        "video/x-ms-asf" = "vlc.desktop";
+        "video/x-ms-wmv" = "vlc.desktop";
+        "video/x-msvideo" = "vlc.desktop";
+        "video/x-ogm+ogg" = "vlc.desktop";
+        "video/3gpp" = "vlc.desktop";
+        "video/3gpp2" = "vlc.desktop";
+      };
+    };
 
     programs.spicetify =
       let
