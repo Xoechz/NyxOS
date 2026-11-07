@@ -1241,15 +1241,11 @@
                 id = "cpuTemp";
               }
               "memUsage"
-              (lib.mkIf isMobile "battery")
-              {
-                enabled = true;
-                id = "dankKDEConnect";
-              }
-              {
+              (lib.mkIf isMobile {
                 enabled = true;
                 id = "warpToggle";
-              }
+              })
+              (lib.mkIf isMobile "battery")
               {
                 enabled = true;
                 id = "dankKDEConnect";
