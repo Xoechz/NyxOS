@@ -65,10 +65,10 @@
     ];
   };
 
-  # System Module dotnet: install .NET 10 SDK with ILSpy and the Aspire CLI, and set DOTNET_ROOT/DOTNET_BIN environment variables
+  # System Module dotnet: install .NET 11 SDK with ILSpy and the Aspire CLI, and set DOTNET_ROOT/DOTNET_BIN environment variables
   flake.modules.nixos.dotnet = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
-      dotnetCorePackages.sdk_10_0
+      dotnetCorePackages.sdk_11_0
       ilspycmd
       libmsquic
     ] ++ [
@@ -76,8 +76,8 @@
     ];
 
     environment.variables = {
-      DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_10_0}/bin/dotnet";
-      DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_10_0}/share/dotnet";
+      DOTNET_BIN = "${pkgs.dotnetCorePackages.sdk_11_0}/bin/dotnet";
+      DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_11_0}/share/dotnet";
     };
     # previous library path problems should be resolved by disabling jack
   };
