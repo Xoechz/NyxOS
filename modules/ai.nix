@@ -1,6 +1,6 @@
 { inputs, ... }: {
   flake-file.inputs.opencode = {
-    url = "github:anomalyco/opencode/v1.19.5";
+    url = "github:jerome-benoit/opencode/nix-lockfile-deps";
   };
 
   # Home Module opencode: OpenCode agent + tiered subagents, delegate/cavekit/dotnet-dev/java-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands
