@@ -51,7 +51,6 @@
     fonts = {
       packages = with pkgs;[
         corefonts
-        vista-fonts
 
         # JetBrains officially created font for developers
         nerd-fonts.jetbrains-mono
@@ -97,12 +96,11 @@
       '';
     };
 
-  # System Module fonts: install the full Nerd Fonts collection (60+ families) plus core/Vista fonts
+  # System Module fonts: install the full Nerd Fonts collection (60+ families) plus core fonts
   flake.modules.nixos.fonts = { pkgs, ... }: {
     fonts = {
       packages = with pkgs;[
         corefonts
-        vista-fonts
 
         # Nerd Fonts
         # A programming font focused on source code legibility

@@ -37,7 +37,7 @@ The name is inspired by the DOTA hero Nyx
       - catppuccin
         - apply full Catppuccin Mocha/Peach theming system-wide including cursor theme
       - fonts
-        - install the full Nerd Fonts collection (60+ families) plus core/Vista fonts
+        - install the full Nerd Fonts collection (60+ families) plus core fonts
       - language-de
         - set German (Austria) language and locale for all LC categories
       - language-en
