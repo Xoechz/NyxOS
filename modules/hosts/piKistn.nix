@@ -75,7 +75,7 @@ let system = "aarch64-linux"; in {
     # system.nix which pins the srk/pi4audio fork for raspberry-pi-4.
     hardware.raspberry-pi."4".audio.enable = true;
 
-    # Waveshare 7" 1024x600 HDMI display config.
+    # Waveshare 7" 1024x600: HDMI carries video; USB provides touch and power.
     # display_auto_detect defaults to true in nixos-hardware; it makes the GPU
     # ignore hdmi_cvt and fall back to a bogus EDID mode (1366x768), garbling
     # the 1024x600 panel. Force the manual mode instead.
@@ -86,78 +86,9 @@ let system = "aarch64-linux"; in {
         hdmi_group = 2;
         hdmi_mode = 87;
         hdmi_cvt = "1024 600 60 6 0 0 0";
-        dtoverlay = [
-          "vc4-fkms-v3d-pi4"
-          "waveshare-ads7846,penirq=25,xmin=3900,xmax=200,ymin=200,ymax=3900,speed=50000,swapxy"
-        ];
+        dtoverlay = [ "vc4-fkms-v3d-pi4" ];
       };
     };
-
-    # The waveshare-ads7846 overlay uses an ADS7846 resistive touch
-    # controller over SPI.  The firmware module only ships RPi-vendor
-    # overlays; provide this one inline so touch works without a
-    # downloaded .dtbo file.
-    hardware.deviceTree.overlays = [
-      {
-        name = "waveshare-ads7846";
-        dtsText = ''
-          /dts-v1/;
-          /plugin/;
-
-          / {
-            compatible = "brcm,bcm2711";
-
-            fragment@0 {
-              target = <&gpio>;
-              __overlay__ {
-                ads7846_pins: ads7846_pins {
-                  brcm,pins = <25 24 23 22>;
-                  brcm,function = <0 1 1 1>; /* in out out out */
-                };
-              };
-            };
-
-            fragment@1 {
-              target = <&spi0>;
-              __overlay__ {
-                status = "okay";
-              };
-            };
-
-            fragment@2 {
-              target = <&spi0>;
-              __overlay__ {
-                /* needed to avoid dtc warning */
-                #address-cells = <1>;
-                #size-cells = <0>;
-
-                ads7846: ads7846@0 {
-                  reg = <0>;
-                  compatible = "ti,ads7846";
-                  spi-max-frequency = <50000>;
-                  interrupts = <25 2>; /* high-to-low edge */
-                  interrupt-parent = <&gpio>;
-                  pendown-gpio = <&gpio 25 0>;
-                  ti,x-min = /bits/ 16 <200>;
-                  ti,x-max = /bits/ 16 <3900>;
-                  ti,y-min = /bits/ 16 <200>;
-                  ti,y-max = /bits/ 16 <3900>;
-                  ti,pressure-min = /bits/ 16 <0>;
-                  ti,pressure-max = /bits/ 16 <255>;
-                  ti,x-plate-ohms = /bits/ 16 <150>;
-                  ti,debounce-max = /bits/ 16 <10>;
-                  ti,debounce-tol = /bits/ 16 <3>;
-                  ti,debounce-rep = /bits/ 16 <1>;
-                  ti,settle-delay-usec = /bits/ 16 <100>;
-                  ti,keep-vref-on;
-                  swapxy = <1>;
-                };
-              };
-            };
-          };
-        '';
-      }
-    ];
 
     services.cage = {
       enable = true;

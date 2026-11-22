@@ -97,7 +97,7 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    opencode.url = "github:jerome-benoit/opencode/nix-lockfile-deps";
+    opencode.url = "github:anomalyco/opencode";
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs = {

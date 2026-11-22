@@ -1,13 +1,20 @@
 { inputs, ... }: {
   flake-file.inputs.opencode = {
-    url = "github:jerome-benoit/opencode/nix-lockfile-deps";
+    url = "github:anomalyco/opencode";
   };
 
   # Home Module opencode: OpenCode agent + tiered subagents, delegate/cavekit/dotnet-dev/java-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands
   flake.modules.homeManager.opencode = { pkgs, ... }: {
     programs.opencode = {
       enable = true;
-      package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
+      package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (
+        old:
+        {
+          node_modules = old.node_modules.override {
+            hash = "sha256-1YrR3eb2bEvJZx3q3iIpcQHk36nULYu1gs3X6nBEj8o=";
+          };
+        }
+      );
       settings = {
         autoshare = false;
         share = "manual";
