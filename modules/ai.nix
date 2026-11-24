@@ -11,7 +11,7 @@
         old:
         {
           node_modules = old.node_modules.override {
-            hash = "sha256-1YrR3eb2bEvJZx3q3iIpcQHk36nULYu1gs3X6nBEj8o=";
+            hash = "sha256-sdMjb/l8SIthDbBJO3VzpyoOL9auoFGjVb6HdlxkQGg=";
           };
         }
       );

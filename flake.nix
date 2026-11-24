@@ -96,6 +96,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-rpi-kernel.url = "github:NixOS/nixpkgs/98d5e8a5c13ec5de0d5a4d569f61a5e0480177c9";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
     opencode.url = "github:anomalyco/opencode";
     plasma-manager = {

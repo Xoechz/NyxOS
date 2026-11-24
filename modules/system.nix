@@ -1,5 +1,8 @@
 { inputs, ... }: {
   flake-file.inputs = {
+    # Last nixpkgs first-parent revision before #580394 brought in Linux headers
+    # 7.3, whose arm64 __u128 types break the RPi 6.18 resolve_btfids build.
+    nixpkgs-rpi-kernel.url = "github:NixOS/nixpkgs/98d5e8a5c13ec5de0d5a4d569f61a5e0480177c9";
     nixos-hardware = {
       # sorki/nixos-hardware @ srk/pi4audio fixes the audio-on-overlay to target
       # <&sound> instead of the stale <&audio> (kernel 6.18 renamed the node),
@@ -44,10 +47,18 @@
   };
 
   # System Module pi4-system: set timezone to Vienna, enable all firmware, fstrim and raspberry pi support
-  flake.modules.nixos.pi4-system = { lib, ... }: {
+  flake.modules.nixos.pi4-system = { lib, pkgs, ... }: {
     imports = [
       inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ];
+
+    boot.kernelPackages =
+      let
+        kernelPkgs = inputs.nixpkgs-rpi-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+      in
+      kernelPkgs.linuxPackagesFor (kernelPkgs.callPackage
+        (inputs.nixos-hardware + "/raspberry-pi/common/kernel.nix")
+        { rpiVersion = 4; });
 
     time.timeZone = "Europe/Vienna";
 
