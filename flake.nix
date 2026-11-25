@@ -87,6 +87,14 @@
         nixpkgs-stable.follows = "nixpkgs-stable";
       };
     };
+    nix-auth = {
+      url = "github:numtide/nix-auth";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+      };
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -98,7 +106,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-rpi-kernel.url = "github:NixOS/nixpkgs/98d5e8a5c13ec5de0d5a4d569f61a5e0480177c9";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
-    opencode.url = "github:anomalyco/opencode";
+    opencode = {
+      url = "github:anomalyco/opencode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs = {
@@ -114,5 +125,9 @@
       };
     };
     systems.url = "github:nix-systems/default";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

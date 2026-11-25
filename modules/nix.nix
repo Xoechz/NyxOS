@@ -75,6 +75,16 @@ in
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-auth = {
+      url = "github:numtide/nix-auth";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+    };
   };
 
   # Sytem Module nix-utilities: install Nix dev tools and utilities for managing NixOS systems
@@ -86,6 +96,8 @@ in
       nix-output-monitor
       nvd
       statix
+
+      inputs.nix-auth.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 
@@ -208,7 +220,7 @@ in
   };
 
   # System Module nh: enable nh with weekly auto-cleanup, keeping the last 3 generations for 7 days
-  flake.modules.nixos.nh = { lib, system, ... }: {
+  flake.modules.nixos.nh = { ... }: {
     programs.nh = {
       enable = true;
       clean = {

@@ -1,6 +1,7 @@
 { inputs, ... }: {
   flake-file.inputs.opencode = {
     url = "github:anomalyco/opencode";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # Home Module opencode: OpenCode agent + tiered subagents, delegate/cavekit/dotnet-dev/java-dev skills, Context7/nixos/microsoft-learn MCP, nix/dotnet/java build-test-format commands
@@ -11,7 +12,7 @@
         old:
         {
           node_modules = old.node_modules.override {
-            hash = "sha256-sdMjb/l8SIthDbBJO3VzpyoOL9auoFGjVb6HdlxkQGg=";
+            hash = "sha256-RXrwbOwbYAHuofiv5pgvXCmXlbNhOCrvLmDOT8FjiNs=";
           };
         }
       );
