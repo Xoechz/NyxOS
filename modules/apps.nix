@@ -89,6 +89,13 @@
     ];
   };
 
+  # Home Module cad: install freeCAD for CAD modeling
+  flake.modules.homeManager.cad = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      freecad
+    ];
+  };
+
   # Home Module media: install VLC and cava, and configure Spicetify-themed Spotify with extensions
   flake.modules.homeManager.media = { pkgs, lib, ... }: {
     imports = [ inputs.spicetify-nix.homeManagerModules.default ];

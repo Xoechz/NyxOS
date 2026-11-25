@@ -80,6 +80,7 @@ let system = "x86_64-linux"; in {
           # ai.nix
           opencode
           # apps.nix
+          cad
           discord
           email
           kde-connect

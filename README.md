@@ -159,6 +159,8 @@ The name is inspired by the DOTA hero Nyx
       - opencode
         - enable the OpenCode AI coding agent, skills and MCPs
     - **[apps.nix](/modules/apps.nix)**
+      - cad
+        - install freeCAD for CAD modeling
       - discord
         - install Vesktop with Catppuccin Mocha CSS theme
       - email
